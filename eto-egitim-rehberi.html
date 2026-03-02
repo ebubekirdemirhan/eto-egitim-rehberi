@@ -1324,14 +1324,27 @@
         <div class="info-box"><strong>4–20 mA eşleşme:</strong> 4 mA = %0 (alt ölçüm), 20 mA = %100 (üst ölçüm). Örnek: transmitter 0–10 bar için: 4mA = 0 bar, 12mA = 5 bar, 20mA = 10 bar.</div>
       </div>
       <div class="card">
-        <h3>5.6 Akü Test Cihazı (Battery Tester)</h3>
+        <h3>5.6 PT100 / RTD Sıcaklık Sensörleri</h3>
         <ul>
-          <li>Akünün <strong>iç direncini (mΩ)</strong> ve yük altındaki gerilimini ölçer.</li>
-          <li>Gerçek kapasite ve sağlık durumu (State of Health — SOH) hakkında bilgi verir.</li>
-          <li>Gemi acil sistemleri (emergency lighting, GMDSS) için düzenli test şarttır.</li>
+          <li><strong>PT100</strong>: 0°C'de 100 Ω dirence sahip platin direnç termometre (RTD). Sıcaklık arttıkça direnci <strong>yaklaşık lineer</strong> artar.</li>
+          <li>Tipik birkaç nokta: <strong>0°C ≈ 100 Ω</strong>, <strong>100°C ≈ 138.5 Ω</strong>, <strong>200°C ≈ 175.8 Ω</strong>.</li>
+          <li>Gemide çoğunlukla <strong>2/3/4 telli</strong> bağlantı ile transmitter'e veya direkt PLC kartına girer; kablo direncini kompanze etmek için 3/4 telli tercih edilir.</li>
+          <li>Proses kalibratörü ile PT100 sinyali <strong>simüle edilerek</strong> sıcaklık transmitter'i ve kart kalibrasyonu test edilir.</li>
         </ul>
-        <div class="warn-box">Akü voltajı şarjlıyken normal görünebilir ama yük altında düşebilir. Her zaman <strong>yük testi</strong> (load test) yapılmalıdır.</div>
+        <div class="sinav-box">
+          <strong>Hızlı hesap:</strong> Eğer PT100 devresinde yaklaşık <strong>120 Ω</strong> ölçüyorsan, sıcaklık kabaca <strong>50°C</strong> civarındadır (0°C→100Ω, 100°C→138.5Ω arası neredeyse doğrusal).
+        </div>
       </div>
+    </div>
+
+    <div class="card" style="margin-top:.8rem;">
+      <h3>5.7 Akü Test Cihazı (Battery Tester)</h3>
+      <ul>
+        <li>Akünün <strong>iç direncini (mΩ)</strong> ve yük altındaki gerilimini ölçer.</li>
+        <li>Gerçek kapasite ve sağlık durumu (State of Health — SOH) hakkında bilgi verir.</li>
+        <li>Gemi acil sistemleri (emergency lighting, GMDSS) için düzenli test şarttır.</li>
+      </ul>
+      <div class="warn-box">Akü voltajı şarjlıyken normal görünebilir ama yük altında düşebilir. Her zaman <strong>yük testi</strong> (load test) yapılmalıdır.</div>
     </div>
 
     <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Sahada ölçüm stratejisi şu sıraya uyar: (1) Önce voltmetre ile gerilim var mı/yok mu bak. (2) Gerekirse akım (ampermetre/CT) ile aşırı yük/kaçak var mı? (3) Son olarak megger ile izolasyon sağlığını değerlendir. Çoğu arıza ilk adımda bulunur.</div>
