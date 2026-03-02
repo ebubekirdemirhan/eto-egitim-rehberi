@@ -1818,6 +1818,76 @@
       </div>
     </div>
 
+    <div class="two-col">
+      <div class="card">
+        <h3>Koruma, Ölçü ve PMS Blokları</h3>
+        <ul>
+          <li>Her jeneratör çıkışında, ACB öncesi ve/veya sonrasında <strong>akım trafoları (CT)</strong> vardır; bunlar <strong>akım röleleri, diferansiyel koruma ve PMS</strong>'e sinyal gönderir.</li>
+          <li>Baraya bağlanan <strong>gerilim trafoları (PT)</strong>, gerilimi röle ve ölçü aletleri için daha düşük seviyeye dönüştürür (ör. 440/110V).</li>
+          <li><strong>ACB koruma ünitesi</strong> (overcurrent, short-circuit, earth fault) CT'lerden gelen akıma göre kesiciyi trip eder.</li>
+          <li><strong>PMS I/O kartı</strong> (DPU30 / DPU31 gibi) generator yükü, gerilim, frekans ve ACB durumlarını okur; start/stop ve close/open komutlarını geri yollar.</li>
+        </ul>
+        <div class="sinav-box">
+          <strong>Sınav / mülakat sorusu:</strong> “CT oranı 1500/5A, sekonderde 4A ölçüyorsun. Jeneratör akımı yaklaşık kaç amperdir?” → 4 × (1500/5) = <strong>1200A</strong>.
+        </div>
+      </div>
+      <div class="svg-wrap">
+        <h3>CT / PT ve PMS Bağlantı Şematiği</h3>
+        <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ana bara ve ACB kutusu -->
+          <line x1="40" y1="60" x2="480" y2="60" stroke="#fbbf24" stroke-width="4"/>
+          <text x="200" y="52" fill="#fbbf24" font-size="10">MAIN BUS SECTION</text>
+
+          <rect x="70" y="80" width="80" height="40" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="85" y="102" fill="#e5e7eb" font-size="9">ACB PROTECT.</text>
+          <text x="90" y="114" fill="#9ca3af" font-size="8">OC / EF / UV</text>
+
+          <!-- CT'ler -->
+          <line x1="55" y1="60" x2="55" y2="90" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="55" cy="96" r="7" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="48" y="99" fill="#38bdf8" font-size="7">CT</text>
+
+          <line x1="140" y1="60" x2="140" y2="90" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="140" cy="96" r="7" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="133" y="99" fill="#38bdf8" font-size="7">CT</text>
+
+          <!-- CT sekonderden rölelere -->
+          <line x1="62" y1="96" x2="120" y2="140" stroke="#38bdf8" stroke-width="1"/>
+          <line x1="147" y1="96" x2="120" y2="140" stroke="#38bdf8" stroke-width="1"/>
+
+          <rect x="100" y="140" width="60" height="32" rx="4" fill="none" stroke="#38bdf8" stroke-width="1.1"/>
+          <text x="106" y="158" fill="#38bdf8" font-size="8">O/C &amp; E/F</text>
+          <text x="108" y="168" fill="#9ca3af" font-size="7">RELAY</text>
+
+          <!-- PT bloğu -->
+          <line x1="220" y1="60" x2="220" y2="90" stroke="#e5e7eb" stroke-width="1.2"/>
+          <rect x="205" y="90" width="30" height="30" rx="4" fill="none" stroke="#f97316" stroke-width="1.1"/>
+          <text x="212" y="107" fill="#f97316" font-size="8">PT</text>
+          <text x="196" y="126" fill="#9ca3af" font-size="7">440/110V</text>
+
+          <!-- PT'den ölçü aletleri ve PMS -->
+          <line x1="220" y1="120" x2="220" y2="150" stroke="#f97316" stroke-width="1"/>
+          <circle cx="220" cy="160" r="10" fill="none" stroke="#e5e7eb" stroke-width="1.1"/>
+          <text x="216" y="164" fill="#e5e7eb" font-size="8">V</text>
+          <text x="205" y="180" fill="#9ca3af" font-size="7">VOLTMETER</text>
+
+          <line x1="235" y1="115" x2="290" y2="140" stroke="#f97316" stroke-width="1"/>
+          <rect x="280" y="140" width="80" height="40" rx="4" fill="none" stroke="#a855f7" stroke-width="1.2"/>
+          <text x="290" y="156" fill="#a855f7" font-size="8">PMS / DPU30</text>
+          <text x="286" y="168" fill="#9ca3af" font-size="7">AI: V, I, kW, cosφ</text>
+
+          <!-- ACB durum ve komut I/O -->
+          <rect x="380" y="90" width="90" height="40" rx="4" fill="none" stroke="#22c55e" stroke-width="1.2"/>
+          <text x="386" y="105" fill="#22c55e" font-size="8">ACB STATUS /</text>
+          <text x="392" y="117" fill="#22c55e" font-size="8">OPEN-CLOSE</text>
+
+          <line x1="360" y1="140" x2="380" y2="120" stroke="#22c55e" stroke-width="1"/>
+          <line x1="360" y1="160" x2="380" y2="130" stroke="#22c55e" stroke-width="1"/>
+          <text x="320" y="150" fill="#22c55e" font-size="7">DI/DO</text>
+        </svg>
+      </div>
+    </div>
+
     <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Şema okurken önce kağıdı değil gemi üzerindeki ekipmanı bul. Şema kafana oturduğunda şema yerine fiziksel cihazlar üzerinde düşünmeye başlarsın — işte o noktada şema okuyabiliyorsun demektir.</div>
 
     <div class="quiz-block">
