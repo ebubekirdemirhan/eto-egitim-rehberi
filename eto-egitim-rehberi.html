@@ -1745,6 +1745,79 @@
       </details>
     </div>
 
+    <h3>7.6 Ana Dağıtım Panosu — 3 DG + Emergency (Şematik)</h3>
+    <div class="two-col">
+      <div class="card">
+        <p>Bu şema, ticari gemilerin büyük çoğunluğunda neredeyse aynı mantıkla kurulan <strong>ana dağıtım panosu (MSB)</strong> yapısını özetler:</p>
+        <ul>
+          <li><strong>Üç ana diesel jeneratör (DG1–DG3)</strong> kendi ACB'leri üzerinden <strong>440V ana baraya</strong> bağlanır.</li>
+          <li><strong>Emergency jeneratör</strong>, önce kendi <strong>Emergency Switchboard (ESB)</strong>'ına, oradan da <strong>bus-tie ACB</strong> üzerinden MSB'ye bağlanır.</li>
+          <li>Her ACB'nin akım trafoları (CT), gerilim trafoları (PT), <strong>koruma röleleri</strong> ve <strong>PMS / senkronizasyon</strong> bağlantıları vardır.</li>
+          <li>Yeni bir gemiye çıktığında ilk bakacağın şema budur: <strong>hangi jeneratör hangi bara bölümüne, hangi kesici üzerinden bağlı?</strong></li>
+        </ul>
+        <div class="saha-box">
+          <strong>Sahada okuma adımı:</strong> (1) DG sembollerini bul, (2) ACB ve bus-tie'ları takip et, (3) Emergency barasının MSB'ye hangi şartlarda bağlandığını koruma rölesi sayfasından kontrol et.
+        </div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Ana Dağıtım Panosu — Tek Hat Örneği</h3>
+        <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ana bara -->
+          <line x1="40" y1="120" x2="480" y2="120" stroke="#fbbf24" stroke-width="4"/>
+          <text x="210" y="112" fill="#fbbf24" font-size="10">440V MAIN BUS</text>
+
+          <!-- DG1 -->
+          <circle cx="100" cy="210" r="16" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="93" y="214" fill="#38bdf8" font-size="10">G1</text>
+          <text x="80" y="236" fill="#9ca3af" font-size="8">DG1</text>
+          <line x1="100" y1="194" x2="100" y2="176" stroke="#e5e7eb" stroke-width="1.4"/>
+          <!-- ACB1 -->
+          <rect x="86" y="156" width="28" height="18" rx="3" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="89" y="168" fill="#e5e7eb" font-size="7">ACB1</text>
+          <line x1="100" y1="156" x2="100" y2="120" stroke="#e5e7eb" stroke-width="1.4"/>
+
+          <!-- DG2 -->
+          <circle cx="210" cy="210" r="16" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="203" y="214" fill="#38bdf8" font-size="10">G2</text>
+          <text x="190" y="236" fill="#9ca3af" font-size="8">DG2</text>
+          <line x1="210" y1="194" x2="210" y2="176" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="196" y="156" width="28" height="18" rx="3" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="199" y="168" fill="#e5e7eb" font-size="7">ACB2</text>
+          <line x1="210" y1="156" x2="210" y2="120" stroke="#e5e7eb" stroke-width="1.4"/>
+
+          <!-- DG3 -->
+          <circle cx="320" cy="210" r="16" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="313" y="214" fill="#38bdf8" font-size="10">G3</text>
+          <text x="300" y="236" fill="#9ca3af" font-size="8">DG3</text>
+          <line x1="320" y1="194" x2="320" y2="176" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="306" y="156" width="28" height="18" rx="3" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="309" y="168" fill="#e5e7eb" font-size="7">ACB3</text>
+          <line x1="320" y1="156" x2="320" y2="120" stroke="#e5e7eb" stroke-width="1.4"/>
+
+          <!-- Emergency Switchboard & Generator -->
+          <rect x="380" y="180" width="80" height="36" rx="4" fill="none" stroke="#f97316" stroke-width="1.2"/>
+          <text x="386" y="198" fill="#f97316" font-size="8">EMERGENCY</text>
+          <text x="390" y="210" fill="#f97316" font-size="8">SWITCHBOARD</text>
+
+          <circle cx="420" cy="240" r="14" fill="none" stroke="#f97316" stroke-width="1.4"/>
+          <text x="415" y="244" fill="#f97316" font-size="9">EG</text>
+          <text x="398" y="256" fill="#9ca3af" font-size="8">E-GEN</text>
+          <line x1="420" y1="226" x2="420" y2="216" stroke="#f97316" stroke-width="1.2"/>
+
+          <!-- ESB to MSB bus-tie -->
+          <line x1="380" y1="192" x2="360" y2="192" stroke="#f97316" stroke-width="1.2"/>
+          <rect x="338" y="184" width="18" height="16" rx="3" fill="none" stroke="#f97316" stroke-width="1.2"/>
+          <text x="340" y="195" fill="#f97316" font-size="7">BT</text>
+          <line x1="347" y1="184" x2="347" y2="120" stroke="#f97316" stroke-width="1.2"/>
+          <text x="352" y="150" fill="#f97316" font-size="8">BUS-TIE</text>
+
+          <!-- Notlar -->
+          <text x="52" y="30" fill="#9ca3af" font-size="8">Her DG kendi ACB'si ile ana baraya bağlanır.</text>
+          <text x="52" y="44" fill="#9ca3af" font-size="8">Emergency jeneratör → ESB → Bus-tie ACB → MSB.</text>
+        </svg>
+      </div>
+    </div>
+
     <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Şema okurken önce kağıdı değil gemi üzerindeki ekipmanı bul. Şema kafana oturduğunda şema yerine fiziksel cihazlar üzerinde düşünmeye başlarsın — işte o noktada şema okuyabiliyorsun demektir.</div>
 
     <div class="quiz-block">
