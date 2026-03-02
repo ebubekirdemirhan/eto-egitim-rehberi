@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETO Eğitim Rehberi — Stajyerden Zabite | Ebubekir</title>
+  <style>
+    :root {
+      --bg: #0f172a; --bg-alt: #020617; --text: #e5e7eb; --muted: #9ca3af;
+      --accent: #38bdf8; --accent-soft: #0ea5e9; --border: #1f2937;
+      --danger: #f97373; --warn: #facc15; --info: #4ade80;
+      --card: #020617; --link: #38bdf8; --link-hover: #7dd3fc;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
+      color: var(--text); line-height: 1.65; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    .page { max-width: 1100px; margin: 0 auto 4rem auto; padding: 1.5rem 1.25rem 3rem; }
+
+    header.hero {
+      margin: 0 auto 2rem; padding: 1.75rem 1.75rem 1.5rem;
+      border-radius: 1.25rem;
+      background: radial-gradient(circle at top left, #1d4ed8 0, #020617 55%);
+      border: 1px solid rgba(148,163,184,.35);
+      display: grid; grid-template-columns: minmax(0,3fr) minmax(0,2.3fr);
+      gap: 1.5rem; align-items: center;
+      box-shadow: 0 25px 60px rgba(15,23,42,.8);
+      /* Sticky yerine statik header: ekranı kaydırırken alan kaplamasın */
+      position: static;
+    }
+    header.hero h1 { margin: 0 0 .5rem; font-size: clamp(1.5rem,2.2vw,2rem); letter-spacing: .02em; }
+    header.hero p { margin: 0; font-size: .94rem; }
+    header.hero small { display: inline-block; margin-top: .4rem; color: var(--muted); font-size: .76rem; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+    .badge { border-radius: 999px; border: 1px solid rgba(148,163,184,.7); padding: .18rem .6rem;
+      font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: #e5e7eb;
+      background: rgba(15,23,42,.6); }
+    .badge.accent { border-color: rgba(56,189,248,.85); background: rgba(15,23,42,.8); color: #e0f2fe; }
+    .hero-right { justify-self: end; display: flex; flex-direction: column; align-items: flex-end; gap: .75rem; }
+    .levels { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .4rem; font-size: .76rem; }
+    .level-chip { padding: .2rem .55rem; border-radius: 999px; border: 1px solid rgba(148,163,184,.6);
+      color: #e5e7eb; background: rgba(15,23,42,.85); }
+    .level-chip span { color: #a5b4fc; font-weight: 600; }
+    .print-hint { font-size: .8rem; color: #e5e7eb; background: rgba(15,23,42,.75);
+      padding: .3rem .7rem; border-radius: 999px; border: 1px solid rgba(148,163,184,.5); }
+    .print-hint code { font-family: monospace; background: rgba(15,23,42,.95);
+      padding: .12rem .3rem; border-radius: .35rem; }
+
+    nav.toc { margin: 1.5rem auto 2rem; padding: 1.2rem 1.5rem 1.4rem;
+      border-radius: 1.1rem; background: rgba(15,23,42,.9);
+      border: 1px solid rgba(148,163,184,.4); box-shadow: 0 18px 40px rgba(15,23,42,.65); }
+    nav.toc h2 { margin: 0 0 .75rem; font-size: .98rem; letter-spacing: .08em;
+      text-transform: uppercase; color: #cbd5f5; }
+    .toc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .6rem 1.25rem; font-size: .9rem; }
+    .toc-item a { display: flex; gap: .4rem; align-items: baseline; padding: .26rem .4rem;
+      border-radius: .5rem; color: #e5e7eb; }
+    .toc-item a:hover { background: rgba(15,23,42,.95); }
+    .toc-index { font-size: .8rem; color: var(--muted); min-width: 1.4rem; }
+    .toc-label { font-weight: 500; }
+    .toc-en { font-size: .76rem; color: var(--muted); }
+
+    main { margin-top: 2rem; }
+    section { margin-bottom: 2.8rem; padding: 1.6rem 1.6rem 1.7rem;
+      border-radius: 1.1rem; background: rgba(15,23,42,.9);
+      border: 1px solid rgba(31,41,55,.95); box-shadow: 0 18px 45px rgba(15,23,42,.8);
+      position: relative; scroll-margin-top: 6.5rem; }
+    section::before { content: attr(data-label); position: absolute; top: -.9rem; left: 1.6rem;
+      padding: .08rem .6rem; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+      border-radius: 999px; border: 1px solid rgba(148,163,184,.7);
+      background: radial-gradient(circle at top left, rgba(56,189,248,.15), rgba(15,23,42,.99));
+      color: #cbd5f5; }
+    section h2 { margin-top: .2rem; margin-bottom: .35rem; font-size: 1.22rem; }
+    .section-sub { margin: 0; font-size: .84rem; color: var(--muted); }
+    h3 { margin-top: 1.1rem; margin-bottom: .45rem; font-size: 1rem; }
+    p { margin: .25rem 0; font-size: .92rem; }
+    ul, ol { margin: .25rem 0 .35rem 1.1rem; padding-left: .8rem; font-size: .91rem; }
+    li { margin-bottom: .15rem; }
+
+    .two-col { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1.3fr);
+      gap: 1.25rem; align-items: flex-start; margin-top: .9rem; }
+    .three-col { display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1rem; margin-top: .9rem; }
+
+    .card { border-radius: .9rem; border: 1px solid rgba(31,41,55,.95);
+      background: linear-gradient(135deg, rgba(15,23,42,.98), rgba(2,6,23,.98));
+      padding: .8rem .9rem; font-size: .9rem; }
+    .card h3 { margin-top: 0; }
+
+    .info-box { border-left: 3px solid var(--info); padding: .4rem .7rem;
+      border-radius: .6rem; background: rgba(22,163,74,.08); font-size: .87rem; margin: .45rem 0; }
+    .warn-box { border-left: 3px solid var(--warn); padding: .4rem .7rem;
+      border-radius: .6rem; background: rgba(250,204,21,.07); font-size: .87rem; margin: .45rem 0; }
+    .danger-box { border-left: 3px solid var(--danger); padding: .4rem .7rem;
+      border-radius: .6rem; background: rgba(239,68,68,.08); font-size: .87rem; margin: .45rem 0; }
+    .note-box { border-left: 3px solid var(--accent-soft); padding: .4rem .7rem;
+      border-radius: .6rem; background: rgba(37,99,235,.12); font-size: .87rem; margin: .45rem 0; }
+    .ebu-note { border-left-color: #fb923c !important; background: rgba(251,146,60,.06) !important; }
+    .saha-box { border-left: 3px solid #22d3ee; padding: .4rem .7rem;
+      border-radius: .6rem; background: rgba(34,211,238,.06); font-size: .87rem; margin: .45rem 0; }
+    .sinav-box { border-left: 3px solid #a78bfa; padding: .4rem .7rem;
+      border-radius: .6rem; background: rgba(167,139,250,.06); font-size: .87rem; margin: .45rem 0; }
+
+    code, .formula { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: rgba(15,23,42,.9); padding: .12rem .3rem; border-radius: .35rem; font-size: .85rem; }
+    .formula { display: inline-block; border: 1px solid rgba(148,163,184,.4); margin: .1rem 0; }
+    .formula-big { display: block; text-align: center; font-size: 1.1rem; font-weight: 700;
+      padding: .6rem 1rem; margin: .6rem 0; border-radius: .75rem;
+      background: rgba(15,23,42,.95); border: 1px solid rgba(56,189,248,.4); color: #38bdf8; }
+
+    table { width: 100%; border-collapse: collapse; margin: .6rem 0; font-size: .87rem; }
+    th, td { border: 1px solid rgba(31,41,55,.95); padding: .35rem .45rem; }
+    th { background: rgba(15,23,42,.95); text-align: left; }
+    tr:nth-child(even) td { background: rgba(15,23,42,.65); }
+
+    .svg-wrap { background: radial-gradient(circle at top left, rgba(56,189,248,.12), rgba(15,23,42,.98));
+      border-radius: .9rem; border: 1px solid rgba(148,163,184,.4); padding: .6rem; margin-top: .35rem; }
+    .svg-wrap h3 { margin-top: .3rem; font-size: .92rem; }
+    svg { max-width: 100%; height: auto; display: block; }
+
+    /* Quiz styles */
+    .quiz-block { margin-top: 1.2rem; border-radius: .9rem;
+      background: rgba(15,23,42,.95); border: 1px solid rgba(148,163,184,.3);
+      overflow: hidden; }
+    .quiz-block .quiz-header { padding: .6rem 1rem;
+      background: rgba(37,99,235,.15); font-size: .9rem; font-weight: 600;
+      border-bottom: 1px solid rgba(148,163,184,.2); display: flex; align-items: center; gap: .5rem; }
+    .quiz-item { padding: .5rem .9rem; border-bottom: 1px solid rgba(31,41,55,.8); }
+    .quiz-item:last-child { border-bottom: none; }
+    details.quiz-item > summary { cursor: pointer; font-size: .88rem; padding: .2rem 0;
+      color: #e5e7eb; list-style: none; display: flex; gap: .5rem; align-items: flex-start; }
+    details.quiz-item > summary::before { content: "▶"; font-size: .65rem; margin-top: .2rem;
+      color: #a78bfa; flex-shrink: 0; }
+    details.quiz-item[open] > summary::before { content: "▼"; }
+    .quiz-answer { margin-top: .4rem; padding: .4rem .6rem; border-radius: .5rem;
+      background: rgba(34,197,94,.07); border-left: 2px solid #4ade80; font-size: .85rem; }
+
+    /* Level badges inline */
+    .lvl { display: inline-block; font-size: .65rem; padding: .1rem .35rem; border-radius: 999px;
+      font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-left: .3rem; vertical-align: middle; }
+    .lvl-1 { background: rgba(74,222,128,.15); color: #4ade80; border: 1px solid rgba(74,222,128,.4); }
+    .lvl-2 { background: rgba(251,191,36,.12); color: #fbbf24; border: 1px solid rgba(251,191,36,.4); }
+    .lvl-3 { background: rgba(167,139,250,.15); color: #a78bfa; border: 1px solid rgba(167,139,250,.4); }
+
+    /* Career flow */
+    .career-step { display: flex; align-items: flex-start; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid rgba(31,41,55,.8); }
+    .career-step:last-child { border-bottom: none; }
+    .career-num { width: 2rem; height: 2rem; border-radius: 50%; background: rgba(56,189,248,.15);
+      border: 2px solid #38bdf8; display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; font-weight: 700; color: #38bdf8; flex-shrink: 0; }
+    .career-body { flex: 1; }
+    .career-body h4 { margin: 0 0 .2rem; font-size: .95rem; }
+    .career-body p, .career-body li { font-size: .86rem; }
+
+    /* Glossary */
+    .glossary-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: .4rem 1.2rem; font-size: .88rem; margin-top: .7rem; }
+    .glossary-item { display: flex; gap: .4rem; padding: .2rem 0; border-bottom: 1px solid rgba(31,41,55,.5); }
+    .glossary-term { font-weight: 600; min-width: 9rem; color: #e5e7eb; }
+    .glossary-en { color: var(--muted); font-size: .84rem; }
+
+    .footer { margin-top: 1.8rem; text-align: center; font-size: .8rem; color: var(--muted); }
+    .footer span { color: #93c5fd; }
+
+    @media (max-width: 800px) {
+      header.hero { grid-template-columns: minmax(0,1fr); padding: 1.3rem 1.1rem; border-radius: 0 0 1.25rem 1.25rem; }
+      .hero-right { align-items: flex-start; }
+      .toc-grid, .two-col, .three-col, .glossary-grid { grid-template-columns: minmax(0,1fr); }
+      section { padding: 1.2rem 1.1rem 1.3rem; }
+    }
+
+    @media print {
+      body { background: #fff; color: #000; }
+      header.hero { position: static; background: #fff; border: none; box-shadow: none; border-radius: 0; }
+      /* İçindekiler bölümünü yazdırmada zorunlu göster */
+      nav.toc {
+        display: block !important;
+        background: #fff;
+        box-shadow: none;
+        border-radius: 0;
+        page-break-after: always;
+      }
+      section { background: #fff; box-shadow: none; border-radius: 0; border: 1px solid #e5e7eb; page-break-inside: avoid; }
+      .print-hint { display: none; }
+      .info-box, .warn-box, .danger-box, .note-box, .saha-box, .sinav-box, .ebu-note { background: #f9fafb !important; }
+      a { color: #000; text-decoration: none; }
+      .page { padding: 0; }
+      @page { margin: 1.5cm; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header class="hero">
+    <div>
+      <div class="badge-row">
+        <div class="badge accent">ETO Eğitim Rehberi</div>
+        <div class="badge">Stajyer → Zabit</div>
+        <div class="badge">Saha + Sınav Odaklı</div>
+      </div>
+      <h1>Gemi ETO'su İçin Kapsamlı Eğitim Rehberi</h1>
+      <p>Temel elektrikten kumanda devrelerine, motorlardan kariyer yoluna kadar
+         <strong>sıfırdan ETO Zabiti</strong> seviyesine taşıyan, sınav ve saha odaklı rehber.</p>
+      <small>Türkçe anlatım · İngilizce teknik terimler · Her bölümde mini sınav · Sahadan örnekler</small>
+    </div>
+    <div class="hero-right">
+      <div class="levels">
+        <div class="level-chip"><span>Seviye 1</span> · Stajyer</div>
+        <div class="level-chip"><span>Seviye 2</span> · Junior ETO</div>
+        <div class="level-chip"><span>Seviye 3</span> · ETO Zabiti</div>
+      </div>
+      <div class="print-hint">PDF: <code>Ctrl + P</code> → <code>PDF olarak kaydet</code></div>
+    </div>
+  </header>
+
+  <!-- ══════════ TOC ══════════ -->
+  <nav class="toc">
+    <h2>İçindekiler · Contents</h2>
+    <div class="toc-grid">
+      <div class="toc-item"><a href="#b1"><span class="toc-index">01</span><span><span class="toc-label">Elektriğin Temelleri</span><br><span class="toc-en">Fundamentals of Electricity</span></span></a></div>
+      <div class="toc-item"><a href="#b2"><span class="toc-index">02</span><span><span class="toc-label">Temel Elektrik Ekipmanları</span><br><span class="toc-en">Electrical Equipment</span></span></a></div>
+      <div class="toc-item"><a href="#b3"><span class="toc-index">03</span><span><span class="toc-label">Kumanda Devreleri</span><br><span class="toc-en">Control Circuits</span></span></a></div>
+      <div class="toc-item"><a href="#b4"><span class="toc-index">04</span><span><span class="toc-label">Motorlar</span><br><span class="toc-en">Motors</span></span></a></div>
+      <div class="toc-item"><a href="#b5"><span class="toc-index">05</span><span><span class="toc-label">Ölçü ve Test Cihazları</span><br><span class="toc-en">Measuring &amp; Test Instruments</span></span></a></div>
+      <div class="toc-item"><a href="#b6"><span class="toc-index">06</span><span><span class="toc-label">Aküler ve Şarj Sistemleri</span><br><span class="toc-en">Batteries &amp; Charging</span></span></a></div>
+      <div class="toc-item"><a href="#b7"><span class="toc-index">07</span><span><span class="toc-label">Şema Okuma</span><br><span class="toc-en">Reading Electrical Diagrams</span></span></a></div>
+      <div class="toc-item"><a href="#b8"><span class="toc-index">08</span><span><span class="toc-label">Güvenlik ve LOTO</span><br><span class="toc-en">Safety &amp; Lockout/Tagout</span></span></a></div>
+      <div class="toc-item"><a href="#b9"><span class="toc-index">09</span><span><span class="toc-label">Kariyer Yol Haritası</span><br><span class="toc-en">Career Roadmap</span></span></a></div>
+      <div class="toc-item"><a href="#b10"><span class="toc-index">10</span><span><span class="toc-label">Sözlük, Formüller &amp; Sınav</span><br><span class="toc-en">Glossary, Formulas &amp; Exam Bank</span></span></a></div>
+      <div class="toc-item"><a href="#b11"><span class="toc-index">11</span><span><span class="toc-label">Gemi Sistemleri &amp; Vaka</span><br><span class="toc-en">Systems &amp; Case Studies</span></span></a></div>
+      <div class="toc-item"><a href="#b12"><span class="toc-index">12</span><span><span class="toc-label">Kritik Ekipmanlar</span><br><span class="toc-en">Key Machinery</span></span></a></div>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 1 – ELEKTRİĞİN TEMELLERİ
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b1" data-label="Bölüm 1">
+    <h2>Elektriğin Temelleri <span class="lvl lvl-1">Seviye 1</span></h2>
+    <p class="section-sub">Akım (I), Gerilim (V), Direnç (R), Güç (P) · AC / DC · Tek faz / Üç faz · Omik &amp; Endüktif yükler · Kirchhoff Kanunları</p>
+    <p><em>Bu bölüm, gemide gördüğünüz her panonun, her motorun ve her kumanda devresinin temel dilini öğretir. Burası sağlamsa geri kalan her şey oturur.</em></p>
+
+    <!-- 1.1 Temel Kavramlar -->
+    <div class="two-col">
+      <div class="card">
+        <h3>1.1 Temel Büyüklükler</h3>
+        <ul>
+          <li><strong>Akım (Current, I)</strong> — İletken içinden birim zamanda geçen yük. Birimi <strong>Ampere (A)</strong>.</li>
+          <li><strong>Gerilim (Voltage, V)</strong> — Yükleri hareket ettiren itici güç; potansiyel fark. Birimi <strong>Volt (V)</strong>.</li>
+          <li><strong>Direnç (Resistance, R)</strong> — Akıma karşı gösterilen zorluk. Birimi <strong>Ohm (Ω)</strong>.</li>
+          <li><strong>Güç (Power, P)</strong> — Birim zamanda yapılan iş. Birimi <strong>Watt (W)</strong>.</li>
+        </ul>
+        <div class="formula-big">V = I · R &nbsp;|&nbsp; P = V · I &nbsp;|&nbsp; P = I² · R</div>
+        <table>
+          <thead><tr><th>Büyüklük</th><th>Sembol</th><th>Birim</th><th>Ölçü Aleti</th></tr></thead>
+          <tbody>
+            <tr><td>Gerilim</td><td>V</td><td>Volt (V)</td><td>Voltmetre</td></tr>
+            <tr><td>Akım</td><td>I</td><td>Ampere (A)</td><td>Ampermetre</td></tr>
+            <tr><td>Direnç</td><td>R</td><td>Ohm (Ω)</td><td>Multimetre (enerjisiz)</td></tr>
+            <tr><td>Güç (Aktif)</td><td>P</td><td>Watt (W)</td><td>Wattmetre</td></tr>
+            <tr><td>Görünür Güç</td><td>S</td><td>Volt-Amper (VA)</td><td>Güç analizörü</td></tr>
+            <tr><td>Güç Faktörü</td><td>cosφ</td><td>— (0…1)</td><td>Güç analizörü</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="svg-wrap">
+        <h3>Ohm Kanunu Devresi</h3>
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/></marker></defs>
+          <rect x="10" y="20" width="300" height="120" rx="10" fill="none" stroke="#64748b" stroke-width="1.2"/>
+          <!-- Battery -->
+          <line x1="60" y1="55" x2="60" y2="105" stroke="#e5e7eb" stroke-width="2"/>
+          <line x1="52" y1="65" x2="68" y2="65" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="50" y1="80" x2="70" y2="80" stroke="#e5e7eb" stroke-width="2.4"/>
+          <text x="35" y="48" fill="#e5e7eb" font-size="11">V=12V</text>
+          <!-- Resistor -->
+          <line x1="110" y1="35" x2="135" y2="35" stroke="#e5e7eb" stroke-width="1.4"/>
+          <polyline points="135,35 143,27 151,43 159,27 167,43 175,27 183,35" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="183" y1="35" x2="220" y2="35" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="140" y="22" fill="#e5e7eb" font-size="10">R=6Ω</text>
+          <!-- Current arrow -->
+          <line x1="220" y1="35" x2="265" y2="35" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr)"/>
+          <text x="225" y="26" fill="#38bdf8" font-size="10">I=2A</text>
+          <!-- Wires -->
+          <line x1="60" y1="35" x2="110" y2="35" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="265" y1="35" x2="265" y2="115" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="265" y1="115" x2="60" y2="115" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="100" y="135" fill="#9ca3af" font-size="9">V=I·R → 12=2·6 ✓  P=V·I=12·2=24W</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 1.2 AC / DC -->
+    <h3>1.2 AC ve DC Akım</h3>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li><strong>DC (Direct Current)</strong>: Tek yönde akar. Örnek: akü, DC güç kaynağı.</li>
+          <li><strong>AC (Alternating Current)</strong>: Yön ve genlik periyodik değişir. Sinüs dalgası. Örnek: gemi jeneratörü, şebeke.</li>
+          <li>Gemide ölçtüğünüz 230 V AC, sinüsün <strong>RMS (etkin) değeri</strong>dir.</li>
+          <li>Tepe değeri: <span class="formula">V<sub>max</sub> = √2 · V<sub>RMS</sub> ≈ 1.414 × 230 ≈ 325 V</span></li>
+        </ul>
+        <div class="info-box"><strong>Hap bilgi:</strong> Gemide büyük sistemler 380–440 V AC, 3 faz çalışır. Aydınlatma ve prizler 220–230 V AC, tek fazdır.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>AC Sinüs &amp; DC Düz Çizgi</h3>
+        <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="65" x2="300" y2="65" stroke="#4b5563" stroke-width="0.7"/>
+          <line x1="20" y1="20" x2="20" y2="110" stroke="#4b5563" stroke-width="0.7"/>
+          <path d="M20 65 C40 20,60 20,80 65 S120 110,140 65 S180 20,200 65 S240 110,260 65 S280 20,300 65" fill="none" stroke="#38bdf8" stroke-width="2"/>
+          <line x1="20" y1="40" x2="300" y2="40" stroke="#a3e635" stroke-width="2"/>
+          <text x="25" y="18" fill="#38bdf8" font-size="9">AC (sinüs)</text>
+          <text x="150" y="35" fill="#a3e635" font-size="9">DC (sabit)</text>
+          <text x="25" y="80" fill="#9ca3af" font-size="8">V<tspan dy="-2" font-size="6">RMS</tspan></text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 1.3 Tek Faz / 3 Faz -->
+    <h3>1.3 Tek Faz ve Üç Faz Sistemler</h3>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li><strong>Tek Faz (Single Phase)</strong>: 1 faz + nötr. 230 V. Aydınlatma, küçük cihazlar.</li>
+          <li><strong>Üç Faz (Three Phase)</strong>: L1, L2, L3 arası 120° faz farkı. 380–440 V (hat-hat). Motorlar, büyük yükler.</li>
+        </ul>
+        <div class="formula-big">V<sub>hat</sub> = √3 × V<sub>faz</sub> ≈ 1.732 × 230 ≈ 400 V</div>
+        <table>
+          <thead><tr><th>Sistem</th><th>Gerilim</th><th>Kullanım Yeri (Gemide)</th></tr></thead>
+          <tbody>
+            <tr><td>Tek faz (L-N)</td><td>220–230 V AC</td><td>Aydınlatma, priz, elektronik</td></tr>
+            <tr><td>Üç faz (L-L)</td><td>380–440 V AC</td><td>Pompalar, fanlar, vinçler, kompresör</td></tr>
+            <tr><td>DC</td><td>24 V / 110 V</td><td>Kumanda devreleri, GMDSS, acil</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="svg-wrap">
+        <h3>Üç Faz Sinüs Dalgaları (120° fark)</h3>
+        <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="120" x2="300" y2="120" stroke="#4b5563" stroke-width="0.7"/>
+          <line x1="20" y1="30" x2="20" y2="120" stroke="#4b5563" stroke-width="0.7"/>
+          <!-- L1 (R) -->
+          <path d="M20 75 C38 30,55 30,73 75 S108 120,126 75 S161 30,179 75 S214 120,232 75 S267 30,285 75 S300 100,300 75" fill="none" stroke="#f97316" stroke-width="1.5"/>
+          <!-- L2 (S) ~120° lag -->
+          <path d="M20 105 C38 55,55 30,73 30 S108 50,126 75 S161 120,179 75 S214 30,232 75 S267 120,285 75 S300 50,300 75" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+          <!-- L3 (T) ~240° lag -->
+          <path d="M20 45 C38 110,55 120,73 105 S108 75,126 75 S161 45,179 30 S214 30,232 75 S267 120,285 105 S300 75,300 75" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="25" y="18" fill="#e5e7eb" font-size="9">3 Fazlı AC Sistemi</text>
+          <text x="290" y="72" fill="#f97316" font-size="9">L1</text>
+          <text x="290" y="88" fill="#22c55e" font-size="9">L2</text>
+          <text x="290" y="55" fill="#38bdf8" font-size="9">L3</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 1.4 Yük Tipleri -->
+    <h3>1.4 Omik, Endüktif ve Kapasitif Yükler</h3>
+    <p>Bir devredeki yük tipi, akım ile gerilimin birbirine göre nasıl davrandığını belirler. Bu, özellikle güç faktörü (cosφ) için kritiktir.</p>
+    <div class="three-col">
+      <div class="card">
+        <h3>Omik (Rezistif) Yük <span class="lvl lvl-1">Temel</span></h3>
+        <p>Akım ve gerilim <strong>aynı fazda</strong>. Güç faktörü cosφ = 1.</p>
+        <ul>
+          <li>Rezistans, ısıtıcı, akkor lamba</li>
+          <li>P = V · I · cosφ = V · I</li>
+          <li>Tüm alınan güç ısıya/ışığa dönüşür</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Endüktif Yük <span class="lvl lvl-2">Önemli</span></h3>
+        <p>Akım gerilimin <strong>gerisinde kalır</strong> (lag). Motorlar, transformatörler, bobinler.</p>
+        <ul>
+          <li>cosφ &lt; 1 (tipik motor: 0.75–0.90)</li>
+          <li>S = V · I (görünür güç)</li>
+          <li>P = S · cosφ (gerçek güç)</li>
+          <li>Gemide çoğu büyük yük endüktiftir</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kapasitif Yük <span class="lvl lvl-3">İleri</span></h3>
+        <p>Akım gerilimin <strong>önünde olur</strong> (lead). Kondansatörler, güç faktörü düzeltme.</p>
+        <ul>
+          <li>Reaktif güç kompanzasyonu için kullanılır</li>
+          <li>Gemide invertör çıkışlarında ve filtre devrelerinde</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box"><strong>Neden önemli?</strong> Motor plakasındaki <strong>cosφ = 0.85</strong> değeri, motorun çektiği görünür güçten sadece %85'ini gerçek işe dönüştürdüğünü söyler. Geri kalan %15, reaktif güç olarak şebekede boş döner. Bu yüzden kablo boyutlandırması nominal akım (<em>S/V</em>) üzerinden, değil nominal güç (P) üzerinden yapılır.</div>
+
+    <!-- 1.5 Kirchhoff -->
+    <h3>1.5 Kirchhoff Kanunları</h3>
+    <div class="two-col">
+      <div>
+        <p><strong>KCL (Akım Kanunu)</strong>: Bir düğüme giren akımlar toplamı = çıkan akımlar toplamı.</p>
+        <div class="formula-big">∑ I<sub>giren</sub> = ∑ I<sub>çıkan</sub></div>
+        <p><strong>KVL (Gerilim Kanunu)</strong>: Kapalı çevrimde gerilimlerin cebirsel toplamı = 0.</p>
+        <div class="formula-big">∑ V = 0</div>
+        <h3>Örnek — KVL ile devre çözümü:</h3>
+        <ul>
+          <li>Kaynak: 24 V, R1 = 4 Ω, R2 = 2 Ω (seri)</li>
+          <li>I = 24 / (4+2) = <strong>4 A</strong></li>
+          <li>V₁ = 4×4 = 16 V, V₂ = 4×2 = 8 V</li>
+          <li>KVL: 24 − 16 − 8 = 0 ✓</li>
+        </ul>
+      </div>
+      <div class="svg-wrap">
+        <h3>Kirchhoff Devre Örneği</h3>
+        <svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/></marker></defs>
+          <rect x="40" y="30" width="240" height="110" rx="10" fill="none" stroke="#64748b" stroke-width="1.2"/>
+          <line x1="70" y1="65" x2="70" y2="115" stroke="#e5e7eb" stroke-width="2"/>
+          <line x1="62" y1="75" x2="78" y2="75" stroke="#e5e7eb" stroke-width="1.3"/>
+          <line x1="60" y1="90" x2="80" y2="90" stroke="#e5e7eb" stroke-width="2.3"/>
+          <text x="48" y="52" fill="#e5e7eb" font-size="10">24V</text>
+          <line x1="110" y1="40" x2="135" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <polyline points="135,40 143,32 151,48 159,32 167,48 175,32 183,40" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="183" y1="40" x2="210" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="135" y="26" fill="#e5e7eb" font-size="9">R₁=4Ω  16V</text>
+          <line x1="210" y1="40" x2="235" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <polyline points="235,40 243,32 251,48 259,32 267,48 275,32 283,40" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="283" y1="40" x2="300" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="235" y="26" fill="#e5e7eb" font-size="9">R₂=2Ω  8V</text>
+          <line x1="70" y1="40" x2="110" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="300" y1="40" x2="300" y2="115" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="300" y1="115" x2="70" y2="115" stroke="#e5e7eb" stroke-width="1.4"/>
+          <path d="M 90 115 Q 115 135 145 135 Q 190 135 240 135 Q 270 135 285 115" fill="none" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#arr2)"/>
+          <text x="140" y="152" fill="#38bdf8" font-size="10">I = 4 A →</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="saha-box"><strong>Sahada ne işine yarar?</strong> Sigortanın sık atması → akım beklenenden büyük demektir (kısa devre veya izolasyon kaçağı). Bir noktada gerilim yoksa KVL mantığıyla çevrimi takip et: enerjinin kaybolduğu yerde ya açık kontak ya yanmış eleman vardır.</div>
+    <div class="sinav-box"><strong>Sınavda nasıl sorulur?</strong> "Seri devreden 2 A akım geçiyor, R₁=10 Ω, R₂=5 Ω; toplam gerilim kaçtır?" → V = 2×(10+5) = 30 V. Güç hesabı: P = I²·R veya P = V·I.</div>
+
+    <!-- Bölüm 1 Mini Quiz -->
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 1 — Mini Sınav (Üstüne tıkla, cevabı gör)</div>
+      <details class="quiz-item">
+        <summary>Soru 1: Bir devrede V = 24 V ve R = 8 Ω ise akım kaç amperdir?</summary>
+        <div class="quiz-answer">I = V/R = 24/8 = <strong>3 A</strong>. Güç: P = V·I = 24×3 = 72 W.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: 230 V AC'nin tepe (maksimum) değeri yaklaşık nedir?</summary>
+        <div class="quiz-answer">V<sub>max</sub> = √2 × 230 ≈ <strong>325 V</strong>. Ölçü cihazları RMS değerini gösterir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: Üç fazlı bir sistemde faz-nötr gerilimi 230 V ise hat (faz-faz) gerilimi kaçtır?</summary>
+        <div class="quiz-answer">V<sub>hat</sub> = √3 × 230 ≈ <strong>400 V</strong>. Bu yüzden 400/230 V sistemi denir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: cosφ = 0.8 olan bir motora 400 V, 10 A uygulanıyor. Aktif güç (P) kaç W'dır?</summary>
+        <div class="quiz-answer">S = V·I = 400×10 = 4000 VA. P = S × cosφ = 4000 × 0.8 = <strong>3200 W = 3.2 kW</strong>.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 5: Kirchhoff Akım Kanunu (KCL) neyi ifade eder?</summary>
+        <div class="quiz-answer">Bir düğüme <strong>giren akımların toplamı, çıkan akımların toplamına eşittir</strong>. Yani: ∑I<sub>giren</sub> = ∑I<sub>çıkan</sub>. Enerji kaybolmaz.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 2 – ELEKTRİK EKİPMANLARI
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b2" data-label="Bölüm 2">
+    <h2>Temel Elektrik Ekipmanları <span class="lvl lvl-1">Seviye 1</span></h2>
+    <p class="section-sub">Sigorta · Şalter/Kesici · Kontaktör · Röle · Termik Röle · Trafo · Akım Trafosu (CT)</p>
+    <p><em>Pano kapağını açtığınızda gördüğünüz her "kutu ve kablo"nun ne işe yaradığını anlamak; arıza bulmayı inanılmaz hızlandırır.</em></p>
+
+    <h3>2.1 Sigorta (Fuse) <span class="lvl lvl-1">Temel</span></h3>
+    <div class="two-col">
+      <div>
+        <p>İçindeki ince tel, akım belirli değeri aşınca <strong>erir ve devreyi açar</strong>. Tek kullanımlıktır.</p>
+        <ul>
+          <li><strong>Anma akımı (In)</strong>: "10 A sigorta" demek, 10 A'e kadar izin verir.</li>
+          <li><strong>Türler:</strong> NH (bıçaklı), HRC, cam tüp, otomatik.</li>
+          <li><strong>Kesme kapasitesi (kA)</strong>: Kısa devrede bozulmadan kesebileceği max akım. Panodaki kısa devre akımından büyük olmalı.</li>
+        </ul>
+        <div class="warn-box">
+          <strong>Saha uyarısı:</strong>
+          <ul>
+            <li>Sigortayı asla <strong>köprüleme</strong>! Kısa devreyi kabloya taşımış olursun.</li>
+            <li>Tekrar atıyorsa sebebi arıza; <strong>daha büyük sigorta takma.</strong></li>
+            <li>Değiştirirken aynı tip ve aynı anma akımını kullan.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Sigorta Sembolü</h3>
+        <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="50" x2="100" y2="50" stroke="#e5e7eb" stroke-width="1.6"/>
+          <rect x="100" y="36" width="90" height="28" rx="6" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="108" y1="50" x2="182" y2="50" stroke="#e5e7eb" stroke-width="1.6" stroke-dasharray="6,4"/>
+          <line x1="190" y1="50" x2="300" y2="50" stroke="#e5e7eb" stroke-width="1.6"/>
+          <text x="125" y="32" fill="#9ca3af" font-size="9">F1 — 16A gG</text>
+          <text x="95" y="82" fill="#9ca3af" font-size="9">Fuse / Sigorta</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>2.2 Şalter / Kesici (Circuit Breaker) <span class="lvl lvl-1">Temel</span></h3>
+    <div class="two-col">
+      <div>
+        <p>Sigortaya benzer ama <strong>mekanik, tekrar kullanılabilir</strong>. Hem aşırı yük hem kısa devreye karşı korur.</p>
+        <table>
+          <thead><tr><th>Tip</th><th>Boyut</th><th>Kullanım</th></tr></thead>
+          <tbody>
+            <tr><td>MCB</td><td>küçük (1–125 A)</td><td>Aydınlatma, priz, küçük motor</td></tr>
+            <tr><td>MCCB</td><td>orta (16–1600 A)</td><td>Yardımcı pano, güç devreleri</td></tr>
+            <tr><td>ACB</td><td>büyük (630 A+)</td><td>Ana dağıtım panosu</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">MCB "trip" ettiyse, <strong>OFF → ON'dan önce sebebini araştır.</strong> Kesici her açıldığında bunu bir mesaj olarak oku: devre aşırı akım çekiyor demektir.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Kesici Sembolü (CB)</h3>
+        <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="55" x2="120" y2="55" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="120" y1="55" x2="175" y2="35" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="175" y1="35" x2="285" y2="35" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="175" y1="35" x2="190" y2="18" stroke="#9ca3af" stroke-width="1.2"/>
+          <circle cx="190" cy="14" r="4" fill="none" stroke="#9ca3af" stroke-width="1"/>
+          <text x="135" y="78" fill="#9ca3af" font-size="9">Circuit Breaker (CB)</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>2.3 Kontaktör (Contactor) <span class="lvl lvl-1">Temel</span></h3>
+    <div class="two-col">
+      <div>
+        <p>Büyük akımları <strong>uzaktan açıp kapatan</strong> elektromekanik anahtar. Motor kumandalarının merkezindedir.</p>
+        <ul>
+          <li><strong>Ana Kontaklar (Main Contacts)</strong>: L1/T1, L2/T2, L3/T3 — güç devresi.</li>
+          <li><strong>Yardımcı Kontaklar (Aux. Contacts)</strong>: NO ve NC — kumanda devresi.</li>
+          <li><strong>Bobin (Coil A1–A2)</strong>: 24 VDC, 110 VAC veya 230 VAC ile beslenir.</li>
+        </ul>
+        <div class="note-box"><strong>Hap bilgi:</strong> Kontaktör güç devresini; start-stop butonları sadece kumanda devresini kontrol eder. Büyük akımı hiçbir zaman butonla taşımazsınız.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Kontaktör (3 Ana + Bobin)</h3>
+        <svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="40" x2="90" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="40" y1="70" x2="90" y2="70" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="40" y1="100" x2="90" y2="100" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="90" y="25" width="130" height="90" rx="8" fill="none" stroke="#38bdf8" stroke-width="1.4"/>
+          <text x="130" y="45" fill="#38bdf8" font-size="10">K1</text>
+          <text x="105" y="58" fill="#9ca3af" font-size="9">Contactor</text>
+          <line x1="220" y1="40" x2="280" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="220" y1="70" x2="280" y2="70" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="220" y1="100" x2="280" y2="100" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="28" y="32" fill="#9ca3af" font-size="8">L1</text>
+          <text x="28" y="62" fill="#9ca3af" font-size="8">L2</text>
+          <text x="28" y="92" fill="#9ca3af" font-size="8">L3</text>
+          <text x="282" y="32" fill="#9ca3af" font-size="8">T1</text>
+          <text x="282" y="62" fill="#9ca3af" font-size="8">T2</text>
+          <text x="282" y="92" fill="#9ca3af" font-size="8">T3</text>
+          <line x1="145" y1="135" x2="145" y2="155" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="185" y1="135" x2="185" y2="155" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="145" y1="145" x2="185" y2="145" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="140" y="130" fill="#9ca3af" font-size="8">A1</text>
+          <text x="183" y="130" fill="#9ca3af" font-size="8">A2</text>
+          <text x="105" y="160" fill="#9ca3af" font-size="8">Bobin — 230VAC</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>2.4 Röle (Relay) ve Termik Röle (Thermal Overload Relay) <span class="lvl lvl-1">Temel</span></h3>
+    <div class="two-col">
+      <div>
+        <p><strong>Röle</strong>: Küçük sinyal ile büyük kontakları kumanda eder. Kumanda devresinin ara elemanı.</p>
+        <p><strong>Termik Röle</strong>: Motoru <strong>aşırı yüklenmeye</strong> karşı korur. Motor nominal akımına göre ayarlanır. Açtığında NC kontağı kumanda devresini keser.</p>
+        <ul>
+          <li>Termik ayarı: motor plakasındaki nominal akımın %95–105'i aralığında.</li>
+          <li>Termik açmışsa → RESET'ten önce <strong>neden aşırı akım çektiğini araştır</strong>.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Röle Türleri</h3>
+        <table>
+          <thead><tr><th>Tür</th><th>Görevi</th></tr></thead>
+          <tbody>
+            <tr><td>Kumanda rölesi</td><td>Sinyal amplifikasyonu, izolasyon</td></tr>
+            <tr><td>Zaman rölesi (Timer)</td><td>Yıldız-üçgen geçişi, gecikmeli kapama</td></tr>
+            <tr><td>Termik röle</td><td>Motor aşırı yük koruması</td></tr>
+            <tr><td>Koruma rölesi</td><td>Aşırı akım, faz kaybı, toprak hatası</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>2.5 Trafo (Transformer) <span class="lvl lvl-1">Temel</span></h3>
+    <div class="two-col">
+      <div>
+        <p>AC gerilimi farklı seviyeye dönüştürür. <strong>DC gerilimi dönüştüremez.</strong></p>
+        <div class="formula-big">V₁/V₂ = N₁/N₂ &nbsp;&nbsp; (sarım oranı)</div>
+        <ul>
+          <li><strong>Güç trafosu</strong>: 440 V → 220 V veya 220 V → 24 V.</li>
+          <li><strong>İzolasyon trafosu</strong>: Giriş-çıkış arasında galvanik izolasyon.</li>
+          <li><strong>Kumanda trafosu</strong>: 440 V → 110 VAC kumanda beslemesi.</li>
+        </ul>
+        <div class="info-box"><strong>Örnek:</strong> N₁=1000 sarım, N₂=500 sarım → dönüşüm oranı 2:1 → V₁=440V ise V₂=220V. Akım ise ters: I₂ = I₁ × (N₁/N₂) = I₁ × 2.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Trafo Sembolü</h3>
+        <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="60" x2="80" y2="60" stroke="#e5e7eb" stroke-width="1.4"/>
+          <!-- Primer sargı -->
+          <path d="M80 45 Q90 35 100 45 Q110 55 120 45 Q130 35 140 45 Q150 55 160 45 Q170 35 180 45" fill="none" stroke="#f97316" stroke-width="2"/>
+          <line x1="180" y1="45" x2="180" y2="75" stroke="#4b5563" stroke-width="1.2"/>
+          <line x1="80" y1="45" x2="80" y2="75" stroke="#4b5563" stroke-width="1.2"/>
+          <!-- Sekonder sargı -->
+          <path d="M180 65 Q190 55 200 65 Q210 75 220 65 Q230 55 240 65 Q250 75 260 65" fill="none" stroke="#38bdf8" stroke-width="2"/>
+          <line x1="260" y1="65" x2="300" y2="65" stroke="#e5e7eb" stroke-width="1.4"/>
+          <!-- Core -->
+          <rect x="178" y="42" width="4" height="36" fill="#9ca3af"/>
+          <text x="25" y="50" fill="#f97316" font-size="9">440V</text>
+          <text x="268" y="58" fill="#38bdf8" font-size="9">220V</text>
+          <text x="120" y="100" fill="#9ca3af" font-size="9">Trafo / Transformer</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>2.6 Akım Trafosu (Current Transformer — CT) <span class="lvl lvl-2">Önemli</span></h3>
+    <div class="two-col">
+      <div>
+        <p>Yüksek hat akımını (örn. 500 A) ölçü cihazlarının okuyabileceği standart değere (5 A veya 1 A) düşürür.</p>
+        <ul>
+          <li>Örnek: 500/5 A CT → hat akımı 500 A iken sekonderde 5 A akar.</li>
+          <li>Ampermetre, koruma rölesi, enerji analizörü ile kullanılır.</li>
+        </ul>
+        <div class="danger-box">
+          <strong>KRİTİK GÜVENLİK:</strong>
+          <ul>
+            <li>CT sekonderi <strong>asla açık bırakılmaz.</strong></li>
+            <li>Ampermetre sökülecekse önce CT uçları kısa devre edilir.</li>
+            <li>Açık CT sekonderinde tehlikeli yüksek gerilim oluşur → can ve ekipman tehlikesi.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svg-wrap">
+        <h3>CT — Primer Hat ve Sekonder Ölçü</h3>
+        <svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="50" x2="300" y2="50" stroke="#e5e7eb" stroke-width="2"/>
+          <text x="25" y="40" fill="#9ca3af" font-size="9">Hat (Primer) — 500A</text>
+          <circle cx="160" cy="50" r="22" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="148" y="55" fill="#38bdf8" font-size="9">CT</text>
+          <text x="112" y="44" fill="#9ca3af" font-size="7">500/5A</text>
+          <line x1="148" y1="72" x2="130" y2="100" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="172" y1="72" x2="190" y2="100" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="220" cy="110" r="14" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="216" y="114" fill="#e5e7eb" font-size="11">A</text>
+          <line x1="190" y1="100" x2="205" y2="110" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="130" y1="100" x2="100" y2="100" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="100" y1="100" x2="100" y2="120" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="100" y1="120" x2="236" y2="120" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="115" y="115" fill="#9ca3af" font-size="8">5A → Ampermetre</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>2.7 Özet Ekipman Tablosu</h3>
+    <table>
+      <thead><tr><th>Ekipman</th><th>İngilizce</th><th>Temel Görevi</th><th>Gemide Kullanım</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Sigorta</strong></td><td>Fuse</td><td>Aşırı akımda tel erir, devreyi keser</td><td>Aydınlatma, elektronik kart besleme</td></tr>
+        <tr><td><strong>Kesici</strong></td><td>MCB/MCCB/ACB</td><td>Aşırı yük/kısa devrede mekanik açma</td><td>Ana pano, motor devreleri</td></tr>
+        <tr><td><strong>Kontaktör</strong></td><td>Contactor</td><td>Büyük akımı uzaktan aç/kapa</td><td>Motor start/stop, Y-Δ devreleri</td></tr>
+        <tr><td><strong>Röle</strong></td><td>Relay</td><td>Küçük sinyal → büyük kontak</td><td>Kumanda, zamanlama, kilitleme</td></tr>
+        <tr><td><strong>Termik Röle</strong></td><td>Thermal O/L Relay</td><td>Motoru aşırı yükten korur</td><td>Her motor kontaktörü önünde</td></tr>
+        <tr><td><strong>Trafo</strong></td><td>Transformer</td><td>AC gerilimi dönüştürür</td><td>Kumanda trafosu, izolasyon trafosu</td></tr>
+        <tr><td><strong>Akım Trafosu</strong></td><td>CT</td><td>Yüksek akımı 5A'e düşürür</td><td>Ampermetreler, koruma röleleri</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Panoya baktığınızda kendinize hep şunu sorun: "Bu enerji hatta <em>nereden giriyor</em>, hangi sigorta/şalter üzerinden hangi kontaktöre ulaşıyor?" Ekipmanların görevini net bilirseniz arıza bulmak çok hızlanır.</div>
+    <div class="saha-box"><strong>Sahada ne işine yarar?</strong> Kontaktör bobini enerjisiz ama ana kontaklar kapanmış gibi davranıyorsa → kontak kaynaklanmıştır. LOTO yap, kontaktörü değiştir.</div>
+    <div class="sinav-box"><strong>Sınavda nasıl sorulur?</strong> "Hangi ekipman aşırı akımda otomatik açar, elle tekrar kapatılır?" → Kesici (MCB/MCCB). "CT sekonderi neden açık bırakılmaz?" → Tehlikeli yüksek gerilim oluşur.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 2 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: Bir sigorta ile bir kesici (MCB) arasındaki temel fark nedir?</summary>
+        <div class="quiz-answer">Sigorta tek kullanımlıktır; açıldığında değiştirilmesi gerekir. MCB mekanik ve tekrar kullanılabilir; elle sıfırlanabilir (reset).</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: Kontaktörün A1-A2 uçları ne işe yarar?</summary>
+        <div class="quiz-answer">A1-A2 <strong>bobin (coil) uçlarıdır.</strong> Kumanda gerilimi (örn. 230 VAC) bu uçlara uygulanınca bobin mıknatıslanır ve ana kontaklar kapanır.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: Termik röle "trip" etti. Hemen RESET basıp motoru çalıştırabilir misiniz? Neden?</summary>
+        <div class="quiz-answer"><strong>Hayır.</strong> Termik açmanın sebebini önce araştırmalısınız: aşırı yük, faz dengesizliği, veya kötü izolasyon olabilir. Sebebi bulmadan RESET yapmak motoru yakabilir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: 500/5 A akım trafosu kullanıyorsunuz. Ampermetreniz 3.5 A gösteriyor. Hattaki gerçek akım nedir?</summary>
+        <div class="quiz-answer">Oran = 500/5 = 100. Gerçek akım = 3.5 × 100 = <strong>350 A</strong>.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 3 – KUMANDA DEVRELERİ
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b3" data-label="Bölüm 3">
+    <h2>Kumanda Devreleri <span class="lvl lvl-1">Seviye 1–2</span></h2>
+    <p class="section-sub">NO/NC butonlar · Start-Stop · Emergency Stop · Mühürleme (Latching) · Otomatik kumanda · Sinyal lambaları</p>
+    <p><em>Arıza bulmada asıl yetkinlik, kumanda devresindeki enerji yolunu kafanda çizebilmektir.</em></p>
+
+    <h3>3.1 NO ve NC Kontak Mantığı</h3>
+    <div class="two-col">
+      <div>
+        <ul>
+          <li><strong>NO (Normally Open — Normalde Açık)</strong>: Aksiyon olmadığında açık; basıldığında/enerjilendiğinde kapanır. → Start butonu, kontaktör ana kontağı.</li>
+          <li><strong>NC (Normally Closed — Normalde Kapalı)</strong>: Aksiyon olmadığında kapalı; basıldığında/enerjilendiğinde açılır. → Stop butonu, Emergency stop, termik röle kontağı.</li>
+        </ul>
+        <div class="warn-box"><strong>Emergency Stop neden NC?</strong> Kablo kopsa bile devre açık kalır → sistem durur. Bu "fail-safe" güvenlik prensibidir. Kablo arızası veya yangında da sistem kendiliğinden güvenli konuma geçer.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>NO ve NC Sembolleri</h3>
+        <svg viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg">
+          <text x="30" y="20" fill="#e5e7eb" font-size="11" font-weight="600">NO (Normalde Açık)</text>
+          <line x1="30" y1="45" x2="80" y2="45" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="100" y1="45" x2="150" y2="45" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="78" y1="33" x2="102" y2="57" stroke="#e5e7eb" stroke-width="1.6"/>
+          <text x="42" y="70" fill="#9ca3af" font-size="9">Start — NO</text>
+          <text x="180" y="20" fill="#e5e7eb" font-size="11" font-weight="600">NC (Normalde Kapalı)</text>
+          <line x1="180" y1="45" x2="220" y2="45" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="244" y1="45" x2="290" y2="45" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="220" y1="45" x2="244" y2="45" stroke="#e5e7eb" stroke-width="1.6"/>
+          <line x1="225" y1="33" x2="239" y2="57" stroke="#020617" stroke-width="4"/>
+          <line x1="225" y1="33" x2="239" y2="57" stroke="#e5e7eb" stroke-width="1.6"/>
+          <text x="188" y="70" fill="#9ca3af" font-size="9">Stop / E-Stop — NC</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>3.2 Start-Stop ve Mühürleme (Self-Holding) Devresi</h3>
+    <div class="two-col">
+      <div class="svg-wrap">
+        <h3>Start-Stop Kumanda Devresi</h3>
+        <svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- L+ besleme -->
+          <text x="10" y="25" fill="#9ca3af" font-size="8">L+</text>
+          <line x1="22" y1="25" x2="22" y2="190" stroke="#e5e7eb" stroke-width="1.2"/>
+          <!-- Satır 1: Stop(NC) — Start(NO) — K1 bobin -->
+          <line x1="22" y1="50" x2="65" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <!-- Stop NC -->
+          <line x1="65" y1="50" x2="95" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="95" y1="50" x2="115" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="99" y1="38" x2="111" y2="62" stroke="#020617" stroke-width="3.5"/>
+          <line x1="99" y1="38" x2="111" y2="62" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="70" y="40" fill="#f97373" font-size="8">Stop (NC)</text>
+          <line x1="115" y1="50" x2="155" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <!-- Start NO -->
+          <line x1="155" y1="38" x2="177" y2="62" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="177" y1="50" x2="220" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="153" y="40" fill="#4ade80" font-size="8">Start (NO)</text>
+          <!-- K1 Bobin -->
+          <line x1="220" y1="50" x2="240" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <rect x="240" y="38" width="35" height="24" rx="4" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="244" y="54" fill="#38bdf8" font-size="9">K1</text>
+          <text x="244" y="74" fill="#9ca3af" font-size="7">Coil</text>
+          <line x1="275" y1="50" x2="310" y2="50" stroke="#e5e7eb" stroke-width="1.2"/>
+          <!-- Satır 2: K1 NO (mühürleme) parallel Start ile -->
+          <line x1="115" y1="90" x2="155" y2="90" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="155" y1="78" x2="177" y2="102" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="177" y1="90" x2="220" y2="90" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="145" y="80" fill="#fbbf24" font-size="8">K1 NO (Mühür)</text>
+          <!-- Bağlantılar -->
+          <line x1="115" y1="50" x2="115" y2="90" stroke="#e5e7eb" stroke-width="1.0"/>
+          <line x1="220" y1="50" x2="220" y2="90" stroke="#e5e7eb" stroke-width="1.0"/>
+          <!-- N- dönüş -->
+          <line x1="310" y1="50" x2="310" y2="160" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="310" y1="160" x2="22" y2="160" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="8" y="165" fill="#9ca3af" font-size="8">N-</text>
+          <!-- Termik NC -->
+          <line x1="22" y1="130" x2="65" y2="130" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="65" y1="130" x2="95" y2="130" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="99" y1="118" x2="111" y2="142" stroke="#020617" stroke-width="3.5"/>
+          <line x1="99" y1="118" x2="111" y2="142" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="115" y1="130" x2="240" y2="130" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="60" y="118" fill="#f97373" font-size="8">Termik NC</text>
+          <rect x="240" y="118" width="35" height="24" rx="4" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+          <text x="244" y="134" fill="#a78bfa" font-size="9">K2</text>
+          <line x1="275" y1="130" x2="310" y2="130" stroke="#e5e7eb" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="info-box">
+        <strong>Çalışma sırası (adım adım):</strong>
+        <ol>
+          <li>Sistem enerjilendiğinde: Stop NC kapalı, Start NO açık → K1 bobini enerjisiz → motor durur.</li>
+          <li><strong>Start'a basılınca:</strong> Devre kapanır → K1 bobini enerjilenir → ana kontaklar kapanır → motor döner.</li>
+          <li>Start bırakıldığında: <strong>K1 NO yardımcı kontağı</strong> Start'ın yanından devreyi mühürler → motor çalışmaya devam eder.</li>
+          <li><strong>Stop'a basılınca:</strong> NC açılır → K1 bobini enerjisi kesilir → her şey eski haline döner → motor durur.</li>
+          <li>Termik NC açarsa motor da durur (aşırı yük koruması).</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>3.3 Emergency Stop — Acil Durdurma</h3>
+    <p>E-Stop butonları <strong>kırmızı mantar tip, NC kontaklı</strong> ve kumanda devresinin başına seri bağlıdır. Birden fazla E-Stop seri bağlanır; herhangi birine basıldığında tüm devre kesilir.</p>
+    <div class="two-col">
+      <div class="warn-box">
+        <strong>Saha kuralları:</strong>
+        <ul>
+          <li>Motor tekrar çalıştırılmadan önce E-Stop <strong>mekanik olarak çekilip serbest bırakılmalıdır</strong>.</li>
+          <li>E-Stop devresi üzerinde bypass, köprü veya izinsiz değişiklik yapmak SOLAS'a aykırıdır.</li>
+          <li>E-Stop kablolarını takip ederken şemayı kullan; tüm butonların seri olduğunu unut.</li>
+        </ul>
+      </div>
+      <div class="svg-wrap">
+        <h3>İki E-Stop — Seri Bağlantı</h3>
+        <svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="45" x2="50" y2="45" stroke="#e5e7eb" stroke-width="1.4"/>
+          <!-- E-Stop 1 NC -->
+          <line x1="50" y1="45" x2="80" y2="45" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="84" y1="33" x2="96" y2="57" stroke="#020617" stroke-width="4"/>
+          <line x1="84" y1="33" x2="96" y2="57" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="100" y1="45" x2="145" y2="45" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="55" y="28" fill="#f97373" font-size="8">E-Stop 1 (NC)</text>
+          <!-- E-Stop 2 NC -->
+          <line x1="145" y1="45" x2="175" y2="45" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="179" y1="33" x2="191" y2="57" stroke="#020617" stroke-width="4"/>
+          <line x1="179" y1="33" x2="191" y2="57" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="195" y1="45" x2="240" y2="45" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="148" y="28" fill="#f97373" font-size="8">E-Stop 2 (NC)</text>
+          <!-- Devam... bobin -->
+          <rect x="240" y="33" width="30" height="24" rx="4" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="245" y="49" fill="#38bdf8" font-size="9">K1</text>
+          <line x1="270" y1="45" x2="310" y2="45" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="10" y="78" fill="#9ca3af" font-size="8">↑ Herhangi birine basınca devre açılır → motor durur</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>3.4 Otomatik Kumanda — Basınç/Seviye Şalteri Örneği</h3>
+    <p>Gemide pompalar çoğunlukla <strong>basınç şalteri (pressure switch)</strong> veya <strong>seviye şalteri (level switch)</strong> ile otomatik çalıştırılır.</p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Örnek: Bilge Pompası Otomatiği</h3>
+        <ol>
+          <li>Sintine seviyesi yükselir → <strong>level switch NO kapanır</strong>.</li>
+          <li>Kumanda devresindeki kontak kapanınca K1 bobini enerji alır.</li>
+          <li>Pompa motoru çalışır ve suyu tahliye eder.</li>
+          <li>Seviye düşünce level switch açılır → K1 deenerjilenir → pompa durur.</li>
+        </ol>
+        <div class="info-box"><strong>Manual/Auto seçici:</strong> Panalarda "Manual-Off-Auto" seçici (selector switch) bulunur. Auto'da otomatik kontak devrededir; Manual'da butonla başlatılır.</div>
+      </div>
+      <div class="card">
+        <h3>Sinyal Lambaları (Pilot Lamps)</h3>
+        <ul>
+          <li><strong>Yeşil:</strong> Hazır / Durdurulmuş (genelde)</li>
+          <li><strong>Kırmızı:</strong> Çalışıyor / Arıza</li>
+          <li><strong>Sarı/Amber:</strong> Dikkat, alarm</li>
+        </ul>
+        <div class="warn-box"><strong>Kontrol:</strong> Motor çalışıyor ama "RUN" lambası yanmıyor → yardımcı kontak, lamba veya sigorta arızalı. Motor durmuş ama "RUN" yanıyor → yanlış bağlantı veya kontak kaynaklanmış.</div>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Kumanda devresindeki arızayı bulmak için şu adımları izle: (1) Şemada enerji giriş noktasını bul. (2) Multimetre ile sırayla her kontakta gerilim var mı diye bak. (3) Enerji kaybedilen noktadaki eleman arızalıdır.</div>
+
+    <!-- Senaryo -->
+    <div class="warn-box">
+      <strong>Senaryo: Stop basılıyor ama motor durmuyor — ne yaparsın?</strong>
+      <ol>
+        <li>Stop butonunun mekanik olarak çalışıp çalışmadığını kontrol et.</li>
+        <li>Multimetre ile Stop butonunun uçlarını ölç: NC kontağı açılıyor mu?</li>
+        <li>Açılıyorsa ama K1 düşmüyorsa → K1 bobinine gelen gerilimi kontrol et.</li>
+        <li>Bobin gerilimi kesiliyor ama kontaktör bırakmıyorsa → ana kontaklar kaynaklanmış → LOTO + kontaktör değişimi.</li>
+      </ol>
+    </div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 3 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: Mühürleme (self-holding) devresinin amacı nedir?</summary>
+        <div class="quiz-answer">Start butonunu anlık olarak basıp bıraktıktan sonra kontaktörün enerjisini korumak için kontaktörün kendi NO yardımcı kontağının Start butonu ile paralel bağlanmasıdır. Böylece parmak kaldırınca devre kopmaz.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: Emergency Stop butonu neden NO değil NC tipi kullanılır?</summary>
+        <div class="quiz-answer">NC kullanılmasının nedeni "fail-safe" ilkesidir: E-Stop kablosu kopsa veya bağlantı bozulsa bile devre <strong>açık kalır</strong> ve sistem durur. NO kullansaydık kablo koptuğunda motor çalışmaya devam ederdi — bu güvensizdir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: Termik röle neden kumanda devresine NC kontak olarak bağlanır?</summary>
+        <div class="quiz-answer">Termik röle aşırı akım durumunda NC kontağını açarak K1 bobininin enerjisini keser ve motor durur. NC bağlantısı olmasa termik röle açılsa bile motor çalışmaya devam ederdi.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: "Manual-Off-Auto" seçicide Auto konumunda hangi eleman devrededir?</summary>
+        <div class="quiz-answer">Auto konumunda otomatik kumanda elemanı (level switch, pressure switch vb.) devrededir. Bu eleman duruma göre motoru kendisi açıp kapatır.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 4 – MOTORLAR
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b4" data-label="Bölüm 4">
+    <h2>Motorlar <span class="lvl lvl-1">Seviye 1–3</span></h2>
+    <p class="section-sub">Asenkron motor yapısı · Kayma (slip) · Motor plaka okuma · Yıldız/Üçgen bağlantı · Yıldız-Üçgen kalkış · Arıza senaryoları</p>
+    <p><em>Gemideki neredeyse her büyük motor kafanızda canlandırabileceğiniz tek bir yapıya sahiptir.</em></p>
+
+    <h3>4.1 Asenkron Motor (Induction Motor) Yapısı</h3>
+    <div class="two-col">
+      <div class="card">
+        <ul>
+          <li><strong>Stator</strong>: Sabit kısım; 3 faz sargılar.</li>
+          <li><strong>Rotor</strong>: Dönen kısım; sincap kafesli (squirrel cage) veya bilezikli.</li>
+          <li><strong>Hava aralığı</strong>: Stator-rotor arası ince boşluk; manyetik alan bu boşluktan geçer.</li>
+          <li><strong>Rulmanlar</strong>: Rotoru taşır; bakım noktası.</li>
+        </ul>
+        <div class="info-box"><strong>Çalışma prensibi:</strong> 3 fazlı gerilim statorda dönen manyetik alan oluşturur. Bu dönen alan rotorda akım indükler. Rotor bu alana yetişmeye çalışarak döner. Tam yetişemez → aralarında <strong>kayma (slip)</strong> olur.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Asenkron Motor Kesiti (Şematik)</h3>
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stator dış gövde -->
+          <circle cx="150" cy="100" r="85" fill="none" stroke="#64748b" stroke-width="2"/>
+          <!-- Stator sargılar (3 renk) -->
+          <circle cx="150" cy="20" r="10" fill="#f97316" opacity=".8"/>
+          <circle cx="224" cy="135" r="10" fill="#22c55e" opacity=".8"/>
+          <circle cx="76" cy="135" r="10" fill="#38bdf8" opacity=".8"/>
+          <text x="143" y="10" fill="#f97316" font-size="8">L1</text>
+          <text x="232" y="140" fill="#22c55e" font-size="8">L2</text>
+          <text x="54" y="140" fill="#38bdf8" font-size="8">L3</text>
+          <!-- Rotor -->
+          <circle cx="150" cy="100" r="45" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+          <!-- Rotor çubukları -->
+          <line x1="150" y1="55" x2="150" y2="145" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="119" y1="63" x2="181" y2="137" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="181" y1="63" x2="119" y2="137" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="107" y1="90" x2="193" y2="110" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="107" y1="110" x2="193" y2="90" stroke="#9ca3af" stroke-width="1"/>
+          <!-- Mil -->
+          <circle cx="150" cy="100" r="8" fill="#4b5563"/>
+          <line x1="150" y1="100" x2="220" y2="100" stroke="#e5e7eb" stroke-width="2.5"/>
+          <text x="155" y="175" fill="#9ca3af" font-size="9">Mil (Shaft)</text>
+          <!-- Etiket -->
+          <text x="60" y="75" fill="#64748b" font-size="8">Stator</text>
+          <text x="125" y="85" fill="#9ca3af" font-size="8">Rotor</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>4.2 Kayma (Slip)</h3>
+    <p>Senkron hız (n<sub>s</sub>), statorun oluşturduğu dönen alanın hızıdır. Rotor bu hıza tam ulaşamaz; aralarındaki fark <strong>kayma (slip, s)</strong> olarak adlandırılır.</p>
+    <div class="two-col">
+      <div>
+        <div class="formula-big">n<sub>s</sub> = (120 × f) / p &nbsp;&nbsp; [dev/dak]</div>
+        <ul>
+          <li>f = frekans (Hz), p = kutup sayısı</li>
+          <li>50 Hz, 4 kutuplu motor: n<sub>s</sub> = 120×50/4 = <strong>1500 dev/dak</strong></li>
+          <li>Gerçek rotor hızı ~1450 dev/dak → slip ≈ %3</li>
+        </ul>
+        <div class="formula-big">s = (n<sub>s</sub> − n) / n<sub>s</sub> × 100%</div>
+      </div>
+      <div class="card">
+        <h3>Tipik Hızlar (50 Hz)</h3>
+        <table>
+          <thead><tr><th>Kutup Sayısı</th><th>Senkron Hız</th><th>Nominal Hız (~)</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td>3000 dev/dak</td><td>~2950</td></tr>
+            <tr><td>4</td><td>1500 dev/dak</td><td>~1450</td></tr>
+            <tr><td>6</td><td>1000 dev/dak</td><td>~960</td></tr>
+            <tr><td>8</td><td>750 dev/dak</td><td>~720</td></tr>
+          </tbody>
+        </table>
+        <div class="sinav-box"><strong>Sınavda:</strong> "Plakada 960 dev/dak yazıyor → kaç kutuplu?" → f=50 Hz, n<sub>s</sub>=1000 → p = 120×50/1000 = 6 kutup.</div>
+      </div>
+    </div>
+
+    <h3>4.3 Motor Plaka Bilgileri (Nameplate)</h3>
+    <div class="two-col">
+      <div class="svg-wrap">
+        <h3>Örnek Motor Plakası</h3>
+        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="20" width="260" height="145" rx="6" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="30" y="20" width="260" height="22" rx="6" fill="rgba(56,189,248,.1)"/>
+          <text x="75" y="36" fill="#38bdf8" font-size="10" font-weight="600">3~ SQUIRREL CAGE INDUCTION MOTOR</text>
+          <text x="45" y="60" fill="#e5e7eb" font-size="9">Güç / Power:</text>
+          <text x="180" y="60" fill="#fbbf24" font-size="10" font-weight="600">7.5 kW</text>
+          <text x="45" y="78" fill="#e5e7eb" font-size="9">Gerilim / Voltage:</text>
+          <text x="180" y="78" fill="#fbbf24" font-size="10" font-weight="600">Δ 400V / Y 690V</text>
+          <text x="45" y="96" fill="#e5e7eb" font-size="9">Akım / Current:</text>
+          <text x="180" y="96" fill="#fbbf24" font-size="10" font-weight="600">Δ 15.4A / Y 8.9A</text>
+          <text x="45" y="114" fill="#e5e7eb" font-size="9">Frekans / Frequency:</text>
+          <text x="180" y="114" fill="#fbbf24" font-size="10" font-weight="600">50 Hz</text>
+          <text x="45" y="132" fill="#e5e7eb" font-size="9">Devir / Speed:</text>
+          <text x="180" y="132" fill="#fbbf24" font-size="10" font-weight="600">1455 rpm</text>
+          <text x="45" y="150" fill="#e5e7eb" font-size="9">Güç Faktörü / cosφ:</text>
+          <text x="180" y="150" fill="#fbbf24" font-size="10" font-weight="600">0.86</text>
+          <text x="45" y="158" fill="#9ca3af" font-size="7">IP 55 · Kl.F · S1 · IEC/EN 60034</text>
+        </svg>
+      </div>
+      <div>
+        <div class="info-box">
+          <strong>Plaka okuma rehberi:</strong>
+          <ul>
+            <li><strong>Δ 400V / Y 690V</strong>: Şebekeniz 400V → üçgen (Δ) bağla; 690V → yıldız (Y) bağla.</li>
+            <li><strong>Δ 15.4A</strong>: 400V şebekede termik röle bu değere göre ayarlanır (~14.5–15.4A).</li>
+            <li><strong>1455 rpm</strong>: 4 kutuplu, senkron hız 1500, kayma ≈ %3.</li>
+            <li><strong>IP 55</strong>: Toz ve su koruması; gemide yaygın.</li>
+            <li><strong>S1</strong>: Sürekli çalışma (Continuous duty).</li>
+          </ul>
+        </div>
+        <div class="sinav-box"><strong>Hesap örneği:</strong> Bu motor 400V şebekede kaç kVA çeker?<br>S = √3 × V × I = 1.732 × 400 × 15.4 ≈ <strong>10.67 kVA</strong>. Aktif güç P = 7.5 kW (plakadan). cosφ = P/S = 7500/10670 ≈ 0.70... ama plakada 0.86 yazıyor; bu nominal yük değeridir.</div>
+      </div>
+    </div>
+
+    <h3>4.4 Yıldız (Star, Y) ve Üçgen (Delta, Δ) Bağlantı</h3>
+    <p>Motor klemens kutusunda <strong>6 uç</strong> çıkar (U1, V1, W1, U2, V2, W2). Köprüleme baraları ile bağlantı şekli değiştirilir.</p>
+    <div class="two-col">
+      <div class="svg-wrap">
+        <h3>Yıldız (Y) Bağlantısı — 690V şebeke</h3>
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="40" fill="#9ca3af" font-size="8">L1</text><line x1="22" y1="40" x2="60" y2="40" stroke="#f97316" stroke-width="1.4"/>
+          <text x="10" y="75" fill="#9ca3af" font-size="8">L2</text><line x1="22" y1="75" x2="60" y2="75" stroke="#22c55e" stroke-width="1.4"/>
+          <text x="10" y="110" fill="#9ca3af" font-size="8">L3</text><line x1="22" y1="110" x2="60" y2="110" stroke="#38bdf8" stroke-width="1.4"/>
+          <!-- Klemens -->
+          <circle cx="70" cy="40" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="70" cy="75" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="70" cy="110" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="65" y="30" fill="#9ca3af" font-size="7">U1</text>
+          <text x="65" y="65" fill="#9ca3af" font-size="7">V1</text>
+          <text x="65" y="100" fill="#9ca3af" font-size="7">W1</text>
+          <!-- Sargılar -->
+          <line x1="75" y1="40" x2="155" y2="40" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="75" y1="75" x2="155" y2="75" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="75" y1="110" x2="155" y2="110" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="165" cy="40" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="165" cy="75" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="165" cy="110" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="162" y="30" fill="#9ca3af" font-size="7">U2</text>
+          <text x="162" y="65" fill="#9ca3af" font-size="7">V2</text>
+          <text x="162" y="100" fill="#9ca3af" font-size="7">W2</text>
+          <!-- Yıldız noktası: U2-V2-W2 birleşimi -->
+          <line x1="170" y1="40" x2="200" y2="75" stroke="#fbbf24" stroke-width="2"/>
+          <line x1="170" y1="75" x2="200" y2="75" stroke="#fbbf24" stroke-width="2"/>
+          <line x1="170" y1="110" x2="200" y2="75" stroke="#fbbf24" stroke-width="2"/>
+          <circle cx="200" cy="75" r="5" fill="#fbbf24"/>
+          <text x="205" y="79" fill="#fbbf24" font-size="9" font-weight="600">Y (Nötr)</text>
+        </svg>
+      </div>
+      <div class="svg-wrap">
+        <h3>Üçgen (Δ) Bağlantısı — 400V şebeke</h3>
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="40" fill="#9ca3af" font-size="8">L1</text><line x1="22" y1="40" x2="60" y2="40" stroke="#f97316" stroke-width="1.4"/>
+          <text x="10" y="75" fill="#9ca3af" font-size="8">L2</text><line x1="22" y1="75" x2="60" y2="75" stroke="#22c55e" stroke-width="1.4"/>
+          <text x="10" y="110" fill="#9ca3af" font-size="8">L3</text><line x1="22" y1="110" x2="60" y2="110" stroke="#38bdf8" stroke-width="1.4"/>
+          <circle cx="70" cy="40" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="70" cy="75" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="70" cy="110" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="65" y="30" fill="#9ca3af" font-size="7">U1</text>
+          <text x="65" y="65" fill="#9ca3af" font-size="7">V1</text>
+          <text x="65" y="100" fill="#9ca3af" font-size="7">W1</text>
+          <circle cx="165" cy="40" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="165" cy="75" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="165" cy="110" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="162" y="30" fill="#9ca3af" font-size="7">U2</text>
+          <text x="162" y="65" fill="#9ca3af" font-size="7">V2</text>
+          <text x="162" y="100" fill="#9ca3af" font-size="7">W2</text>
+          <!-- Üçgen köprüleri: U1-W2, V1-U2, W1-V2 -->
+          <line x1="75" y1="40" x2="160" y2="110" stroke="#38bdf8" stroke-width="2"/>
+          <line x1="75" y1="75" x2="160" y2="40" stroke="#38bdf8" stroke-width="2"/>
+          <line x1="75" y1="110" x2="160" y2="75" stroke="#38bdf8" stroke-width="2"/>
+          <text x="155" y="140" fill="#38bdf8" font-size="8">Δ — çapraz köprüler</text>
+        </svg>
+      </div>
+    </div>
+    <div class="info-box"><strong>Genel kural:</strong> Plakada <strong>Δ/Y 400/690V</strong> yazıyorsa; 400V şebekede <strong>Δ (üçgen)</strong>, 690V şebekede <strong>Y (yıldız)</strong> bağla. Yanlış bağlarsan motor ya yanar ya döndüremiyor.</div>
+
+    <h3>4.5 Yıldız-Üçgen Kalkış (Star-Delta Starting)</h3>
+    <p>Büyük motorlar kalkışta nominal akımın <strong>5–7 katı</strong> çekebilir. Y-Δ kalkışı bu ani akımı yaklaşık <strong>1/3'e</strong> düşürür.</p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Akım ve Tork İlişkisi</h3>
+        <table>
+          <thead><tr><th>Bağlantı</th><th>Kalkış Akımı</th><th>Kalkış Torku</th></tr></thead>
+          <tbody>
+            <tr><td>Direkt (DOL)</td><td>I<sub>n</sub> × 5–7</td><td>T<sub>n</sub> × 1.5–2.5</td></tr>
+            <tr><td>Y-Δ (Yıldızda)</td><td>I<sub>n</sub> × 1.5–2.5</td><td>T<sub>n</sub> × 0.5–0.8</td></tr>
+            <tr><td>Y-Δ (Üçgene geçince)</td><td>Nominal'e döner</td><td>Tam tork</td></tr>
+          </tbody>
+        </table>
+        <div class="warn-box"><strong>Y ve Δ kontaktörleri asla aynı anda çekmemeli!</strong> Kısa devre oluşur. Şemada mutlaka mekanik + elektriksel kilitleme vardır.</div>
+      </div>
+      <div class="card">
+        <h3>Çalışma Adımları (K1: Ana, K2: Yıldız, K3: Üçgen)</h3>
+        <ol>
+          <li>Start → <strong>K1 (ana) + K2 (yıldız)</strong> aynı anda çeker → motor Y bağlı düşük akımla döner.</li>
+          <li>Zaman rölesi (T) sayar (genelde 5–15 sn).</li>
+          <li>T dolunca → <strong>K2 bırakır</strong> → kısa bekleme (15–50 ms).</li>
+          <li><strong>K3 (üçgen)</strong> çeker → motor Δ bağlı tam gerilimde, tam güçte çalışır.</li>
+        </ol>
+        <div class="info-box">Zaman rölesi süresi çok kısaysa motor henüz hız kazanmadan Δ geçiş olur → büyük akım darbesi. Çok uzunsa yıldız kontaktörü ve motor aşınır.</div>
+      </div>
+    </div>
+
+    <div class="danger-box">
+      <strong>Arıza Senaryosu: Motor Y'den Δ'ya geçemiyor</strong>
+      <ol>
+        <li>Zaman rölesi ayarlanmış mı ve çalışıyor mu? → Timer kontağı ölç.</li>
+        <li>K3 (üçgen kontaktörü) bobinine gerilim geliyor mu? → K3 A1-A2 ölç.</li>
+        <li>K3 bobini enerjileniyor ama kontak kapmıyorsa → K3 arızalı, değiştir.</li>
+        <li>K2'nin NC kilitlemesi K3'e gelmiyor mu? → Kilitleme kontağını kontrol et.</li>
+      </ol>
+    </div>
+
+    <div class="saha-box"><strong>Sahada motor kontrol listesi:</strong> (1) Enerji var mı? (2) 3 faz dengeli mi? (3) Termik atmış mı? (4) İzolasyon (megger) ≥1 MΩ? (5) Mekanik yük sıkışmış mı?</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 4 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: Motor plakasında "Δ 400V / Y 690V" yazıyor. 400V şebekede hangi bağlantı yapılır?</summary>
+        <div class="quiz-answer"><strong>Üçgen (Δ) bağlantısı.</strong> Yıldızda her sargıya 400/√3 ≈ 230V düşer (sargı gerilimi tasarım değerini aşmaz). Üçgendeyse sargıya hat gerilimi tam uygulanır → 400V plakalı sargı için doğru.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: 50 Hz, 6 kutuplu motorun senkron hızı kaçtır? Plakada 960 rpm yazıyor, kayma % kaçtır?</summary>
+        <div class="quiz-answer">n<sub>s</sub> = 120×50/6 = <strong>1000 rpm</strong>. Slip = (1000−960)/1000 × 100 = <strong>%4</strong>.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: Y-Δ kalkışta yıldız ve üçgen kontaktörü neden aynı anda çekmemeli?</summary>
+        <div class="quiz-answer">Aynı anda çekerlerse Y ve Δ bağlantıları aynı anda olur ve <strong>motor sargıları kısa devre</strong> olur. Büyük akım darbesi motoru ve kontaktörleri tahrip eder. Bu nedenle hem mekanik kilitleme hem NC kontaklı elektriksel kilitleme yapılır.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: Motor termik röle atmadan dönmüyor. Multimetreyi nereye nasıl bağlarsınız?</summary>
+        <div class="quiz-answer">Önce <strong>gerilim</strong> ölçümü: (1) Kontaktör giriş terminalleri L1-L2-L3'te 400V var mı? (2) Kontaktör çıkış T1-T2-T3'te 400V var mı? (3) Motor klemenslerinde gerilim var mı? Enerji kaybedilen noktada sigorta, şalter veya kontaktör arızası var demektir.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 5 – ÖLÇÜ VE TEST CİHAZLARI
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b5" data-label="Bölüm 5">
+    <h2>Ölçü ve Test Cihazları <span class="lvl lvl-1">Seviye 1–2</span></h2>
+    <p class="section-sub">Ampermetre · Voltmetre · Multimetre · Megger · Proses Kalibratörü · Akü Test Cihazı</p>
+    <p><em>Doğru ölçüm yapamayan bir ETO arızayı hissedebilir ama ispatlayamaz. Bu cihazlar sahada gözlerinizdir.</em></p>
+
+    <h3>5.1 Ampermetre (Ammeter)</h3>
+    <div class="two-col">
+      <div>
+        <p>Devreden geçen akımı ölçer. <strong>Seri bağlanır.</strong></p>
+        <ul>
+          <li>İç direnci çok düşüktür; değilse devre yükü artar.</li>
+          <li>Yüksek akımlarda hat üzerine doğrudan bağlanmaz; <strong>CT üzerinden</strong> kullanılır.</li>
+          <li>Pano ampermetreleri genelde CT + sabit devirli göstergedir; motor yük takibinde kullanılır.</li>
+        </ul>
+        <div class="warn-box"><strong>Dikkat:</strong> Multimetre akım modunda iken devreye <strong>paralel bağlarsan</strong> multimetre içindeki sigorta patlar veya multimetre yanar.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Ampermetre — Seri Bağlantı</h3>
+        <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="50" x2="90" y2="50" stroke="#e5e7eb" stroke-width="1.6"/>
+          <circle cx="115" cy="50" r="18" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="110" y="55" fill="#38bdf8" font-size="13">A</text>
+          <line x1="133" y1="50" x2="240" y2="50" stroke="#e5e7eb" stroke-width="1.6"/>
+          <rect x="240" y="36" width="50" height="28" rx="6" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="248" y="54" fill="#e5e7eb" font-size="10">Yük</text>
+          <text x="10" y="80" fill="#9ca3af" font-size="9">→ SERİ bağlantı: akım ampermetreden geçer</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>5.2 Voltmetre (Voltmeter)</h3>
+    <div class="two-col">
+      <div>
+        <p>İki nokta arasındaki gerilim farkını ölçer. <strong>Paralel bağlanır.</strong></p>
+        <ul>
+          <li>İç direnci çok yüksektir (MΩ); devreyi neredeyse yüklemez.</li>
+          <li>Sık ölçüm noktaları: faz-faz (L1-L2, L2-L3, L3-L1), faz-nötr (L-N), hat-gövde (L-PE).</li>
+        </ul>
+        <div class="info-box"><strong>Arızada voltmetre kullanımı:</strong> Kontaktör öncesi 400V var, sonrası 0V → kontaktör açık/arızalı. Her adımda ölçerek enerji kaybolduğu noktayı bul.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Voltmetre — Paralel Bağlantı</h3>
+        <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="40" x2="290" y2="40" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="30" y1="90" x2="290" y2="90" stroke="#e5e7eb" stroke-width="1.4"/>
+          <circle cx="160" cy="65" r="17" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="155" y="70" fill="#e5e7eb" font-size="13">V</text>
+          <line x1="160" y1="48" x2="160" y2="40" stroke="#38bdf8" stroke-width="1.4"/>
+          <line x1="160" y1="82" x2="160" y2="90" stroke="#38bdf8" stroke-width="1.4"/>
+          <text x="35" y="30" fill="#9ca3af" font-size="8">Faz (L)</text>
+          <text x="35" y="105" fill="#9ca3af" font-size="8">Nötr (N)</text>
+          <text x="10" y="115" fill="#9ca3af" font-size="8">→ PARALEL bağlantı: voltmetre sadece ölçer, devreye etkisi yok</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>5.3 Multimetre (Digital Multimeter — DMM)</h3>
+    <div class="two-col">
+      <div>
+        <p>Tek cihazda: AC/DC gerilim, AC/DC akım, direnç, süreklilik (buzzer), diyot, frekans.</p>
+        <div class="danger-box">
+          <strong>Kritik kullanım kuralları:</strong>
+          <ul>
+            <li>Önce <strong>ne ölçeceğini</strong> belirle → kademe + prob girişini doğru ayarla.</li>
+            <li>Direnç / süreklilik ölçümünde devre <strong>kesinlikle enerjisiz</strong> olmalı.</li>
+            <li>Akım (mA/A) için probu <strong>A girişine</strong> tak. V/Ω girişine takıp akım ölçmek multimetreyi patlatır.</li>
+            <li>Yüksek gerilim ölçmeden önce <strong>izolasyonlu probları</strong> kontrol et.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Multimetre Ön Paneli</h3>
+        <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="10" width="160" height="200" rx="12" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <!-- Ekran -->
+          <rect x="50" y="22" width="120" height="40" rx="4" fill="rgba(34,211,238,.08)" stroke="#38bdf8" stroke-width="1"/>
+          <text x="88" y="47" fill="#38bdf8" font-size="16">00.0</text>
+          <text x="60" y="35" fill="#9ca3af" font-size="7">AC/DC V A Ω</text>
+          <!-- Kadran -->
+          <circle cx="110" cy="125" r="35" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="103" y="108" fill="#9ca3af" font-size="7">V~</text>
+          <text x="103" y="118" fill="#9ca3af" font-size="7">V=</text>
+          <text x="86" y="132" fill="#9ca3af" font-size="7">Ω</text>
+          <text x="127" y="132" fill="#9ca3af" font-size="7">A</text>
+          <text x="98" y="148" fill="#9ca3af" font-size="7">⏺ →</text>
+          <!-- Ok -->
+          <line x1="110" y1="125" x2="110" y2="96" stroke="#38bdf8" stroke-width="1.5"/>
+          <!-- Prob delikleri -->
+          <circle cx="75" cy="182" r="5" fill="none" stroke="#9ca3af" stroke-width="1.2"/>
+          <circle cx="110" cy="182" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <circle cx="145" cy="182" r="5" fill="none" stroke="#f97373" stroke-width="1.2"/>
+          <text x="63" y="198" fill="#9ca3af" font-size="7">COM</text>
+          <text x="100" y="198" fill="#e5e7eb" font-size="7">V/Ω</text>
+          <text x="135" y="198" fill="#f97373" font-size="7">A/mA</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>5.4 Megger (Insulation Resistance Tester — Yalıtım Ölçer)</h3>
+    <div class="two-col">
+      <div>
+        <p>Yüksek DC gerilim (250, 500, 1000 V) uygulayarak kablo ve sargıların <strong>izolasyon direncini MΩ cinsinden</strong> ölçer.</p>
+        <table>
+          <thead><tr><th>Sistem Gerilimi</th><th>Test Gerilimi</th><th>Min. Kabul Değeri</th></tr></thead>
+          <tbody>
+            <tr><td>&lt; 1000 V</td><td>500 VDC</td><td>≥ 1 MΩ</td></tr>
+            <tr><td>1–5 kV</td><td>1000 VDC</td><td>≥ 5 MΩ</td></tr>
+            <tr><td>Motor (genel)</td><td>500 VDC</td><td>≥ 1 MΩ (şüpheli &lt;5 MΩ)</td></tr>
+          </tbody>
+        </table>
+        <div class="danger-box">
+          <strong>Güvenlik:</strong>
+          <ul>
+            <li>Test öncesi devre <strong>tamamen enerjisiz ve topraklanmış</strong> olmalı.</li>
+            <li>Test sonrası <strong>artık gerilimi boşalt</strong> (megger probuyla kısa devre et); kondansatif yük enerji tutabilir.</li>
+            <li>Başkasının muhtemelen farkında olmadığı bir devreyi test ediyorsan LOTO yap.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Megger ile Motor İzolasyon Testi</h3>
+        <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="50" width="90" height="60" rx="8" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="42" y="75" fill="#e5e7eb" font-size="10">Megger</text>
+          <text x="42" y="92" fill="#38bdf8" font-size="9">500V DC</text>
+          <circle cx="230" cy="80" r="35" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="218" y="84" fill="#e5e7eb" font-size="11">M</text>
+          <line x1="230" y1="115" x2="230" y2="140" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="215" y1="140" x2="245" y2="140" stroke="#e5e7eb" stroke-width="1.2"/>
+          <!-- Kırmızı prob: faza -->
+          <line x1="120" y1="65" x2="200" y2="65" stroke="#f97373" stroke-width="1.4"/>
+          <text x="125" y="58" fill="#f97373" font-size="8">L (Faz) → kırmızı prob</text>
+          <!-- Siyah/yeşil prob: gövdeye -->
+          <line x1="120" y1="100" x2="205" y2="135" stroke="#9ca3af" stroke-width="1.4"/>
+          <text x="95" y="125" fill="#9ca3af" font-size="8">PE (Gövde) → siyah/yeşil</text>
+          <text x="50" y="130" fill="#9ca3af" font-size="8">→ İzolasyon Faz-Gövde arası</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>5.5 Proses Kalibratörü (Process Calibrator)</h3>
+    <p><strong>4–20 mA ve 0–10 V</strong> otomasyon sinyallerini hem ölçen hem üreten hassas cihazdır.</p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Kullanım Modları</h3>
+        <ul>
+          <li><strong>READ (Ölç)</strong>: Transmitter'den gelen 4–20 mA sinyali ölçer → transmitter doğru mu?</li>
+          <li><strong>SOURCE (Üret)</strong>: PLC/DCS giriş kartına 4–20 mA gönderir → kart okuyabiliyor mu?</li>
+          <li><strong>SIMULATE</strong>: RTD/termokupl sinyali taklit eder → sıcaklık sensörü yerine kart testi.</li>
+        </ul>
+        <div class="info-box"><strong>4–20 mA eşleşme:</strong> 4 mA = %0 (alt ölçüm), 20 mA = %100 (üst ölçüm). Örnek: transmitter 0–10 bar için: 4mA = 0 bar, 12mA = 5 bar, 20mA = 10 bar.</div>
+      </div>
+      <div class="card">
+        <h3>5.6 Akü Test Cihazı (Battery Tester)</h3>
+        <ul>
+          <li>Akünün <strong>iç direncini (mΩ)</strong> ve yük altındaki gerilimini ölçer.</li>
+          <li>Gerçek kapasite ve sağlık durumu (State of Health — SOH) hakkında bilgi verir.</li>
+          <li>Gemi acil sistemleri (emergency lighting, GMDSS) için düzenli test şarttır.</li>
+        </ul>
+        <div class="warn-box">Akü voltajı şarjlıyken normal görünebilir ama yük altında düşebilir. Her zaman <strong>yük testi</strong> (load test) yapılmalıdır.</div>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Sahada ölçüm stratejisi şu sıraya uyar: (1) Önce voltmetre ile gerilim var mı/yok mu bak. (2) Gerekirse akım (ampermetre/CT) ile aşırı yük/kaçak var mı? (3) Son olarak megger ile izolasyon sağlığını değerlendir. Çoğu arıza ilk adımda bulunur.</div>
+    <div class="sinav-box"><strong>Sınavda nasıl sorulur?</strong> "Motor faz-gövde izolasyonu 0.3 MΩ çıktı, ne yaparsınız?" → 1 MΩ'un altı şüpheli, 0.3 kabul edilemez. Motor çalıştırılmaz, sargılar kuru tutulup tekrar ölçülür; gerekirse yenileme.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 5 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: Multimetreyi direnç (Ω) modunda enerjili devreye bağladınız. Ne olur?</summary>
+        <div class="quiz-answer">Multimetre zarar görür veya yanlış değer okur. Direnç ölçümü her zaman <strong>enerjisiz devrede</strong> yapılmalıdır.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: Ampermetre ile akım ölçerken devre nasıl bağlanır?</summary>
+        <div class="quiz-answer">Ampermetre <strong>seri</strong> bağlanır: kablo kesilir ve ampermetre araya eklenir. Paralel bağlamak kısa devre oluşturur.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: 500V megger ile motor izolasyonu ölçtünüz: 0.8 MΩ geldi. Motoru çalıştırır mısınız?</summary>
+        <div class="quiz-answer"><strong>Hayır.</strong> 1 MΩ'un altı şüpheli kabul edilir. Motor çalıştırılmadan önce sebebi araştırılmalıdır (nem, kablolama hatası, sarımın zayıflaması vb.).</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: Proses kalibratörünün "SOURCE" modunda 4 mA gönderdiniz, ekranda %50 okuyunca ne düşünürsünüz?</summary>
+        <div class="quiz-answer">Sistem 4 mA = %0 olması gerekirken %50 okuyorsa giriş kartı yanlış kalibre edilmiş veya ölçüm parametresi hatalı ayarlanmıştır. Kart konfigürasyonu kontrol edilmelidir.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 6 – AKÜLER VE ŞARJ SİSTEMLERİ
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b6" data-label="Bölüm 6">
+    <h2>Aküler ve Şarj Sistemleri <span class="lvl lvl-2">Seviye 2</span></h2>
+    <p class="section-sub">Akü tipleri · Seri / Paralel bağlantı · Şarj-Deşarj · Acil durum sistemleri · Bakım</p>
+    <p><em>Gemi emniyet sistemlerinin kalbi akülerdir. GMDSS'den emergency aydınlatmaya, alarm sistemlerine kadar her şey aküye bağlıdır. Akü bilmek can kurtarır.</em></p>
+
+    <h3>6.1 Akü Tipleri</h3>
+    <div class="three-col">
+      <div class="card">
+        <h3>Kurşun-Asit (Lead-Acid)</h3>
+        <ul>
+          <li>En yaygın gemi aküsü</li>
+          <li>Nominal: 2V/hücre → 12V = 6 hücre</li>
+          <li><strong>Avantaj:</strong> Ucuz, dayanıklı, yüksek kısa devre akımı</li>
+          <li><strong>Dezavantaj:</strong> Ağır, hidrojen gazı, bakım gerektirir</li>
+          <li>Kullanım: Motor aküleri, acil aydınlatma</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Ni-Cd (Nikel-Kadmiyum)</h3>
+        <ul>
+          <li>Nominal: 1.2V/hücre → 24V = 20 hücre</li>
+          <li><strong>Avantaj:</strong> Uzun ömür (20+ yıl), geniş sıcaklık aralığı, yüksek deşarj akımı</li>
+          <li><strong>Dezavantaj:</strong> Pahalı, kadmiyum çevre tehlikesi, hafıza etkisi</li>
+          <li>Kullanım: GMDSS, alarm sistemleri, acil aydınlatma</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Li-Ion (Lityum-İyon)</h3>
+        <ul>
+          <li>Nominal: 3.6V/hücre</li>
+          <li><strong>Avantaj:</strong> Hafif, yüksek enerji yoğunluğu, hızlı şarj</li>
+          <li><strong>Dezavantaj:</strong> Pahalı BMS gerektirir, termik yönetim kritik</li>
+          <li>Kullanım: Yeni gemilerde UPS, hibrit sistemler</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>6.2 Seri ve Paralel Bağlantı</h3>
+    <div class="two-col">
+      <div class="svg-wrap">
+        <h3>Seri Bağlantı — Gerilim Toplamı</h3>
+        <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/></marker></defs>
+          <!-- Aku 1 -->
+          <rect x="30" y="40" width="50" height="50" rx="6" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+          <text x="38" y="62" fill="#fbbf24" font-size="10">Akü 1</text>
+          <text x="42" y="78" fill="#e5e7eb" font-size="10">12V</text>
+          <!-- Aku 2 -->
+          <rect x="130" y="40" width="50" height="50" rx="6" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+          <text x="138" y="62" fill="#fbbf24" font-size="10">Akü 2</text>
+          <text x="142" y="78" fill="#e5e7eb" font-size="10">12V</text>
+          <!-- Aku 3 -->
+          <rect x="230" y="40" width="50" height="50" rx="6" fill="none" stroke="#fbbf24" stroke-width="1.6"/>
+          <text x="238" y="62" fill="#fbbf24" font-size="10">Akü 3</text>
+          <text x="242" y="78" fill="#e5e7eb" font-size="10">12V</text>
+          <!-- Seri bağlantı -->
+          <line x1="80" y1="65" x2="130" y2="65" stroke="#e5e7eb" stroke-width="1.4"/>
+          <line x1="180" y1="65" x2="230" y2="65" stroke="#e5e7eb" stroke-width="1.4"/>
+          <!-- Çıkış -->
+          <line x1="280" y1="65" x2="300" y2="65" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr3)"/>
+          <line x1="30" y1="65" x2="10" y2="65" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="8" y="105" fill="#38bdf8" font-size="8">+ ←</text>
+          <!-- Sonuç -->
+          <text x="55" y="118" fill="#38bdf8" font-size="10" font-weight="600">Toplam V = 12+12+12 = 36V &nbsp; Kapasite = 1 Ah (aynı)</text>
+        </svg>
+      </div>
+      <div class="svg-wrap">
+        <h3>Paralel Bağlantı — Kapasite Toplamı</h3>
+        <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ortak +/- hatları -->
+          <line x1="30" y1="25" x2="290" y2="25" stroke="#38bdf8" stroke-width="1.6"/>
+          <line x1="30" y1="120" x2="290" y2="120" stroke="#f97373" stroke-width="1.6"/>
+          <text x="5" y="29" fill="#38bdf8" font-size="8">+</text>
+          <text x="5" y="124" fill="#f97373" font-size="8">−</text>
+          <!-- Aku 1 -->
+          <rect x="50" y="40" width="45" height="60" rx="5" fill="none" stroke="#fbbf24" stroke-width="1.4"/>
+          <text x="55" y="60" fill="#fbbf24" font-size="9">Akü 1</text>
+          <text x="58" y="78" fill="#e5e7eb" font-size="9">12V</text>
+          <text x="57" y="90" fill="#9ca3af" font-size="7">100 Ah</text>
+          <line x1="72" y1="40" x2="72" y2="25" stroke="#38bdf8" stroke-width="1.4"/>
+          <line x1="72" y1="100" x2="72" y2="120" stroke="#f97373" stroke-width="1.4"/>
+          <!-- Aku 2 -->
+          <rect x="140" y="40" width="45" height="60" rx="5" fill="none" stroke="#fbbf24" stroke-width="1.4"/>
+          <text x="145" y="60" fill="#fbbf24" font-size="9">Akü 2</text>
+          <text x="148" y="78" fill="#e5e7eb" font-size="9">12V</text>
+          <text x="147" y="90" fill="#9ca3af" font-size="7">100 Ah</text>
+          <line x1="162" y1="40" x2="162" y2="25" stroke="#38bdf8" stroke-width="1.4"/>
+          <line x1="162" y1="100" x2="162" y2="120" stroke="#f97373" stroke-width="1.4"/>
+          <!-- Aku 3 -->
+          <rect x="230" y="40" width="45" height="60" rx="5" fill="none" stroke="#fbbf24" stroke-width="1.4"/>
+          <text x="235" y="60" fill="#fbbf24" font-size="9">Akü 3</text>
+          <text x="238" y="78" fill="#e5e7eb" font-size="9">12V</text>
+          <text x="237" y="90" fill="#9ca3af" font-size="7">100 Ah</text>
+          <line x1="252" y1="40" x2="252" y2="25" stroke="#38bdf8" stroke-width="1.4"/>
+          <line x1="252" y1="100" x2="252" y2="120" stroke="#f97373" stroke-width="1.4"/>
+          <text x="40" y="142" fill="#38bdf8" font-size="10" font-weight="600">Toplam V = 12V (aynı) &nbsp; Kapasite = 100+100+100 = 300 Ah</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Özet:</strong>
+      <ul>
+        <li><strong>Seri bağlantı</strong>: Gerilimler toplanır, kapasite aynı kalır. Örnek: 3×12V = 36V sistem.</li>
+        <li><strong>Paralel bağlantı</strong>: Gerilim aynı kalır, kapasiteler toplanır. Örnek: 3×100 Ah = 300 Ah sistem.</li>
+        <li><strong>Seri-paralel</strong>: Hem yüksek gerilim hem yüksek kapasite için ikisi birlikte uygulanır.</li>
+      </ul>
+    </div>
+
+    <h3>6.3 Şarj ve Deşarj</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Şarj Aşamaları (3 Aşamalı Şarj)</h3>
+        <ol>
+          <li><strong>Bulk (Hızlı Şarj)</strong>: Sabit akım, gerilim yükselir. Akü %0–%80 dolar.</li>
+          <li><strong>Absorption (Emilim)</strong>: Sabit gerilim, akım düşer. %80–%100.</li>
+          <li><strong>Float (Bakım/Titre Şarj)</strong>: Düşük gerilim, minimum akım. Tam dolumu korur.</li>
+        </ol>
+        <div class="warn-box">Şarj sırasında <strong>hidrojen gazı</strong> açığa çıkabilir. Akü odaları havalandırılmalı, açık ateş ve kıvılcımdan kaçınılmalıdır.</div>
+      </div>
+      <div class="card">
+        <h3>Deşarj ve Bakım</h3>
+        <ul>
+          <li>Kurşun-asit akü %80'in altına indirmemek gerekir → derin deşarj ömrü kısaltır.</li>
+          <li>Elektrolit seviyesi distile su ile kontrol edilir (jel akü hariç).</li>
+          <li>Terminal bağlantıları temiz ve sıkı olmalı; korozyon süt tozu + su ile temizlenir.</li>
+          <li>Gerilim yük altında ölçülmeli; boştayken normal görünebilir.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>6.4 Gemi Acil Durum Yükleri (Emergency Loads)</h3>
+    <p>Acil durum jeneratörü devreye giremediğinde veya ana şebeke kesildiğinde <strong>UPS + aküler</strong> aşağıdaki yükleri beslemek zorundadır (\"Acil Durum Jeneratöründen Besleme Alan Ekipmanlar\" notuna göre özetlenmiştir):</p>
+    <table>
+      <thead><tr><th>Sistem / Ekipman</th><th>Öncelik</th><th>Not</th></tr></thead>
+      <tbody>
+        <tr><td>Tüm emergency aydınlatma lambaları (koridor, merdiven, makine dairesi, güverteler)</td><td>Kritik</td><td>En az 3 saat aydınlatma</td></tr>
+        <tr><td>Güverte ve dış yol (street / tekne güvertesi) acil aydınlatması</td><td>Kritik</td><td>Tahliye yolları görünür olmalı</td></tr>
+        <tr><td>Navigasyon sistemleri (radar, GPS, ECDIS, seyir yardımcıları)</td><td>Kritik</td><td>Sevki güvenliği için zorunlu</td></tr>
+        <tr><td>Direksiyon dişlisi / steering gear kumandası</td><td>Kritik</td><td>Yedek/emergency besleme</td></tr>
+        <tr><td>Acil durum yangın pompası</td><td>Kritik</td><td>Genelde emergency jeneratör beslemeli</td></tr>
+        <tr><td>Acil durum hava kompresörü</td><td>Önemli</td><td>Emergency start havası için</td></tr>
+        <tr><td>Yangın algılama ve alarm sistemi</td><td>Kritik</td><td>Akü / UPS ile sürekli besleme</td></tr>
+        <tr><td>Genel alarm ve manuel yangın alarm butonları</td><td>Kritik</td><td>Her an kullanılabilir olmalı</td></tr>
+        <tr><td>Telsiz / haberleşme (GMDSS: DSC, VHF, EPIRB vb.)</td><td>Kritik</td><td>GMDSS aküleri + emergency jeneratör</td></tr>
+        <tr><td>Gün ışığı sinyal lambası ve gemi düdüğü (daylight signal, whistle)</td><td>Önemli</td><td>Emergency besleme üzerinden</td></tr>
+        <tr><td>Su geçirmez kapılar (watertight doors)</td><td>Kritik</td><td>SOLAS: en az 18 saat besleme</td></tr>
+        <tr><td>Şarj cihazları (charger'lar)</td><td>Kritik</td><td>Main engine, diesel engine, yangın ve genel alarm, GMDSS şarj cihazları</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> GMDSS akülerini mutlaka yük testi ile kontrol edin. Yalnızca gerilim ölçümü yetmez; yük altında gerilim düşümü kritik bilgidir. 18 aylık periyodik kontrol zorunludur ve sertifika denetimlerde sorulur.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 6 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: 3 adet 12V, 100Ah akü seri bağlandığında toplam gerilim ve kapasite nedir?</summary>
+        <div class="quiz-answer">Seri bağlantıda gerilimler toplanır, kapasite aynı kalır: <strong>36V, 100 Ah</strong>.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: 3 adet 12V, 100Ah akü paralel bağlandığında toplam gerilim ve kapasite nedir?</summary>
+        <div class="quiz-answer">Paralel bağlantıda gerilim aynı kalır, kapasiteler toplanır: <strong>12V, 300 Ah</strong>.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: Akü şarjı sırasında hangi tehlikeli gaz açığa çıkabilir?</summary>
+        <div class="quiz-answer"><strong>Hidrojen (H₂)</strong> gazı. Havalandırma yapılmalı, açık ateş ve kıvılcımdan uzak durulmalıdır.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: GMDSS aküsü 18 aylık kontrolde boş gerilimi 24.1V gösteriyor. Onaylayabilir misiniz?</summary>
+        <div class="quiz-answer"><strong>Hayır.</strong> Boş gerilim yanıltıcı olabilir. <strong>Yük testi (load test)</strong> yapılmalı; yük altındaki gerilim ve ölçülen kapasite değerlendirilmelidir.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 7 – ŞEMA OKUMA
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b7" data-label="Bölüm 7">
+    <h2>Şema Okuma <span class="lvl lvl-2">Seviye 2–3</span></h2>
+    <p class="section-sub">IEC semboller · Tek hat şeması · Güç ve kumanda devresi · Kablo numaralandırma · Pratik okuma adımları</p>
+    <p><em>Şemada yolunuzu bulabiliyorsanız, işin yarısını bitirmişsiniz demektir.</em></p>
+
+    <h3>7.1 Temel IEC Elektrik Sembolleri</h3>
+    <table>
+      <thead><tr><th>Sembol Adı</th><th>IEC / NEMA</th><th>Açıklama</th></tr></thead>
+      <tbody>
+        <tr><td>NO Kontak</td><td>—/—</td><td>Normalde açık; aksiyon ile kapanır</td></tr>
+        <tr><td>NC Kontak</td><td>—/—</td><td>Normalde kapalı; aksiyon ile açılır</td></tr>
+        <tr><td>Sigorta (Fuse)</td><td>Dikdörtgen + kesik çizgi</td><td>Eriyebilir koruma elemanı</td></tr>
+        <tr><td>Kesici (CB)</td><td>Açı kontak + kol</td><td>Tekrar kullanılabilir koruma</td></tr>
+        <tr><td>Kontaktör ana kontağı</td><td>NO ile aynı + kutup çizgisi</td><td>Güç devresi anahtarı</td></tr>
+        <tr><td>Motor (M)</td><td>Daire + M veya 3~</td><td>3 fazlı asenkron motor</td></tr>
+        <tr><td>Trafo</td><td>İki sarım + çekirdek çizgisi</td><td>Gerilim dönüştürücü</td></tr>
+        <tr><td>CT</td><td>Daire + iletken + sarım</td><td>Akım ölçüm trafosu</td></tr>
+        <tr><td>Topraklama (PE)</td><td>Üçgen / çizgiler</td><td>Koruyucu toprak</td></tr>
+        <tr><td>Zaman Rölesi NO</td><td>NO + saat sembolü</td><td>Gecikmeli kapanma</td></tr>
+        <tr><td>Termik Röle kontağı</td><td>NC + dalga çizgisi</td><td>Aşırı yük algısı</td></tr>
+        <tr><td>Sinyal lambası</td><td>Daire + X</td><td>Görsel gösterge</td></tr>
+        <tr><td>Buton (NO)</td><td>Düğme + NO</td><td>Start butonu</td></tr>
+        <tr><td>Buton (NC)</td><td>Düğme + NC</td><td>Stop / E-Stop butonu</td></tr>
+      </tbody>
+    </table>
+
+    <h3>7.2 Tek Hat Şeması (Single Line Diagram — SLD)</h3>
+    <div class="two-col">
+      <div>
+        <p>Tek hat şeması, sistemin <strong>enerji akışını</strong> basitleştirilmiş biçimde gösterir. Her 3 fazlı hat tek bir çizgiyle temsil edilir.</p>
+        <div class="info-box">
+          <strong>Okuma sırası:</strong>
+          <ol>
+            <li>Enerji kaynağından (jeneratör, ana bara) başla.</li>
+            <li>Koruma elemanlarını (sigorta, kesici) takip et.</li>
+            <li>Dağıtım baralarına (busbar) ve alt panolara ulaş.</li>
+            <li>Son olarak yük (motor, aydınlatma) terminaline gel.</li>
+          </ol>
+        </div>
+        <div class="sinav-box"><strong>Sınavda:</strong> "Ana bara üzerindeki bir motor beslemesi hangi sırayla korunur?" → Ana kesici → Dal sigortası/kesici → Kontaktör + Termik → Motor klemens kutusu.</div>
+      </div>
+      <div class="svg-wrap">
+        <h3>Basit Tek Hat Şeması (SLD)</h3>
+        <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Jeneratör -->
+          <circle cx="150" cy="25" r="18" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="143" y="29" fill="#38bdf8" font-size="10">G</text>
+          <text x="155" y="18" fill="#9ca3af" font-size="7">440V</text>
+          <line x1="150" y1="43" x2="150" y2="60" stroke="#e5e7eb" stroke-width="1.6"/>
+          <!-- Ana Bara -->
+          <line x1="40" y1="60" x2="260" y2="60" stroke="#fbbf24" stroke-width="3"/>
+          <text x="8" y="64" fill="#fbbf24" font-size="8">BARA</text>
+          <!-- Dal 1: Aydınlatma -->
+          <line x1="80" y1="60" x2="80" y2="85" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="65" y="85" width="30" height="16" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="70" y="97" fill="#e5e7eb" font-size="7">MCB</text>
+          <line x1="80" y1="101" x2="80" y2="120" stroke="#e5e7eb" stroke-width="1.4"/>
+          <circle cx="80" cy="130" r="10" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="76" y1="126" x2="84" y2="134" stroke="#e5e7eb" stroke-width="1"/>
+          <line x1="84" y1="126" x2="76" y2="134" stroke="#e5e7eb" stroke-width="1"/>
+          <text x="65" y="152" fill="#9ca3af" font-size="7">Aydınlatma</text>
+          <!-- Dal 2: Motor 1 -->
+          <line x1="150" y1="60" x2="150" y2="80" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="135" y="80" width="30" height="16" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="138" y="92" fill="#e5e7eb" font-size="7">MCCB</text>
+          <line x1="150" y1="96" x2="150" y2="110" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="135" y="110" width="30" height="16" rx="4" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="140" y="122" fill="#38bdf8" font-size="7">K1</text>
+          <line x1="150" y1="126" x2="150" y2="140" stroke="#e5e7eb" stroke-width="1.4"/>
+          <circle cx="150" cy="155" r="14" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="143" y="159" fill="#e5e7eb" font-size="10">M</text>
+          <text x="134" y="180" fill="#9ca3af" font-size="7">Pompa Mot.</text>
+          <!-- Dal 3: Motor 2 -->
+          <line x1="220" y1="60" x2="220" y2="80" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="205" y="80" width="30" height="16" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1.2"/>
+          <text x="208" y="92" fill="#e5e7eb" font-size="7">MCCB</text>
+          <line x1="220" y1="96" x2="220" y2="110" stroke="#e5e7eb" stroke-width="1.4"/>
+          <rect x="205" y="110" width="30" height="16" rx="4" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="210" y="122" fill="#38bdf8" font-size="7">K2</text>
+          <line x1="220" y1="126" x2="220" y2="140" stroke="#e5e7eb" stroke-width="1.4"/>
+          <circle cx="220" cy="155" r="14" fill="none" stroke="#e5e7eb" stroke-width="1.4"/>
+          <text x="213" y="159" fill="#e5e7eb" font-size="10">M</text>
+          <text x="204" y="180" fill="#9ca3af" font-size="7">Fan Mot.</text>
+          <!-- Toprak hatları -->
+          <line x1="150" y1="169" x2="150" y2="195" stroke="#22c55e" stroke-width="1.2"/>
+          <line x1="130" y1="195" x2="170" y2="195" stroke="#22c55e" stroke-width="1.2"/>
+          <line x1="138" y1="200" x2="162" y2="200" stroke="#22c55e" stroke-width="1.0"/>
+          <line x1="144" y1="205" x2="156" y2="205" stroke="#22c55e" stroke-width="0.8"/>
+          <text x="153" y="208" fill="#22c55e" font-size="7">PE</text>
+        </svg>
+      </div>
+    </div>
+
+    <h3>7.3 Güç ve Kumanda Devresi Okuma Stratejisi</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Güç Devresi (Power Circuit)</h3>
+        <ul>
+          <li>Kalın çizgilerle gösterilir; L1, L2, L3 fazları taşır.</li>
+          <li>Sıra: Şebeke → Sigorta/Kesici → Kontaktör → Termik → Motor</li>
+          <li>Kablo kesiti büyüktür (mm² ile belirtilir).</li>
+          <li>Üst tarafta veya solda gösterilir (şemaya göre değişir).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kumanda Devresi (Control Circuit)</h3>
+        <ul>
+          <li>İnce çizgilerle gösterilir; düşük akım taşır (0.5–5 A).</li>
+          <li>Sıra: Kontrol trafosu → Sigorta → E-Stop → Stop → Start → Yardımcı kontaklar → Bobin</li>
+          <li>Genelde alt tarafta veya sağda çizilir.</li>
+          <li>Kablo ince, genelde sarı veya gri.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>7.4 Kablo Numaralandırma ve Terminal İşaretleme</h3>
+    <div class="two-col">
+      <div>
+        <p>Profesyonel şemalarda her kablo ve terminal sistematik şekilde numaralandırılır:</p>
+        <ul>
+          <li><strong>L1, L2, L3</strong>: Faz iletkenleri</li>
+          <li><strong>N</strong>: Nötr iletkeni</li>
+          <li><strong>PE</strong>: Koruyucu toprak (genelde sarı-yeşil)</li>
+          <li><strong>1, 2, 3…</strong> veya <strong>X1:1, X1:2</strong>: Kumanda devresi kablo numaraları</li>
+          <li>Terminal bloklar: <strong>X1, X2…</strong> ve her noktaya numara</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Renk Kodları (IEC 60446)</h3>
+        <table>
+          <thead><tr><th>Renk</th><th>İşlevi</th></tr></thead>
+          <tbody>
+            <tr><td>Kahverengi / Siyah / Gri</td><td>L1 / L2 / L3 faz</td></tr>
+            <tr><td>Mavi</td><td>Nötr (N)</td></tr>
+            <tr><td>Sarı-Yeşil</td><td>Toprak (PE)</td></tr>
+            <tr><td>Kırmızı</td><td>AC kumanda (+)</td></tr>
+            <tr><td>Mavi (koyu)</td><td>DC kumanda (−)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>7.5 Otomasyon ve PLC Temelleri</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>PLC Nedir? Mimarisi</h3>
+        <ul>
+          <li><strong>PLC (Programmable Logic Controller)</strong>, sahadaki sinyalleri (sensör, buton, seviye şalteri) okuyup, programdaki mantığa göre çıkışları (motor, vana, lamba) süren <strong>endüstriyel kontrolcüdür</strong>.</li>
+          <li><strong>Güç Kaynağı (Power Supply)</strong>: PLC'ye 24 VDC veya 230 VAC sağlar.</li>
+          <li><strong>CPU</strong>: Programı çalıştıran beyin; bellek (memory), işlemci ve haberleşme (Modbus, Profibus vb.).</li>
+          <li><strong>Dijital Giriş/Çıkış Kartları (DI/DO)</strong>: Start-stop butonları, seviye/limit switch'ler, kontaktör bobinleri.</li>
+          <li><strong>Analog Giriş/Çıkış Kartları (AI/AO)</strong>: 4–20 mA, 0–10 V basınç, seviye, sıcaklık transmitteri sinyalleri.</li>
+        </ul>
+        <div class="info-box">
+          <strong>Scan Cycle (Taramalı Çalışma):</strong>
+          <ol>
+            <li><strong>Girişleri oku</strong> (Input image): Tüm I adreslerinin durumunu hafızaya kopyalar.</li>
+            <li><strong>Programı çalıştır</strong>: Ladder/FBD satır satır işlenir.</li>
+            <li><strong>Çıkışları güncelle</strong> (Output image): Q adresleri fiziksel çıkışlara yazılır.</li>
+          </ol>
+          <p style="margin-top:.3rem;font-size:.84rem;">Bu döngü tipik olarak her 5–20 ms'de bir tekrar eder. Sen Ladder'da ne yazarsan, CPU her taramada onu uygular.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Ladder Mantığı ve Adres Örneği</h3>
+        <ul>
+          <li><strong>I0.0</strong> → Start butonu (NO kontak)</li>
+          <li><strong>I0.1</strong> → Stop butonu (NC kontak)</li>
+          <li><strong>M0.0</strong> → Mühürleme (iç hafıza biti)</li>
+          <li><strong>Q0.0</strong> → Motor kontaktör bobini (K1)</li>
+        </ul>
+        <p>Ladder mantığı (sözde kod):</p>
+        <p><code>M0.0 = (I0.0 OR M0.0) AND I0.1</code><br><code>Q0.0 = M0.0 AND NOT Emergency</code></p>
+        <ul>
+          <li>I0.0 = Start → M0.0'ı 1 yapar, M0.0 kendi kendini mühürler (self-hold).</li>
+          <li>I0.1 = Stop (NC) → açılırsa M0.0 sıfırlanır, motor durur.</li>
+          <li>Emergency aktif ise (Emergency=1) → NOT Emergency = 0 → Q0.0 hemen sıfırlanır.</li>
+        </ul>
+        <div class="saha-box">
+          <strong>Gemide PLC nerede?</strong>
+          <ul>
+            <li>Makine alarm ve izleme sistemleri (AMS, UMS)</li>
+            <li>Yakıt separatörü, kargo/ballast pompaları ve tank seviye kontrolü</li>
+            <li>HVAC (klima/chiller), kazan/ekonomizer otomasyonu</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sinav-box"><strong>PLC için sınav ve saha tüyosu:</strong> PLC'yi anlamak için önce <strong>klasik start-stop devresini</strong> iyi bil; Ladder diyagram aslında aynı devrenin yatay \"merdiven\" olarak çizilmiş halidir. Adresleri (I/Q/M) fiziksel giriş-çıkışlarla eşleştirebilirsen, arızayı hem şemadan hem PLC ekranından rahatlıkla takip edersin.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 PLC Mini Sınavı</div>
+      <details class="quiz-item">
+        <summary>Soru P1: PLC'de scan cycle hangi üç ana adımdan oluşur?</summary>
+        <div class="quiz-answer">1) <strong>Girişleri okuma</strong> (Input image güncelleme), 2) <strong>Programı çalıştırma</strong> (Ladder/FBD), 3) <strong>Çıkışları güncelleme</strong> (Output image'i fiziksel Q'lara yazma).</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru P2: I0.0 Start, I0.1 Stop (NC), M0.0 mühür ve Q0.0 motor bobini ise Ladder'da neden M0.0 kullanılır?</summary>
+        <div class="quiz-answer">M0.0 <strong>iç hafıza biti</strong> olarak mühürleme (self-hold) için kullanılır. Böylece Q0.0 sadece motoru süren çıkıştır; mühürleme mantığı M0.0'da tutulur ve programda başka yerlerde de kullanılabilir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru P3: PLC ekranında I0.0 = 1, I0.1 = 1, M0.0 = 1 ama Q0.0 = 0 görüyorsun. Ne düşünürsün?</summary>
+        <div class="quiz-answer">Ladder'da Q0.0'ın önünde muhtemelen <strong>ek bir şart</strong> (ör. Emergency sinyali, interlock, seviye şartı) vardır. Bu şart sağlanmadığı için M0.0 = 1 olmasına rağmen Q0.0 = 0 kalır. Önce Ladder diyagramda Q0.0 satırını incelemek gerekir.</div>
+      </details>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Şema okurken önce kağıdı değil gemi üzerindeki ekipmanı bul. Şema kafana oturduğunda şema yerine fiziksel cihazlar üzerinde düşünmeye başlarsın — işte o noktada şema okuyabiliyorsun demektir.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 7 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: Tek hat şemasında (SLD) neden 3 faz tek bir çizgiyle gösterilir?</summary>
+        <div class="quiz-answer">Sistemi sadeleştirerek enerji akışını anlaşılır kılmak için. Her fazı ayrı çizmek şemayı karmaşık ve okunaksız yapar. Güç büyüklükleri, koruma değerleri ve bağlantı noktaları tek hat üzerinde yeterince belirtilir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: Sarı-yeşil renkteki kablo nedir?</summary>
+        <div class="quiz-answer"><strong>Koruyucu toprak (PE — Protective Earth)</strong>. Bu kablo hiçbir zaman aktif bir devre elemanı olarak kullanılamaz.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: Kumanda devresindeki kablo numaralandırması ne işe yarar?</summary>
+        <div class="quiz-answer">Şemadaki her noktayı fiziksel bir kablo veya terminale eşleştirmeyi sağlar. Arıza takibinde "21 numaralı kablo" dediğinizde şemada ve tabloda hemen bulabilirsiniz.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 8 – GÜVENLİK VE LOTO
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b8" data-label="Bölüm 8">
+    <h2>Güvenlik ve LOTO <span class="lvl lvl-1">Seviye 1–3 · KRİTİK</span></h2>
+    <p class="section-sub">Elektrik çarpması · LOTO prosedürü · PPE · Sıcak çalışma · SOLAS gereksinimleri</p>
+    <p><em>Hiçbir iş can güvenliğinden önemli değildir. Bu bölüm ezberlenecek değil, içselleştirilecek bilgiler içeriyor.</em></p>
+
+    <h3>8.1 Elektrik Çarpması Tehlikeleri</h3>
+    <table>
+      <thead><tr><th>Vücut Akımı</th><th>Etkisi</th></tr></thead>
+      <tbody>
+        <tr><td>1 mA</td><td>Hissedilebilir eşik</td></tr>
+        <tr><td>5 mA</td><td>Ağrı hissi</td></tr>
+        <tr><td>10–20 mA</td><td>Kaslar çalışmaz; bırakamama</td></tr>
+        <tr><td>50–100 mA</td><td>Kalp fibrilasyonu — hayati tehlike</td></tr>
+        <tr><td>100–300 mA</td><td>Kesin ölüm riski</td></tr>
+        <tr><td>1 A+</td><td>Doku yanması, anında bilinç kaybı</td></tr>
+      </tbody>
+    </table>
+    <div class="danger-box"><strong>Kritik bilgi:</strong> Ölüm için yüksek gerilim şart değildir. <strong>50 mA, 50 ms</strong> bile yeterlidir. 230V AC, ıslak veya zayıf izolasyonlu ortamda öldürücü akım için yeterli gerilimdir.</div>
+
+    <h3>8.2 LOTO — Lockout / Tagout (Kilitleme / Etiketleme)</h3>
+    <p>LOTO, bir ekipman üzerinde çalışmadan önce enerjisinin kesilip kilitlenerek <strong>başkası tarafından yeniden devreye alınmasını</strong> fiziksel olarak önleyen güvenlik prosedürüdür.</p>
+
+    <div class="svg-wrap">
+      <h3>LOTO 6 Adımı</h3>
+      <svg viewBox="0 0 640 100" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arrL" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/></marker></defs>
+        <!-- Step boxes -->
+        <rect x="5" y="20" width="90" height="60" rx="6" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="15" y="38" fill="#38bdf8" font-size="9" font-weight="600">1. HAZIRLIK</text>
+        <text x="12" y="52" fill="#e5e7eb" font-size="8">Tehlikeleri</text>
+        <text x="12" y="64" fill="#e5e7eb" font-size="8">belirle</text>
+        <line x1="95" y1="50" x2="108" y2="50" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#arrL)"/>
+
+        <rect x="110" y="20" width="90" height="60" rx="6" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="118" y="38" fill="#38bdf8" font-size="9" font-weight="600">2. KES</text>
+        <text x="116" y="52" fill="#e5e7eb" font-size="8">Tüm enerji</text>
+        <text x="116" y="64" fill="#e5e7eb" font-size="8">kaynaklarını</text>
+        <line x1="200" y1="50" x2="213" y2="50" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#arrL)"/>
+
+        <rect x="215" y="20" width="90" height="60" rx="6" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="220" y="38" fill="#38bdf8" font-size="9" font-weight="600">3. KİLİTLE</text>
+        <text x="220" y="52" fill="#e5e7eb" font-size="8">Şalter/kesici</text>
+        <text x="220" y="64" fill="#e5e7eb" font-size="8">kilitlensin</text>
+        <line x1="305" y1="50" x2="318" y2="50" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#arrL)"/>
+
+        <rect x="320" y="20" width="90" height="60" rx="6" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="328" y="38" fill="#38bdf8" font-size="9" font-weight="600">4. ETİKET</text>
+        <text x="325" y="52" fill="#e5e7eb" font-size="8">"Dokunma!</text>
+        <text x="325" y="64" fill="#e5e7eb" font-size="8">Çalışılıyor"</text>
+        <line x1="410" y1="50" x2="423" y2="50" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#arrL)"/>
+
+        <rect x="425" y="20" width="90" height="60" rx="6" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="432" y="38" fill="#38bdf8" font-size="9" font-weight="600">5. DOĞRULA</text>
+        <text x="430" y="52" fill="#e5e7eb" font-size="8">Voltmetre ile</text>
+        <text x="430" y="64" fill="#e5e7eb" font-size="8">gerilim yok mu?</text>
+        <line x1="515" y1="50" x2="528" y2="50" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#arrL)"/>
+
+        <rect x="530" y="20" width="100" height="60" rx="6" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="538" y="38" fill="#4ade80" font-size="9" font-weight="600">6. ÇALIŞ</text>
+        <text x="536" y="52" fill="#e5e7eb" font-size="8">Güvenli şekilde</text>
+        <text x="536" y="64" fill="#e5e7eb" font-size="8">işe başla</text>
+      </svg>
+    </div>
+
+    <div class="danger-box">
+      <strong>LOTO'yu atlama gerekçesi yoktur:</strong>
+      <ul>
+        <li>"Hızlıca bakacağım" → En kısa bakım bile LOTO gerektirir.</li>
+        <li>"Anahtarı ben çektim" → Anahtarı kilit olmadan başkası kapatabilir.</li>
+        <li>"Arkadaşa söyledim" → Sözel uyarı LOTO'nun yerine geçmez.</li>
+        <li>LOTO yapmadan pano kapağı bile açılmamalıdır.</li>
+      </ul>
+    </div>
+
+    <h3>8.3 Kişisel Koruyucu Ekipman (PPE)</h3>
+    <div class="three-col">
+      <div class="card">
+        <h3>Temel PPE</h3>
+        <ul>
+          <li>İzolasyonlu eldiven (en az 1000V)</li>
+          <li>Güvenlik gözlüğü / yüz siperine</li>
+          <li>İzolasyonlu ayakkabı</li>
+          <li>Alev geçirmez tulum</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Elektrik Ark Riski</h3>
+        <ul>
+          <li>Yüksek akımlı şebekelerde yay (ark) oluşabilir → 10.000°C+</li>
+          <li>Ark flash koruyucu elbise gerekli</li>
+          <li>Gemide ana panonun yakınında çalışırken bu risk var</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>İzolasyonlu Aletler</h3>
+        <ul>
+          <li>VDE işaretli vidalar, penselar</li>
+          <li>1000V'a kadar dayanıklı</li>
+          <li>Gemide zorunlu ekipman</li>
+          <li>Hasarlı izolasyonlu alet kullanılamaz</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>8.4 Sıcak Çalışma (Live / Hot Work) Kuralları</h3>
+    <p>Bazı durumlarda devre enerjili iken ölçüm veya kontrole izin verilebilir; bu "sıcak çalışma"dır ve <strong>özel izin + prosedür</strong> gerektirir.</p>
+    <div class="two-col">
+      <div class="warn-box">
+        <strong>Sıcak çalışma yapılabilmesi için:</strong>
+        <ul>
+          <li>Sorumlu mühendisten <strong>yazılı izin (Permit to Work)</strong> alınmış olmalı.</li>
+          <li>En az bir kişi <strong>gözetmen</strong> olarak hazır bulunmalı.</li>
+          <li>Uygun PPE eksiksiz takılmış olmalı.</li>
+          <li>Yangın söndürücü yakında hazır olmalı.</li>
+          <li>Sadece izin verilen noktada, izin verilen işlem yapılmalı.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>CT Sekonderi — Kritik</h3>
+        <p>CT sekonderini enerjili devreden sökecekseniz:</p>
+        <ol>
+          <li>Önce CT uçlarını <strong>kısa devre et</strong> (shorting link veya jumper).</li>
+          <li>Ardından ölçü cihazını sök.</li>
+          <li>Yeni cihazı tak, sonra kısa devreyi kaldır.</li>
+        </ol>
+        <div class="danger-box">Sırasını karıştırırsan CT sekonderinde binlerce volt oluşur → ölümcül tehlike.</div>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Denizde en tehlikeli iş "bildiğimi sanarak yaptığım iş"tir. Şüphelendiğin her an dur ve sorgula. LOTO yapmak zaman kaybettirmez; aksine seni hayatta tutar. "Hızlı bakacaktım" diyerek başlayan kazaların büyük çoğunluğu ciddi yaralanma veya ölümle sonuçlanmıştır.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 8 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>Soru 1: LOTO prosedüründe "doğrulama" adımında ne yapılır?</summary>
+        <div class="quiz-answer">Voltmetre ile enerjinin gerçekten kesildiği doğrulanır. Anahtarı çekmek yetmez; anahtarın doğru şaltere ait olup olmadığını ve gerilimin düştüğünü voltmetreyle ispatlamak gerekir.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 2: 50 mA akımın kalp üzerindeki etkisi nedir?</summary>
+        <div class="quiz-answer"><strong>Ventriküler fibrilasyon</strong> — kalbin düzensiz çarpmasına ve ölüme yol açabilecek kritik sınırdır. 50 mA'in üstü her değer hayati tehlike oluşturur.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 3: "Arkadaşa söyledim, LOTO yapmadan bakacağım" yaklaşımı doğru mu?</summary>
+        <div class="quiz-answer"><strong>Kesinlikle yanlış.</strong> Sözel uyarı LOTO'nun yerine geçmez. Başka biri habersizce şalteri kapatabilir. LOTO fiziksel kilit + etiket zorunludur.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Soru 4: CT sekonderini enerjili devreden sökmeden önce ne yapılmalıdır?</summary>
+        <div class="quiz-answer">CT uçları önce <strong>kısa devre edilmelidir</strong>. Ardından ölçü cihazı sökülür. Aksi halde sekonderde tehlikeli yüksek gerilim oluşur.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 9 – KARİYER YOL HARİTASI
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b9" data-label="Bölüm 9">
+    <h2>Kariyer Yol Haritası <span class="lvl lvl-3">Seviye 1 → 3</span></h2>
+    <p class="section-sub">Stajyerden ETO Zabiti ve ötesine · Her aşamada yetkinlikler · Sınav stratejisi · Sahadan öneriler</p>
+
+    <h3>9.1 Kariyer Akışı</h3>
+    <div class="svg-wrap">
+      <h3>ETO Kariyer Akış Diyagramı</h3>
+      <svg viewBox="0 0 680 100" xmlns="http://www.w3.org/2000/svg">
+        <defs><marker id="arrC" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/></marker></defs>
+        <rect x="5" y="15" width="100" height="70" rx="8" fill="rgba(74,222,128,.1)" stroke="#4ade80" stroke-width="1.4"/>
+        <text x="18" y="36" fill="#4ade80" font-size="9" font-weight="600">STAJYER</text>
+        <text x="12" y="52" fill="#e5e7eb" font-size="7">Gemi stajı</text>
+        <text x="12" y="63" fill="#e5e7eb" font-size="7">6–12 ay</text>
+        <text x="12" y="74" fill="#e5e7eb" font-size="7">Okul teorisi</text>
+        <line x1="105" y1="50" x2="120" y2="50" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#arrC)"/>
+
+        <rect x="122" y="15" width="110" height="70" rx="8" fill="rgba(251,191,36,.1)" stroke="#fbbf24" stroke-width="1.4"/>
+        <text x="132" y="36" fill="#fbbf24" font-size="9" font-weight="600">JUNIOR ETO</text>
+        <text x="128" y="52" fill="#e5e7eb" font-size="7">1–3 yıl deniz</text>
+        <text x="128" y="63" fill="#e5e7eb" font-size="7">Saha pratiği</text>
+        <text x="128" y="74" fill="#e5e7eb" font-size="7">Bölüm sınavı</text>
+        <line x1="232" y1="50" x2="247" y2="50" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#arrC)"/>
+
+        <rect x="249" y="15" width="110" height="70" rx="8" fill="rgba(167,139,250,.1)" stroke="#a78bfa" stroke-width="1.4"/>
+        <text x="258" y="36" fill="#a78bfa" font-size="9" font-weight="600">ETO ZABİTİ</text>
+        <text x="255" y="52" fill="#e5e7eb" font-size="7">STCW Belgesi</text>
+        <text x="255" y="63" fill="#e5e7eb" font-size="7">Bağımsız çalışma</text>
+        <text x="255" y="74" fill="#e5e7eb" font-size="7">Tüm sistemler</text>
+        <line x1="359" y1="50" x2="374" y2="50" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#arrC)"/>
+
+        <rect x="376" y="15" width="110" height="70" rx="8" fill="rgba(56,189,248,.1)" stroke="#38bdf8" stroke-width="1.4"/>
+        <text x="385" y="36" fill="#38bdf8" font-size="9" font-weight="600">KIDEMLİ ETO</text>
+        <text x="380" y="52" fill="#e5e7eb" font-size="7">5+ yıl deneyim</text>
+        <text x="380" y="63" fill="#e5e7eb" font-size="7">Ekip yönetimi</text>
+        <text x="380" y="74" fill="#e5e7eb" font-size="7">Denetim &amp; raporlama</text>
+        <line x1="486" y1="50" x2="501" y2="50" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#arrC)"/>
+
+        <rect x="503" y="15" width="120" height="70" rx="8" fill="rgba(249,115,22,.1)" stroke="#fb923c" stroke-width="1.4"/>
+        <text x="510" y="36" fill="#fb923c" font-size="9" font-weight="600">ELEKTRİK SUPERİN.</text>
+        <text x="508" y="52" fill="#e5e7eb" font-size="7">Armador ofisi</text>
+        <text x="508" y="63" fill="#e5e7eb" font-size="7">Filo yönetimi</text>
+        <text x="508" y="74" fill="#e5e7eb" font-size="7">PMS / ISM</text>
+      </svg>
+    </div>
+
+    <h3>9.2 Her Aşamada Yetkinlikler</h3>
+    <div class="career-step">
+      <div class="career-num">1</div>
+      <div class="career-body">
+        <h4>Stajyer <span class="lvl lvl-1">Seviye 1</span></h4>
+        <ul>
+          <li>Ohm kanunu, güç formülleri, tek/üç faz anlayışı</li>
+          <li>NO/NC kontak mantığı, start-stop devresi teorisi</li>
+          <li>Temel ekipman isimleri ve görevleri (sigorta, kontaktör, röle)</li>
+          <li>Multimetre ile temel gerilim ve süreklilik ölçümü</li>
+          <li>LOTO prosedürünü bilmek (uygulamaya katılmak)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="career-step">
+      <div class="career-num">2</div>
+      <div class="career-body">
+        <h4>Junior ETO <span class="lvl lvl-2">Seviye 2</span></h4>
+        <ul>
+          <li>Yıldız-üçgen devresi çizme ve açıklama</li>
+          <li>Motor plakasını okuyarak termik röle ve kablo seçimi</li>
+          <li>CT kullanımı, megger ile izolasyon testi yapabilme</li>
+          <li>Kumanda devresinde arızayı multimetre ile bulma</li>
+          <li>Akü bakımı, şarj sistemi kontrolü</li>
+          <li>Tek hat şeması okuyabilme</li>
+        </ul>
+      </div>
+    </div>
+    <div class="career-step">
+      <div class="career-num">3</div>
+      <div class="career-body">
+        <h4>ETO Zabiti <span class="lvl lvl-3">Seviye 3</span></h4>
+        <ul>
+          <li>Şema üzerinden tam arıza analizi ve çözümü</li>
+          <li>LOTO prosedürünü bağımsız uygulayabilme ve yönetme</li>
+          <li>PMS (Planlı Bakım Sistemi) üzerinden bakım yapabilme</li>
+          <li>Güç kalitesi analizi (faz dengesi, harmonik, cosφ)</li>
+          <li>ISM prosedürlerine göre kayıt tutma ve raporlama</li>
+          <li>Manual'dan hata kodu okuyarak çözüm üretme</li>
+          <li>GMDSS, navigasyon ve acil durum sistemleri bakımı</li>
+          <li>Teknik İngilizce ile raporlama ve iletişim</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>9.3 Sınav Hazırlık Stratejisi</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Çıkmış Soru Konuları</h3>
+        <ul>
+          <li>Motor tipleri (sincap kafesli, gölge kutuplu, senkron)</li>
+          <li>Devir hesabı: n = 120f/p</li>
+          <li>Transfer fonksiyonu ve Laplace dönüşümü</li>
+          <li>DC şönt motor — sabit yükte uyartım akımı değişirse ne olur?</li>
+          <li>KVL/KCL ile devre çözümü</li>
+          <li>Peltier ve Thomson — Seebeck etkisi</li>
+          <li>Hidro-pnömatik sistemler (basınç, viskozite)</li>
+          <li>Sensör tipleri (kimyasal tanker kargo tankı)</li>
+          <li>Sinüs formu, RMS değer</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Strateji Önerileri</h3>
+        <ul>
+          <li>Formülleri ezberlemek değil, <strong>anlamak</strong>: neden V=IR doğru?</li>
+          <li>Her hesaplı soruyu birim takip ederek çöz.</li>
+          <li>Motor devir soruları çok çıkıyor → n = 120f/p kaçıncı tane</li>
+          <li>DC motor soruları: şönt=paralel, seri, compound farklarını bil.</li>
+          <li>Laplace/Transfer fonksiyonu: paydada kalıpları tanı.</li>
+          <li>Sınav öncesi son 3 yılın sorularını çöz.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box">
+      <strong>Ebubekir'in Tavsiyeleri:</strong>
+      <ul>
+        <li><strong>Şema okuma:</strong> Enerji nereden giriyor, hangi yolları izliyor? Şemada yolunuzu bulabiliyorsanız işin yarısını bitirdiniz.</li>
+        <li><strong>Ölçü cihazları:</strong> Ekrandaki değerin ne anlama geldiğini yorumlamaya odaklanın, sadece "bağla ve oku" değil.</li>
+        <li><strong>Motor bilgisi:</strong> Asenkron motor ve yıldız-üçgen prensibine mutlaka hakim olun — her gemide bu var.</li>
+        <li><strong>Akü ve şarj:</strong> Acil sistemlerin kalbi; seri-paralel bağlantı ve şarj-deşarj mantığını iyi bilin.</li>
+        <li><strong>Manual:</strong> Her şeyi ezberleyemezsiniz ama wiring diagram ve hata kodlarını okuyacak kadar teknik İngilizce şart.</li>
+        <li><strong>LOTO:</strong> Hiçbir iş can güvenliğinden önemli değildir. Etiketleme ve kilitleme yapmadan pano kapağı bile açmayın.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 10 – SÖZLÜK, FORMÜLLER VE SINAV BANKASI
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b10" data-label="Bölüm 10">
+    <h2>Sözlük, Formüller &amp; Sınav Bankası <span class="lvl lvl-1">Tüm Seviyeler</span></h2>
+    <p class="section-sub">TR–EN teknik sözlük · Formül kartları · Hızlı referans · Deneme sınav soruları</p>
+
+    <h3>10.1 Teknik İngilizce Sözlük (100+ Terim)</h3>
+    <div class="glossary-grid">
+      <div class="glossary-item"><span class="glossary-term">Akım</span><span class="glossary-en">Current (I) — Ampere</span></div>
+      <div class="glossary-item"><span class="glossary-term">Gerilim</span><span class="glossary-en">Voltage / Potential (V)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Direnç</span><span class="glossary-en">Resistance (R) — Ohm</span></div>
+      <div class="glossary-item"><span class="glossary-term">Güç (aktif)</span><span class="glossary-en">Active Power (P) — Watt</span></div>
+      <div class="glossary-item"><span class="glossary-term">Görünür Güç</span><span class="glossary-en">Apparent Power (S) — VA</span></div>
+      <div class="glossary-item"><span class="glossary-term">Reaktif Güç</span><span class="glossary-en">Reactive Power (Q) — VAr</span></div>
+      <div class="glossary-item"><span class="glossary-term">Güç Faktörü</span><span class="glossary-en">Power Factor (cosφ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Frekans</span><span class="glossary-en">Frequency (Hz)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Sigorta</span><span class="glossary-en">Fuse</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kesici</span><span class="glossary-en">Circuit Breaker (CB)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kontaktör</span><span class="glossary-en">Contactor</span></div>
+      <div class="glossary-item"><span class="glossary-term">Röle</span><span class="glossary-en">Relay</span></div>
+      <div class="glossary-item"><span class="glossary-term">Termik Röle</span><span class="glossary-en">Thermal Overload Relay</span></div>
+      <div class="glossary-item"><span class="glossary-term">Trafo</span><span class="glossary-en">Transformer</span></div>
+      <div class="glossary-item"><span class="glossary-term">Akım Trafosu</span><span class="glossary-en">Current Transformer (CT)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kontrol devresi</span><span class="glossary-en">Control circuit</span></div>
+      <div class="glossary-item"><span class="glossary-term">Güç devresi</span><span class="glossary-en">Power circuit</span></div>
+      <div class="glossary-item"><span class="glossary-term">Asenkron motor</span><span class="glossary-en">Induction / Asynchronous motor</span></div>
+      <div class="glossary-item"><span class="glossary-term">Senkron hız</span><span class="glossary-en">Synchronous speed (ns)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kayma</span><span class="glossary-en">Slip (s)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Yıldız bağlantı</span><span class="glossary-en">Star / Wye connection (Y)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Üçgen bağlantı</span><span class="glossary-en">Delta connection (Δ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Mühürleme</span><span class="glossary-en">Self-holding / Latching</span></div>
+      <div class="glossary-item"><span class="glossary-term">Acil durdurma</span><span class="glossary-en">Emergency Stop (E-Stop)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Normalde Açık</span><span class="glossary-en">Normally Open (NO)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Normalde Kapalı</span><span class="glossary-en">Normally Closed (NC)</span></div>
+      <div class="glossary-item"><span class="glossary-term">İzolasyon direnci</span><span class="glossary-en">Insulation resistance (MΩ)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Yalıtım ölçer</span><span class="glossary-en">Megger / Insulation tester</span></div>
+      <div class="glossary-item"><span class="glossary-term">Çok fonksiyonlu ölçer</span><span class="glossary-en">Multimeter (DMM)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Akü</span><span class="glossary-en">Battery / Accumulator</span></div>
+      <div class="glossary-item"><span class="glossary-term">Bobin</span><span class="glossary-en">Coil / Inductor</span></div>
+      <div class="glossary-item"><span class="glossary-term">Omik yük</span><span class="glossary-en">Resistive load</span></div>
+      <div class="glossary-item"><span class="glossary-term">Endüktif yük</span><span class="glossary-en">Inductive load</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kapasitif yük</span><span class="glossary-en">Capacitive load</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kısa devre</span><span class="glossary-en">Short circuit</span></div>
+      <div class="glossary-item"><span class="glossary-term">Açık devre</span><span class="glossary-en">Open circuit</span></div>
+      <div class="glossary-item"><span class="glossary-term">Toprak hattı</span><span class="glossary-en">Earth / Ground (PE)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Tek hat şeması</span><span class="glossary-en">Single Line Diagram (SLD)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Sinyal lambası</span><span class="glossary-en">Pilot lamp / Indicator light</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kilitleme-Etiketleme</span><span class="glossary-en">Lockout / Tagout (LOTO)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Kişisel Koruyucu</span><span class="glossary-en">Personal Protective Equipment (PPE)</span></div>
+      <div class="glossary-item"><span class="glossary-term">İzin belgesi</span><span class="glossary-en">Permit to Work (PTW)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Planlı bakım</span><span class="glossary-en">Planned Maintenance System (PMS)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Çalışma Güvenliği</span><span class="glossary-en">Safety Management System (SMS)</span></div>
+      <div class="glossary-item"><span class="glossary-term">Motor plakası</span><span class="glossary-en">Motor nameplate / Rating plate</span></div>
+      <div class="glossary-item"><span class="glossary-term">Klemens kutusu</span><span class="glossary-en">Terminal box / Junction box</span></div>
+      <div class="glossary-item"><span class="glossary-term">Seri bağlantı</span><span class="glossary-en">Series connection</span></div>
+      <div class="glossary-item"><span class="glossary-term">Paralel bağlantı</span><span class="glossary-en">Parallel connection</span></div>
+      <div class="glossary-item"><span class="glossary-term">Proses kalibratörü</span><span class="glossary-en">Process calibrator</span></div>
+      <div class="glossary-item"><span class="glossary-term">Derin deşarj</span><span class="glossary-en">Deep discharge</span></div>
+    </div>
+
+    <h3>10.2 Formül Kartları — Hızlı Referans</h3>
+    <div class="three-col">
+      <div class="card">
+        <h3>Temel Formüller</h3>
+        <p><span class="formula">V = I · R</span> (Ohm Kanunu)</p>
+        <p><span class="formula">P = V · I = I² · R = V²/R</span></p>
+        <p><span class="formula">P = S · cosφ</span> (Aktif Güç)</p>
+        <p><span class="formula">S = V · I</span> (Görünür Güç — VA)</p>
+        <p><span class="formula">Q = S · sinφ</span> (Reaktif — VAr)</p>
+        <p><span class="formula">V<sub>max</sub> = √2 · V<sub>RMS</sub></span></p>
+      </div>
+      <div class="card">
+        <h3>3 Faz Formüller</h3>
+        <p><span class="formula">V<sub>hat</sub> = √3 · V<sub>faz</sub> ≈ 1.732 · V<sub>faz</sub></span></p>
+        <p><span class="formula">P<sub>3φ</sub> = √3 · V<sub>L</sub> · I<sub>L</sub> · cosφ</span></p>
+        <p><span class="formula">n<sub>s</sub> = 120 · f / p</span> (Senkron Hız)</p>
+        <p><span class="formula">s = (n<sub>s</sub> − n) / n<sub>s</sub></span> (Kayma)</p>
+        <p><span class="formula">V₁/V₂ = N₁/N₂</span> (Trafo)</p>
+        <p><span class="formula">I₂/I₁ = N₁/N₂</span> (CT oranı)</p>
+      </div>
+      <div class="card">
+        <h3>Kirchhoff Özetleri</h3>
+        <p><span class="formula">∑I<sub>giren</sub> = ∑I<sub>çıkan</sub></span> (KCL)</p>
+        <p><span class="formula">∑V = 0</span> (KVL, kapalı çevrim)</p>
+        <p><strong>Seri:</strong> R<sub>top</sub> = R₁+R₂+…</p>
+        <p><strong>Paralel:</strong> 1/R<sub>top</sub> = 1/R₁+1/R₂+…</p>
+        <p><strong>Akü Seri:</strong> V<sub>top</sub> = V₁+V₂ / Ah = Ah</p>
+        <p><strong>Akü Paralel:</strong> V = V₁ / Ah<sub>top</sub> = Ah₁+Ah₂</p>
+      </div>
+    </div>
+
+    <h3>10.3 Çıkmış Sınav Soruları ve Çözümleri</h3>
+    <p style="font-size:.84rem;color:var(--muted)">11.03.2024 Sefaköy Elektro sınavından ve tipik ETO sınav soruları</p>
+
+    <div class="quiz-block">
+      <div class="quiz-header">🎓 Karışık Deneme Sınavı — 20 Soru</div>
+
+      <details class="quiz-item">
+        <summary>S1: Seyyar elektrikli el aletlerinde hangi motor tipi kullanılır?</summary>
+        <div class="quiz-answer"><strong>Gölge kutuplu (shaded pole) motor.</strong> Küçük, sağlam ve bakım gerektirmeyen yapısıyla el aletleri ve küçük cihazlar için idealdir. (Doğru: C şıkkı)</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S2: DC şönt motor sabit yükle çalışırken uyartım akımı azalırsa ne olur?</summary>
+        <div class="quiz-answer"><strong>Devir sayısı artar.</strong> Şönt motorda n ≈ (V − I·Ra) / (k·Φ). Uyartım akımı azalınca akı (Φ) düşer → devir yükselir. Bu tehlikeli olabilir (motorun kaçmasına yol açabilir).</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S3: 110V devreden 0.1 Ω direnç üzerinden çıkış EMK'sı 100V ise akım kaçtır?</summary>
+        <div class="quiz-answer">Gerilim düşümü = 110 − 100 = 10V. I = V/R = 10/0.1 = <strong>100 A</strong>.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S4: 50 Hz şebekede 4 kutuplu motorun senkron hızı kaçtır?</summary>
+        <div class="quiz-answer">n<sub>s</sub> = 120 × 50 / 4 = <strong>1500 dev/dak</strong>.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S5: Transfer fonksiyonu 3s³Y(s) + 4s²Y(s) + 8Y(s) = 6U(s) ise G(s) nedir?</summary>
+        <div class="quiz-answer">G(s) = Y(s)/U(s) = <strong>6 / (3s³ + 4s² + 8)</strong>. Y(s) paranteze alındığında: Y(s)[3s³+4s²+8] = 6U(s) → G(s) = 6/(3s³+4s²+8).</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S6: Peltier ve Thomson ilkeleri hangi yasaya dayanır?</summary>
+        <div class="quiz-answer"><strong>Seebeck etkisi</strong> (termoelektrik etki). İki farklı iletkenin bağlantı noktasında sıcaklık farkı oluşunca EMK meydana gelir.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S7: Yol-adım diyagramının tanımı nedir?</summary>
+        <div class="quiz-answer">Hidrolik/pnömatik sistemlerde <strong>silindirlerin nerede devreye girip nerede duracağını</strong> gösteren diyagram. Sistem çalışma sırasını adım adım gösterir.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S8: Akümülatörün basınçlı yağ depolamanın yanı sıra başka görevi nedir?</summary>
+        <div class="quiz-answer"><strong>Ani basınç değişimlerini yumuşatmak.</strong> Şok emici işlevi görür; sistemi aşırı basınç darbelerinden korur.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S9: 3 fazlı bir sistemde faz-nötr gerilimi 220V ise hat gerilimi kaçtır?</summary>
+        <div class="quiz-answer">V<sub>hat</sub> = √3 × 220 ≈ <strong>380 V</strong>. (√3 ≈ 1.732 kullanarak: 1.732 × 220 ≈ 381V)</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S10: Sigorta tekrar tekrar atıyorsa ne yapılmalıdır?</summary>
+        <div class="quiz-answer">Sebebi araştırılmalıdır. Daha büyük sigorta takılmamalıdır. Kablo veya ekipmanda kısa devre, kaçak akım veya aşırı yük olabilir. Arıza bulunmadan devre çalıştırılmamalıdır.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S11: Emergency stop butonu neden kırmızı ve mantar tipindedir?</summary>
+        <div class="quiz-answer">Kırmızı renk evrensel "dur/tehlike" rengidir, hızla fark edilir. Mantar (mushroom head) tipi ise geniş yüzeyi sayesinde acil durumda kolayca — herhangi bir açıdan — basılabilir.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S12: CT sekonderi neden asla açık bırakılamaz?</summary>
+        <div class="quiz-answer">Primer hattaki akım sabit devam eder. Sekonderde yük (ölçü aleti) yokken tüm manyetik akı sekonder sargıya yüksek gerilim indükler → binlerce volt → can ve ekipman tehlikesi.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S13: Yıldız-üçgen kalkışta motor neden önce yıldıza alınır?</summary>
+        <div class="quiz-answer">Yıldızda her sargıya düşen gerilim, hat geriliminin 1/√3 ≈ %58'i kadardır. Bu düşük gerilimde kalkış akımı ve torku azalır → şebekeye verilen ani akım darbesi yaklaşık 1/3'e iner.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S14: Motor megger testi 0.5 MΩ sonuç verdi. Motoru çalıştırabilir misiniz?</summary>
+        <div class="quiz-answer"><strong>Hayır.</strong> 1 MΩ alt sınırdır; 0.5 MΩ kabul edilemez. Motor çalıştırılmamalı, izolasyon bozulmasının sebebi araştırılmalıdır (nem, sarım yıpranması).</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S15: LOTO sırasında "doğrulama" adımını atlayabilir misiniz? Neden?</summary>
+        <div class="quiz-answer"><strong>Asla.</strong> Şalterin kapatıldığını görmeniz yetmez. Voltmetreyle çalışacağınız noktada gerilim bulunmadığını ispatlamanız zorunludur.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S16: 3 adet 12V, 50Ah akü önce 2'si seri, sonra bu grup üçüncüyle paralel bağlanırsa sonuç ne olur?</summary>
+        <div class="quiz-answer">2 seri = 24V, 50Ah. Bu grup + 12V, 50Ah paralel: gerilimler eşit olmalı ki paralel bağlanabilsin. 24V ile 12V paralel bağlanamaz (farklı gerilimler). <strong>Bu bağlantı hatalıdır; akü zarar görür.</strong></div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S17: Proses kalibratörünü "SOURCE" modunda 4 mA'e ayarladınız. Bu otomasyon sisteminde neyi ifade eder?</summary>
+        <div class="quiz-answer">4–20 mA standardında 4 mA = <strong>%0 (minimum ölçüm değeri)</strong>. Örneğin 0–100 bar için 4 mA = 0 bar anlamına gelir.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S18: DC şönt motor ile DC seri motorun temel farkı nedir?</summary>
+        <div class="quiz-answer">Şönt motorda uyartım sargısı armatür ile <strong>paralel</strong>; sabit gerilimde devir sabittir. Seri motorda uyartım sargısı armatür ile <strong>seri</strong>; yük arttıkça devir düşer, düşük yükte tehlikeli devirlere çıkabilir.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S19: Kimyasal tankerlerin kargo tanklarında hangisi kullanılmaz — katalitik sensör?</summary>
+        <div class="quiz-answer"><strong>Katalitik (pellistor) sensör kullanılmaz</strong> çünkü agresif kimyasallar katalitik elementi zehirleyerek duyarsız hale getirir. Bu tanklarda infrared veya diğer dayanıklı sensör tipleri tercih edilir.</div>
+      </details>
+
+      <details class="quiz-item">
+        <summary>S20: Acil durum jeneratöründen beslenen kritik yükler nelerdir?</summary>
+        <div class="quiz-answer">Acil aydınlatma, navigasyon sistemleri (GPS, radar), GMDSS (DSC, VHF, EPIRB), yangın algılama ve alarm sistemi, genel alarm, su geçirmez kapılar, direksiyon kumandası, acil yangın pompası, şarj cihazları.</div>
+      </details>
+    </div>
+
+    <h3>10.4 Hata Kodu ve Manual Okuma İpuçları</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Manual'a Nasıl Yaklaşılır?</h3>
+        <ul>
+          <li>İlk önce <strong>İçindekiler (Table of Contents)</strong>: hangi bölümde ne var?</li>
+          <li>Arıza durumunda: <strong>"Troubleshooting" veya "Fault Codes"</strong> bölümüne git.</li>
+          <li>Hata kodu: önce açıklamayı oku, sonra önerilen kontrol adımlarını takip et.</li>
+          <li><strong>Wiring Diagram</strong>: kablo bağlantıları ve terminal numaraları burada.</li>
+          <li>Bilmediğin kelimeyi sözlükte bak; teknik İngilizce zamanla gelişir.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Yaygın Hata Kodu Tipleri</h3>
+        <table>
+          <thead><tr><th>Kod Tipi</th><th>Tipik Anlam</th></tr></thead>
+          <tbody>
+            <tr><td>E001, F01…</td><td>Donanım/sensör arızası</td></tr>
+            <tr><td>AL-xxx</td><td>Alarm durumu</td></tr>
+            <tr><td>OC (Overcurrent)</td><td>Aşırı akım</td></tr>
+            <tr><td>OV (Overvoltage)</td><td>Aşırı gerilim</td></tr>
+            <tr><td>UV (Undervoltage)</td><td>Düşük gerilim</td></tr>
+            <tr><td>OT (Overtemp)</td><td>Aşırı sıcaklık</td></tr>
+            <tr><td>GF (Ground Fault)</td><td>Toprak kaçağı</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>10.5 Genel Checklist'ler — Saha + Sınav</h3>
+    <div class="three-col">
+      <div class="card">
+        <h3>Gemiye İlk Çıkış Checklist'i</h3>
+        <ul>
+          <li><strong>Panoları tanı:</strong> Ana pano, emergency pano, bow thruster, kargo, HVAC panolarının yerini ve beslemelerini öğren.</li>
+          <li><strong>Şemalar:</strong> Ana tek hat şeması, birkaç tipik motor kumanda şeması ve alarm/izleme (AMS) P&amp;ID'lerini gözden geçir.</li>
+          <li><strong>Akü odaları:</strong> GMDSS, emergency lighting, steering ve starting akülerinin yerini ve gerilimlerini öğren.</li>
+          <li><strong>Ölçü aletleri:</strong> Gemideki multimetre, megger, proses kalibratörü ve akü test cihazlarının <em>nerede</em> olduğunu ve <em>kimlerin kullandığını</em> sor.</li>
+          <li><strong>LOTO ekipmanı:</strong> Kilitler, etiketler, şalter kilitleme aparatları ve LOTO prosedürünü görerek oku.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Günlük / Haftalık Saha Checklist'i</h3>
+        <ul>
+          <li><strong>Görsel kontrol:</strong> Panolarda yanık/koku, gevşek kablo, aşırı ısınan eleman var mı?</li>
+          <li><strong>Motor trendleri:</strong> Önemli pompalar ve fanlar için akım ve sıcaklık değerlerini PMS'e kaydet.</li>
+          <li><strong>Akü kontrolü:</strong> Kritik akü gruplarının gerilimlerini ve (varsa) şarj akımını kontrol et.</li>
+          <li><strong>Alarm listesi:</strong> Makine alarm sisteminde (AMS) <em>sürekli aktif</em> görünen alarmların sebeplerini araştır.</li>
+          <li><strong>LOTO uygulaması:</strong> En az bir bakım işinde LOTO'ya aktif olarak katıl (sadece izleme değil, prosedürü sen yürüt).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Sınav Hazırlık Checklist'i</h3>
+        <ul>
+          <li><strong>Formüller:</strong> Bölüm 10'daki tüm formül kartlarını ezbere ve örnek soru ile uygula.</li>
+          <li><strong>Konular:</strong> Motorlar (Y-Δ, kayma), kumanda devreleri (NO/NC, mühürleme), CT/Trafo, aküler, LOTO.</li>
+          <li><strong>Çıkmış sorular:</strong> Karışık deneme (20 soru) + kendi notlarındaki soruları en az iki kez çöz.</li>
+          <li><strong>PLC:</strong> I/Q/M adresleme ve basit Ladder örneğini (start-stop mühürleme) kağıda çizip açıklayabil.</li>
+          <li><strong>İngilizce:</strong> Sözlükteki terimlerden her gün 10–15 tanesini seçip cümlede kullan (örn. \"contactor coil\", \"insulation resistance\").</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Son Notu:</strong> Bu rehberi baştan sona çalışan, örnekleri ve <strong>checklist'leri</strong> gerçekten uygulayan biri; temel teoriden sınava, oradan gerçek gemi pratiğine doğru güvenli bir yol kat eder. Tek bir şeyi unutma: <em>Her bilgi, sahada bir sorunu çözebilmek için vardır.</em> Başarılar. ⚓</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 11 – GEMİ SİSTEMLERİ & VAKA ÇALIŞMALARI
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b11" data-label="Bölüm 11">
+    <h2>Gemi Sistemleri &amp; Vaka Çalışmaları <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Separatör, soğutma, emergency güç ve PLC/PID temelli gerçekçi arıza senaryoları.</p>
+    <p><em>Bu bölümde amaç, gerçek gemi sistemlerinde karşılaşacağın durumları; ölçü, şema ve prosedür kullanarak adım adım analiz etmeyi öğrenmek.</em></p>
+
+    <h3>11.1 Separatör (Fuel Oil Purifier) Vaka Çalışması</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Vaka 1 — Separatör Sık Sık Trip Ediyor</h3>
+        <p><strong>Belirti:</strong> Fuel oil separatörü çalıştıktan 3–5 dakika sonra alarm verip stop ediyor. Alarm panelinde <strong>\"High vibration\"</strong> ve bazen <strong>\"Bowl speed low\"</strong> uyarıları görünüyor.</p>
+        <h4>Adım Adım Analiz</h4>
+        <ol>
+          <li><strong>Ön kontrol:</strong> Yağ giriş sıcaklığı (heater çıkışı) tasarım değerde mi? (örn. 98–105 °C). Çok soğuk yağ viskoziteyi artırır, yükü yükseltir.</li>
+          <li><strong>Devir kontrolü:</strong> Hız sensörü (tachometer) değerini panelden oku; nominal devirin (%100) altına düşüyor mu?</li>
+          <li><strong>Vibrasyon sensörü:</strong> Kablo ve terminal bağlantılarını göz ve multimetre ile kontrol et (gevşeklik, kırık kablo).</li>
+          <li><strong>Mekanik durum:</strong> Kase (bowl) içinde yabancı cisim, balçık birikmesi veya dengesizlik olabilir. Manual'daki <em>\"bowl cleaning\"</em> prosedürüne göre kontrol et.</li>
+          <li><strong>PLC/Alarm mantığı:</strong> Ladder/FBD diyagramında \"vibration high\" setpoint'ini ve reset koşullarını incele; yanlış ayar var mı?</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Checklist — Separatör Arızasında</h3>
+        <ul>
+          <li>Yağ sıcaklığı, debi ve viskozite değerleri kaydedildi mi?</li>
+          <li>Devir (rpm) ve vibrasyon trendleri (son 24 saat) incelendi mi?</li>
+          <li>Son bakım (bowl temizliği, rulman değişimi) tarihleri PMS'den kontrol edildi mi?</li>
+          <li>Alarm geçmişi (event log) incelendi mi? Aynı arıza daha önce olmuş mu?</li>
+          <li>Gemide varsa fabrika <em>troubleshooting chart</em> ile adımlar karşılaştırıldı mı?</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>11.2 Soğutma / Buzluk Sistemi Vaka Çalışması</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Vaka 2 — Buzluk Soğutmuyor</h3>
+        <p><strong>Belirti:</strong> Buzluk istenen sıcaklığa inmiyor; kompresör uzun süre çalışıyor, sık sık devreye girip çıkıyor.</p>
+        <h4>Tipik Nedenler (\"Soğutma arızaları\" notlarından)</h4>
+        <ul>
+          <li><strong>Yüksek yoğuşturucu (kondenser) basıncı:</strong> Kirli deniz suyu devresi, tıkanmış borular, yetersiz debi.</li>
+          <li><strong>Düşük evaporatör basıncı:</strong> Genleşme valfi arızası, tıkalı filtre, az soğutucu akışkanı.</li>
+          <li><strong>Termostat/PLC ayarı:</strong> Yanlış set değeri veya histerezis, sensör kalibrasyon hatası.</li>
+        </ul>
+        <h4>Ölçü Adımları</h4>
+        <ol>
+          <li>Sistem basınçlarını manometreden oku; normal işletme değerleriyle karşılaştır.</li>
+          <li>Deniz suyu giriş/çıkış sıcaklığı ve debisini kontrol et.</li>
+          <li>Termostat sensörünü (NTC/PT100) ohm tablosuna göre ölç; kablo kopukluğu var mı?</li>
+          <li>PLC/otomasyon ekranından ilgili PID veya on/off kontrol bloklarını incele.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>ETO İçin Notlar</h3>
+        <ul>
+          <li>Soğutma sisteminde çoğu sorun, <strong>basınç + sıcaklık + akış</strong> üçlüsüne bakarak bulunur.</li>
+          <li>Elektrik tarafında: kompresör motoru aşırı akım çekiyor mu, kontaktör/termik düzgün çalışıyor mu?</li>
+          <li>Otomasyon tarafında: sensör okuması gerçek sıcaklıkla uyuşuyor mu? Gerekirse <strong>proses kalibratörü</strong> ile 4–20 mA hattını test et.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>Soğutma Arızaları &amp; Muhtemel Sebepler (Özet Tablo)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Belirti</th>
+            <th>Başlık</th>
+            <th>Muhtemel Sebepler (\"Soğutma Arızaları\" dokümanından özet)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Yüksek kondenser (yoğuşturucu) basıncı</td>
+            <td>YÜKSEK BASINÇ – ÇOK YÜKSEK</td>
+            <td>
+              <ul>
+                <li>Kondenser su sirkülasyonu zayıf (deniz suyu debisi az, pompa arızalı).</li>
+                <li>Kondenser boruları kirli / kireçli, ısı transfer yüzeyi düşmüş.</li>
+                <li>Soğutma suyu regüle valfi arızalı veya yanlış ayarda.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Düşük kondenser basıncı</td>
+            <td>YÜKSEK BASINÇ – ÇOK DÜŞÜK</td>
+            <td>
+              <ul>
+                <li>Kondenserde yoğuşmamış soğutucu gaz birikimi.</li>
+                <li>Soğutucu miktarı eksik (kaçak).</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Yüksek emme (suction) basıncı</td>
+            <td>EMME BASINCI YÜKSEK</td>
+            <td>
+              <ul>
+                <li>Expansion valf çok açık, kompresöre fazla soğutucu geliyor.</li>
+                <li>Kompresör kapasitesi düşmüş (iç kaçaklar, valf kaçakları).</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Düşük emme basıncı ve evaporatörde buzlanma</td>
+            <td>EMME BASINCI DÜŞÜK</td>
+            <td>
+              <ul>
+                <li>Expansion valf çok kapalı veya tıkalı.</li>
+                <li>Soğutucu miktarı az; sıvı yerine çoğunlukla gaz dolaşıyor.</li>
+                <li>Soğutucu içindeki nem exp. valfta donup akışı kısıtlıyor.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Kompresörün aşırı ısınması</td>
+            <td>KOMPRESÖR HARARETİ YÜKSEK</td>
+            <td>
+              <ul>
+                <li>Emiş basıncı çok düşük → sıkıştırma oranı artmış.</li>
+                <li>Yağlama yetersiz, ceket soğutma suyu az.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Kompresörde anormal ses</td>
+            <td>KOMPRESÖRDE SES VAR</td>
+            <td>
+              <ul>
+                <li>Yatak boşlukları artmış, piston-gömlek klerensi fazla.</li>
+                <li>Valfler doğru oturmuyor veya ayarı bozuk.</li>
+                <li>Kavrama / kayış sisteminde gevşeklik veya eksen kaçıklığı.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>11.3 Emergency Güç &amp; Aydınlatma Vaka Çalışması</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Vaka 3 — Blackout Sonrası Emergency Aydınlatmanın Bir Kısmı Yanmadı</h3>
+        <p><strong>Belirti:</strong> Ana şebeke kesildikten sonra emergency jeneratör devreye girmiş, ancak bazı acil aydınlatma lambaları yanmamış.</p>
+        <h4>Adım Adım Yol Haritası</h4>
+        <ol>
+          <li>Emergency panoda ilgili <strong>aydinlatma devresinin sigorta/MCB</strong> durumunu kontrol et.</li>
+          <li>Şemadan bu devrenin hangi <strong>transformatör/ayrıcı</strong> üzerinden beslendiğini bul.</li>
+          <li>Arızalı hatta en yakın noktada gerilim ölç: emergency bara → sigorta → şalter → lamba grubu.</li>
+          <li>Lamba arızası mı, kablo/bağlantı arızası mı, yoksa besleme tarafında mı problem var, ayrıştır.</li>
+          <li>İlgili devrenin <strong>emergency yük listesinde</strong> doğru işaretlenip işaretlenmediğini kontrol et (yanlış etiketleme yaygındır).</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Emergency Checklist (Kısa)</h3>
+        <ul>
+          <li>Emergency jeneratörün otomatik devreye girme testi yapıldı mı?</li>
+          <li>Acil durum aydınlatma devrelerinin hepsi test edildi mi (koridor, merdiven, makine dairesi, dış güverte)?</li>
+          <li>Emergency akü/UPS gerilimleri ve kapasite testleri güncel mi?</li>
+          <li>GMDSS ve köprü ekipmanlarının emergency beslemeleri periyodik olarak test ediliyor mu?</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>11.4 PLC &amp; PID — Sıcaklık Kontrol Örneği</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Basit PID Döngüsü: Jacket Cooling</h3>
+        <p><strong>Amaç:</strong> Ana makine jacket cooling su sıcaklığını 80±2 °C bandında tutmak.</p>
+        <ul>
+          <li><strong>PV (Process Value)</strong>: Jacket çıkış sıcaklığı (PT100 → 4–20 mA → AI).</li>
+          <li><strong>SP (Set Point)</strong>: 80 °C.</li>
+          <li><strong>CV (Control Value)</strong>: Soğutma suyu by-pass vanası açma yüzdesi (0–100 %, AO).</li>
+        </ul>
+        <p>PLC Ladder/FBD içinde bir PID bloğu vardır: <code>PID (PV, SP, Kp, Ti, Td) → CV</code>.</p>
+      </div>
+      <div class="card">
+        <h3>ETO İçin Kontrol Checklist'i</h3>
+        <ul>
+          <li>PV sinyali doğru mu? PID girişine gelen değer ile sahadaki termometre uyuşuyor mu?</li>
+          <li>SP operatör panelinde doğru ayarlanmış mı (yanlışlıkla 60 veya 95 °C yapılmamış mı)?</li>
+          <li>Vanaya giden <strong>AO sinyali</strong> (4–20 mA) ile vana pozisyonu mekanik olarak uyumlu mu?</li>
+          <li>PID parametreleri (Kp, Ti, Td) üzerinde izinsiz değişiklik yapılmış mı? Manual'daki default değerlerle karşılaştır.</li>
+          <li>Gerekirse PID'yi <strong>manual mod</strong> alıp CV'yi elle değiştirerek proses tepkisini gözlemle.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>11.5 Arıza Kayıt Formu (Fault Report Template)</h3>
+    <p>Bu tabloyu yazdırıp gemide arıza raporlama için kullanabilir veya PMS sistemine aynı başlıklarla kayıt açabilirsin.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Tarih / Saat</th>
+          <th>Sistem / Ekipman</th>
+          <th>Belirti / Alarm Mesajı</th>
+          <th>İlk Ölçümler (V, A, bar, °C)</th>
+          <th>Alınan Aksiyonlar</th>
+          <th>Kök Sebep (Root Cause)</th>
+          <th>Kalıcı Çözüm / Öneri</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>11.6 Kazan Suyu Test Prosedürü (Özet)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Günlük Kontroller (ARS.105B'den Özet)</h3>
+        <ul>
+          <li><strong>P Alkalinitesi (P-Alk.)</strong> — kuvvetli bazlar (karbonat/hidroksit). Fenol ftalein (FF) indikatörü ile pembe renk kaybolana kadar <em>Alkalinite Titrasyon Çözeltisi</em> damlatılır. 1 damla ≈ 50 ppm.</li>
+          <li><strong>M Alkalinitesi (M-Alk.)</strong> — bikarbonat dahil toplam alkalinite. Metil Red (MR) ile yeşilden gri-kırmızıya dönene kadar HCl çözeltisi damlatılır. 1 damla ≈ 50 ppm.</li>
+          <li><strong>Klorür (Cl⁻)</strong> — korozyon riski. Klorür indikatörü ile sarı renk kiremit rengine dönene kadar gümüş nitrat çözeltisi damlatılır. Her damla ≈ 30 ppm.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Tipik Limitler (Örnek Değerler)</h3>
+        <table>
+          <thead><tr><th>Parametre</th><th>İstenen Aralık</th><th>Not</th></tr></thead>
+          <tbody>
+            <tr><td>P-Alkalinite</td><td>100–300 ppm</td><td>Yeterli fosfat/alkalilik; çok düşükse korozyon riski, çok yüksekse taş oluşumu.</td></tr>
+            <tr><td>M-Alkalinite</td><td>300–700 ppm</td><td>Sisteme ve kimyasal programa göre işletme talimatına bak.</td></tr>
+            <tr><td>Klorür</td><td>&lt; 200 ppm</td><td>Besleme suyu çok klorlu ise ön arıtma gerekebilir.</td></tr>
+          </tbody>
+        </table>
+        <div class="warn-box">
+          <strong>ETO İçin:</strong> Sonuçları her gün PMS veya emniyet formlarına kaydet; limit dışına çıktığında <strong>hangi kimyasalı ne kadar eklediğini</strong> mutlaka not düş. Denetimlerde grafik ve kayıtlar senden istenir.
+        </div>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Zabitlik seviyesinde senden beklenen; sadece \"motor çalışmıyor\" demek değil, <strong>hangi ölçümü nerede yaptığını, ne gördüğünü ve hangi sonuca vardığını</strong> net bir şekilde raporlayabilmendir. Bu bölümdeki vaka çalışmaları, soğutma arıza tablosu, emergency yük özeti, kazan suyu ve arıza formu, o refleksi kazanman için tasarlandı.</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 12 – KRİTİK EKİPMANLAR: KOMPRESÖR, VİNÇ, ŞAFT & TURBO
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b12" data-label="Bölüm 12">
+    <h2>Kritik Ekipmanlar: Kompresör, Vinç, Şaft &amp; Turbo <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Hava kompresörleri, güverte vinçleri, ana makine şaft &amp; yatakları ve turbocharger için ETO bakış açısı.</p>
+    <p><em>Bu bölüm, sınıfta çok anlatılmayan ama sahada ETO Zabiti olarak en çok başvuracağın dört ekipmanı özetler.</em></p>
+
+    <h3>12.1 Hava Kompresörleri (Starting / Service Air)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Görev ve Tipik Arızalar</h3>
+        <ul>
+          <li><strong>Görev:</strong> Ana makinelerin start havasını ve servis havasını üretir. Genelde 2 kademeli pistonlu kompresördür.</li>
+          <li><strong>Tipik elektrik arızaları:</strong> Motor aşırı akım (termik), düşük yağ basıncı veya yüksek sıcaklık alarmına bağlı trip, star-delta devresinde kontak yapışması.</li>
+          <li><strong>Tipik mekanik arızalar:</strong> Valf sızıntısı, segman aşınması, soğutma yetersizliği, yağlama problemleri.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kısa Checklist (\"Compressor\" notuna göre)</h3>
+        <ul>
+          <li>Çalışma saatlerini ve bakım aralıklarını PMS üzerinden kontrol et (valf, segman, yatak değişimleri).</li>
+          <li>Yağ seviyesi ve yağ kalitesi (renk, koku) günlük gözlenmeli.</li>
+          <li>Çıkış sıcaklıkları (1. ve 2. kademe) normal aralıkta mı? Aşırı yükselme durumunda soğutma suyu debisini ve kirlenmeyi kontrol et.</li>
+          <li>Elektrik tarafında; motor akımı, besleme gerilimi, kontaktör ve termik ayarları kaydedilmeli.</li>
+          <li>\"Yardda yapılacak işler\" ile gemide yapılabilecek bakımları ayırt et; büyük revizyonları planlarken ofis/elektrik süperintendent ile koordinasyon kur.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>12.2 Güverte Vinçleri ve IFM-PLC</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Roszkowski Vinç Notlarından Özet</h3>
+        <ul>
+          <li>Vinçlerde yük sınırlayıcılar, limit switch'ler ve referans sensörleri çoğunlukla <strong>IFM-PLC</strong> veya benzeri kontrolörlere bağlıdır.</li>
+          <li>Kalibrasyon veya IFM-PLC değişimi sonrası mutlaka <strong>referans nokta ayarı</strong> (zero / home position) yapılmalıdır.</li>
+          <li>Tek grab / çift grab modlarında yük limitleri ve hızlar farklı olabilir; PLC parametreleri buna göre seçilir.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ETO İçin Güvenlik ve Kontrol Noktaları</h3>
+        <ul>
+          <li>Her işten önce LOTO + rüzgâr limiti ve SWL (safe working load) kontrolleri yapılmalı.</li>
+          <li>Limit switch ve encoder kablolarında kopuk/gevşek bağlantı vinci <strong>hareketsiz bırakabilir</strong> veya <strong>aşırı hareket</strong>e sebep olabilir.</li>
+          <li>PLC değişiminde eski parametre dosyasını (backup) sakla; yeni cihaza yüklerken checksum/versiyon uyumunu kontrol et.</li>
+          <li>Arıza sonrası vinci \"manuel override\" ile çalıştırmak gerekiyorsa, üretici talimatına harfiyen uy; güvenlik limitlerini bypass etme.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>12.3 Ana Makine Şaft ve Yatak İzleme</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Wärtsilä Şaft &amp; Yatak Manualinden Özet</h3>
+        <ul>
+          <li><strong>İzlenen temel büyüklükler:</strong> Yatak sıcaklıkları, yağ basıncı, yağ sıcaklığı, vibrasyon.</li>
+          <li>Şaft hattında ani sıcaklık artışı veya lokal ısınma, yağ filminde bozulma ve olası <strong>yatak hasarı</strong>nı gösterir.</li>
+          <li>Alarm limitleri genelde <strong>trend tabanlı</strong>dır (örnek: normal 65 °C iken 80 °C'ye hızlı çıkış).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Alarm Durumunda ETO’nun Rolü</h3>
+        <ul>
+          <li>Alarm anındaki tüm değerleri kaydet (tüm yatak sıcaklıkları, yağ basıncı, makina yükü, rpm).</li>
+          <li>Termal kamera veya infrared termometre ile şüpheli yatakları görsel olarak kontrol et.</li>
+          <li>Vibrasyon analizörü varsa, jenerik ölçüm al ve önceki kayıtlarla karşılaştır.</li>
+          <li>Elektrik tarafında; sensör (RTD/thermocouple) kablolarında ve giriş kartlarında gevşek bağlantı/temas problemi var mı, kontrol et.</li>
+          <li>Tüm bulguları baş mühendisle paylaş ve PMS/rapor sistemine ayrıntılı olarak gir.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>12.4 Turbocharger Bakım Notları</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Genel İlkeler</h3>
+        <ul>
+          <li>Turbo nun sağlığı; motorun egzoz sıcaklığı, boost pressure ve yakıt tüketimi üzerinde doğrudan etkilidir.</li>
+          <li>Düzenli olarak <strong>görsel kontrol</strong>: kanatlarda çatlak, erozyon, yağ kaçağı, gevşek cıvata.</li>
+          <li>Hava filtresi ve washer sistemi (varsa) periyodik olarak temizlenmeli/çalıştırılmalıdır.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ETO Bakış Açısıyla Kontroller</h3>
+        <ul>
+          <li>Boost pressure ve egzoz sıcaklığı trendlerini kaydet; düşen boost + artan egzoz sıcaklığı genelde <strong>kirlenmiş turbo</strong>ya işaret eder.</li>
+          <li>Turbo yağ basıncı ve dönüş (drain) hattında köpüklenme/taşma olup olmadığını kontrol et.</li>
+          <li>On-line washer sistemlerini kullanırken üretici talimatındaki yük ve sıcaklık limitlerine uy.</li>
+          <li>Elektrik/otomasyon tarafında: turbo ile ilgili bütün alarmların (high exhaust temp, low boost pressure vb.) AMS ekranında doğru göründüğünü doğrula.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Bu bölümdeki başlıklar, genelde \"makine\" sorumluluğunda gibi görünür ama bir arıza anında <strong>ölçü, alarm ve trendleri yorumlayacak kişi</strong> çoğu zaman sensörleri ve sistemleri en iyi tanıyan ETO’dur. Kritik ekipmanlarda ölçü + şema + manual üçlüsünü kullanmayı öğrenirsen, zabit olarak değerin katlanarak artar.</div>
+  </section>
+  <div class="footer">
+    Bu rehber, denizde görev yapan ETO zabiti <span>Ebubekir</span>'in sahadan tavsiyeleri ve
+    stajyerden zabite uzanan deneyimleri esas alınarak hazırlanmıştır.
+    Tüm formüller IEC standartlarına ve STCW yetkinlik çerçevesine uygundur.
+    &nbsp;|&nbsp; PDF: Ctrl+P → PDF olarak kaydet
+  </div>
+
+</div><!-- /page -->
+<script>
+  // Yazdırmadan önce tüm quiz ve detay bloklarını aç, sonra eski haline döndür
+  (function () {
+    const allDetails = Array.from(document.querySelectorAll('details'));
+    if (!allDetails.length) return;
+    let previousStates = [];
+
+    function beforePrint() {
+      previousStates = allDetails.map(d => d.open);
+      allDetails.forEach(d => { d.open = true; });
+    }
+
+    function afterPrint() {
+      if (!previousStates.length) return;
+      allDetails.forEach((d, i) => { d.open = previousStates[i]; });
+    }
+
+    if (window.matchMedia) {
+      const mediaQueryList = window.matchMedia('print');
+      mediaQueryList.addEventListener('change', function (mql) {
+        if (mql.matches) beforePrint(); else afterPrint();
+      });
+    }
+    window.addEventListener('beforeprint', beforePrint);
+    window.addEventListener('afterprint', afterPrint);
+  })();
+</script>
+</body>
+</html>
