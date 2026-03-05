@@ -3017,6 +3017,15 @@
       <p class="svg-caption">Senkronizasyonda ibre <strong>FAST</strong> (saat yönünde) veya <strong>SLOW</strong> (ters yönde) döner; <strong>SYNCHRONIZED</strong> (12) konumunda kesici kapatılır.</p>
     </div>
 
+    <div class="warn-box">
+      <strong>Senaryo: Paralel alırken senkronizer ibresi çok hızlı dönüyor — ne yaparsın?</strong>
+      <ol>
+        <li>Kesiciyi <strong>kapatma</strong>; hızlı ibre faz uyumsuzluğu demektir, darbe riski vardır.</li>
+        <li>Governor ile jeneratör devir sayısını (dolayısıyla frekansı) baraya yaklaştır; ibre yavaşlayana kadar ayar yap.</li>
+        <li>İbre saat 11–1 aralığına yavaşça gelirken kesiciyi kapat; tercihen 12 (SYNCHRONIZED) anında.</li>
+      </ol>
+    </div>
+
     <div class="quiz-block sinav-box">
       <div class="quiz-header">Mini Sınav — Jeneratör &amp; Paralel Devre</div>
       <details class="quiz-item">
@@ -3081,6 +3090,15 @@
         <div class="saha-box"><strong>Saha ipucu:</strong> AVR değiştirirken eski cihazın tüm pot ayarlarını fotoğraflayın. Yeni AVR'yi bu değerlere yakın başlatmak, gereksiz deneme-yanılmayı azaltır.</div>
       </div>
     </div>
+
+    <div class="warn-box">
+      <strong>Senaryo: Jeneratör çalışıyor ama voltmetre 0 (veya çok düşük) gösteriyor — ilk kontrol noktaları?</strong>
+      <ol>
+        <li>AVR besleme gerilimi var mı? (Sigorta, kablo, PT bağlantısı.)</li>
+        <li>Exciter alan sargısı ve rotor doğrultucu diyotları sağlam mı? (Açık devre / kısa devre ölçümü.)</li>
+        <li>AVR üzerindeki voltaj ayar potu minimumda veya arızalı mı?</li>
+      </ol>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -3131,6 +3149,16 @@
         </ul>
         <div class="note-box">Manual'daki <strong>\"Fault Codes\"</strong> tablosu, sahada en çok bakacağın sayfalardan biridir. Her arıza sonrası hangi adımları uyguladığını kısa notlarla kaydet; tekrar eden hatalarda kök sebebi daha hızlı bulursun.</div>
       </div>
+    </div>
+
+    <div class="warn-box">
+      <strong>Senaryo: VFD ekranda OC (aşırı akım) hatası veriyor — adım adım ne yaparsın?</strong>
+      <ol>
+        <li>Girişte 3 faz gerilim var mı, dengeli mi kontrol et.</li>
+        <li>Motor mekanik olarak sıkışmış mı, rulman/kaplin kontrolü.</li>
+        <li>Motor plaka değerleri VFD parametrelerinde doğru girilmiş mi? Hızlanma rampası çok kısa olabilir.</li>
+        <li>Reset sonrası tekrar ediyorsa megger ile motor ve kablo izolasyonunu ölç.</li>
+      </ol>
     </div>
   </section>
 
@@ -3200,6 +3228,16 @@
         </ul>
       </div>
     </div>
+
+    <div class="warn-box">
+      <strong>Senaryo: Ana şebeke kesildi, emergency jeneratör devreye girmedi — kontrol listesi?</strong>
+      <ol>
+        <li>Emergency jeneratör start devresi (pil/akü, start solenoid, motor) ve yakıt valfi açık mı?</li>
+        <li>Otomatik start sinyali geliyor mu? (Loss of mains rölesi / sensör.)</li>
+        <li>Bus-tie ve emergency SWB kesicileri doğru konumda mı? Kilitleme mekanizması takılı mı?</li>
+        <li>Manuel start ile jeneratör çalışıyor mu? Çalışıyorsa otomasyon veya sinyal tarafı arızalıdır.</li>
+      </ol>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -3266,6 +3304,15 @@
         </ul>
         <div class="saha-box"><strong>Saha ipucu:</strong> Alarm panelinde <strong>sürekli aktif</strong> görünen bir alarm varsa, önce giriş sinyalini multimetreyle, ardından kablo numarası üzerinden şemayla takip et. Çoğu sorun kablo / terminal kaynaklıdır.</div>
       </div>
+    </div>
+
+    <div class="warn-box">
+      <strong>Senaryo: Bir alarm sürekli aktif görünüyor, oysa proses değeri normal — takip sırası?</strong>
+      <ol>
+        <li>İlgili girişteki sinyali multimetre veya proses kalibratörü ile ölç; gerçekten limit aşımı mı?</li>
+        <li>Kablo ve terminal bağlantılarını kontrol et; gevşek veya oksitli uç yanlış okumaya yol açar.</li>
+        <li>Kartın giriş tipi (4–20 mA / 0–10 V / PT100) ve set değerleri doğru mu? Yanlış span/zero ayarı sürekli alarm verebilir.</li>
+      </ol>
     </div>
   </section>
 
