@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -119,6 +119,7 @@
     .svg-wrap { background: radial-gradient(circle at top left, rgba(56,189,248,.12), rgba(15,23,42,.98));
       border-radius: .9rem; border: 1px solid rgba(148,163,184,.4); padding: .6rem; margin-top: .35rem; }
     .svg-wrap h3 { margin-top: .3rem; font-size: .92rem; }
+    .svg-caption { font-size: .9rem; color: #cbd5e1; margin: .6rem 0 0; line-height: 1.45; padding: 0 .25rem; }
     svg { max-width: 100%; height: auto; display: block; }
 
     /* Quiz styles */
@@ -2966,6 +2967,7 @@
   <rect x="108" y="128" width="80" height="56" rx="4" fill="#0f172a" stroke="#475569"/><text x="118" y="142" fill="#94a3b8" font-size="8">MAIN BREAKER</text><rect x="124" y="152" width="48" height="22" rx="2" fill="#334155" stroke="#64748b"/><text x="132" y="166" fill="#94a3b8" font-size="9">ACB</text>
   <text x="200" y="142" fill="#94a3b8" font-size="8">VOLT. REG.</text><text x="200" y="158" fill="#64748b" font-size="8">↓ DEC  ↑ INC</text><text x="200" y="178" fill="#64748b" font-size="8">BREAKER TRIP</text>
 </svg>
+      <p class="svg-caption">Bu şema, jeneratör panelinde gördüğünüz göstergeleri (A, V, Hz, kW, cosφ), motor kumandasını (Start/Stop/E-Stop) ve ana kesiciyi (ACB) metinle eşleştirmenize yardımcı olur.</p>
     </div>
 
     <h3>13.2 Paralel Devreye Alma Adımları (Senkronizasyon)</h3>
@@ -3012,6 +3014,7 @@
   <text x="100" y="142" fill="#64748b" font-size="8" text-anchor="middle">RELAY</text>
   <text x="100" y="158" fill="#64748b" font-size="8" text-anchor="middle">GEN · BUS</text>
 </svg>
+      <p class="svg-caption">Senkronizasyonda ibre <strong>FAST</strong> (saat yönünde) veya <strong>SLOW</strong> (ters yönde) döner; <strong>SYNCHRONIZED</strong> (12) konumunda kesici kapatılır.</p>
     </div>
 
     <div class="quiz-block sinav-box">
@@ -3173,8 +3176,9 @@
   <text x="20" y="112" fill="#f97316" font-size="11" font-weight="600">EMG. SWITCHBOARD (380 V / 220 V)</text>
   <rect x="20" y="122" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/><text x="28" y="138" fill="#94a3b8" font-size="9">380 V AC</text><text x="28" y="152" fill="#64748b" font-size="8">Acil bara</text>
   <rect x="128" y="122" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/><text x="136" y="138" fill="#94a3b8" font-size="9">220 V AC</text><text x="136" y="152" fill="#64748b" font-size="8">Aydınlatma</text>
-  <text x="240" y="132" fill="#94a3b8" font-size="8">Kritik yükler:</text><text x="240" y="146" fill="#64748b" font-size="7">Fire Pump · Steering · Lighting</text><text x="240" y="158" fill="#64748b" font-size="7">Nav System · Transformer</text>
+  <text x="240" y="132" fill="#94a3b8" font-size="8">Kritik yükler:</text><text x="240" y="146" fill="#64748b" font-size="7">Fire Pump · Steering · Lighting</text>  <text x="240" y="158" fill="#64748b" font-size="7">Nav System · Transformer</text>
 </svg>
+      <p class="svg-caption">Ana pano (üst) ve acil dağıtım panosu (alt) blok yapısı; 380 V / 220 V bölümleri ve kritik yükler metinle birlikte bu şemada özetlenir.</p>
     </div>
 
     <h3>16.2 Emergency Switchboard</h3>
@@ -3219,8 +3223,9 @@
   <line x1="82" y1="60" x2="92" y2="60" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#ar)"/>
   <line x1="154" y1="60" x2="164" y2="60" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#ar)"/>
   <line x1="226" y1="60" x2="236" y2="60" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#ar)"/>
-  <rect x="308" y="38" width="24" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="312" y="62" fill="#f97316" font-size="8">→</text><text x="308" y="78" fill="#64748b" font-size="6">Alarm</text>
+  <rect x="308" y="38" width="24" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="312" y="62" fill="#f97316" font-size="8">→</text>  <text x="308" y="78" fill="#64748b" font-size="6">Alarm</text>
 </svg>
+      <p class="svg-caption">Sensör (PT100, 4–20 mA, switch vb.) → transmitter → alarm kontrolü → çıkış akışı; laboratuvar ve saha panellerinde aynı mantık kullanılır.</p>
     </div>
     <div class="two-col">
       <div class="card">
