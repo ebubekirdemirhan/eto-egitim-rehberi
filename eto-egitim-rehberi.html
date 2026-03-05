@@ -248,6 +248,7 @@
         <div class="level-chip"><span>Seviye 1</span> · Stajyer</div>
         <div class="level-chip"><span>Seviye 2</span> · Junior ETO</div>
         <div class="level-chip"><span>Seviye 3</span> · ETO Zabiti</div>
+        <div class="level-chip"><span>Seviye 4</span> · Expert / Saha</div>
       </div>
       <div class="print-hint">PDF: <code>Ctrl + P</code> → <code>PDF olarak kaydet</code></div>
     </div>
@@ -269,6 +270,14 @@
       <div class="toc-item"><a href="#b10"><span class="toc-index">10</span><span><span class="toc-label">Sözlük, Formüller &amp; Sınav</span><br><span class="toc-en">Glossary, Formulas &amp; Exam Bank</span></span></a></div>
       <div class="toc-item"><a href="#b11"><span class="toc-index">11</span><span><span class="toc-label">Gemi Sistemleri &amp; Vaka</span><br><span class="toc-en">Systems &amp; Case Studies</span></span></a></div>
       <div class="toc-item"><a href="#b12"><span class="toc-index">12</span><span><span class="toc-label">Kritik Ekipmanlar</span><br><span class="toc-en">Key Machinery</span></span></a></div>
+      <div class="toc-item"><a href="#b13"><span class="toc-index">13</span><span><span class="toc-label">Jeneratör Operasyonları</span><br><span class="toc-en">Generator Ops &amp; Parallel</span></span></a></div>
+      <div class="toc-item"><a href="#b14"><span class="toc-index">14</span><span><span class="toc-label">Alternatör &amp; AVR</span><br><span class="toc-en">Alternator &amp; Excitation</span></span></a></div>
+      <div class="toc-item"><a href="#b15"><span class="toc-index">15</span><span><span class="toc-label">Frekans İnvertörü</span><br><span class="toc-en">VFD Motor Control</span></span></a></div>
+      <div class="toc-item"><a href="#b16"><span class="toc-index">16</span><span><span class="toc-label">Ana Dağıtım &amp; Emergency</span><br><span class="toc-en">Main &amp; Emergency SWB</span></span></a></div>
+      <div class="toc-item"><a href="#b17"><span class="toc-index">17</span><span><span class="toc-label">Sensör &amp; Alarm Panelleri</span><br><span class="toc-en">Sensor &amp; Alarm Panels</span></span></a></div>
+      <div class="toc-item"><a href="#b18"><span class="toc-index">18</span><span><span class="toc-label">Seyir Feneri &amp; Dümen</span><br><span class="toc-en">Nav Lights &amp; Steering</span></span></a></div>
+      <div class="toc-item"><a href="#b19"><span class="toc-index">19</span><span><span class="toc-label">Burner &amp; Hidrolik</span><br><span class="toc-en">Burner, Pneumatic, Hydraulic</span></span></a></div>
+      <div class="toc-item"><a href="#b20"><span class="toc-index">20</span><span><span class="toc-label">Lab Uygulamaları</span><br><span class="toc-en">Lab Exercises &amp; Gear</span></span></a></div>
     </div>
   </nav>
 
@@ -1742,6 +1751,29 @@
 
     <div class="sinav-box"><strong>PLC için sınav ve saha tüyosu:</strong> PLC'yi anlamak için önce <strong>klasik start-stop devresini</strong> iyi bil; Ladder diyagram aslında aynı devrenin yatay \"merdiven\" olarak çizilmiş halidir. Adresleri (I/Q/M) fiziksel giriş-çıkışlarla eşleştirebilirsen, arızayı hem şemadan hem PLC ekranından rahatlıkla takip edersin.</div>
 
+    <h3>7.5.1 Motor Start Prosedürü (PLC Mantığıyla)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Start-Stop Sırası — Saha Adımları</h3>
+        <ol>
+          <li>LOTO kaldırıldıktan ve devre kontrol edildikten sonra <strong>kontrol gerilimini</strong> aç.</li>
+          <li>PLC ekranından ilgili motor için <strong>Auto/Manual</strong> durumunu kontrol et.</li>
+          <li>Manual modda: Start butonuna bas, I0.0 = 1 olduğunu PLC ekranından doğrula.</li>
+          <li>PLC Ladder'da M0.0 mühür biti ve Q0.0 çıkışının beklendiği gibi 1 olduğundan emin ol.</li>
+          <li>Kontaktör çektiğinde hem <strong>akım</strong> hem de <strong>geri besleme yardımcı kontağı</strong> (ör. I0.2) izle.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Arıza Durumunda İzlenecek Yol</h3>
+        <ul>
+          <li>I girişleri beklediğin gibi değişmiyorsa: buton, kablo veya terminal arızası araştır.</li>
+          <li>I girişleri doğru, fakat Q çıkışı yoksa: Ladder üzerinde bu çıkış satırındaki tüm şartları tek tek kontrol et.</li>
+          <li>Q çıkışı 1 olduğu halde kontaktör çekmiyorsa: bobin gerilimini ölç, termik / MCB / ara röle zincirini takip et.</li>
+          <li>Motor çalışırken beklenmedik stop oluyorsa: Ladder'da stop şartı veren tüm interlock girişlerini (seviye, basınç, emergency vb.) incele.</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="quiz-block">
       <div class="quiz-header">📝 PLC Mini Sınavı</div>
       <details class="quiz-item">
@@ -2073,6 +2105,35 @@
         <div class="quiz-answer">CT uçları önce <strong>kısa devre edilmelidir</strong>. Ardından ölçü cihazı sökülür. Aksi halde sekonderde tehlikeli yüksek gerilim oluşur.</div>
       </details>
     </div>
+
+    <h3>8.5 EKOL Laboratuvar Güvenlik Talimatları (Özet)</h3>
+    <div class="three-col">
+      <div class="card">
+        <h3>Kim Çalışabilir?</h3>
+        <ul>
+          <li>Yalnızca <strong>elektrikçiler</strong> ve yetkilendirilmiş personel elektrikli ekipman ve devreler üzerinde bakım yapabilir.</li>
+          <li>Kesilmiş bir ekipman veya sistem üzerinde, sorumludan izin almadan çalışma yapılmaz.</li>
+          <li>Yetkisiz kişilerin panolara ve şalter odalarına girmesi engellenir.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Çalışma Ortamı</h3>
+        <ul>
+          <li>Kabloları çekerek fişi prizden ayırmak <strong>kesinlikle yasaktır</strong>; fişten tutarak çıkar.</li>
+          <li>Ekipmanı ıslak veya nemli zeminde kullanma; mümkünse izolasyonlu platform üzerinde çalış.</li>
+          <li>Kesici ve şalterlerin etrafı her zaman temiz, kuru ve erişilebilir olmalıdır.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Genel Kurallar</h3>
+        <ul>
+          <li>Tüm panolara gerilimlerine uygun <strong>uyarı levhaları</strong> asılmalıdır.</li>
+          <li>Elektrikli el aletlerini kullanmadan önce kablo ve fişlerini kontrol et; hasarlıysa kullanma.</li>
+          <li>Çalışma bitiminde ekipmanları kapat, fişten çek ve LOTO etiketlerini kaldırmadan önce sahayı güvenli hale getir.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-box">EKOL talimat listesi 20+ maddeden oluşur; burada yalnızca <strong>ETO için kritik olan</strong> başlıklar özetlenmiştir. Gemide göreve başlamadan önce, bağlı olduğun kurumun ISG/LOTO prosedürünü baştan sona okuman zorunludur.</div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -2299,6 +2360,27 @@
         <p><strong>Paralel:</strong> 1/R<sub>top</sub> = 1/R₁+1/R₂+…</p>
         <p><strong>Akü Seri:</strong> V<sub>top</sub> = V₁+V₂ / Ah = Ah</p>
         <p><strong>Akü Paralel:</strong> V = V₁ / Ah<sub>top</sub> = Ah₁+Ah₂</p>
+      </div>
+    </div>
+
+    <h3>10.2.1 Isı &amp; Enerji Formülleri (Kalori / Joule)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Temel Isı Formülü</h3>
+        <p><span class="formula-big">Q = m · c · (t<sub>2</sub> − t<sub>1</sub>)</span></p>
+        <ul>
+          <li><strong>Q</strong> — Isı miktarı (cal veya J).</li>
+          <li><strong>m</strong> — Kütle (kg veya g).</li>
+          <li><strong>c</strong> — Özgül ısı (su için yaklaşık 1 cal/(g·°C) veya 4.18 kJ/(kg·K)).</li>
+          <li><strong>t<sub>2</sub> − t<sub>1</sub></strong> — Sıcaklık farkı (°C).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kalori ↔ Joule Dönüşümü ve Verim</h3>
+        <p><span class="formula">1 cal ≈ 4.18 J</span></p>
+        <p><span class="formula">1 J ≈ 0.24 cal</span></p>
+        <p><span class="formula-big">η = (Alınan Güç / Verilen Güç) × 100%</span></p>
+        <p style="font-size:.84rem;">Örneğin bir motor şebekeden 5 kW çekip milde 4 kW güç üretiyorsa: η = 4/5 = 0.8 → <strong>%80 verim</strong>.</p>
       </div>
     </div>
 
@@ -2826,6 +2908,455 @@
 
     <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Bu bölümdeki başlıklar, genelde \"makine\" sorumluluğunda gibi görünür ama bir arıza anında <strong>ölçü, alarm ve trendleri yorumlayacak kişi</strong> çoğu zaman sensörleri ve sistemleri en iyi tanıyan ETO’dur. Kritik ekipmanlarda ölçü + şema + manual üçlüsünü kullanmayı öğrenirsen, zabit olarak değerin katlanarak artar.</div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 13 – JENERATÖR OPERASYONLARI & PARALEL DEVRE
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b13" data-label="Bölüm 13">
+    <h2>Jeneratör Operasyonları &amp; Paralel Devreye Alma <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Generator main panel, senkronizasyon, yük paylaşımı ve liman-gemi geçişlerinde dikkat edilecek noktalar.</p>
+    <p><em>Bu bölümde EKOL laboratuvarındaki jeneratör panolarını (NO.1 / NO.2), senkronizer panelini ve ana dağıtım panosunu sahadaki gerçek prosedürlerle birleştiriyoruz.</em></p>
+
+    <h3>13.1 Jeneratör Ana Panelini Okumak</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Göstergeler ve Ana Elemanlar</h3>
+        <ul>
+          <li><strong>Ammeter / Voltmeter / Frequency Meter / kW Meter</strong> — Jeneratörün yükünü, gerilimini ve frekansını gösterir.</li>
+          <li><strong>Cosφ metre</strong> — Güç faktörünü izlersin; düşük cosφ gereksiz akım, kablo ve jeneratör zorlanması demektir.</li>
+          <li><strong>Generator Engine Control</strong> — Start / stop / emergency stop, yağ basıncı ve su sıcaklığı gibi motor korumaları buradan izlenir.</li>
+          <li><strong>Generator Main Breaker (ACB / MCCB)</strong> — Jeneratörü bara ile mekanik olarak bağlayan ana kesici.</li>
+        </ul>
+        <div class="saha-box"><strong>Saha ipucu:</strong> Jeneratör devreye almadan önce daima <strong>voltaj, frekans ve faz sırasını</strong> kontrol et. Yanlış faz sırası vinç, pompa ve asenkron motorların ters dönmesine neden olabilir.</div>
+      </div>
+      <div class="card">
+        <h3>Tipik Gösterge Değerleri (Liman / Seyir)</h3>
+        <table>
+          <thead><tr><th>Parametre</th><th>Hedef Değer</th><th>Açıklama</th></tr></thead>
+          <tbody>
+            <tr><td>Gerilim</td><td>380–440 V AC</td><td>Faz-faz gerilim; ana panodaki voltmetreyle izlenir.</td></tr>
+            <tr><td>Frekans</td><td>50 / 60 Hz</td><td>Liman talebine göre; paralel alma öncesi ±0.2 Hz içinde olmalı.</td></tr>
+            <tr><td>Cosφ</td><td>0.8–0.95</td><td>Çok düşük cosφ, jeneratör ve kabloların ısınmasına yol açar.</td></tr>
+            <tr><td>Yük</td><td>%40–80</td><td>Uzun süre %20 altında yük, dizel motor için sağlıklı değildir (wet stacking).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>13.2 Paralel Devreye Alma Adımları (Senkronizasyon)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Genel Prensip</h3>
+        <p>Bir jeneratörü mevcut bara ile paralel bağlamak için <strong>üç şart</strong> sağlanmalıdır:</p>
+        <ul>
+          <li><strong>Gerilim eşitliği:</strong> Jeneratör faz-faz gerilimi, baraya mümkün olduğunca eşit olmalı.</li>
+          <li><strong>Frekans eşitliği:</strong> Jeneratör frekansı, baradan çok az farklı olmalı (senkronoskopta ibre yavaş).</li>
+          <li><strong>Faz açısı eşitliği:</strong> Senkronizer ibresi saat 11–1 arasında iken (tercihen 12 yönünde) kesici kapatılır.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Laboratuvar Prosedürü (Özet)</h3>
+        <ol>
+          <li>Çalışmayan jeneratörü start butonuyla çalıştır.</li>
+          <li>Jeneratör kontrol panelinden gerilim ve frekansı ayarla (AVR + governor).</li>
+          <li>Senkronizer kontrol panelinde ibreyi <strong>yavaş döner</strong> konuma getir (clockwise).</li>
+          <li>İbre saat 12 konumuna gelirken <strong>Generator Main Breaker</strong>'ı kapat.</li>
+          <li>Yük ayarlamasını, voltaj/frekans kumandalarıyla iki jeneratör arasında eşit paylaştır.</li>
+        </ol>
+        <div class="warn-box"><strong>Dikkat:</strong> Yanlış anda kapatılan kesici, barada <strong>büyük senkronizasyon darbesi</strong> oluşturur. ACB mekanik olarak zarar görebilir, motor şaftında tork darbeleri oluşur.</div>
+      </div>
+    </div>
+
+    <div class="quiz-block sinav-box">
+      <div class="quiz-header">Mini Sınav — Jeneratör &amp; Paralel Devre</div>
+      <details class="quiz-item">
+        <summary>Jeneratörü paralele almadan önce hangi üç büyüklüğü mutlaka kontrol etmelisin?</summary>
+        <div class="quiz-answer">Gerilim (V), frekans (Hz) ve faz açısı (senkronizer). Üçü de bara ile uyumlu olmazsa kesici kapatılmamalıdır.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>Senkronizer ibresi hızlı dönüyorsa ne yaparsın?</summary>
+        <div class="quiz-answer">Governor ile jeneratör hızını (dolayısıyla frekansı) bara frekansına yaklaştırır, ibrenin yavaş dönmesini sağlarsın; hızlı iken kesici kapatılmaz.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 14 – ALTERNATÖR, AVR & UYARTIM
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b14" data-label="Bölüm 14">
+    <h2>Alternatör, AVR &amp; Uyartım Sistemleri <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Kendinden uyartımlı fırçasız alternatörler, AVR çalışma prensibi ve tipik arıza senaryoları.</p>
+
+    <h3>14.1 Fırçasız Alternatör Yapısı</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Temel Bileşenler</h3>
+        <ul>
+          <li><strong>Ana stator</strong> — Yük akımını taşıyan 3 faz sargılar.</li>
+          <li><strong>Ana rotor</strong> — Manyetik alanı oluşturan döner alan (alan sargısı).</li>
+          <li><strong>Exciter (uyartım jeneratörü)</strong> — Küçük bir AC jeneratör; çıkışı diyot köprüsüyle doğrultularak ana rotora verilir.</li>
+          <li><strong>AVR (Automatic Voltage Regulator)</strong> — Exciter alan akımını ayarlayarak çıkış gerilimini sabit tutar.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>AVR Ne Yapar?</h3>
+        <ul>
+          <li>Çıkış gerilimini sürekli ölçer (genelde PT üzerinden 110 V'a düşürülmüş sinyal).</li>
+          <li>Gerilim düşerse exciter alan akımını artırır → ana rotor alanı güçlenir → çıkış gerilimi yükselir.</li>
+          <li>Gerilim yükselirse exciter alan akımını azaltır.</li>
+          <li>Katkı olarak bazı AVR'ler <strong>UFRO (Under Frequency Roll-Off)</strong> özelliği ile düşük frekansta gerilimi bilinçli düşürür.</li>
+        </ul>
+        <div class="info-box"><strong>Hap Bilgi:</strong> Alternatör uyartımı kaybolursa (field failure), voltmetrede gerilim görülmez veya çok düşük olur. İlk kontrol edilecek yer AVR beslemesi ve exciter sargısıdır.</div>
+      </div>
+    </div>
+
+    <h3>14.2 Tipik Arızalar ve Kontrol Noktaları</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Gerilim Yükselmiyor</h3>
+        <ul>
+          <li>AVR beslemesi yok (sigorta atmış, kablo kopmuş).</li>
+          <li>Exciter alan sargısı açık devre veya kısa devre.</li>
+          <li>Rotor doğrultucu diyotlarından biri yanmış (özellikle yüksek yük sonrası).</li>
+          <li>AVR üzerindeki voltaj potu minimumda veya arızalı.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Gerilim Dalgalanıyor</h3>
+        <ul>
+          <li>AVR voltaj / stabilite trimpot ayarları bozulmuş.</li>
+          <li>CT / PT geri besleme kablolarında gevşeklik, oksitlenme.</li>
+          <li>Yükte ani değişimler (büyük vinç, bow thruster) için AVR tepkisi çok agresif ayarlanmış.</li>
+        </ul>
+        <div class="saha-box"><strong>Saha ipucu:</strong> AVR değiştirirken eski cihazın tüm pot ayarlarını fotoğraflayın. Yeni AVR'yi bu değerlere yakın başlatmak, gereksiz deneme-yanılmayı azaltır.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 15 – FREKANS İNVERTÖRÜ (VFD)
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b15" data-label="Bölüm 15">
+    <h2>Frekans İnvertörü (VFD) ile Motor Kontrolü <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Mitsubishi D700 gibi invertörlerle pompa ve fan devir kontrolü, temel parametreler ve arıza yaklaşımı.</p>
+
+    <h3>15.1 Çalışma Prensibi</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Blok Yapı</h3>
+        <ul>
+          <li><strong>Doğrultucu</strong> — 3 faz AC'yi DC bara gerilimine dönüştürür.</li>
+          <li><strong>DC Bara</strong> — Kondansatör bankı ile gerilim filtrelenir.</li>
+          <li><strong>IGBT İnvertör</strong> — PWM tekniği ile istenen frekansta 3 faz AC üretir.</li>
+          <li><strong>Kontrol kartı</strong> — Frekans, rampa, koruma ve haberleşmeyi yönetir.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Temel Parametreler</h3>
+        <ul>
+          <li><strong>Motor Plaka Değerleri</strong> — Güç (kW), gerilim, nominal akım, frekans.</li>
+          <li><strong>Frekans Aralığı</strong> — Örneğin 0–50 Hz; çoğu pompa/fan 25–50 Hz aralığında çalıştırılır.</li>
+          <li><strong>Hızlanma / Yavaşlama Rampası</strong> — Start/stop sırasında mekanik darbe ve akım piklerini azaltır.</li>
+          <li><strong>Minimum Frekans</strong> — Pompa/fan için çok düşük frekansta çalışmak, yağlama ve soğutmayı bozabilir.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>15.2 VFD Arızalarında ETO Yaklaşımı</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Elektriksel Kontroller</h3>
+        <ul>
+          <li>Girişte 3 faz gerilim var mı? (L1-L2-L3 eşit mi?)</li>
+          <li>Motor kablosu ve topraklaması sağlam mı? İzolasyon testi (megger) sonucu yeterli mi?</li>
+          <li>Termik / MCB / kontaktör zinciri tam mı, herhangi bir eleman tripte mi?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Hata Kodları &amp; Parametreler</h3>
+        <ul>
+          <li><strong>OC / OL</strong> — Aşırı akım / aşırı yük: mekanik sıkışma, yanlış motor parametresi, hızlanma rampası çok kısa.</li>
+          <li><strong>OV / UV</strong> — Aşırı / düşük DC bara gerilimi: şebeke problemleri veya fren direnci hatası.</li>
+          <li><strong>GF</strong> — Toprak kaçağı: motor kablosu veya sargı izolasyonunu kontrol et.</li>
+        </ul>
+        <div class="note-box">Manual'daki <strong>\"Fault Codes\"</strong> tablosu, sahada en çok bakacağın sayfalardan biridir. Her arıza sonrası hangi adımları uyguladığını kısa notlarla kaydet; tekrar eden hatalarda kök sebebi daha hızlı bulursun.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 16 – ANA DAĞITIM PANOSU & EMERGENCY SWB
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b16" data-label="Bölüm 16">
+    <h2>Ana Dağıtım Panosu &amp; Emergency Switchboard <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Main switchboard, emergency switchboard ve shore connection mantığı; CT/PT, grup kesiciler ve kritik hatlar.</p>
+
+    <h3>16.1 Main Switchboard (380 / 220 V)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Tipik Yapı</h3>
+        <ul>
+          <li><strong>Section 1 — 380 V AC</strong>: Pompa, fan, vinç gibi 3 faz yükler.</li>
+          <li><strong>Section 2 — 220 V AC</strong>: Aydınlatma, priz ve küçük yükler (trafo üzerinden).</li>
+          <li><strong>Group Starter Kesicileri</strong>: Fire pump, steering gear, transformer, lighting, nav system, alarm monitoring.</li>
+          <li><strong>CT / PT'ler</strong>: Akım trafoları koruma ve ölçü için, gerilim trafoları AVR ve ölçü için kullanılır.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Shore Connection (Liman Beslemesi)</h3>
+        <ul>
+          <li>Gemideki ana bara, liman şebekesiyle <strong>asla doğrudan paralel</strong> bağlanmaz; özel shore kesicisi ve interlock'lar kullanılır.</li>
+          <li>Faz sırası, gerilim ve topraklama liman prosedürüne göre mutlaka kontrol edilir.</li>
+          <li>Shore kesicisi kapalıyken gemi jeneratörlerinin ana kesicileri kilitlenir (mekanik/elektriksel kilitleme).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>16.2 Emergency Switchboard</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Acil Dağıtımın Mantığı</h3>
+        <ul>
+          <li>Emergency jeneratör, önce kendi <strong>Emergency SWB</strong>'ına, oradan bus-tie üzerinden ana baraya bağlanır.</li>
+          <li>Emergency baradan beslenen yükler <strong>EMERCENSI AYDINLATMA &amp; GÜÇ BESLEME</strong> listesinde özetlenmiştir.</li>
+          <li>Ana şebeke devre dışı kaldığında; alarm, aydınlatma, haberleşme ve yönlendirme sistemleri kesintisiz devam etmelidir.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ETO İçin Kontrol Listesi</h3>
+        <ul>
+          <li>Emergency jeneratörün otomatik devreye girme testini düzenli olarak yap.</li>
+          <li>Emergency aydınlatma devrelerinin tamamını periyodik olarak test et (koridor, merdiven, makine dairesi, güverte).</li>
+          <li>Emergency SWB üzerinde <strong>yanık izleri, gevşek bağlantı, aşırı ısınma</strong> belirtisi var mı kontrol et.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 17 – SENSÖR & ALARM PANELLERİ
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b17" data-label="Bölüm 17">
+    <h2>Sensör &amp; Alarm Panelleri <span class="lvl lvl-2">Seviye 2–3 · Otomasyon</span></h2>
+    <p class="section-sub">PT100 sıcaklık, 4–20 mA basınç, seviye ve RPM sensörleriyle çalışan alarm panellerinin saha kullanımı.</p>
+
+    <h3>17.1 Sensör Alarm Panelinin Mantığı</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Tipik Sinyal Yolu</h3>
+        <ul>
+          <li><strong>Saha sensörü</strong> (PT100, basınç switch, seviye switch, RPM sensörü).</li>
+          <li><strong>Transmitter</strong> (gerekliyse) — 4–20 mA veya 0–10 V sinyal üretir.</li>
+          <li><strong>Alarm kontrolörü</strong> — Giriş sinyalini okur, set değerleriyle karşılaştırır.</li>
+          <li><strong>Buzzer / alarm lambaları</strong> — Limit aşımlarında devreye girer.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Laboratuvar İşlem Basamakları (Özet)</h3>
+        <ol>
+          <li>Ana şalteri aç, panelin enerjilendiğini doğrula.</li>
+          <li>İlgili sensörü teste hazırla (basıncı/sıcaklığı yükselt veya düşür).</li>
+          <li>Alarm kontrolöründen set değerlerini ayarla (ör. yüksek basınç 8 bar, düşük seviye %20).</li>
+          <li>Sinyali değiştirerek alarmın doğru noktada devreye girip girmediğini gözle.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>17.2 Sık Yapılan Hatalar</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Kablolama ve Topraklama</h3>
+        <ul>
+          <li>4–20 mA hatlarını <strong>ortak dönüş (common)</strong> üzerinden yanlış bağlamak; loop'u kısa devre etmek.</li>
+          <li>Shield (ekran) kablosunu yanlış uçtan topraklamak; gürültü ve hatalı ölçüm.</li>
+          <li>NO/NC kontakların PLC girişlerinde ters mantıkla kullanılması.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kalibrasyon &amp; Test</h3>
+        <ul>
+          <li>Proses kalibratörü ile 4–20 mA sinyal gönderirken kartın giriş tipini (current/voltage) kontrol etmemek.</li>
+          <li>PT100 simülasyonunda 2/3/4 telli bağlantı farkını göz ardı etmek.</li>
+        </ul>
+        <div class="saha-box"><strong>Saha ipucu:</strong> Alarm panelinde <strong>sürekli aktif</strong> görünen bir alarm varsa, önce giriş sinyalini multimetreyle, ardından kablo numarası üzerinden şemayla takip et. Çoğu sorun kablo / terminal kaynaklıdır.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 18 – SEYİR FENERLERİ, AYDINLATMA & DÜMEN
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b18" data-label="Bölüm 18">
+    <h2>Seyir Fenerleri, Aydınlatma &amp; Dümen Makinasi <span class="lvl lvl-2">Seviye 2–3</span></h2>
+    <p class="section-sub">Navigation light control paneli, acil aydınlatma devreleri ve elektro-hidrolik dümen makinası için ETO bakışı.</p>
+
+    <h3>18.1 Navigation Light Control Panel</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Temel Özellikler</h3>
+        <ul>
+          <li>Her seyir feneri için <strong>iki lamba</strong> ve otomatik arıza yedeklemesi (primary / secondary).</li>
+          <li>Lambaların akımını izleyen <strong>kontrol röleleri</strong> veya elektronik kartlar.</li>
+          <li>Köprüde durum göstergeleri (ON / FAIL) ve ortak alarm.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kontrol Listesi</h3>
+        <ul>
+          <li>Gece vardiyası öncesi tüm seyir fenerlerinin durumunu kontrol et; arızalı lambayı <strong>limana kalmadan</strong> değiştir.</li>
+          <li>Navigation light panelindeki sigortaları ve klemenleri periyodik olarak sıkıla.</li>
+          <li>Yedek lambalar ve camlar stokta mı, PMS kayıtlarına işle.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>18.2 Emergency Aydınlatma</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Acil Yükler Listesi ile Bağlantı</h3>
+        <p>EMERCENSI AYDINLATMA notundaki tüm lambalar, emergency pano veya UPS üzerinden beslenir. Her devrenin hem <strong>ana şebeke hem emergency</strong> tarafı şemadan izlenmelidir.</p>
+      </div>
+      <div class="card">
+        <h3>Pratik Test</h3>
+        <ol>
+          <li>Ana şebekeyi simüle ederek kes (test butonu veya kesici).</li>
+          <li>Emergency jeneratörün devreye girdiğini ve emergency lambaların yandığını gözlemle.</li>
+          <li>Yanmayın her lamba için önce besleme devresini, sonra armatürü kontrol et.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>18.3 Elektro-Hidrolik Dümen Makinasi</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Temel Bileşenler</h3>
+        <ul>
+          <li>Elektrik motoru + hidrolik pompa grubu.</li>
+          <li>Sol / sağ yön valfleri (solenoid kontrollü).</li>
+          <li>Stroke limit switch'leri ve feedback potansiyometre / encoder.</li>
+          <li>Alarm ve izleme paneli (yağ seviyesi, basınç, sıcaklık, power pack durumu).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ETO'nun Kontrol Noktaları</h3>
+        <ul>
+          <li>Motor start devrelerini (start/stop, kontaktör, termik) şemadan takip et.</li>
+          <li>Alarm devrelerinde hatalı bypass veya köprüleme olmadığından emin ol.</li>
+          <li>Dümen testlerinde kayıt tut: açı, süre, kullanılan power pack, görülen alarmlar.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 19 – BURNER, PNÖMATİK & HİDROLİK
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b19" data-label="Bölüm 19">
+    <h2>Burner, Pnömatik &amp; Hidrolik Sistemler <span class="lvl lvl-3">Seviye 3 · Zabitlik</span></h2>
+    <p class="section-sub">Yakma sistemleri, pnömatik/hidrolik kumanda devreleri ve ETO'nun tipik görevleri.</p>
+
+    <h3>19.1 Burner Sistemi (Kazan Brülörü)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Görseldeki Ana Bileşenler</h3>
+        <ul>
+          <li>Burner motoru ve fan — Yanma havasını sağlar.</li>
+          <li>Oil pump ve solenoid / servo kontrollü yağ vanaları.</li>
+          <li>Ignition transformer ve elektrotlar — Ateşlemeyi başlatır.</li>
+          <li>Flame sensor — Alevi algılar, yanma kaybolursa sistemi hızlıca kapatır.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ETO Açısından Kritik Noktalar</h3>
+        <ul>
+          <li>Limit switch ve emniyet zinciri (low air, low oil pressure, high temp) devrelerinin sağlamlığı.</li>
+          <li>Burner kontrol paneli hata kodlarının okunması ve manual'a göre adım adım ilerleme.</li>
+          <li>Acil stop ve LOTO prosedürlerinin uygulanması; yanıcı atmosferde kapak açmadan önce havalandırma.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>19.2 Pnömatik ve Hidrolik Kumanda Devreleri</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Laboratuvar Uygulamaları</h3>
+        <ul>
+          <li>Çift etkili silindirlerle <strong>yol-adım diyagramına</strong> uygun çalışma.</li>
+          <li>Start/stop butonlarıyla pnömatik valflerin elektriksel olarak kontrolü.</li>
+          <li>Basınç şalteri ile otomatik devreye alma / durdurma.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Arıza Yaklaşımı</h3>
+        <ul>
+          <li>Önce elektrik beslemesini ve bobin gerilimlerini (solenoid valfler) kontrol et.</li>
+          <li>Ardından basınç / debi yönünden pnömatik/hidrolik çizimi izle.</li>
+          <li>Hareket etmeyen bir silindir için hem <strong>elektrik hem akış</strong> tarafını sistematik olarak kontrol et.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 20 – ETO LABORATUVAR UYGULAMALARI
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b20" data-label="Bölüm 20">
+    <h2>ETO Laboratuvar Uygulamaları &amp; Ekipman Listesi <span class="lvl lvl-1">Seviye 1–3</span></h2>
+    <p class="section-sub">EKOL ETO laboratuvarındaki simülatörler, deney panoları ve bu ekipmanlarla yapılacak temel çalışmalar.</p>
+
+    <p class="saha-box">Lab görselleri (jeneratör paneli, sensör alarm paneli, ana dağıtım panosu vb.) projede <code>images/</code> klasörüne eklenerek ilgili bölümlerde kullanılabilir.</p>
+
+    <h3>20.1 Laboratuvar Ekipmanları Özeti</h3>
+    <div class="three-col">
+      <div class="card">
+        <h3>Güç &amp; Motor Panoları</h3>
+        <ul>
+          <li>5 kW üstü transformatör panosu.</li>
+          <li>Asenkron motor yol verme ve otomatik kumanda panoları.</li>
+          <li>Monofaze ve trifaze motor test masaları.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Jeneratör &amp; Senkronizasyon</h3>
+        <ul>
+          <li>2 adet alternatör ve paralel bağlama konsolu.</li>
+          <li>Senkronizasyon ve generator engine control konsolları.</li>
+          <li>Emergency / main switchboard panoları.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Otomasyon &amp; Alarm</h3>
+        <ul>
+          <li>Sensor alarm paneli ve analog alarm sistemleri paneli.</li>
+          <li>PLC kontrollü panolar (motor, jeneratör, seviye/basınç).</li>
+          <li>Inverter, mars motoru, akü ve redresör sistemleri.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>20.2 Önerilen Uygulama Setleri</h3>
+    <div class="two-col">
+      <div class="card">
+        <h3>Seviye 1 — Stajyer</h3>
+        <ul>
+          <li>Temel Ohm kanunu, güç ölçümü ve 3 faz sistem deneyleri.</li>
+          <li>Start-stop ve mühürleme devresi kurma, acil stop zinciri testleri.</li>
+          <li>Seyir feneri ve aydınlatma devrelerinde sigorta / MCB kullanımını görmek.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Seviye 2–3 — Junior ETO &amp; Zabit</h3>
+        <ul>
+          <li>Yıldız-üçgen kalkış, VFD ile devir kontrolü ve akım/frekans trend analizi.</li>
+          <li>Jeneratör paralel alma, yük paylaşımı ve emergency testleri.</li>
+          <li>PLC ladder programı ile sensör girişleri ve motor çıkışları üzerinde arıza senaryoları.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Bu laboratuvar ortamı, gemide karşılaşacağın her kritik sistemin küçük birer modeli gibi düşünülmeli. Burada yaptığın her ölçümü, attığın her LOTO adımını ve çözdüğün her arızayı not edersen; limanda ve seyirde karşılaştığında çok daha hızlı ve güvenli hareket edersin.</div>
+  </section>
+
   <div class="footer">
     Bu rehber, denizde görev yapan ETO zabiti <span>Ebubekir</span>'in sahadan tavsiyeleri ve
     stajyerden zabite uzanan deneyimleri esas alınarak hazırlanmıştır.
