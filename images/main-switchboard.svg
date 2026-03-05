@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 180" role="img" aria-label="Ana da1t1m ve acil durum panosu blok _emas1">
+  <defs>
+    <linearGradient id="swBg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#1e293b"/><stop offset="100%" style="stop-color:#0f172a"/></linearGradient>
+  </defs>
+  <!-- MAIN SWITCHBOARD -->
+  <rect x="8" y="8" width="364" height="78" rx="6" fill="url(#swBg)" stroke="#475569" stroke-width="1.2"/>
+  <text x="20" y="26" fill="#38bdf8" font-size="11" font-weight="600">MAIN SWITCHBOARD (380 V / 220 V)</text>
+  <rect x="20" y="36" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/>
+  <text x="28" y="52" fill="#94a3b8" font-size="9">380 V AC</text>
+  <text x="28" y="66" fill="#64748b" font-size="8">Voltmetre · R-S-T</text>
+  <rect x="128" y="36" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/>
+  <text x="136" y="52" fill="#94a3b8" font-size="9">220 V AC</text>
+  <text x="136" y="66" fill="#64748b" font-size="8">Voltmetre · Trafo</text>
+  <text x="240" y="48" fill="#94a3b8" font-size="8">Kesiciler:</text>
+  <text x="240" y="62" fill="#64748b" font-size="7">Group Starter · Shore Con. · EMG SWB</text>
+  <text x="240" y="74" fill="#64748b" font-size="7">Transformer · Lighting · Nav · Alarm</text>
+  <!-- EMERGENCY SWITCHBOARD -->
+  <rect x="8" y="94" width="364" height="78" rx="6" fill="url(#swBg)" stroke="#475569" stroke-width="1.2"/>
+  <text x="20" y="112" fill="#f97316" font-size="11" font-weight="600">EMG. SWITCHBOARD (380 V / 220 V)</text>
+  <rect x="20" y="122" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/>
+  <text x="28" y="138" fill="#94a3b8" font-size="9">380 V AC</text>
+  <text x="28" y="152" fill="#64748b" font-size="8">Acil bara</text>
+  <rect x="128" y="122" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/>
+  <text x="136" y="138" fill="#94a3b8" font-size="9">220 V AC</text>
+  <text x="136" y="152" fill="#64748b" font-size="8">Ayd1nlatma</text>
+  <text x="240" y="132" fill="#94a3b8" font-size="8">Kritik yükler:</text>
+  <text x="240" y="146" fill="#64748b" font-size="7">Fire Pump · Steering · Lighting</text>
+  <text x="240" y="158" fill="#64748b" font-size="7">Nav System · Transformer</text>
+</svg>
