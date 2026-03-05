@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -2942,6 +2942,31 @@
         </table>
       </div>
     </div>
+    <div class="svg-wrap">
+      <h3>Jeneratör Ana Panel Şeması (Simülasyon)</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200" role="img" aria-label="Jeneratör ana panel şeması" width="420" height="200" style="max-width:100%;height:auto;">
+  <defs>
+    <linearGradient id="panelBg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#1e293b"/><stop offset="100%" style="stop-color:#0f172a"/></linearGradient>
+  </defs>
+  <rect width="420" height="200" rx="8" fill="url(#panelBg)" stroke="#334155" stroke-width="1.2"/>
+  <text x="12" y="22" fill="#94a3b8" font-size="10" font-weight="600">GENERATOR MAIN PANEL</text>
+  <text x="12" y="36" fill="#64748b" font-size="9">380 V · 50 Hz · 13 kVA</text>
+  <circle cx="50" cy="58" r="10" fill="none" stroke="#ef4444" stroke-width="1.5"/><text x="46" y="62" fill="#ef4444" font-size="9">R</text>
+  <circle cx="80" cy="58" r="10" fill="none" stroke="#ef4444" stroke-width="1.5"/><text x="76" y="62" fill="#ef4444" font-size="9">S</text>
+  <circle cx="110" cy="58" r="10" fill="none" stroke="#ef4444" stroke-width="1.5"/><text x="106" y="62" fill="#ef4444" font-size="9">T</text>
+  <rect x="20" y="78" width="52" height="36" rx="4" fill="#0f172a" stroke="#475569"/><text x="28" y="92" fill="#94a3b8" font-size="8">A</text><text x="32" y="106" fill="#38bdf8" font-size="11">30</text>
+  <rect x="78" y="78" width="52" height="36" rx="4" fill="#0f172a" stroke="#475569"/><text x="84" y="92" fill="#94a3b8" font-size="8">V</text><text x="88" y="106" fill="#38bdf8" font-size="11">450</text>
+  <rect x="136" y="78" width="52" height="36" rx="4" fill="#0f172a" stroke="#475569"/><text x="140" y="92" fill="#94a3b8" font-size="8">Hz</text><text x="148" y="106" fill="#38bdf8" font-size="11">50</text>
+  <rect x="194" y="78" width="52" height="36" rx="4" fill="#0f172a" stroke="#475569"/><text x="198" y="92" fill="#94a3b8" font-size="8">kW</text><text x="206" y="106" fill="#38bdf8" font-size="11">15</text>
+  <rect x="252" y="78" width="60" height="36" rx="4" fill="#0f172a" stroke="#475569"/><text x="258" y="92" fill="#94a3b8" font-size="8">cos φ</text><text x="266" y="106" fill="#38bdf8" font-size="10">0.85</text>
+  <rect x="20" y="128" width="70" height="56" rx="4" fill="#0f172a" stroke="#475569"/><text x="28" y="142" fill="#94a3b8" font-size="8">ENGINE</text>
+  <rect x="32" y="148" width="22" height="14" rx="3" fill="#166534" stroke="#22c55e"/><text x="36" y="158" fill="#fff" font-size="8">START</text>
+  <rect x="58" y="148" width="22" height="14" rx="3" fill="#991b1b" stroke="#ef4444"/><text x="62" y="158" fill="#fff" font-size="8">STOP</text>
+  <circle cx="45" cy="172" r="8" fill="#dc2626" stroke="#f87171"/><text x="42" y="175" fill="#fff" font-size="7">E-STOP</text>
+  <rect x="108" y="128" width="80" height="56" rx="4" fill="#0f172a" stroke="#475569"/><text x="118" y="142" fill="#94a3b8" font-size="8">MAIN BREAKER</text><rect x="124" y="152" width="48" height="22" rx="2" fill="#334155" stroke="#64748b"/><text x="132" y="166" fill="#94a3b8" font-size="9">ACB</text>
+  <text x="200" y="142" fill="#94a3b8" font-size="8">VOLT. REG.</text><text x="200" y="158" fill="#64748b" font-size="8">↓ DEC  ↑ INC</text><text x="200" y="178" fill="#64748b" font-size="8">BREAKER TRIP</text>
+</svg>
+    </div>
 
     <h3>13.2 Paralel Devreye Alma Adımları (Senkronizasyon)</h3>
     <div class="two-col">
@@ -2965,6 +2990,28 @@
         </ol>
         <div class="warn-box"><strong>Dikkat:</strong> Yanlış anda kapatılan kesici, barada <strong>büyük senkronizasyon darbesi</strong> oluşturur. ACB mekanik olarak zarar görebilir, motor şaftında tork darbeleri oluşur.</div>
       </div>
+    </div>
+    <div class="svg-wrap">
+      <h3>Senkronoskop Kadranı (Simülasyon)</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Senkronoskop kadranı" width="200" height="200" style="max-width:100%;height:auto;">
+  <defs>
+    <linearGradient id="dialBg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#1e293b"/><stop offset="100%" style="stop-color:#0f172a"/></linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="88" fill="url(#dialBg)" stroke="#475569" stroke-width="2"/>
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#334155" stroke-width="1"/>
+  <text x="100" y="32" fill="#4ade80" font-size="11" font-weight="700" text-anchor="middle">SYNCHRONIZED</text>
+  <text x="32" y="108" fill="#facc15" font-size="12" text-anchor="middle">FAST</text>
+  <text x="168" y="108" fill="#facc15" font-size="12" text-anchor="middle">SLOW</text>
+  <line x1="100" y1="28" x2="100" y2="38" stroke="#64748b" stroke-width="2"/>
+  <line x1="162" y1="100" x2="172" y2="100" stroke="#64748b" stroke-width="2"/>
+  <line x1="100" y1="162" x2="100" y2="172" stroke="#64748b" stroke-width="2"/>
+  <line x1="28" y1="100" x2="38" y2="100" stroke="#64748b" stroke-width="2"/>
+  <line x1="100" y1="100" x2="100" y2="42" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="100" cy="100" r="6" fill="#38bdf8"/>
+  <text x="100" y="128" fill="#94a3b8" font-size="9" text-anchor="middle">SYNCHRO CHECK</text>
+  <text x="100" y="142" fill="#64748b" font-size="8" text-anchor="middle">RELAY</text>
+  <text x="100" y="158" fill="#64748b" font-size="8" text-anchor="middle">GEN · BUS</text>
+</svg>
     </div>
 
     <div class="quiz-block sinav-box">
@@ -3111,6 +3158,24 @@
         </ul>
       </div>
     </div>
+    <div class="svg-wrap">
+      <h3>Main &amp; Emergency Switchboard (Blok Şeması)</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 180" role="img" aria-label="Ana dağıtım ve acil durum panosu" width="380" height="180" style="max-width:100%;height:auto;">
+  <defs>
+    <linearGradient id="swBg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#1e293b"/><stop offset="100%" style="stop-color:#0f172a"/></linearGradient>
+  </defs>
+  <rect x="8" y="8" width="364" height="78" rx="6" fill="url(#swBg)" stroke="#475569" stroke-width="1.2"/>
+  <text x="20" y="26" fill="#38bdf8" font-size="11" font-weight="600">MAIN SWITCHBOARD (380 V / 220 V)</text>
+  <rect x="20" y="36" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/><text x="28" y="52" fill="#94a3b8" font-size="9">380 V AC</text><text x="28" y="66" fill="#64748b" font-size="8">Voltmetre · R-S-T</text>
+  <rect x="128" y="36" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/><text x="136" y="52" fill="#94a3b8" font-size="9">220 V AC</text><text x="136" y="66" fill="#64748b" font-size="8">Voltmetre · Trafo</text>
+  <text x="240" y="48" fill="#94a3b8" font-size="8">Kesiciler:</text><text x="240" y="62" fill="#64748b" font-size="7">Group Starter · Shore Con. · EMG SWB</text><text x="240" y="74" fill="#64748b" font-size="7">Transformer · Lighting · Nav · Alarm</text>
+  <rect x="8" y="94" width="364" height="78" rx="6" fill="url(#swBg)" stroke="#475569" stroke-width="1.2"/>
+  <text x="20" y="112" fill="#f97316" font-size="11" font-weight="600">EMG. SWITCHBOARD (380 V / 220 V)</text>
+  <rect x="20" y="122" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/><text x="28" y="138" fill="#94a3b8" font-size="9">380 V AC</text><text x="28" y="152" fill="#64748b" font-size="8">Acil bara</text>
+  <rect x="128" y="122" width="100" height="40" rx="4" fill="#0f172a" stroke="#475569"/><text x="136" y="138" fill="#94a3b8" font-size="9">220 V AC</text><text x="136" y="152" fill="#64748b" font-size="8">Aydınlatma</text>
+  <text x="240" y="132" fill="#94a3b8" font-size="8">Kritik yükler:</text><text x="240" y="146" fill="#64748b" font-size="7">Fire Pump · Steering · Lighting</text><text x="240" y="158" fill="#64748b" font-size="7">Nav System · Transformer</text>
+</svg>
+    </div>
 
     <h3>16.2 Emergency Switchboard</h3>
     <div class="two-col">
@@ -3141,6 +3206,22 @@
     <p class="section-sub">PT100 sıcaklık, 4–20 mA basınç, seviye ve RPM sensörleriyle çalışan alarm panellerinin saha kullanımı.</p>
 
     <h3>17.1 Sensör Alarm Panelinin Mantığı</h3>
+    <div class="svg-wrap">
+      <h3>Sinyal Akışı (Simülasyon)</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 100" role="img" aria-label="Sensör alarm paneli sinyal akışı" width="340" height="100" style="max-width:100%;height:auto;">
+  <defs><marker id="ar" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/></marker></defs>
+  <rect x="8" y="8" width="324" height="84" rx="6" fill="#0f172a" stroke="#334155"/>
+  <text x="20" y="26" fill="#94a3b8" font-size="10">Sensör → Transmitter → Alarm kontrol → Çıkış</text>
+  <rect x="20" y="38" width="62" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="28" y="54" fill="#38bdf8" font-size="8">PT100</text><text x="28" y="68" fill="#64748b" font-size="7">Sıcaklık</text>
+  <rect x="92" y="38" width="62" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="98" y="54" fill="#38bdf8" font-size="8">4–20 mA</text><text x="98" y="68" fill="#64748b" font-size="7">Basınç</text>
+  <rect x="164" y="38" width="62" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="170" y="54" fill="#38bdf8" font-size="8">PNP RPM</text><text x="170" y="68" fill="#64748b" font-size="7">Devir</text>
+  <rect x="236" y="38" width="62" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="242" y="54" fill="#38bdf8" font-size="8">Switch</text><text x="242" y="68" fill="#64748b" font-size="7">Seviye/Basınç</text>
+  <line x1="82" y1="60" x2="92" y2="60" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="154" y1="60" x2="164" y2="60" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="226" y1="60" x2="236" y2="60" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="308" y="38" width="24" height="44" rx="4" fill="#1e293b" stroke="#475569"/><text x="312" y="62" fill="#f97316" font-size="8">→</text><text x="308" y="78" fill="#64748b" font-size="6">Alarm</text>
+</svg>
+    </div>
     <div class="two-col">
       <div class="card">
         <h3>Tipik Sinyal Yolu</h3>
@@ -3304,7 +3385,7 @@
     <h2>ETO Laboratuvar Uygulamaları &amp; Ekipman Listesi <span class="lvl lvl-1">Seviye 1–3</span></h2>
     <p class="section-sub">EKOL ETO laboratuvarındaki simülatörler, deney panoları ve bu ekipmanlarla yapılacak temel çalışmalar.</p>
 
-    <p class="saha-box">Lab görselleri (jeneratör paneli, sensör alarm paneli, ana dağıtım panosu vb.) projede <code>images/</code> klasörüne eklenerek ilgili bölümlerde kullanılabilir.</p>
+    <p class="saha-box">Jeneratör paneli, senkronoskop, ana dağıtım panosu ve sensör alarm paneli için <strong>şematik çizimleri</strong> ve Bölüm 13, 16, 17’de kullanılır.</p>
 
     <h3>20.1 Laboratuvar Ekipmanları Özeti</h3>
     <div class="three-col">
