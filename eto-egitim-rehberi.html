@@ -288,7 +288,11 @@
       <div class="toc-item"><a href="#b18"><span class="toc-index">18</span><span><span class="toc-label">Seyir Feneri &amp; Dümen</span><br><span class="toc-en">Nav Lights &amp; Steering</span></span></a></div>
       <div class="toc-item"><a href="#b19"><span class="toc-index">19</span><span><span class="toc-label">Burner &amp; Hidrolik</span><br><span class="toc-en">Burner, Pneumatic, Hydraulic</span></span></a></div>
       <div class="toc-item"><a href="#b20"><span class="toc-index">20</span><span><span class="toc-label">Lab Uygulamaları</span><br><span class="toc-en">Lab Exercises &amp; Gear</span></span></a></div>
-      <div class="toc-item toc-item-b21"><a href="#b21"><span class="toc-index">21</span><span><span class="toc-label">Soru Bankası — Liman / Zabitlik</span><br><span class="toc-en">Sınav 1, 2 & 3 · 300 Soru · Çözümlü</span></span></a></div>
+      <div class="toc-item"><a href="#b22"><span class="toc-index">22</span><span><span class="toc-label">Atölye Pratikleri &amp; El Becerileri</span><br><span class="toc-en">Workshop Skills &amp; Hands-On</span></span></a></div>
+      <div class="toc-item"><a href="#b23"><span class="toc-index">23</span><span><span class="toc-label">Spesifik Motor &amp; Elektrik Uygulamaları</span><br><span class="toc-en">Motor &amp; Electrical Applications</span></span></a></div>
+      <div class="toc-item"><a href="#b24"><span class="toc-index">24</span><span><span class="toc-label">Gemicilik &amp; Hayatta Kalma</span><br><span class="toc-en">Seamanship &amp; Survival</span></span></a></div>
+      <div class="toc-item"><a href="#b25"><span class="toc-index">25</span><span><span class="toc-label">Özel Sistemler &amp; Vaka Analizleri</span><br><span class="toc-en">Special Systems &amp; Case Studies</span></span></a></div>
+      <div class="toc-item toc-item-b21"><a href="#b21"><span class="toc-index">21</span><span><span class="toc-label">Soru Bankası — Liman / Zabitlik</span><br><span class="toc-en">Sınav 1, 2 &amp; 3 · 300 Soru · Çözümlü</span></span></a></div>
     </div>
   </nav>
 
@@ -3872,6 +3876,548 @@
       <details class="quiz-item"><summary>Ç100. "Emergency" jeneratör start edilmeden önce hangi kontrol yapılır? A) Sadece yağ B) Yakıt seviyesi, start aküsü, yağ, soğutma, loss-of-mains sinyali B) Sadece su D) Sadece egzoz</summary><div class="quiz-answer"><strong>Cevap:</strong> B. Çözüm: Acil jeneratör start öncesi yakıt, akü, yağ, soğutma ve otomatik start sinyali kontrol edilir.</div></details>
     </div>
     <p class="section-sub" style="margin-top:1.5rem;"><strong>Toplam 300 soru</strong> (Sınav 1 + Sınav 2 + Sınav 3). Sınav 3'ün ilk 20 sorusu doğrudan yazılı sınav tarzında; Ç21–Ç100 rehber ve çıkmış soru tarzında eklenmiştir.</p>
+  </section>
+
+  <!-- ══════════ BÖLÜM 22 ══════════ -->
+  <section id="b22" data-label="Bölüm 22">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">22</span><span class="section-level level-2">Seviye 2–3</span></div>
+      <h2 class="section-title">Atölye Pratikleri &amp; El Becerileri <span class="section-en">Workshop Skills &amp; Hands-On</span></h2>
+    </div>
+    <p class="section-intro">Lehim · Kontaktör Bakımı · Motor Demontaj/Montaj · Sahada Alternatif Çözüm Üretme</p>
+    <p class="section-sub"><em>Bu bölüm, sınıfta pek öğretilmeyen ama sahada günlük kullandığın el becerilerini kapsar. Teori bittikten sonra asıl iş burada başlar.</em></p>
+
+    <h3>22.1 Lehim Nasıl Yapılır (Soldering)</h3>
+    <p>Lehim, iki iletken yüzeyi düşük erime noktalı bir alaşımla (kalay-kurşun veya kurşunsuz) birleştirme işlemidir.</p>
+    <h4>Temel Malzemeler</h4>
+    <ul>
+      <li><strong>Lehim havyası (soldering iron):</strong> 25–60 W arası elektronik işlere; 100 W+ güç kablosu eklentileri için.</li>
+      <li><strong>Lehim teli (solder wire):</strong> En yaygın Sn60Pb40 (60% kalay, 40% kurşun). Kurşunsuz alternatif: Sn96.5Ag3Cu0.5.</li>
+      <li><strong>Flux:</strong> Oksit tabakasını temizler, lehimin yüzeye yapışmasını sağlar. Reçine bazlı veya su-bazlı olabilir.</li>
+    </ul>
+    <h4>Adım Adım Lehim Prosedürü</h4>
+    <ol>
+      <li>Havyayı ısıt, ucu temiz ve gümüş renkli olmalı (tinning — kalaylama).</li>
+      <li>Birleştirilecek yüzeyleri zımpara veya bıçakla temizle; oksit/yağ olmamalı.</li>
+      <li>İletken uçları bir arada tut (klips veya yardımcı tutaç ile).</li>
+      <li>Havyayı birleşim noktasına tut (5–10 sn), <em>lehim telini</em> havyaya değil birleşim noktasına değdir.</li>
+      <li>Lehim aktıktan sonra havyayı çek; lehim soğuyana kadar hareketsiz tut.</li>
+    </ol>
+    <h4>Soğuk Lehim Tespiti (Cold Solder Joint)</h4>
+    <div class="callout callout-warn">
+      <strong>Soğuk lehim:</strong> Görsel olarak mat/granüllü görünür; sağlıklı lehim parlak ve pürüzsüzdür. Soğuk lehim yüksek direnç yaratır → ısınma, aralıklı arıza. Multimetre ile süreklilik ölçümünde aralıklı sonuç veriyorsa şüphelenin.
+    </div>
+    <table>
+      <thead><tr><th>Durum</th><th>Görünüm</th><th>Test</th></tr></thead>
+      <tbody>
+        <tr><td>Sağlıklı lehim</td><td>Parlak, düzgün konik şekil</td><td>Süreklilik var, direnç sıfıra yakın</td></tr>
+        <tr><td>Soğuk lehim</td><td>Mat, granüllü, pürüzlü</td><td>Aralıklı süreklilik, yüksek direnç</td></tr>
+        <tr><td>Yetersiz ısı</td><td>Top/damla biçimi, yüzeye yapışmamış</td><td>Mekanik olarak düşer</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>Ebubekir'in Notu:</strong> Gemide yedek lehim teli ve küçük bir havya daima işe yarar. Elektronik kart üzerinde çalışmadan önce ESD (statik) koruması al; statik, devre elemanlarını sessizce öldürür.
+    </div>
+
+    <h3>22.2 Kontaktör Mekanik Sökme ve Kontak Bakımı</h3>
+    <p>Kontaktör arızalarının büyük çoğunluğu mekanik: kaynaklanmış kontak, yanmış bobin, kirlenmiş pogo yayı.</p>
+    <h4>Sökme Sırası</h4>
+    <ol>
+      <li><strong>LOTO:</strong> Devreyi kes, kilitle, doğrula — asla atlama.</li>
+      <li>Güç kablolarını (L1–T3) terminal vidalarından söküp işaretle (kameraya al veya yazı yaz).</li>
+      <li>Kumanda kablolarını (A1, A2, yardımcı kontaklar) söküp işaretle.</li>
+      <li>Kontaktörü DIN raydan kaldır (ray klipsi var ise bastır).</li>
+      <li>Bobin kapağını veya ön kapaklı modellerde kilit klipsini bırak; bobin modülünü çek.</li>
+      <li>Ana kontak modülünü çıkar; yay ve köprü kontakları dökülmesin diye dikkatli ol.</li>
+    </ol>
+    <h4>Kontak Kontrolü ve Eğeleme</h4>
+    <ul>
+      <li>Yanmış, pütürlü kontak yüzeyine <strong>ince bir kontak eğesi</strong> (contact file) ile hafifçe geç — sadece pütürleri al, kontak kalınlığını fazla inceltme.</li>
+      <li>Kontak kalınlığı limit değerin (genelde plakada belirtilmiştir, yoksa 1 mm) altına düştüyse kontaktörü değiştir.</li>
+      <li>Eğelemek geçici çözümdür; kaynaklanmış kontak tekrar ortaya çıkıyorsa aşırı yük var demektir — sebebi araştır.</li>
+    </ul>
+    <div class="callout callout-warn">
+      <strong>Tehlike:</strong> Kontaktör sökülmeden önce <em>mutlaka enerjisiz</em> olduğunu voltmetre ile doğrula. "Az önce kestim" demek yeterli değildir.
+    </div>
+
+    <h3>22.3 Motor Demontaj &amp; Montaj</h3>
+    <p>Asenkron motor demontajı genelde rulman değişimi veya sargı bakımı için yapılır. Sahada temel adımlar:</p>
+    <h4>Demontaj Sırası</h4>
+    <ol>
+      <li>LOTO uygula; motorun soğuk olduğundan emin ol.</li>
+      <li>Kaplin veya kayış-kasnak bağlantısını söküp işaretle (kayış yönü önemli).</li>
+      <li>Terminaller kutusunu (klemens kutusu) aç; kablolarını işaretle ve söküp bağ.</li>
+      <li>Motor cıvatalarını söküp motoru taşıma askısına/zemine yerleştir (ağır motor için vinç/zincir hoist kullan).</li>
+      <li>Arka kapak (DE/NDE) cıvatalarını söküp kapağı dik darbe ile aç — kesinlikle çekiçle direkt vurma, ahşap veya plastik ara parça koy.</li>
+      <li><strong>Rulman çıkarma:</strong> Puley çekicisi (bearing puller) kullan. Isı uygulama (ısı tabancası) ile sıkışık rulmanı gevşet.</li>
+      <li>Rotoru statordan dikkatli çek; hava aralığı çok küçük, stator sargısını çizmemek için destekle.</li>
+    </ol>
+    <h4>Montaj ve Hizalama</h4>
+    <ol>
+      <li>Yeni rulmanı sıcak yağ banyosu (80–90°C) veya endüksiyonlu ısıtıcı ile genleştirip mili üzerine it — kesinlikle çekiçle dıştaki halkaya vurma, iç halkadan itmeli.</li>
+      <li>Rotoru statorun içinden yavaşça geçir.</li>
+      <li>Kapakları sıkıştır; 2 karşılıklı vida → 2 karşılıklı vida şeklinde çapraz sıkma.</li>
+      <li>Mili elle döndür; pürüzsüz dönmeli, takılmamalı.</li>
+      <li><strong>Hizalama (alignment):</strong> Düz cetvel veya dial indicator ile motor-pompa akısı hizasını kontrol et. Açısal ve paralel kaçıklık sınır içinde olmalı (genelde &lt;0,05 mm).</li>
+      <li>Megger ile sargıları ölç (≥1 MΩ) — montaj sonrası nem girişi olabilir.</li>
+    </ol>
+    <table>
+      <thead><tr><th>İşlem</th><th>Alet</th><th>Dikkat</th></tr></thead>
+      <tbody>
+        <tr><td>Rulman çıkarma</td><td>Puley çekicisi, ısı tabancası</td><td>Dış halkadan çek, iç halkadan itme</td></tr>
+        <tr><td>Rulman takma</td><td>Rulman ısıtıcı veya yağ banyosu</td><td>İç halkadan it, dış halkaya kuvvet verme</td></tr>
+        <tr><td>Hizalama</td><td>Dial indicator, lazer hizalama</td><td>Soğukta kontrol et, ısınma ile biraz değişir</td></tr>
+        <tr><td>İzolasyon testi</td><td>Megger 500 VDC</td><td>Montaj sonrası mutlaka ölç</td></tr>
+      </tbody>
+    </table>
+
+    <h3>22.4 Sahada Alternatif Çözüm Üretme</h3>
+    <p>Açık denizde veya kıt imkânlı bir limanda her parça anında bulunamaz. ETO'nun değerini artıran şey, bu kısıtlı koşullarda çalışmayı devam ettirme becerisidir.</p>
+    <h4>Temel Prensipler</h4>
+    <ul>
+      <li><strong>Muadil parça:</strong> Kontaktör veya röle için marka yerine teknik eşdeğer (bobin gerilimi, kontak kapasitesi, boyut) bul. IEC/CE sertifikalı muadil kullanılabilir.</li>
+      <li><strong>Geçici köprü (bypass):</strong> Arızalı yardımcı kontak yerine geçici jumper — sadece test ve acil durum için; kalıcı çözüm değildir.</li>
+      <li><strong>3D bakış açısı:</strong> Kıyı malzeme deposu, diğer gemiler, liman çarşısı, gemideki diğer ekipmanların yedek parçaları. "Eski kontaktör hurda kutusunda mı?" gibi sorular sor.</li>
+      <li><strong>Yeniden kullanma:</strong> Farklı gerilimli bir bobin → seri direnç ekleyerek uyarlama (geçici ve hesaplanmış olmalı).</li>
+    </ul>
+    <div class="callout">
+      <strong>Ebubekir'in Notu:</strong> Alternatifleri dene ama güvenlik sınırlarını asla aşma. "Motor çalışıyor" yeterli değil; "güvenli ve kayıtlı" olmalı. Geçici çözümü PMS'e not düş; limanda kalıcı parça temin edildiğinde değiştir.
+    </div>
+
+    <details class="quiz-item"><summary>Bölüm 22 Mini Sınav — S1: Lehim sırasında neden flux kullanılır?</summary><div class="quiz-answer">Flux, metal yüzeyindeki oksit tabakasını eritir ve lehimin yüzeye bağlanmasını sağlar. Fluxsuz lehimde teneke yüzeye yapışmaz, soğuk lehim oluşur.</div></details>
+    <details class="quiz-item"><summary>S2: Kontaktör kontakları kaynaklanmışsa ilk yapılacak iş nedir?</summary><div class="quiz-answer">LOTO uygula, kontaktörü söküp kontak modülünü incele. Eğeleme ile geçici çözüm mümkündür ancak tekrar kaynaklıyorsa aşırı yük sebebi araştırılmalı, kontaktör değiştirilmelidir.</div></details>
+    <details class="quiz-item"><summary>S3: Rulman değişiminde neden dış halkaya kuvvet uygulanmaz?</summary><div class="quiz-answer">Kuvvet, bir halkadan diğerine bilyeler üzerinden iletilirse bilyeler ve yuvaları zarar görür. Montajda iç halkadan, demontajda dış halkadan kuvvet uygulanır.</div></details>
+  </section>
+
+  <!-- ══════════ BÖLÜM 23 ══════════ -->
+  <section id="b23" data-label="Bölüm 23">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">23</span><span class="section-level level-2">Seviye 2–3</span></div>
+      <h2 class="section-title">Spesifik Motor &amp; Elektrik Uygulamaları <span class="section-en">Motor &amp; Electrical Applications</span></h2>
+    </div>
+    <p class="section-intro">Monofaze Çalıştırma · Dahlander · Marş Motoru · Renk Kodları · MN Bobini · Jogging · Floresan · Diyot/Pot Ölçümü</p>
+    <p class="section-sub"><em>Bu bölüm, videolarda sıkça gösterilen ama standart kaynaklarda az anlatılan özel uygulamaları kapsıyor.</em></p>
+
+    <h3>23.1 Trifaze Motoru Monofaze Çalıştırma</h3>
+    <p>Acil durum veya kısıtlı tesis koşullarında 3 fazlı bir motor tek fazla çalıştırılabilir — ancak ciddi kısıtlamalar vardır.</p>
+    <h4>Kondansatör Yöntemi</h4>
+    <ul>
+      <li>Üçüncü faz yerine <strong>kondansatör</strong> bağlanır; faz kayması oluşturur ve dönen manyetik alan sağlar.</li>
+      <li>Kondansatör değeri: yaklaşık <strong>70–100 µF/kW</strong> (motor gücüne göre).</li>
+      <li>Motor bu yöntemle yaklaşık <strong>%60–70 kapasitesinde</strong> çalışır; tam yükle kullanılamaz.</li>
+    </ul>
+    <div class="callout callout-warn">
+      <strong>Önemli Kısıtlamalar:</strong> Motor sürekli monofaze çalıştırılmamalı; tek fazda çalışma sargıları dengesiz ısıtır. Nominal akımın %70'inde termik röle ayarı önerilir. Bu yöntem yalnızca geçici ve acil kullanım içindir.
+    </div>
+    <table>
+      <thead><tr><th>Parametre</th><th>3 Faz Normal</th><th>Monofaze (Kondansatörlü)</th></tr></thead>
+      <tbody>
+        <tr><td>Kapasite</td><td>%100</td><td>~%65</td></tr>
+        <tr><td>Isınma</td><td>Normal</td><td>Daha hızlı, asimetrik</td></tr>
+        <tr><td>Kullanım süresi</td><td>Sürekli</td><td>Kısa süreli / acil</td></tr>
+      </tbody>
+    </table>
+
+    <h3>23.2 Çift Devirli Asenkron Motor (Dahlander Bağlantısı)</h3>
+    <p>Tek bir stator üzerinde <strong>iki farklı hız</strong> elde etmek için Dahlander (pole-changing) yöntemi kullanılır.</p>
+    <h4>Çalışma Prensibi</h4>
+    <ul>
+      <li>Sargılar seri-paralel olarak anahtarlanır; seri bağlantı kutup sayısını iki katına çıkarır, hız yarıya iner.</li>
+      <li><strong>Düşük hız (seri):</strong> 2×p kutuplu, n_s = 120f/2p</li>
+      <li><strong>Yüksek hız (paralel / yıldız):</strong> p kutuplu, n_s = 120f/p</li>
+    </ul>
+    <h4>Tipik Örnek (50 Hz)</h4>
+    <table>
+      <thead><tr><th>Mod</th><th>Kutup</th><th>Senkron Hız</th></tr></thead>
+      <tbody>
+        <tr><td>Düşük hız</td><td>8</td><td>750 dev/dak</td></tr>
+        <tr><td>Yüksek hız</td><td>4</td><td>1500 dev/dak</td></tr>
+      </tbody>
+    </table>
+    <h4>Kumanda Devresi Özeti</h4>
+    <ul>
+      <li>İki ayrı kontaktör (K1 düşük, K2 yüksek); birbirini kilitleyen NC kontaklar.</li>
+      <li>Geçiş sırasında motor durdurulur, ardından yeni devre enerjilenir (özellikle yüksekten düşüğe geçişte — mekanik darbe riski var).</li>
+    </ul>
+
+    <h3>23.3 Marş Motoru (Starter Motor) — Prensip ve Arızaları</h3>
+    <p>Dizel ve benzinli motorlarda krank milini döndürerek ateşlemeyi başlatan küçük DC seri motordur.</p>
+    <h4>Çalışma Prensibi</h4>
+    <ul>
+      <li>DC seri motor kullanılır: yüksek kalkış torku, düşük devir → ideal başlatma.</li>
+      <li><strong>Solenoid (çekme mıknatısı):</strong> Anahtara basılınca solenoid enerjilenir → pinion dişlisi vola (flywheel) dişlisiyle kavrar → main kontaklar kapanır → motor yüksek akım çeker → krank döner.</li>
+      <li>Motor ateşlenince pinion geri çekilir (bendiks / overrunning clutch ile); marş motoru aşırı devir almaz.</li>
+    </ul>
+    <h4>Tipik Arızalar</h4>
+    <table>
+      <thead><tr><th>Belirti</th><th>Olası Sebep</th><th>Kontrol</th></tr></thead>
+      <tbody>
+        <tr><td>Tıklama sesi var, motor dönmüyor</td><td>Akü voltajı düşük, main kontak arızası</td><td>Akü yük testi, solenoid main kontakları ölç</td></tr>
+        <tr><td>Hiç ses yok</td><td>Sigorta, solenoid besleme, start anahtarı</td><td>Solenoid S-terminalinde gerilim var mı?</td></tr>
+        <tr><td>Marş motor sürekli dönüyor</td><td>Solenoid main kontakları kaynaklanmış</td><td>Solenoid değişimi</td></tr>
+        <tr><td>Gıcırdama, dişli engeli</td><td>Bendiks arızası, vola dişi kırık</td><td>Mekanik kontrol, bendiks değişimi</td></tr>
+      </tbody>
+    </table>
+
+    <h3>23.4 Motor Bağlantı Renk Kodları</h3>
+    <p>IEC 60034-8 standardına göre 3 fazlı motorlarda uç işaretleme ve renk kodları:</p>
+    <table>
+      <thead><tr><th>Uç</th><th>İşaret</th><th>IEC Renk (tavsiye)</th><th>Açıklama</th></tr></thead>
+      <tbody>
+        <tr><td>1. faz başlangıcı</td><td>U1</td><td>Kahverengi / Siyah</td><td>L1 faza bağlanır (Δ veya Y)</td></tr>
+        <tr><td>2. faz başlangıcı</td><td>V1</td><td>Siyah / Gri</td><td>L2 faza bağlanır</td></tr>
+        <tr><td>3. faz başlangıcı</td><td>W1</td><td>Gri / Kahverengi</td><td>L3 faza bağlanır</td></tr>
+        <tr><td>1. faz sonu</td><td>U2</td><td>—</td><td>Yıldız nötrü veya Δ köprüde</td></tr>
+        <tr><td>2. faz sonu</td><td>V2</td><td>—</td><td>Yıldız nötrü veya Δ köprüde</td></tr>
+        <tr><td>3. faz sonu</td><td>W2</td><td>—</td><td>Yıldız nötrü veya Δ köprüde</td></tr>
+        <tr><td>Toprak</td><td>PE</td><td>Sarı-Yeşil</td><td>Gövde topraklaması</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>Eski DIN Karşılığı:</strong> Eski sistemlerde U1=U, V1=V, W1=W; U2=X, V2=Y, W2=Z olarak da görülür. Klemens kutusundaki gerçek işarete bak, renk kodu tavsiye niteliğindedir.
+    </div>
+
+    <h3>23.5 MN Bobini (Düşük Gerilim Bobini) &amp; Envensör Şalter</h3>
+    <h4>MN Bobini — Undervoltage Release (UVR)</h4>
+    <p>MN bobini (minimum gerilim / no-volt coil), gerilim belirli değerin altına düşünce veya kesilince kesiciyi <strong>otomatik olarak açan</strong> bir güvenlik elemanıdır.</p>
+    <ul>
+      <li>Kesici kapalıyken bobin sürekli enerjili tutulur; gerilim düşünce elektromıknatıs kuvvetini kaybeder → yay kontağı açar.</li>
+      <li>Gemide ana kesici veya büyük motor kesicilerinde bulunur; blackout sonrası <strong>otomatik kapanmayı önler</strong> (insan müdahalesi olmadan yüklerin aynı anda devreye girmesi tehlikelidir).</li>
+      <li>Sınav sorusu: "Gerilim kesilince kesici otomatik açıyorsa bu hangi elemanın işidir?" → MN bobini (undervoltage release).</li>
+    </ul>
+    <h4>Envensör Şalter (Reversing Contactor / Kutup Değiştirici)</h4>
+    <p>Motorun dönüş yönünü değiştirmek için faz sırasını (L1, L2, L3) ters çeviren iki kontaktörlü devre.</p>
+    <ul>
+      <li><strong>İleri (Forward):</strong> K1 çeker → L1–L2–L3 sırası.</li>
+      <li><strong>Geri (Reverse):</strong> K2 çeker → L1–L3–L2 sırası (iki faz yer değiştirilir).</li>
+      <li>K1 ve K2 asla aynı anda çekilmez: mekanik + elektriksel kilitleme zorunludur.</li>
+    </ul>
+
+    <h3>23.6 Kesik/Seri Çalıştırma — Jogging / Inching</h3>
+    <p>Jogging (inching), motorun sürekli değil <strong>kısa darbe darbe</strong> çalıştırılmasıdır. Konveyör hizalama, vinç ince pozisyonlama gibi işlerde kullanılır.</p>
+    <h4>Standart Start-Stop ile Farkı</h4>
+    <ul>
+      <li>Normal start-stop devresinde mühürleme (self-holding) vardır; butonu bırakınca motor çalışmaya devam eder.</li>
+      <li>Jogging devresinde <strong>mühürleme yoktur</strong>; butonu bırakınca motor hemen durur.</li>
+    </ul>
+    <h4>Basit Jogging Devresi</h4>
+    <p>Jog butonu, K1 mühür kontağını seri NC kontak olarak keser; Start butonuna basıldığında mühürleme yerine sadece anık enerji verilir:</p>
+    <ul>
+      <li>Jog butonu: NO tip, bobin doğrudan enerjiler; Stop ve mühür kontağını devre dışı bırakır.</li>
+      <li>Alternatif: Jog-Run seçici anahtarı ile mühür kontağını devreye alıp almamak seçilir.</li>
+    </ul>
+    <div class="callout">
+      <strong>Saha notu:</strong> Jogging sırasında motor her darbede yüksek kalkış akımı çeker. Çok sık jogging kontaktör ve motorun ömrünü kısaltır. Üretici kılavuzuna bak: bazı motorlarda saatte max jogging sayısı belirtilmiştir.
+    </div>
+
+    <h3>23.7 Floresan Lamba Çalışma Prensibi ve Arızaları</h3>
+    <p>Floresan lambalar düşük basınçlı cıva buharı içinde arkı tetikleyerek UV ışık üretir; iç fluoresant kaplama bunu görünür ışığa çevirir.</p>
+    <h4>Ana Bileşenler</h4>
+    <ul>
+      <li><strong>Balast (Ballast):</strong> Akımı sınırlandırır; manyetik (eski bobin tipi) veya elektronik (yeni). Elektronik balast titreşimsiz, verimli, hafif hum sesi yok.</li>
+      <li><strong>Starter (glow starter):</strong> Manyetik balas sisteminde kullanılır; ön ısıtma sonrası başlatma gerilimi oluşturur.</li>
+      <li><strong>Lamba (tüp):</strong> Katot elektrotlar cıva buharı içinde ark yolu.</li>
+    </ul>
+    <h4>Arıza Tespiti</h4>
+    <table>
+      <thead><tr><th>Belirti</th><th>Olası Sebep</th><th>Test/Çözüm</th></tr></thead>
+      <tbody>
+        <tr><td>Yanmıyor, starter titreşiyor</td><td>Lamba ömrü bitmiş, katot yıpranmış</td><td>Lamba değiştir</td></tr>
+        <tr><td>Sürekli yanıp sönüyor</td><td>Starter arızalı veya lamba zayıf</td><td>Starter değiştir, lamba kontrol et</td></tr>
+        <tr><td>Uçları kararıyor, orta yanıyor</td><td>Lamba ömrü doluyor</td><td>Lamba değiştir</td></tr>
+        <tr><td>Hiç ışık yok, starter çalışmıyor</td><td>Balast veya sigorta arızası</td><td>Voltmetre ile beslemeyi kontrol, balast ölç</td></tr>
+      </tbody>
+    </table>
+
+    <h3>23.8 Diyot, Rezistans &amp; Potansiyometre Ölçümü (Multimetre ile)</h3>
+    <h4>Diyot Ölçümü — Diyot Testi Modu (⊲)</h4>
+    <ul>
+      <li>Multimetreyi diyot sembolü moduna al.</li>
+      <li><strong>İleri yön (forward bias):</strong> Kırmızı prob anoda (+), siyah prob katoda (−). Silikon diyot: 0,5–0,7 V gösterir. Germanium: 0,2–0,3 V.</li>
+      <li><strong>Ters yön (reverse bias):</strong> Probları ters bağla. Sağlıklı diyot: OL (açık devre) veya çok yüksek değer gösterir.</li>
+      <li><strong>Kısa devre diyot:</strong> Her iki yönde de düşük değer (0–0,1 V).</li>
+      <li><strong>Açık devre diyot:</strong> Her iki yönde OL.</li>
+    </ul>
+    <h4>Rezistans Ölçümü</h4>
+    <ul>
+      <li>Devre <strong>mutlaka enerjisiz</strong> ve ölçülecek eleman devreden ayrılmış olmalı (paralel yollar hatalı okutabilir).</li>
+      <li>Ω modunu seç; beklenen değere yakın aralık seç.</li>
+      <li>Süreklilik (buzzer modu): 0–birkaç Ω → buzzer çalar. Kısa devre testi için hızlı yöntem.</li>
+    </ul>
+    <h4>Potansiyometre (Pot) Ölçümü</h4>
+    <ul>
+      <li>Potansiyometre 3 uçludur: iki uç (A-B) toplam direnç, orta uç (wiper/sürgü) değişken çıkış.</li>
+      <li><strong>Adım 1:</strong> A-B arası ölç → toplam direnç (örn. 10 kΩ). Bu sabit kalmalı.</li>
+      <li><strong>Adım 2:</strong> A-Wiper veya B-Wiper arası ölçürken potu döndür → düzgün pot değer 0'dan 10 kΩ'a kadar kademesiz artar/azalır.</li>
+      <li><strong>Arızalı pot:</strong> Döndürürken değer zıplıyor, süreklilik aralıklı → karbon iz aşınmış, pot değiştir.</li>
+    </ul>
+
+    <details class="quiz-item"><summary>Bölüm 23 — S1: Multimetre ile diyot testinde ileri yönde 0,65 V çıktı. Diyot sağlıklı mı?</summary><div class="quiz-answer">Evet. Silikon diyot için ileri yön gerilimi 0,5–0,7 V normaldir. 0,65 V sağlıklı diyot göstergesidir.</div></details>
+    <details class="quiz-item"><summary>S2: Trifaze motoru monofaze çalıştırırken termik röle ayarı nasıl yapılır?</summary><div class="quiz-answer">Nominal akımın yaklaşık %70'ine ayarlanması önerilir; monofazda motor daha az güç üretir ve sargılar asimetrik ısınır, yüksek akım setinde termik geç açar.</div></details>
+    <details class="quiz-item"><summary>S3: Jogging devresinin standart start-stop devresinden temel farkı nedir?</summary><div class="quiz-answer">Jogging devresinde mühürleme (self-holding) kontağı yoktur ya da Jog butonu mühürlemeyi devre dışı bırakır. Butona basılı tutulduğu sürece çalışır, bırakınca durur.</div></details>
+    <details class="quiz-item"><summary>S4: MN bobini (UVR) neden önemlidir?</summary><div class="quiz-answer">Gerilim kesilince kesiciyi otomatik açar. Gerilim geri geldiğinde kesicinin kendiliğinden kapanmasını engeller; tüm yüklerin aynı anda devreye girip jeneratörü çökertmesini önler.</div></details>
+  </section>
+
+  <!-- ══════════ BÖLÜM 24 ══════════ -->
+  <section id="b24" data-label="Bölüm 24">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">24</span><span class="section-level level-1">Seviye 1–3 · KRİTİK</span></div>
+      <h2 class="section-title">Gemicilik &amp; Hayatta Kalma <span class="section-en">Seamanship &amp; Survival</span></h2>
+    </div>
+    <p class="section-intro">İlk Yardım · Filika &amp; Can Salı · Immersion Suit · Emniyet Kemeri · Denizcilik Bağları</p>
+    <p class="section-sub"><em>Bir ETO zabiti hem elektrikçi hem de gemi adamıdır. Bu bölüm, STCW Basic Safety eğitiminin temel kavramlarını özet olarak toplar; asıl eğitim sertifikalı kurs ile tamamlanır.</em></p>
+
+    <h3>24.1 Heimlich Manevrası &amp; Temel İlk Yardım</h3>
+    <h4>Boğulmada (Nefes Yolu Tıkanması) Heimlich Manevrası</h4>
+    <ol>
+      <li>Kişinin arkasına geç; iki ayağını omuz genişliğinde aç, bir ayağını kişinin ayakları arasına koy.</li>
+      <li>Göbek deliği ile göğüs kemiği arası bölgeye bir yumruğunu koy (baş parmak içe bakmalı).</li>
+      <li>Diğer elinle yumruğunu kavra.</li>
+      <li>Hızlı, güçlü, içe ve yukarı doğru baskı uygula (5 kez).</li>
+      <li>Cisim çıkmazsa 5 sırt darbesi (kürek kemiği arası, el ayasıyla) + 5 Heimlich döngüsünü tekrarla.</li>
+    </ol>
+    <div class="callout callout-warn">
+      <strong>Bebek/Çocuk:</strong> Farklı teknik uygulanır; kursla öğrenilmeli. Bilinç kaybı varsa CPR'a geç, 112 veya gemi acil hatını ara.
+    </div>
+    <h4>CPR Özeti (30:2)</h4>
+    <ul>
+      <li>Göğüs ortasına, sternum alt yarısına; iki el üst üste, kollar dik.</li>
+      <li>5–6 cm derinlikte, dakikada 100–120 baskı.</li>
+      <li>30 baskı → 2 kurtarma nefesi (eğitimli ise).</li>
+      <li>AED (otomatik defibrilatör) mümkün olan en kısa sürede uygulanmalı.</li>
+    </ul>
+
+    <h3>24.2 Filika &amp; Can Salı Sistemi</h3>
+    <h4>Kapalı Tip Filika (Totally Enclosed Lifeboat)</h4>
+    <ul>
+      <li>SOLAS gereksinimi: en az 37 kişi kapasiteli veya gemi personel sayısını barındıracak büyüklükte.</li>
+      <li><strong>Davlumbaz (falls/gripes):</strong> Filikayı gemiye bağlayan halatlar; acil terk sırasında bırakma kolu ile serbest bırakılır.</li>
+      <li><strong>Hidrostatik kilit (hydrostatic release):</strong> Gemi 4 metre derinde batarsa otomatik açılır, can salını/filikayı serbest bırakır.</li>
+      <li><strong>Filika içine girme:</strong> Her zaman <strong>ayaklar önce</strong>, kural olarak sıralı giriş; kapı kolu ve emniyet mandallarını tanı.</li>
+    </ul>
+    <h4>Can Salı (Life Raft)</h4>
+    <ul>
+      <li>Kanistra içinde katlanmıştır; halat çekilince CO₂ ile şişer.</li>
+      <li>Hidrostatik kilitle 4 m derinlikte otomatik serbest kalır veya halat çekilerek manuel açılır.</li>
+      <li>İçinde: gıda, su, sinyal malzemesi, first-aid, aydınlatma, kürek.</li>
+    </ul>
+    <div class="callout">
+      <strong>Terk talimatı duyunca:</strong> (1) İmmersion suit giy. (2) Can yeleğini giy. (3) Toplanma yerine git. (4) Mürettebat sayımını bekle. (5) Komuta göre filikaya/salına bin. Panikle bireysel hareket etme.
+    </div>
+
+    <h3>24.3 Immersion Suit (Dalma Giysisi — Survival Suit)</h3>
+    <p>Soğuk suda hayatta kalma süresini uzatan tam vücut korumalı yalıtımlı giysiler.</p>
+    <h4>Giyim Sırası</h4>
+    <ol>
+      <li>Fermuarı tamamen aç; paçaları önce giy (çorap gibi).</li>
+      <li>Kolları tak; el koruması varsa parmakları yerleştir.</li>
+      <li>Kapüşonu başa geçir.</li>
+      <li>Ön fermuarı alt bölümden itibaren kapatmaya çalış; mühürleme dolgu contasını bastır.</li>
+      <li>Giyim süresi eğitimde &lt;2 dakika hedeflenir.</li>
+    </ol>
+    <h4>Suda Pozisyon</h4>
+    <ul>
+      <li><strong>HELP (Heat Escape Lessening Posture):</strong> Tek başınaysan kolları göğüse çek, dizleri karna çek — ısı kaybını en aza indirir.</li>
+      <li><strong>HUDDLE:</strong> Grup halinde iseniz sırt sırta, kollar birbirinizin omzunda yüzük şeklinde — toplu ısı koruması.</li>
+    </ul>
+    <table>
+      <thead><tr><th>Su Sıcaklığı</th><th>İmm. Suit Olmadan</th><th>İmm. Suit ile</th></tr></thead>
+      <tbody>
+        <tr><td>10°C</td><td>1–2 saat</td><td>6+ saat</td></tr>
+        <tr><td>5°C</td><td>30 dak–1 saat</td><td>4–6 saat</td></tr>
+        <tr><td>0°C</td><td>15–30 dak</td><td>2–4 saat</td></tr>
+      </tbody>
+    </table>
+
+    <h3>24.4 Emniyet Kemeri Kullanımı (Safety Harness)</h3>
+    <ul>
+      <li><strong>Bağlanma noktası (anchor point):</strong> Standart şeklinde min 5 kN dayanımlı; güçlü yapı elemanına bağlanmalı. Zayıf boru veya korkuluğa bağlama.</li>
+      <li><strong>Yaşam hattı (lifeline / lanyard):</strong> Kemer ile bağlanma noktası arasındaki halatı mümkün olduğunca kısa tut — düşme mesafesini azaltır.</li>
+      <li><strong>Çift lanyard (double lanyard / Y-lanyard):</strong> Bir uca her zaman bağlıyken diğer ucu bir sonraki noktaya bağla, sonra ilkini çöz. Sürekli bağlantılı kalınır.</li>
+      <li>Güverte üstü çalışmalarda kötü hava koşulları ve gece emniyet kemeri zorunludur.</li>
+    </ul>
+    <div class="callout callout-warn">
+      <strong>Sık hata:</strong> Emniyet kemerini güvertede giymek ama bağlanma noktasına <em>bağlamamak</em>. Kemer bağlanmadan hiçbir şey sağlamaz. "Bağlı mı?" kontrolü her güverte çıkışında yapılmalıdır.
+    </div>
+
+    <h3>24.5 Kılavuz Çarmıhı (Pilot Ladder / Accommodation Ladder)</h3>
+    <p>Kılavuzların ve personelin gemiye inip çıkmasında kullanılan merdiven sistemi.</p>
+    <ul>
+      <li><strong>Çarmıh basamakları:</strong> Ahşap veya non-slip metal; aralıklar eşit, maksimum 35 cm.</li>
+      <li>SOLAS XI-1/3 ve Reg. V/23 gereksinimlerine göre donanımlandırılmalı.</li>
+      <li><strong>Güvenli kullanım:</strong> Her zaman iki el tutarak, güverteden asılmış hâlde gemiye yüklü çarmıha çıkarken küçük dalgada bile sallanmaya dikkat.</li>
+      <li>Kılavuz çarmıhı hasarlı, çürük veya aşınmış ise derhal değiştirilmelidir; denetimde kontrol edilir.</li>
+    </ul>
+
+    <h3>24.6 Denizcilik Bağları</h3>
+    <p>Bir ETO olarak halatla temel bağları bilmek; güverteye çıkışta, kurtarma operasyonlarında ve günlük işlerde zorunludur.</p>
+    <table>
+      <thead><tr><th>Bağ Adı</th><th>İngilizce</th><th>Ne Zaman</th><th>Özellik</th></tr></thead>
+      <tbody>
+        <tr><td>Kazık bağı</td><td>Bowline</td><td>Halatı nesneye bağlamak; yüklü altında gevşemez</td><td>Kolay çözülür, güvenilir halka oluşturur</td></tr>
+        <tr><td>Sancak bağı</td><td>Round turn &amp; two half hitches</td><td>Halatı kazığa veya barınağa bağlamak</td><td>Sürtünme ile yükü karşılar</td></tr>
+        <tr><td>Elde izbarço</td><td>Figure-of-eight (stopper)</td><td>Halatın ucu bloğa girmesin</td><td>Basit stopper düğümü</td></tr>
+        <tr><td>Belde izbarço</td><td>Cleat hitch</td><td>Halatı makasaya bağlamak</td><td>Hızlı bağ ve çözüm</td></tr>
+      </tbody>
+    </table>
+    <h4>Kazık Bağı Adım Adım</h4>
+    <ol>
+      <li>Halatın serbest ucunu nesnenin etrafından geçir.</li>
+      <li>Ana halat üzerine bir kulak (ilmik) çevir — "tavşan deliği".</li>
+      <li>Serbest ucu (tavşan) delikten yukarı çıkar.</li>
+      <li>Ana halatın etrafını dolaş.</li>
+      <li>Serbest ucu tekrar delikten aşağı sok.</li>
+      <li>Sıkıştır; yük altında sıkışır ama yüksüz kolayca çözülür.</li>
+    </ol>
+
+    <details class="quiz-item"><summary>Bölüm 24 — S1: Immersion suit'te HELP pozisyonu neden önerilir?</summary><div class="quiz-answer">Kolların ve dizlerin çekilmesiyle vücudun ısı kaybeden bölgeleri (kasık, koltuk altı, boyun) su ile temas azaltılır. Hayatta kalma süresi 2–3 kat uzayabilir.</div></details>
+    <details class="quiz-item"><summary>S2: Hidrostatik kilit (hydrostatic release) ne zaman devreye girer?</summary><div class="quiz-answer">Gemi batıp can salı veya EPIRB yaklaşık 4 metre derinliğe indiğinde su basıncıyla kilit açılır, cihaz serbest kalır. Ayrıca manuel de çekilebilir.</div></details>
+    <details class="quiz-item"><summary>S3: Çift lanyard (Y-lanyard) neden kullanılır?</summary><div class="quiz-answer">Bağlanma noktaları arasında geçiş yaparken her zaman bir ucun bağlı kalmasını sağlar. Tek lanyard ile geçiş sırasında kısa süreliğine bağsız kalınır, bu tehlikelidir.</div></details>
+  </section>
+
+  <!-- ══════════ BÖLÜM 25 ══════════ -->
+  <section id="b25" data-label="Bölüm 25">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">25</span><span class="section-level level-3">Seviye 3 · Zabitlik</span></div>
+      <h2 class="section-title">Özel Sistemler &amp; Vaka Analizleri <span class="section-en">Special Systems &amp; Case Studies</span></h2>
+    </div>
+    <p class="section-intro">Pirometre · Mors/SOS · Kuzine Vakası · Plakalı Eşanjör · Balast Sistemi</p>
+    <p class="section-sub"><em>Sahada nadir ama kritik anlarda ihtiyaç duyulan sistemler ve gerçek arıza vakası tarzında anlatımlar.</em></p>
+
+    <h3>25.1 Pirometre ile Sıcaklık Ölçümü</h3>
+    <p>Pirometre (pyrometer / infrared thermometer), temas gerektirmeden yüzeyin yaydığı kızılötesi radyasyonu ölçerek sıcaklığı belirler.</p>
+    <h4>Emissivity (Emisivite)</h4>
+    <ul>
+      <li>Cismin radyasyon yayma oranı; 0 (mükemmel ayna) ile 1 (mükemmel siyah cisim) arasında.</li>
+      <li>Çıplak metal yüzey: ~0,1–0,3 (yansıtıcı, düşük emisivite → hatalı okuma riski).</li>
+      <li>Boyalı metal, plastik, kauçuk: ~0,9–0,95 (doğru okuma).</li>
+      <li><strong>Saha tüyosu:</strong> Parlak metal yüzeye elektrik bandı yapıştır, bant üzerini ölç — emisivite 0,95'e yakın, okuma güvenilir.</li>
+    </ul>
+    <h4>Sıcaklık Ölçek Dönüşümleri</h4>
+    <table>
+      <thead><tr><th>Dönüşüm</th><th>Formül</th><th>Örnek</th></tr></thead>
+      <tbody>
+        <tr><td>°C → °F</td><td>°F = (°C × 9/5) + 32</td><td>100°C → 212°F</td></tr>
+        <tr><td>°F → °C</td><td>°C = (°F − 32) × 5/9</td><td>212°F → 100°C</td></tr>
+        <tr><td>°C → K</td><td>K = °C + 273,15</td><td>100°C → 373,15 K</td></tr>
+        <tr><td>°F → R (Rankine)</td><td>R = °F + 459,67</td><td>32°F → 491,67 R</td></tr>
+        <tr><td>K → R</td><td>R = K × 9/5</td><td>373 K → 671 R</td></tr>
+      </tbody>
+    </table>
+    <h4>Gemide Kullanım Alanları</h4>
+    <ul>
+      <li>Motor yatak sıcaklığı (standart termometre yerine hızlı kontrol).</li>
+      <li>Kontaktör ve kablo bağlantılarında sıcak nokta tespiti (kötü bağlantı → ısınma).</li>
+      <li>Egzoz manifoldu ve turbo sıcaklık dengesi takibi.</li>
+      <li>Soğutma sistemi sıcaklık profili (kondenser, evaporatör üzerinden hızlı tarama).</li>
+    </ul>
+
+    <h3>25.2 Mors Alfabesi &amp; SOS Sinyali</h3>
+    <h4>SOS Sinyali</h4>
+    <p>Evrensel acil sinyal: <strong>· · · — — — · · ·</strong> (3 kısa, 3 uzun, 3 kısa)</p>
+    <ul>
+      <li>Mors'ta: S = · · ·  &nbsp; O = — — —</li>
+      <li>Işıkla, düdükle, radyoyla verilebilir; aralıksız tekrarlanır.</li>
+    </ul>
+    <h4>Aldis Lambası (Signal Lamp) Kullanımı</h4>
+    <ul>
+      <li>El tipi veya sabit montajlı yüksek parlaklıklı projektör; manuel veya otomatik Mors kodu gönderir.</li>
+      <li>Tetik veya düğmeye <em>kısa basış</em> = nokta, <em>uzun basış</em> = çizgi.</li>
+      <li>Gece veya kötü görüş koşullarında kıyı veya başka gemilerle iletişim.</li>
+    </ul>
+    <h4>Temel Mors Alfabesi</h4>
+    <table>
+      <thead><tr><th>Harf</th><th>Kod</th><th>Harf</th><th>Kod</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>· —</td><td>N</td><td>— ·</td></tr>
+        <tr><td>B</td><td>— · · ·</td><td>O</td><td>— — —</td></tr>
+        <tr><td>C</td><td>— · — ·</td><td>P</td><td>· — — ·</td></tr>
+        <tr><td>D</td><td>— · ·</td><td>Q</td><td>— — · —</td></tr>
+        <tr><td>E</td><td>·</td><td>R</td><td>· — ·</td></tr>
+        <tr><td>F</td><td>· · — ·</td><td>S</td><td>· · ·</td></tr>
+        <tr><td>G</td><td>— — ·</td><td>T</td><td>—</td></tr>
+        <tr><td>H</td><td>· · · ·</td><td>U</td><td>· · —</td></tr>
+        <tr><td>I</td><td>· ·</td><td>V</td><td>· · · —</td></tr>
+        <tr><td>K</td><td>— · —</td><td>W</td><td>· — —</td></tr>
+        <tr><td>L</td><td>· — · ·</td><td>X</td><td>— · · —</td></tr>
+        <tr><td>M</td><td>— —</td><td>Y</td><td>— · — —</td></tr>
+      </tbody>
+    </table>
+
+    <h3>25.3 Elektrikli Ocak (Kuzine) Arızası — Vaka Analizi</h3>
+    <p>Gemide mutfak ekipmanı arızaları sıkça yaşanır; kuzine (elektrikli ocak) arızası basit ama sistematik çözüm gerektiren bir vakadır.</p>
+    <h4>Belirti: Ocak ısınmıyor, rezistans ışığı yanmıyor</h4>
+    <h4>Adım Adım Arıza Analizi</h4>
+    <ol>
+      <li><strong>Besleme kontrolü:</strong> Ocak girişinde 220 V var mı? Voltmetre ile ölç. Yok → sigorta veya kesici kontrol.</li>
+      <li><strong>Rezistans (heating element) testi:</strong> LOTO uygula, rezistansı devreden çıkar. Ω modunda ölç:
+        <ul>
+          <li>1000 W, 230 V rezistans: R = V²/P = 230²/1000 = ~53 Ω beklenir.</li>
+          <li>OL (açık devre) → rezistans kopmuş, değiştir.</li>
+          <li>0 Ω → kısa devre, değiştir.</li>
+        </ul>
+      </li>
+      <li><strong>Termostat testi:</strong> Termostatı oda sıcaklığında süreklilik ölçümü yap; NC tipi ise kapalı olmalı. OL → termostat arızalı.</li>
+      <li><strong>Kontaktör veya röle:</strong> Bazı kuzinelerde kontaktör var; bobin gerilimi var mı, kontak kapanıyor mu?</li>
+      <li><strong>Seçici anahtar:</strong> Hangi konuma döndürüldüğünde çıkış verdiğini süreklilik ile test et.</li>
+    </ol>
+    <div class="callout">
+      <strong>Sık karşılaşılan:</strong> Ocak baskı altında çalışmış, termostat bozulmuş ve "sıcak" olarak kalmış (stuck open). Ocak hiç ısınmıyor. Termostat bypass ederek test edilebilir (geçici, izlenmiş şekilde). Termostat değişimi genellikle 30 dakikada çözüm.
+    </div>
+
+    <h3>25.4 Plakalı Eşanjör (Plate Heat Exchanger — PHE) Bakımı</h3>
+    <p>Deniz suyu soğutma sistemlerinde ve yakıt ısıtmada yaygın kullanılan ısı transfer cihazı.</p>
+    <h4>Yapı ve Çalışma</h4>
+    <ul>
+      <li>İnce metal plakalar (paslanmaz çelik veya titanyum) contalar ile sızdırmaz şekilde sıkıştırılmıştır.</li>
+      <li>Sıcak ve soğuk akışkanlar arka arkaya plakaların arasından geçer; yüksek yüzey alanı ile verimli ısı transferi sağlar.</li>
+    </ul>
+    <h4>Tipik Arızalar ve Belirtileri</h4>
+    <table>
+      <thead><tr><th>Belirti</th><th>Sebep</th><th>Çözüm</th></tr></thead>
+      <tbody>
+        <tr><td>Soğutma verimi düşüyor, basınç farkı artıyor</td><td>Kirlenme / birikinti (fouling); biyolojik film veya kireç</td><td>Kimyasal temizlik veya mekanik sökme</td></tr>
+        <tr><td>Akışkanlar birbirine karışıyor</td><td>Conta (gasket) hasarı veya plaka çatlağı</td><td>Conta veya plaka değişimi</td></tr>
+        <tr><td>Çevresel sızıntı</td><td>Dış contanın aşınması veya baskı eksikliği</td><td>Conta değişimi, sıkma torku kontrolü</td></tr>
+      </tbody>
+    </table>
+    <h4>Temizlik Prosedürü</h4>
+    <ol>
+      <li>LOTO; sistemi basınçsızlaştır ve boşalt.</li>
+      <li>Sıkıştırma cıvatalarını sıkma sırası tersinden söküp plakaları dışarı çek.</li>
+      <li>Her plakayı yumuşak fırça ve uygun temizleyici ile (asit bazlı kireç için, alkalin bazlı biyolojik film için) temizle.</li>
+      <li>Plakaları incele: çatlak veya delik varsa ayır, yenisiyle değiştir.</li>
+      <li>Yeni contalar takarak monte et; cıvataları kademeli ve çapraz sıkıştır. Sıkma torku üretici değerine göre.</li>
+      <li>Servise alıp basınç testi yap; sızıntı kontrolü.</li>
+    </ol>
+
+    <h3>25.5 Balast Sistemi ve Elektriksel Kontrol</h3>
+    <p>Balast sistemi gemi dengesini sağlamak için su alıp vererek trim ve yatıklığı (heel/trim) ayarlar.</p>
+    <h4>Elektriksel Yapı</h4>
+    <ul>
+      <li><strong>Balast pompası:</strong> Genelde büyük 3 fazlı asenkron motor; DOL veya Y-Δ kalkış.</li>
+      <li><strong>Vana kontrol:</strong> Motorlu vana aktüatörleri (MOV — Motor Operated Valve); aç/kapa veya oransal kontrol.</li>
+      <li><strong>Seviye transmitteri:</strong> Tank doluluk seviyesi; genelde 4–20 mA, ultrasonik veya basınç tabanlı.</li>
+      <li><strong>PLC/ICS:</strong> Modern gemilerde Integrated Control System tüm balast vanalarını ve pompalarını koordineli kontrol eder.</li>
+    </ul>
+    <h4>BWTS (Ballast Water Treatment System)</h4>
+    <ul>
+      <li>IMO konvansiyonu gereği, alınan balast suyu arıtılarak yabancı organizmaların tahliyesi önlenir.</li>
+      <li><strong>UV arıtma:</strong> Yüksek yoğunluklu UV lambalar organizmaları etkisiz kılar; ETO lambaların çalışır olduğunu ve enerji değerlerini takip eder.</li>
+      <li><strong>Elektroklorinasyon:</strong> Tuzlu su elektrolizi ile hipoklorit üretilir; ETO elektroliz hücrelerinin akım ve gerilimini izler.</li>
+    </ul>
+    <h4>ETO'nun Balast Sistemindeki Görevi</h4>
+    <ul>
+      <li>Pompa motor akımı ve termik ayarlarını kontrol etmek.</li>
+      <li>MOV aktüatör limit switch ve pozisyon geri beslemesini doğrulamak.</li>
+      <li>BWTS alarm listesi ve UV lamba çalışma saatlerini PMS'e kaydetmek.</li>
+      <li>Seviye sensörü kalibrasyonunu periyodik yapmak.</li>
+    </ul>
+
+    <details class="quiz-item"><summary>Bölüm 25 — S1: Pirometre ile parlak metal ölçümü neden hatalı çıkabilir?</summary><div class="quiz-answer">Parlak metal yüzeyin emisivitesi düşüktür (0,1–0,3); pirometre gerçekten düşük radyasyon ölçer, dolayısıyla sıcaklığı olduğundan düşük gösterir. Elektrik bandı yapıştırarak veya emisivite değerini düşürerek ayar yapılabilir.</div></details>
+    <details class="quiz-item"><summary>S2: Kuzinede 1000 W rezistansın beklenen direnci yaklaşık kaç Ω'dur? (230 V şebeke)</summary><div class="quiz-answer">R = V²/P = 230²/1000 = 52900/1000 ≈ 53 Ω. Multimetre ile ölçülen değer buna yakın olmalı; OL çıkarsa rezistans kopmuş demektir.</div></details>
+    <details class="quiz-item"><summary>S3: Balast sisteminde MOV (Motor Operated Valve) nedir?</summary><div class="quiz-answer">Elektrik motoruyla açılan/kapanan vana aktüatörüdür. Limit switch'lerle tam açık/kapalı konumlar algılanır; PLC veya ICS'den kumanda edilir. ETO limit switch ve geri besleme sinyallerini kontrol etmekten sorumludur.</div></details>
+    <details class="quiz-item"><summary>S4: SOS sinyali Mors kodunda nasıldır?</summary><div class="quiz-answer">· · · — — — · · · (3 kısa, 3 uzun, 3 kısa). S = · · ·, O = — — —. Işık, ses veya radyoyla aralıksız tekrar edilir.</div></details>
   </section>
 
   <div class="footer">
