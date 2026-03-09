@@ -292,6 +292,9 @@
       <div class="toc-item"><a href="#b23"><span class="toc-index">23</span><span><span class="toc-label">Spesifik Motor &amp; Elektrik Uygulamaları</span><br><span class="toc-en">Motor &amp; Electrical Applications</span></span></a></div>
       <div class="toc-item"><a href="#b24"><span class="toc-index">24</span><span><span class="toc-label">Gemicilik &amp; Hayatta Kalma</span><br><span class="toc-en">Seamanship &amp; Survival</span></span></a></div>
       <div class="toc-item"><a href="#b25"><span class="toc-index">25</span><span><span class="toc-label">Özel Sistemler &amp; Vaka Analizleri</span><br><span class="toc-en">Special Systems &amp; Case Studies</span></span></a></div>
+      <div class="toc-item"><a href="#b26"><span class="toc-index">26</span><span><span class="toc-label">Kaçak Akım Tespiti</span><br><span class="toc-en">Earth Fault Detection &amp; Hunting</span></span></a></div>
+      <div class="toc-item"><a href="#b27"><span class="toc-index">27</span><span><span class="toc-label">GMDSS &amp; Deniz Haberleşmesi</span><br><span class="toc-en">GMDSS &amp; Maritime Communications</span></span></a></div>
+      <div class="toc-item"><a href="#b28"><span class="toc-index">28</span><span><span class="toc-label">Yüksek Gerilim (HV) Sistemleri</span><br><span class="toc-en">High Voltage Systems</span></span></a></div>
       <div class="toc-item toc-item-b21"><a href="#b21"><span class="toc-index">21</span><span><span class="toc-label">Soru Bankası — Liman / Zabitlik</span><br><span class="toc-en">Sınav 1, 2 &amp; 3 · 300 Soru · Çözümlü</span></span></a></div>
     </div>
   </nav>
@@ -4880,6 +4883,445 @@
     <details class="quiz-item"><summary>S2: Kuzinede 1000 W rezistansın beklenen direnci yaklaşık kaç Ω'dur? (230 V şebeke)</summary><div class="quiz-answer">R = V²/P = 230²/1000 = 52900/1000 ≈ 53 Ω. Multimetre ile ölçülen değer buna yakın olmalı; OL çıkarsa rezistans kopmuş demektir.</div></details>
     <details class="quiz-item"><summary>S3: Balast sisteminde MOV (Motor Operated Valve) nedir?</summary><div class="quiz-answer">Elektrik motoruyla açılan/kapanan vana aktüatörüdür. Limit switch'lerle tam açık/kapalı konumlar algılanır; PLC veya ICS'den kumanda edilir. ETO limit switch ve geri besleme sinyallerini kontrol etmekten sorumludur.</div></details>
     <details class="quiz-item"><summary>S4: SOS sinyali Mors kodunda nasıldır?</summary><div class="quiz-answer">· · · — — — · · · (3 kısa, 3 uzun, 3 kısa). S = · · ·, O = — — —. Işık, ses veya radyoyla aralıksız tekrar edilir.</div></details>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       BÖLÜM 26 — KAÇAK AKIM TESPİTİ
+  ══════════════════════════════════════════════════════ -->
+  <section id="b26" data-label="Bölüm 26">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">26</span><span class="section-level level-3">Seviye 3 · Kritik Operasyon</span></div>
+      <h2 class="section-title">Kaçak Akım Tespiti <span class="section-en">Earth Fault Detection &amp; Hunting</span></h2>
+    </div>
+    <p class="section-intro">IT Sistemi · Earth Fault İndikatörü · Hunting Prosedürü · Sık Nedenler</p>
+    <p class="section-sub"><em>Bir ETO'nun seferde en sık karşılaştığı elektriksel alarm — doğru prosedür bilinmezse çift arıza kısa devreye ve blackout'a yol açar.</em></p>
+
+    <h3>26.1 Gemi IT (İzole Toprak) Sistemi</h3>
+    <p>Gemiler kara şebekesinden farklı olarak <strong>IT (Isolated Terra)</strong> topraklama sistemi kullanır: faz iletkenleri ile gemi teknesi (hull/earth) arasında kasıtlı bir elektriksel bağlantı yoktur.</p>
+    <div class="two-col">
+      <div>
+        <h4>Neden IT Sistemi?</h4>
+        <ul>
+          <li>Denizde bakım yapılabilirliği: <strong>tek toprak arızası sistemi trip etmez</strong>, gemi işletmeye devam eder; arıza aranabilir.</li>
+          <li>Kara TN sisteminde tek arıza = sigorta atar. Açık okyanusta bu kritik pompayı veya dümen makinesini durdurabilir.</li>
+          <li>SOLAS Bölüm II-1 Kural 45: Gemi ana dağıtım sistemleri izole (IT) olmalıdır.</li>
+        </ul>
+        <h4>Arıza Senaryoları</h4>
+        <table>
+          <thead><tr><th>Durum</th><th>Sonuç</th><th>ETO Aksiyonu</th></tr></thead>
+          <tbody>
+            <tr><td>Sağlıklı (R_iso &gt; 1 MΩ)</td><td>Alarm yok, tüm lambalar eşit</td><td>Periyodik megger kontrolü</td></tr>
+            <tr><td>Tek arıza (R_iso düşük)</td><td>Earth fault alarmı — trip YOK</td><td>Hunting prosedürü başlat</td></tr>
+            <tr><td>Çift arıza (2 farklı fazda)</td><td>Faz-faz kısa devre → trip, blackout riski</td><td>ACİL — derhal müdahale</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="svg-wrap">
+        <h3>IT Sistemi — Tek Toprak Arızası Gösterimi</h3>
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Busbars -->
+          <rect x="15" y="12" width="52" height="14" rx="3" fill="#78350f" stroke="#d97706" stroke-width="1.3"/>
+          <text x="30" y="23" fill="#fbbf24" font-size="9" font-weight="bold">L1</text>
+          <rect x="134" y="12" width="52" height="14" rx="3" fill="#1f2937" stroke="#6b7280" stroke-width="1.3"/>
+          <text x="149" y="23" fill="#e5e7eb" font-size="9" font-weight="bold">L2</text>
+          <rect x="253" y="12" width="52" height="14" rx="3" fill="#374151" stroke="#9ca3af" stroke-width="1.3"/>
+          <text x="268" y="23" fill="#9ca3af" font-size="9" font-weight="bold">L3</text>
+
+          <!-- L1 — good insulation (green zigzag) -->
+          <line x1="41" y1="26" x2="41" y2="50" stroke="#4ade80" stroke-width="1.3"/>
+          <polyline points="41,50 36,57 46,64 36,71 46,78 36,85 46,92 41,99" fill="none" stroke="#4ade80" stroke-width="1.4"/>
+          <line x1="41" y1="99" x2="41" y2="115" stroke="#4ade80" stroke-width="1.3"/>
+          <text x="4" y="72" fill="#4ade80" font-size="6">≥1MΩ</text>
+
+          <!-- L2 — FAULT (red direct path) -->
+          <line x1="160" y1="26" x2="160" y2="115" stroke="#f97373" stroke-width="2.2"/>
+          <text x="168" y="58" fill="#f97373" font-size="8" font-weight="bold">ARIZA</text>
+          <text x="168" y="68" fill="#f97373" font-size="7">R≈0Ω</text>
+          <text x="153" y="88" fill="#facc15" font-size="13">⚡</text>
+
+          <!-- L3 — good insulation (green zigzag) -->
+          <line x1="279" y1="26" x2="279" y2="50" stroke="#4ade80" stroke-width="1.3"/>
+          <polyline points="279,50 274,57 284,64 274,71 284,78 274,85 284,92 279,99" fill="none" stroke="#4ade80" stroke-width="1.4"/>
+          <line x1="279" y1="99" x2="279" y2="115" stroke="#4ade80" stroke-width="1.3"/>
+
+          <!-- Hull bar -->
+          <rect x="8" y="115" width="304" height="12" rx="3" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="105" y="124" fill="#38bdf8" font-size="8">GEMİ TEKNESİ (Hull / Earth)</text>
+
+          <!-- Earth fault indicator lamps panel -->
+          <rect x="15" y="138" width="290" height="52" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1.2"/>
+          <text x="80" y="150" fill="#94a3b8" font-size="7.5">Earth Fault İndikatörü (Ana Panelde)</text>
+
+          <!-- L1 lamp — normal glow -->
+          <circle cx="72" cy="168" r="10" fill="rgba(74,222,128,0.12)" stroke="#4ade80" stroke-width="1.5"/>
+          <circle cx="72" cy="168" r="4" fill="#4ade80" opacity="0.5"/>
+          <text x="67" y="172" fill="#4ade80" font-size="7">L1</text>
+          <text x="58" y="183" fill="#9ca3af" font-size="6">Normal</text>
+
+          <!-- L2 lamp — OFF (fault on L2 = lamp goes out) -->
+          <circle cx="160" cy="168" r="10" fill="none" stroke="#f97373" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <line x1="153" y1="161" x2="167" y2="175" stroke="#f97373" stroke-width="1.5"/>
+          <line x1="167" y1="161" x2="153" y2="175" stroke="#f97373" stroke-width="1.5"/>
+          <text x="155" y="172" fill="#f97373" font-size="7">L2</text>
+          <text x="148" y="183" fill="#f97373" font-size="6">SÖNDÜ !</text>
+
+          <!-- L3 lamp — bright (other phases brighter) -->
+          <circle cx="248" cy="168" r="12" fill="rgba(250,204,21,0.18)" stroke="#facc15" stroke-width="1.8"/>
+          <circle cx="248" cy="168" r="5" fill="#facc15" opacity="0.7"/>
+          <text x="243" y="172" fill="#facc15" font-size="7">L3</text>
+          <text x="236" y="183" fill="#facc15" font-size="6">PARLADI !</text>
+        </svg>
+        <p class="svg-caption">IT sisteminde L2'ye toprak arızası oluştuğunda: L2 lambası söner (arızalı faz), L1 ve L3 lambaları parlar (şimdi hat gerilimi görüyorlar). Bu görüntü hangi fazda arıza olduğunu söyler.</p>
+      </div>
+    </div>
+
+    <h3>26.2 Earth Fault İndikatörü — Switchboard'da Okuma</h3>
+    <div class="two-col">
+      <div>
+        <h4>3 Lamba Sistemi</h4>
+        <ul>
+          <li>Her lamba bir faz ile indikatör nötrü arasına bağlıdır; nötr tekne topraklarına bağlanır.</li>
+          <li><strong>Normal:</strong> 3 lamba eşit, soluk yanar (izolasyon dirençleri dengelidir).</li>
+          <li><strong>Arıza var:</strong> Arızalı faz lambası söner, diğer iki lamba parlar.</li>
+          <li>Hangi lamba söndüyse o faz toprak arızasına yakındır → aramayı o fazdan başlat.</li>
+        </ul>
+        <h4>Voltmetre Göstergeli Sistem</h4>
+        <ul>
+          <li>Bazı switchboard'larda 3 voltmetre veya tek voltmetre + seçici anahtar bulunur.</li>
+          <li>Normal: her faz-toprak voltajı ≈ Vfaz (örn. 220 V).</li>
+          <li>Arızalı fazda: gerilim düşer (0'a yakın); diğer fazlarda yükselir (hat gerilimine yakın).</li>
+        </ul>
+      </div>
+      <div>
+        <div class="danger-box"><strong>Kritik Kural:</strong> Earth fault alarmı geldiğinde panikleyip tek seferde büyük bir kesiciyi açma. Yanlış devre açılırsa kritik bir yük kaybedilir. Sistematik — küçük devreden büyüğe — ara.</div>
+        <div class="warn-box"><strong>Çift Arıza Tehlikesi:</strong> İlk arıza aramayı geciktirirsen bir kazayla ikinci bir arıza oluşabilir. İki farklı fazda aynı anda toprak arızası → faz-faz kısa devreye eşdeğer → ACB trip → blackout.</div>
+        <div class="info-box"><strong>Günlük kontrol:</strong> IT sistemi izolasyon değerlerini IMO ve sınıflandırma kuruluşu (Lloyd's, DNV vb.) günlük log'larına kaydet. Kabul edilebilir minimum izolasyon direnci genelde ≥ 1 MΩ'dur.</div>
+      </div>
+    </div>
+
+    <h3>26.3 Earth Fault Hunting Prosedürü (Adım Adım)</h3>
+    <div class="danger-box"><strong>Önce güvenlik:</strong> Hunting sırasında arızalı devre enerjili olabilir. İzoleli eldiven, voltmetre ile faz doğrulama ve asistansız çalışmama kurallarını uygula.</div>
+    <ol>
+      <li><strong>Alarm kaydı:</strong> Earth fault alarmını saati, hangi lamba/faz göstergesiyle ve hangi devre kesicilerinin açık olduğunu kaydet.</li>
+      <li><strong>Öncelik listesi yap:</strong> Kritik devreler (acil aydınlatma, yangın pompası, dümen, GMDSS) en sona bırak. Önce bakım veya geçici devreler, kabin prizleri, atölyeler vb.</li>
+      <li><strong>Seçici kesicileri sırayla aç:</strong> Her seferinde bir tane — kesiciyi açtıktan sonra indikatöre bak. <strong>İndikatör normale dönerse son açtığın devrede arıza var.</strong></li>
+      <li><strong>Arızalı devreyi bul ve izole et:</strong> O devrenin ana kesicisini açık bırak; geri kalan devreleri kapat.</li>
+      <li><strong>Megger ile doğrula:</strong> Arızalı devreyi tamamen deenerjize et. 500 V DC megger ile faz-toprak izolasyonunu ölç — &lt;1 MΩ çıkarsa kesinleşir.</li>
+      <li><strong>Arızayı gider:</strong> Islak kablo ucu kurutma, hasarlı kablo değişimi veya motor sargısı onarımı. Tamir sonrası megger testini tekrarla.</li>
+      <li><strong>Devreyi enerjile ve log'a kaydet:</strong> Alarm geçtiğini doğrula; bulguları, nedeni ve yapılan işlemi arıza formuna ve PMS'e yaz.</li>
+    </ol>
+    <div class="saha-box"><strong>Ebubekir'in Sahadaki Tüyosu:</strong> Hunting'e geceleri veya kötü hava koşullarında başlarsan asistan iste. Yalnız çalışma. Earth fault kaynaklı hiçbir ölüm olmasa da, hunting sırasında enerji verilmiş devrelerle çalışılıyor — dikkat dağıtıcı ortamda kaza olabilir. Sesli olarak "şimdi X kesiciyi açıyorum" de, asistanın duyduğunu onaylasın.</div>
+
+    <h3>26.4 Sık Karşılaşılan Nedenler</h3>
+    <table>
+      <thead><tr><th>Neden</th><th>Nerede Görülür</th><th>Tespit</th></tr></thead>
+      <tbody>
+        <tr><td>Islak / su almış kablo ucu</td><td>Sintine, güverte prizi, dış aydınlatma</td><td>Kablo terminalini kuru bez ile sil; megger tekrar &gt; 1 MΩ çıkarsa nedendir</td></tr>
+        <tr><td>Kablo yalıtımı ezilmiş / kopuk</td><td>Borda delikleri, kablo kanalı keskin köşeleri</td><td>Görsel inceleme + megger bölüm bölüm</td></tr>
+        <tr><td>Motor sargısı ıslanmış / bozulmuş</td><td>Sintinedeki pompalar, güverte ekipmanları</td><td>Motor terminallerini ayır, megger faz-gövde ölçümü</td></tr>
+        <tr><td>Eski veya hatalı kablo eki</td><td>Onarım noktaları, geçici kablolar</td><td>Ek noktalarını görsel incele + megger</td></tr>
+        <tr><td>Aşırı ısınmış kablo (yük fazla)</td><td>Aşırı yüklü devreler</td><td>Kablo yüzeyine dokunmadan termometre; sararmış plastik kılıf</td></tr>
+      </tbody>
+    </table>
+
+    <details class="quiz-item"><summary>B26-S1: IT sisteminde tek toprak arızası oluştuğunda ne olur? A) Sistem hemen trip eder B) Alarm verir, sistem çalışmaya devam eder C) Faz gerilimi sıfıra düşer D) Sigorta atar</summary><div class="quiz-answer"><strong>Cevap: B.</strong> IT sisteminin temel avantajı: tek toprak arızası trip oluşturmaz, alarm verir. Gemi çalışmaya devam ederken ETO arızayı arar. İki ayrı fazda eş zamanlı arıza olursa faz-faz kısa devre meydana gelir ve o zaman trip oluşur.</div></details>
+    <details class="quiz-item"><summary>B26-S2: Earth fault hunting sırasında hangi devreyi en son açmalısın? A) Atölye prizi B) Kabin aydınlatması C) Yangın algılama ve GMDSS beslemesi D) Depo aydınlatması</summary><div class="quiz-answer"><strong>Cevap: C.</strong> Kritik güvenlik sistemleri (yangın algılama, GMDSS, dümen, acil aydınlatma) hunting listesinde en sona bırakılır. Bu sistemler kesilirse deniz emniyeti tehlikeye girer.</div></details>
+    <details class="quiz-item"><summary>B26-S3: 3 lamba earth fault indikatöründe L1 lambası söndü, L2 ve L3 parladı. Bu ne anlama gelir? A) L2'de arıza B) L3'te arıza C) L1'de arıza D) Sistem sağlıklı</summary><div class="quiz-answer"><strong>Cevap: C.</strong> Sönen lamba arızalı fazı gösterir. L1 söndü → L1 fazının tekneye toprak arızası var. Diğer lambalar sönen faz üzerinden toprak yolunu bulduğu için hat gerilimine yakın gerilim görüp daha parlak yanar.</div></details>
+    <details class="quiz-item"><summary>B26-S4: Arıza bulunan devre izole edildikten sonra megger ile ölçüm yapıldı ve 0,3 MΩ çıktı. Bu ne anlama gelir?</summary><div class="quiz-answer">0,3 MΩ, kabul edilebilir minimum değer olan 1 MΩ'un altındadır — arıza bu devrede kesindir. Devre enerjilenmemeli; kablo veya bağlı ekipman onarılarak/değiştirilerek megger değeri ≥ 1 MΩ'a çıkana kadar devreye alınmamalıdır. Bulgular arıza formuna ve PMS'e kaydedilmelidir.</div></details>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       BÖLÜM 27 — GMDSS & DENİZ HABERLEŞMESİ
+  ══════════════════════════════════════════════════════ -->
+  <section id="b27" data-label="Bölüm 27">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">27</span><span class="section-level level-3">Seviye 3 · Zabitlik</span></div>
+      <h2 class="section-title">GMDSS &amp; Deniz Haberleşmesi <span class="section-en">GMDSS &amp; Maritime Communications</span></h2>
+    </div>
+    <p class="section-intro">DSC · VHF · EPIRB · SART · NAVTEX · Inmarsat · ETO Bakım Görevleri</p>
+    <p class="section-sub"><em>GMDSS, denizde can güvenliğinin teknolojik omurgasıdır. ETO bu sistemlerin bakımından ve akü testlerinden birinci derecede sorumludur.</em></p>
+
+    <h3>27.1 GMDSS Nedir ve Hangi Sistemleri Kapsar?</h3>
+    <p><strong>GMDSS (Global Maritime Distress and Safety System)</strong> — IMO tarafından zorunlu kılınan uluslararası deniz tehlike ve güvenlik haberleşme sistemidir. SOLAS Bölüm IV ile düzenlenir.</p>
+
+    <div class="svg-wrap">
+      <h3>GMDSS Sistemi — Bileşenler ve Sinyal Akışı</h3>
+      <svg viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrG" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/>
+          </marker>
+          <marker id="arrGY" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 z" fill="#facc15"/>
+          </marker>
+        </defs>
+        <!-- Satellite -->
+        <polygon points="170,14 178,28 162,28" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.2"/>
+        <line x1="165" y1="20" x2="158" y2="15" stroke="#a78bfa" stroke-width="1.5"/>
+        <line x1="175" y1="20" x2="182" y2="15" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="145" y="10" fill="#a78bfa" font-size="8">COSPAS-SARSAT</text>
+        <text x="156" y="19" fill="#a78bfa" font-size="6">Uydu</text>
+
+        <!-- Ship (center-left) -->
+        <rect x="8" y="75" width="115" height="100" rx="7" fill="#0f172a" stroke="#475569" stroke-width="1.2"/>
+        <text x="45" y="90" fill="#94a3b8" font-size="8" font-weight="bold">GEMİ</text>
+
+        <!-- EPIRB box -->
+        <rect x="15" y="95" width="95" height="16" rx="3" fill="#1e293b" stroke="#f97373" stroke-width="1.2"/>
+        <text x="19" y="107" fill="#f97373" font-size="7.5" font-weight="bold">EPIRB</text>
+        <text x="52" y="107" fill="#9ca3af" font-size="6">406 MHz · uydu</text>
+
+        <!-- DSC/VHF box -->
+        <rect x="15" y="115" width="95" height="16" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="19" y="127" fill="#38bdf8" font-size="7.5" font-weight="bold">DSC / VHF</text>
+        <text x="70" y="127" fill="#9ca3af" font-size="6">CH16/70</text>
+
+        <!-- SART box -->
+        <rect x="15" y="135" width="95" height="16" rx="3" fill="#1e293b" stroke="#facc15" stroke-width="1.2"/>
+        <text x="19" y="147" fill="#facc15" font-size="7.5" font-weight="bold">SART / AIS-SART</text>
+        <text x="72" y="147" fill="#9ca3af" font-size="6">9 GHz</text>
+
+        <!-- NAVTEX box -->
+        <rect x="15" y="155" width="95" height="16" rx="3" fill="#1e293b" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="19" y="167" fill="#4ade80" font-size="7.5" font-weight="bold">NAVTEX</text>
+        <text x="57" y="167" fill="#9ca3af" font-size="6">518 kHz alıcı</text>
+
+        <!-- MF/HF box -->
+        <rect x="15" y="97" width="95" height="0" rx="3" fill="none"/>
+
+        <!-- Signals from ship to satellite (EPIRB) -->
+        <line x1="63" y1="95" x2="160" y2="32" stroke="#f97373" stroke-width="1.4" marker-end="url(#arrG)" stroke-dasharray="5,2"/>
+
+        <!-- DSC to Coast Guard -->
+        <line x1="123" y1="123" x2="220" y2="100" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#arrG)"/>
+
+        <!-- SART to SAR Helicopter -->
+        <line x1="110" y1="143" x2="220" y2="150" stroke="#facc15" stroke-width="1.4" marker-end="url(#arrGY)" stroke-dasharray="4,2"/>
+
+        <!-- NAVTEX from broadcast -->
+        <line x1="220" y1="175" x2="110" y2="163" stroke="#4ade80" stroke-width="1.4" marker-end="url(#arrG)"/>
+
+        <!-- Satellite to RCC -->
+        <line x1="180" y1="28" x2="220" y2="65" stroke="#a78bfa" stroke-width="1.4" marker-end="url(#arrG)"/>
+
+        <!-- Right side: receivers -->
+        <rect x="218" y="58" width="110" height="20" rx="4" fill="#1e293b" stroke="#a78bfa" stroke-width="1.2"/>
+        <text x="223" y="72" fill="#a78bfa" font-size="7.5">LUT / RCC (Kurtarma Merkezi)</text>
+
+        <rect x="218" y="88" width="110" height="20" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="223" y="102" fill="#38bdf8" font-size="7.5">Kıyı İstasyonu / MRCC</text>
+
+        <rect x="218" y="138" width="110" height="20" rx="4" fill="#1e293b" stroke="#facc15" stroke-width="1.2"/>
+        <text x="223" y="148" fill="#facc15" font-size="7.5">SAR Helikopter / Gemi</text>
+        <text x="223" y="157" fill="#9ca3af" font-size="6">(Radar ekranında konum alır)</text>
+
+        <rect x="218" y="168" width="110" height="18" rx="4" fill="#1e293b" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="223" y="180" fill="#4ade80" font-size="7.5">Deniz yayın (MSI / NtM)</text>
+      </svg>
+      <p class="svg-caption">EPIRB 406 MHz sinyalini uyduya gönderir; uydu RCC'ye iletir, SAR başlar. DSC/VHF CH70 dijital tehlike çağrısını kıyı istasyonuna gönderir. SART radar sinyaliyle SAR ekibine konum verir. NAVTEX tek yönlü denizcilik yayınlarını alır.</p>
+    </div>
+
+    <h3>27.2 GMDSS Bileşenleri — ETO Perspektifi</h3>
+    <table>
+      <thead><tr><th>Cihaz</th><th>Frekans / Kanal</th><th>Fonksiyon</th><th>ETO Bakım Görevi</th></tr></thead>
+      <tbody>
+        <tr><td><strong>EPIRB</strong> (Emergency Position Indicating Radio Beacon)</td><td>406 MHz (uydu) + 121,5 MHz (hava)</td><td>Tehlike + GPS koordinatı uydusuna iletir; otomatik (hidrostatik) veya manüel aktive</td><td>Pil ve test tarihi etiketi kontrolü — 5 yılda pil/sertifika yenileme; hidrostatik release testi</td></tr>
+        <tr><td><strong>DSC Kontrolörü + VHF</strong></td><td>CH70 (DSC), CH16 (ses)</td><td>Dijital seçici çağrı ile otomatik tehlike mesajı; ses haberleşmesi</td><td>MMSI numarası doğrulama; DSC ack testi; akü besleme kontrolü</td></tr>
+        <tr><td><strong>SART</strong> (Search and Rescue Transponder)</td><td>9 GHz (X-band radar)</td><td>SAR gemisi veya helikopterin radarında konum noktası oluşturur</td><td>Pil son kullanma tarihi; yıllık test (self-test modu)</td></tr>
+        <tr><td><strong>AIS-SART</strong></td><td>AIS frekansları (161,975 / 162,025 MHz)</td><td>AIS ekranında konum; modern alternatif</td><td>Şarj durumu, günlük test</td></tr>
+        <tr><td><strong>NAVTEX</strong></td><td>518 kHz (uluslararası), 490 kHz (ulusal)</td><td>Tek yönlü MSI (denizcilik güvenlik bilgisi) alır: hava durumu, NOTAM, SAR</td><td>Yazıcı kağıdı, yazıcı kafası temizliği; frekans ve servis alanı ayarı</td></tr>
+        <tr><td><strong>Inmarsat / Iridium</strong></td><td>Uydu (L-band)</td><td>Uzak sularda sesli + veri haberleşmesi, gelişmiş tehlike çağrısı</td><td>Anten hizalama, abonelik sertifikası geçerliliği</td></tr>
+        <tr><td><strong>MF/HF Telsiz</strong></td><td>2182 kHz, 4–27 MHz</td><td>Orta ve uzak mesafe ses + DSC haberleşmesi</td><td>Anten empedans testi, SSB DSC çağrısı periyodik test</td></tr>
+      </tbody>
+    </table>
+
+    <h3>27.3 Distress Çağrısı Gönderme (DSC + VHF CH16)</h3>
+    <div class="two-col">
+      <div>
+        <h4>DSC Distress Çağrısı (Dijital — CH70)</h4>
+        <ol>
+          <li>DSC kontrolörü üzerinde <strong>kırmızı "DISTRESS" kapağını kaldır</strong> ve butona 5 saniye bas.</li>
+          <li>Cihaz otomatik olarak CH70'e MMSI numaranı, tehlike türünü ve GPS koordinatını içeren dijital mesaj gönderir.</li>
+          <li>Onay (acknowledge) 15 dakika içinde gelmezse tekrarla.</li>
+        </ol>
+        <h4>Sesli Tehlike Çağrısı (VHF CH16)</h4>
+        <ol>
+          <li>"MAYDAY MAYDAY MAYDAY"</li>
+          <li>"THIS IS [gemi adı × 3]"</li>
+          <li>"MAYDAY [gemi adı]"</li>
+          <li>Konum, tehlike türü (yangın, batıyor, çarpışma vb.)</li>
+          <li>Kişi sayısı ve talep edilen yardım</li>
+          <li>"OVER" ile bitir; CH16'da dinlemeye devam et.</li>
+        </ol>
+      </div>
+      <div>
+        <div class="danger-box"><strong>Yanlış Alarm (False Alert):</strong> EPIRB yanlışlıkla aktive olursa <strong>derhal</strong> koru muhafıza bildir. Yetkili makamlar bildirildikten sonra cihazı RESET etmeden kapatma; MMSI ve gemi bilgisiyle resmi bildirim yapılmalıdır. Yanlış alarm SAR kaynaklarını gereksiz tüketir, ciddi para cezası uygulanır.</div>
+        <div class="info-box"><strong>MMSI (Maritime Mobile Service Identity):</strong> Her geminin 9 haneli benzersiz kimlik numarası. EPIRB ve DSC cihazlarına programlanır; kurtarma merkezleri bu numara üzerinden gemi kaydına ve sahibine ulaşır. ETO, MMSI'nın tüm cihazlarda doğru programlandığını kontrol eder.</div>
+      </div>
+    </div>
+
+    <h3>27.4 GMDSS Aküleri — ETO'nun Sorumluluğu</h3>
+    <ul>
+      <li>GMDSS cihazları <strong>bağımsız akülerle</strong> beslenir — ana şebeke kesilse bile çalışmalıdır.</li>
+      <li>SOLAS zorunluluğu: GMDSS aküsü <strong>en az 1 saatlik çalışma kapasitesi</strong> sağlamalıdır (bazı cihazlarda 6 saat).</li>
+      <li>Periyodik test: <strong>18 ayda bir yük testi</strong> — boş gerilim değil, yük altında gerilim düşümü ölçülür.</li>
+      <li>Şarj cihazının (charger) çalıştığını günlük kontrol et; şarj akımı ve gerilimini log'a yaz.</li>
+      <li>Akü tipi genellikle <strong>Ni-Cd veya VRLA (kapalı kurşun-asit)</strong>; üreticinin tavsiye ettiği değiştirme periyoduna uy.</li>
+    </ul>
+
+    <details class="quiz-item"><summary>B27-S1: EPIRB hangi frekansla uyduya sinyal gönderir? A) 156,8 MHz B) 406 MHz C) 9 GHz D) 518 kHz</summary><div class="quiz-answer"><strong>Cevap: B.</strong> EPIRB 406 MHz ile COSPAS-SARSAT uydusuna tehlike ve GPS konum sinyali gönderir. Ek olarak 121,5 MHz homing (yönlendirme) frekansı da yayınlar. 156,8 MHz = VHF CH16, 9 GHz = SART radarı, 518 kHz = NAVTEX alıcısı.</div></details>
+    <details class="quiz-item"><summary>B27-S2: SART neden SAR helikopterine faydalıdır?</summary><div class="quiz-answer">SART (Search and Rescue Transponder) 9 GHz X-band radar sinyalini yanıtlayarak SAR aracının radar ekranında belirgin bir dizi nokta (pip) oluşturur. Böylece SAR ekibi karanlıkta veya sisli havada hayatta kalan kişilerin konumunu hassas olarak belirleyebilir.</div></details>
+    <details class="quiz-item"><summary>B27-S3: GMDSS aküleri ne zaman ve nasıl test edilmelidir?</summary><div class="quiz-answer">SOLAS gereği en az 18 ayda bir yük testi yapılmalıdır. Sadece boş gerilim ölçmek yeterli değildir; akü yük altındayken gerilim düşümü ölçülmelidir. Yük testi genellikle sertifikalı GMDSS teknisyeni tarafından yapılır ve sonuçları log'a kaydedilir. ETO, şarj cihazını günlük kontrol eder.</div></details>
+    <details class="quiz-item"><summary>B27-S4: Sesli VHF tehlike çağrısında hangi kanal kullanılır ve çağrı nasıl başlar?</summary><div class="quiz-answer">VHF CH16 (156,8 MHz) kullanılır. Çağrı "MAYDAY MAYDAY MAYDAY" ile başlar, ardından "THIS IS [gemi adı × 3]" gelir. Devamında konum, tehlike türü, kişi sayısı ve istenen yardım bildirilir. CH16 sürekli dinleme kanalıdır; tehlike çağrısı bu kanalda yapıldıktan sonra cevap beklenir.</div></details>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       BÖLÜM 28 — YÜKSEK GERİLİM (HV) SİSTEMLERİ
+  ══════════════════════════════════════════════════════ -->
+  <section id="b28" data-label="Bölüm 28">
+    <div class="section-header">
+      <div class="section-meta"><span class="section-num">28</span><span class="section-level level-3">Seviye 3 · Zabitlik · Büyük Gemiler</span></div>
+      <h2 class="section-title">Yüksek Gerilim (HV) Sistemleri <span class="section-en">High Voltage Systems</span></h2>
+    </div>
+    <p class="section-intro">HV Nedir · Gemilerde Kullanım · HV Güvenliği · ETO Görevleri · Sınav Konuları</p>
+    <p class="section-sub"><em>Konteyner gemileri, LNG tankerleri ve VLCC'lerde standart olan 6,6 kV / 11 kV sistemler. Zabitlik sınavında ve büyük gemi operasyonlarında temel bilgi.</em></p>
+
+    <h3>28.1 Yüksek Gerilim Nedir — Gemilerde Kullanım</h3>
+    <div class="two-col">
+      <div>
+        <p>IEC 60092 standartlarına göre gemi elektriğinde <strong>1 kV üzeri = Yüksek Gerilim (HV)</strong> olarak sınıflandırılır. Tipik değerler:</p>
+        <table>
+          <thead><tr><th>Gerilim Seviyesi</th><th>Kullanım Yeri</th></tr></thead>
+          <tbody>
+            <tr><td><strong>3,3 kV</strong></td><td>Bazı orta boy gemiler, büyük pompa motorları</td></tr>
+            <tr><td><strong>6,6 kV</strong></td><td>En yaygın HV seviyesi — konteyner, tanker, RoRo</td></tr>
+            <tr><td><strong>11 kV</strong></td><td>VLCC, büyük LNG, yolcu gemileri (pod motorları)</td></tr>
+          </tbody>
+        </table>
+        <h4>Neden HV Kullanılır?</h4>
+        <ul>
+          <li>Aynı güç için akım düşer → kablo kesiti küçülür → ağırlık ve maliyet azalır.</li>
+          <li><span class="formula">I = P / (√3 · V · cosφ)</span> — Gerilim 10 kat artarsa akım 10 kat düşer.</li>
+          <li>Bow thruster, stern thruster, cargo pump, büyük vinç motorları gibi megawatt seviyeli yükler için zorunludur.</li>
+        </ul>
+      </div>
+      <div class="svg-wrap">
+        <h3>HV Güç Dağıtımı — Basit Blok Şema</h3>
+        <svg viewBox="0 0 320 175" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrHV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L6,3 L0,6 z" fill="#f97373"/>
+            </marker>
+            <marker id="arrLV" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/>
+            </marker>
+          </defs>
+          <!-- Generator (HV) -->
+          <rect x="10" y="15" width="80" height="28" rx="5" fill="#1e293b" stroke="#f97373" stroke-width="1.5"/>
+          <text x="18" y="28" fill="#f97373" font-size="8" font-weight="bold">Jeneratör</text>
+          <text x="20" y="38" fill="#9ca3af" font-size="7">6,6 kV / 11 kV</text>
+
+          <!-- HV Switchboard -->
+          <rect x="115" y="8" width="90" height="42" rx="5" fill="#1e293b" stroke="#f97373" stroke-width="1.8"/>
+          <text x="125" y="24" fill="#f97373" font-size="9" font-weight="bold">HV Switchboard</text>
+          <text x="128" y="37" fill="#9ca3af" font-size="7">6,6 kV / 11 kV Barası</text>
+          <text x="132" y="46" fill="#9ca3af" font-size="6">VCB + koruma röleleri</text>
+
+          <!-- Generator to HV SWB -->
+          <line x1="90" y1="29" x2="115" y2="29" stroke="#f97373" stroke-width="2" marker-end="url(#arrHV)"/>
+
+          <!-- HV to LV Transformer -->
+          <rect x="115" y="72" width="90" height="34" rx="5" fill="#1e293b" stroke="#facc15" stroke-width="1.5"/>
+          <text x="127" y="87" fill="#facc15" font-size="8" font-weight="bold">Step-Down Trafo</text>
+          <text x="123" y="99" fill="#9ca3af" font-size="7">6,6 kV → 440 V</text>
+
+          <!-- HV SWB to Transformer -->
+          <line x1="160" y1="50" x2="160" y2="72" stroke="#f97373" stroke-width="1.8" marker-end="url(#arrHV)"/>
+
+          <!-- Transformer to LV SWB -->
+          <rect x="115" y="130" width="90" height="28" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="127" y="144" fill="#38bdf8" font-size="8" font-weight="bold">LV Switchboard</text>
+          <text x="133" y="154" fill="#9ca3af" font-size="7">440 V / 220 V</text>
+
+          <!-- Transformer to LV SWB -->
+          <line x1="160" y1="106" x2="160" y2="130" stroke="#38bdf8" stroke-width="1.8" marker-end="url(#arrLV)"/>
+
+          <!-- HV Loads (right) -->
+          <rect x="225" y="15" width="85" height="20" rx="4" fill="#1e293b" stroke="#f97373" stroke-width="1.2"/>
+          <text x="230" y="28" fill="#f97373" font-size="7">Bow Thruster Motoru</text>
+          <rect x="225" y="40" width="85" height="20" rx="4" fill="#1e293b" stroke="#f97373" stroke-width="1.2"/>
+          <text x="230" y="53" fill="#f97373" font-size="7">Cargo Pump Motoru</text>
+
+          <!-- HV SWB to HV loads -->
+          <line x1="205" y1="22" x2="225" y2="22" stroke="#f97373" stroke-width="1.5" marker-end="url(#arrHV)"/>
+          <line x1="205" y1="48" x2="225" y2="48" stroke="#f97373" stroke-width="1.5" marker-end="url(#arrHV)"/>
+
+          <!-- LV loads -->
+          <rect x="225" y="133" width="85" height="20" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="230" y="146" fill="#38bdf8" font-size="7">Normal Tüketici</text>
+          <text x="230" y="155" fill="#9ca3af" font-size="6">Aydınlatma, priz…</text>
+          <line x1="205" y1="144" x2="225" y2="144" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrLV)"/>
+
+          <!-- HV zone marker -->
+          <rect x="5" y="4" width="210" height="62" rx="6" fill="none" stroke="#f97373" stroke-width="0.8" stroke-dasharray="5,3" opacity="0.5"/>
+          <text x="8" y="168" fill="#f97373" font-size="7" opacity="0.7">— — HV Bölgesi (kırmızı) — —</text>
+        </svg>
+        <p class="svg-caption">HV jeneratörü (6,6 kV) → HV Switchboard → büyük motorlara doğrudan gider; diğer yandan step-down trafo ile 440 V LV baraya indirilerek normal tüketiciler beslenir.</p>
+      </div>
+    </div>
+
+    <h3>28.2 HV Özel Güvenlik Kuralları</h3>
+    <div class="danger-box"><strong>HV ile Çalışmada Temel Kural:</strong> 1 kV üzeri gerilimde <em>hiçbir zaman yalnız çalışma</em>. HV yetkisi olmayan personel HV bölgelerine giremez. Sınıflandırma kuruluşu ve bayrak devleti sertifikası zorunludur.</div>
+    <div class="two-col">
+      <div>
+        <h4>HV LOTO (Lockout/Tagout) — Ekstra Adımlar</h4>
+        <ol>
+          <li>VCB (Vacuum Circuit Breaker) aç ve racking out konumuna al (çek dışarı).</li>
+          <li>Earth switch (topraklama şalteri) kapat → deşarj ve güvenli topraklama sağla.</li>
+          <li>3 fazda voltmetre ile 0 V doğrula.</li>
+          <li>Fiziksel kilit + kişisel kilit + uyarı etiketi.</li>
+          <li>Çalışma izni (Permit to Work — PTW) belgesi al ve imzalat.</li>
+        </ol>
+        <div class="info-box"><strong>Earth Switch:</strong> HV devre dışı bırakıldıktan sonra otomatik topraklama sağlayan özel şalter. Kapatılınca kablo veya bara üzerinde kalan enerji (kapasitif şarj dahil) güvenle deşarj edilir.</div>
+      </div>
+      <div>
+        <h4>HV PPE (Kişisel Koruyucu Ekipman)</h4>
+        <table>
+          <thead><tr><th>Ekipman</th><th>Standart / Not</th></tr></thead>
+          <tbody>
+            <tr><td>HV izoleli eldiven (rubber gloves)</td><td>IEC 60903 — gerilim sınıfına göre (Sınıf 2 = 17 kV)</td></tr>
+            <tr><td>HV izoleli bot</td><td>İletken olmayan taban</td></tr>
+            <tr><td>Yüz siperi / ark flash kask</td><td>Cal/cm² değeri hesaplanmış ark enerji sınıfına uygun</td></tr>
+            <tr><td>İzoleli alet seti</td><td>1000 V VDE markalı — HV için yetersizdir; 11 kV için özel alet</td></tr>
+            <tr><td>HV dedektör (proximity tester)</td><td>Temas öncesi alan varlığını kontrol</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>28.3 HV Switchgear — VCB ve Koruma Sistemleri</h3>
+    <ul>
+      <li><strong>VCB (Vacuum Circuit Breaker):</strong> Ark söndürme vakum tüpü içinde gerçekleşir — bakım az, ömür uzun. HV kesicilerin en yaygın tipidir.</li>
+      <li><strong>Diferansiyel Koruma (87):</strong> HV motorları ve transformatörleri sarı gerilim farkı ile korur; iç kısa devreye anında tepki verir.</li>
+      <li><strong>Overcurrent Röle (51):</strong> Zaman gecikmeli aşırı akım koruma.</li>
+      <li><strong>Earth Fault Röle (51N / 64):</strong> HV sistemlerde izolasyon monitörü veya toplanma bobini (core balance CT) ile toprak arızası tespiti.</li>
+      <li><strong>Racking (çek/tak) sistemi:</strong> VCB'yi "test" veya "isolated" pozisyonuna alarak kablo bağlantılarını kesmeden test yapılabilir.</li>
+    </ul>
+
+    <h3>28.4 ETO'nun HV Görevleri</h3>
+    <ul>
+      <li>HV sistemlere <strong>sadece yetkili, sertifikalı HV teknisyenleri</strong> dokunabilir. ETO'nun rolü izleme ve koordinasyondur.</li>
+      <li>HV motorlarında izolasyon testleri (megger, 5 kV veya 10 kV DC test cihazıyla) — faz-gövde ≥ genellikle 100 MΩ beklenir.</li>
+      <li>Termal kamera ile HV switchgear sıcak nokta taraması — izin alınmadan yapılabilir (temas gerekmez).</li>
+      <li>HV alarm ve trip kayıtlarını PMS'e girmek ve sınıflandırma kuruluşuna bildirmek.</li>
+      <li>Periyodik dielektrik yağ analizi (trafolarda) — laboratuvar gönderimi.</li>
+    </ul>
+    <div class="warn-box"><strong>Sınav İpucu:</strong> "1 kV üzeri = HV" sınırını ve VCB tanımını bil. Zabitlik sınavında "HV çalışmada earth switch ne işe yarar?", "VCB ark söndürme ortamı nedir?", "diferansiyel koruma (87) neyi korur?" sıkça çıkan sorulardır.</div>
+
+    <details class="quiz-item"><summary>B28-S1: Gemi elektriğinde IEC 60092'ye göre yüksek gerilim (HV) sınırı nedir? A) 500 V B) 1000 V C) 3300 V D) 6600 V</summary><div class="quiz-answer"><strong>Cevap: B.</strong> IEC 60092 standardına göre 1 kV (1000 V) üzeri yüksek gerilim (HV) olarak tanımlanır. Gemilerde en yaygın HV seviyeleri 3,3 kV, 6,6 kV ve 11 kV'tur.</div></details>
+    <details class="quiz-item"><summary>B28-S2: VCB (Vacuum Circuit Breaker) ark söndürme ortamı nedir ve avantajı nedir?</summary><div class="quiz-answer">VCB'de ark söndürme vakum tüpü içinde gerçekleşir. Vakum ortamında ark hızla söner, gaz veya yağ kullanılmaz — dolayısıyla bakım ihtiyacı azdır, kirlenme riski yoktur, ömrü uzundur. Modern HV switchgear'da tercih edilen tiptir.</div></details>
+    <details class="quiz-item"><summary>B28-S3: HV LOTO sırasında "earth switch" kapatmanın amacı nedir?</summary><div class="quiz-answer">Earth switch kapatılarak devre dışı bırakılmış HV barası veya kablosundaki kapasitif şarj ve artık enerji güvenle deşarj edilir ve fiziksel olarak topraklanır. Bu sayede yanlışlıkla enerji gelse bile personel korunur. Earth switch kapatılmadan HV bölgesine girilmez.</div></details>
+    <details class="quiz-item"><summary>B28-S4: Neden yüksek güçlü gemi motorları için HV kullanılır?</summary><div class="quiz-answer">I = P / (√3 · V · cosφ) formülüne göre, aynı güç için gerilim artırılınca akım düşer. Düşük akım demek daha ince kablo kesiti, daha az ağırlık ve daha az kayıp demektir. Bow thruster veya cargo pump gibi MW seviyesindeki motorlarda LV ile çok büyük kablo kesitleri gerekirdi; HV bu sorunu çözer.</div></details>
   </section>
 
   <div class="footer">
