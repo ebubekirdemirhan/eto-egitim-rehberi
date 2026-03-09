@@ -3888,31 +3888,30 @@
     <p class="section-sub"><em>Bu bölüm, sınıfta pek öğretilmeyen ama sahada günlük kullandığın el becerilerini kapsar. Teori bittikten sonra asıl iş burada başlar.</em></p>
 
     <h3>22.1 Lehim Nasıl Yapılır (Soldering)</h3>
-    <p>Lehim, iki iletken yüzeyi düşük erime noktalı bir alaşımla (kalay-kurşun veya kurşunsuz) birleştirme işlemidir.</p>
+    <p>Gemide elektronik kartlardaki kopmaları, sensör kablolarını veya ince kumanda tellerini onarmak için iyi lehim yapabilmek şarttır. Lehim, iki iletken yüzeyi düşük erime noktalı bir alaşımla (kalay-kurşun veya kurşunsuz) birleştirme işlemidir.</p>
     <h4>Temel Malzemeler</h4>
     <ul>
       <li><strong>Lehim havyası (soldering iron):</strong> 25–60 W arası elektronik işlere; 100 W+ güç kablosu eklentileri için.</li>
-      <li><strong>Lehim teli (solder wire):</strong> En yaygın Sn60Pb40 (60% kalay, 40% kurşun). Kurşunsuz alternatif: Sn96.5Ag3Cu0.5.</li>
-      <li><strong>Flux:</strong> Oksit tabakasını temizler, lehimin yüzeye yapışmasını sağlar. Reçine bazlı veya su-bazlı olabilir.</li>
+      <li><strong>Pastalı lehim teli (flux-core solder wire):</strong> En yaygın Sn60Pb40 (60% kalay, 40% kurşun). İçindeki flux oksit tabakasını temizler; lehim kendiliğinden yüzeye yayılır.</li>
+      <li><strong>Havya ucu hazırlığı:</strong> Uç temiz ve gümüş renkli (parlak) olmalı; kararıp mat hale geldiyse ıslak sünger veya pirinç tel temizleyici ile sil, ardından az lehim ile kalayla (tinning).</li>
     </ul>
     <h4>Adım Adım Lehim Prosedürü</h4>
     <ol>
-      <li>Havyayı ısıt, ucu temiz ve gümüş renkli olmalı (tinning — kalaylama).</li>
-      <li>Birleştirilecek yüzeyleri zımpara veya bıçakla temizle; oksit/yağ olmamalı.</li>
-      <li>İletken uçları bir arada tut (klips veya yardımcı tutaç ile).</li>
-      <li>Havyayı birleşim noktasına tut (5–10 sn), <em>lehim telini</em> havyaya değil birleşim noktasına değdir.</li>
-      <li>Lehim aktıktan sonra havyayı çek; lehim soğuyana kadar hareketsiz tut.</li>
+      <li><strong>Hazırlık:</strong> Lehimlenecek yüzeyde oksit veya yağ olmamalıdır; zımpara veya bıçakla temizle.</li>
+      <li><strong>Isıtma:</strong> Havyanın ucunu doğrudan lehim teline değil, birleştirilecek yüzeye (kablo ucu veya kart bacağı) temas ettirerek yüzeyi ısıt. Yaklaşık 2–3 saniye bekle.</li>
+      <li><strong>Lehimi verme:</strong> Yüzey yeterince ısındığında pastalı lehim telini havyanın ucuna değil, ısınmış olan yüzeye değdir. Lehim kendiliğinden eriyip yüzeye yayılacaktır.</li>
+      <li><strong>Soğutma:</strong> Lehim aktıktan sonra havyayı çek; lehim soğuyana kadar bağlantıyı hareketsiz tut (5–10 saniye).</li>
     </ol>
     <h4>Soğuk Lehim Tespiti (Cold Solder Joint)</h4>
     <div class="callout callout-warn">
-      <strong>Soğuk lehim:</strong> Görsel olarak mat/granüllü görünür; sağlıklı lehim parlak ve pürüzsüzdür. Soğuk lehim yüksek direnç yaratır → ısınma, aralıklı arıza. Multimetre ile süreklilik ölçümünde aralıklı sonuç veriyorsa şüphelenin.
+      <strong>Soğuk lehim:</strong> Sağlıklı lehim soğuduğunda <em>parlak ve konik</em> bir şekil alır. Mat, pürüzlü ve topaklanmış görünüyorsa bu bir "soğuk lehim"dir. Soğuk lehim mekanik tutuş sağlasa da <strong>elektrik akımını düzgün geçirmez</strong>; yüksek direnç → ısınma → aralıklı arıza.
     </div>
     <table>
       <thead><tr><th>Durum</th><th>Görünüm</th><th>Test</th></tr></thead>
       <tbody>
         <tr><td>Sağlıklı lehim</td><td>Parlak, düzgün konik şekil</td><td>Süreklilik var, direnç sıfıra yakın</td></tr>
-        <tr><td>Soğuk lehim</td><td>Mat, granüllü, pürüzlü</td><td>Aralıklı süreklilik, yüksek direnç</td></tr>
-        <tr><td>Yetersiz ısı</td><td>Top/damla biçimi, yüzeye yapışmamış</td><td>Mekanik olarak düşer</td></tr>
+        <tr><td>Soğuk lehim</td><td>Mat, granüllü, pürüzlü</td><td>Aralıklı süreklilik; mekanik tutar ama akım geçirmez</td></tr>
+        <tr><td>Yetersiz ısı</td><td>Top/damla biçimi, yüzeye yapışmamış</td><td>Hafif itişte düşer</td></tr>
       </tbody>
     </table>
     <div class="callout">
@@ -3920,45 +3919,48 @@
     </div>
 
     <h3>22.2 Kontaktör Mekanik Sökme ve Kontak Bakımı</h3>
-    <p>Kontaktör arızalarının büyük çoğunluğu mekanik: kaynaklanmış kontak, yanmış bobin, kirlenmiş pogo yayı.</p>
+    <p>Kontaktörlerin ana kontakları zamanla açıp kapama sırasındaki arklar nedeniyle kararır ve karbonlaşır; bazen de kontaklar birbirine kaynar. Kontaktör arızalarının büyük çoğunluğu bu mekanik nedenlerden kaynaklanır.</p>
+    <div class="callout callout-warn">
+      <strong>Güvenlik — LOTO zorunludur:</strong> Kontaktör sökülmeden önce devreyi kes, kilitle ve enerjinin kesildiğini <em>voltmetre ile doğrula</em>. "Az önce kestim" demek yeterli değildir.
+    </div>
     <h4>Sökme Sırası</h4>
     <ol>
-      <li><strong>LOTO:</strong> Devreyi kes, kilitle, doğrula — asla atlama.</li>
       <li>Güç kablolarını (L1–T3) terminal vidalarından söküp işaretle (kameraya al veya yazı yaz).</li>
       <li>Kumanda kablolarını (A1, A2, yardımcı kontaklar) söküp işaretle.</li>
       <li>Kontaktörü DIN raydan kaldır (ray klipsi var ise bastır).</li>
-      <li>Bobin kapağını veya ön kapaklı modellerde kilit klipsini bırak; bobin modülünü çek.</li>
-      <li>Ana kontak modülünü çıkar; yay ve köprü kontakları dökülmesin diye dikkatli ol.</li>
+      <li><strong>Üst kapağı aç:</strong> Çoğu endüstriyel kontaktörün üst kapağı tırnaklıdır. İnce düz uçlu bir tornavida ile tırnakları hafifçe kanırtarak kapağı aç.</li>
+      <li>İçerideki hareketli ve sabit ana kontak köprülerini yaylar dökülmeden dikkatle çıkar.</li>
     </ol>
     <h4>Kontak Kontrolü ve Eğeleme</h4>
     <ul>
-      <li>Yanmış, pütürlü kontak yüzeyine <strong>ince bir kontak eğesi</strong> (contact file) ile hafifçe geç — sadece pütürleri al, kontak kalınlığını fazla inceltme.</li>
+      <li>Kararmış ve meme yapmış kontak yüzeylerini <strong>çok ince bir zımpara veya saatçi eğesi</strong> ile nazikçe temizle.</li>
       <li>Kontak kalınlığı limit değerin (genelde plakada belirtilmiştir, yoksa 1 mm) altına düştüyse kontaktörü değiştir.</li>
       <li>Eğelemek geçici çözümdür; kaynaklanmış kontak tekrar ortaya çıkıyorsa aşırı yük var demektir — sebebi araştır.</li>
     </ul>
     <div class="callout callout-warn">
-      <strong>Tehlike:</strong> Kontaktör sökülmeden önce <em>mutlaka enerjisiz</em> olduğunu voltmetre ile doğrula. "Az önce kestim" demek yeterli değildir.
+      <strong>Kritik Kural — Gümüş Kaplama:</strong> Kontakların üzerinde iletkenliği sağlayan <em>ince bir gümüş kaplama</em> vardır. Eğeyi çok sert kullanıp bu kaplamayı kazırsanız, kontaktör bakır yüzeye kalır ve ilk yük altında tekrar yapışır. Sadece pürüzü ve siyah kurum tabakasını alın — altındaki parlak yüzeye ulaşınca dur.
     </div>
 
     <h3>22.3 Motor Demontaj &amp; Montaj</h3>
-    <p>Asenkron motor demontajı genelde rulman değişimi veya sargı bakımı için yapılır. Sahada temel adımlar:</p>
-    <h4>Demontaj Sırası</h4>
+    <p>Rulman dağıtan veya sargısı yanan bir motorun gemi şartlarında sökülüp toplanması bir ETO'nun temel görevlerindendir. Sahada temel adımlar:</p>
+    <h4>Demontaj (Söküm) Adımları</h4>
     <ol>
       <li>LOTO uygula; motorun soğuk olduğundan emin ol.</li>
-      <li>Kaplin veya kayış-kasnak bağlantısını söküp işaretle (kayış yönü önemli).</li>
-      <li>Terminaller kutusunu (klemens kutusu) aç; kablolarını işaretle ve söküp bağ.</li>
+      <li>Klemens kutusundaki bağlantıları sökmeden önce kablo numaralarını ve renklerini not et (kameraya al).</li>
+      <li>Motor milindeki kaplini veya kasnağı <strong>çektirme (puller) aparatı</strong> kullanarak çıkar. <em>Çekiçle vurmak mili eğebilir!</em></li>
       <li>Motor cıvatalarını söküp motoru taşıma askısına/zemine yerleştir (ağır motor için vinç/zincir hoist kullan).</li>
-      <li>Arka kapak (DE/NDE) cıvatalarını söküp kapağı dik darbe ile aç — kesinlikle çekiçle direkt vurma, ahşap veya plastik ara parça koy.</li>
+      <li>Ön ve arka kapak (DE/NDE) cıvatalarını söküp kapağı gövdeden ayırmak için <strong>sadece plastik veya kauçuk tokmak</strong> kullan — metal çekiçle direkt vurma.</li>
       <li><strong>Rulman çıkarma:</strong> Puley çekicisi (bearing puller) kullan. Isı uygulama (ısı tabancası) ile sıkışık rulmanı gevşet.</li>
-      <li>Rotoru statordan dikkatli çek; hava aralığı çok küçük, stator sargısını çizmemek için destekle.</li>
+      <li>Rotoru, statordaki sargılara sürtmeden ve çizmeden milinden tutarak dikkatlice dışarı al. Hava aralığı çok küçük, rotor stator sargısına temas ederse zarar verir.</li>
     </ol>
-    <h4>Montaj ve Hizalama</h4>
+    <h4>Montaj (Toplama) Adımları</h4>
     <ol>
-      <li>Yeni rulmanı sıcak yağ banyosu (80–90°C) veya endüksiyonlu ısıtıcı ile genleştirip mili üzerine it — kesinlikle çekiçle dıştaki halkaya vurma, iç halkadan itmeli.</li>
-      <li>Rotoru statorun içinden yavaşça geçir.</li>
-      <li>Kapakları sıkıştır; 2 karşılıklı vida → 2 karşılıklı vida şeklinde çapraz sıkma.</li>
-      <li>Mili elle döndür; pürüzsüz dönmeli, takılmamalı.</li>
-      <li><strong>Hizalama (alignment):</strong> Düz cetvel veya dial indicator ile motor-pompa akısı hizasını kontrol et. Açısal ve paralel kaçıklık sınır içinde olmalı (genelde &lt;0,05 mm).</li>
+      <li>Motorun içi ve rulman yatakları temizlenmeli; gerekiyorsa rulmanlar değiştirilmeli/greslenmelidir.</li>
+      <li>Yeni rulmanı sıcak yağ banyosu (80–90°C) veya endüksiyonlu ısıtıcı ile genleştirip mili üzerine it — çekiçle dıştaki halkaya asla vurma, iç halkadan it.</li>
+      <li>Rotoru sargılara temas ettirmeden stator içine merkezleyerek yerleştir.</li>
+      <li>Kapak cıvatalarını sıkarken <strong>karşılıklı (çapraz) sıkma prensibini</strong> uygula. Bir tarafı tam sıkıp diğerine geçmek kapakların kasmasına neden olur.</li>
+      <li>İşlem bitince mili elinizle çevirin; rahat ve sürtünmesiz dönmelidir.</li>
+      <li><strong>Hizalama (alignment):</strong> Düz cetvel veya dial indicator ile motor-pompa aksı hizasını kontrol et (&lt;0,05 mm).</li>
       <li>Megger ile sargıları ölç (≥1 MΩ) — montaj sonrası nem girişi olabilir.</li>
     </ol>
     <table>
@@ -3971,17 +3973,21 @@
       </tbody>
     </table>
 
-    <h3>22.4 Sahada Alternatif Çözüm Üretme</h3>
-    <p>Açık denizde veya kıt imkânlı bir limanda her parça anında bulunamaz. ETO'nun değerini artıran şey, bu kısıtlı koşullarda çalışmayı devam ettirme becerisidir.</p>
-    <h4>Temel Prensipler</h4>
+    <h3>22.4 Sahada Alternatif Malzeme Bulma Pratikleri</h3>
+    <p>Okyanusun ortasında malzeme bittiğinde ve yedek parça gelmesine haftalar varken, gemiyi yürütmek ETO'nun yaratıcılığına kalır.</p>
+    <h4>Eşdeğer Parça Kullanımı</h4>
     <ul>
-      <li><strong>Muadil parça:</strong> Kontaktör veya röle için marka yerine teknik eşdeğer (bobin gerilimi, kontak kapasitesi, boyut) bul. IEC/CE sertifikalı muadil kullanılabilir.</li>
-      <li><strong>Geçici köprü (bypass):</strong> Arızalı yardımcı kontak yerine geçici jumper — sadece test ve acil durum için; kalıcı çözüm değildir.</li>
-      <li><strong>3D bakış açısı:</strong> Kıyı malzeme deposu, diğer gemiler, liman çarşısı, gemideki diğer ekipmanların yedek parçaları. "Eski kontaktör hurda kutusunda mı?" gibi sorular sor.</li>
-      <li><strong>Yeniden kullanma:</strong> Farklı gerilimli bir bobin → seri direnç ekleyerek uyarlama (geçici ve hesaplanmış olmalı).</li>
+      <li>Bozulan bir rölenin aynısı yoksa, <strong>bobin gerilimi</strong> (örneğin 24 VDC) ve <strong>kontak taşıma kapasitesi</strong> eşdeğer olan farklı marka bir röleyi klemenslere uydurarak geçici çözüm üretebilirsiniz. IEC/CE sertifikalı muadil kullanılabilir.</li>
+      <li>Farklı gerilimli bir bobin → seri direnç ekleyerek uyarlama (geçici ve hesaplanmış olmalı).</li>
+      <li>Arızalı yardımcı kontak yerine geçici jumper — sadece test ve acil durum için; kalıcı çözüm değildir.</li>
+    </ul>
+    <h4>Hurdadan Kurtarma (Cannibalization)</h4>
+    <ul>
+      <li>Gemide eski veya iptal edilmiş panolar (örneğin eski bir vinç panosu) sizin hazinenizdir. Oradaki sağlam kontaktörleri, klemensleri ve zaman rölelerini söküp atölyenizde test ederek kendi <strong>"yedek parça bankanızı"</strong> oluşturun.</li>
+      <li>Kıyı malzeme deposu, diğer gemiler, liman çarşısı gibi kaynakları da düşün; "Yakın limanda bu parça var mı?" sorusunu sormaktan çekinme.</li>
     </ul>
     <div class="callout">
-      <strong>Ebubekir'in Notu:</strong> Alternatifleri dene ama güvenlik sınırlarını asla aşma. "Motor çalışıyor" yeterli değil; "güvenli ve kayıtlı" olmalı. Geçici çözümü PMS'e not düş; limanda kalıcı parça temin edildiğinde değiştir.
+      <strong>Ebubekir'in Notu:</strong> Sahadaki ustalığınız, el aletlerini ne kadar iyi kullandığınızla doğrudan orantılıdır. Şema okuyarak "Sorun K1 kontaktöründe" demek harikadır — ancak o kontaktörü 5 dakika içinde söküp, eğeleyip sistemi tekrar devreye aldığınızda gemideki efsane ETO siz olursunuz! Alternatifleri dene ama güvenlik sınırlarını asla aşma; geçici çözümü PMS'e not düş, limanda kalıcı parça temin edildiğinde değiştir.
     </div>
 
     <details class="quiz-item"><summary>Bölüm 22 Mini Sınav — S1: Lehim sırasında neden flux kullanılır?</summary><div class="quiz-answer">Flux, metal yüzeyindeki oksit tabakasını eritir ve lehimin yüzeye bağlanmasını sağlar. Fluxsuz lehimde teneke yüzeye yapışmaz, soğuk lehim oluşur.</div></details>
