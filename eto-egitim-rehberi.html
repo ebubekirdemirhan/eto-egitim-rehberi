@@ -3914,6 +3914,55 @@
         <tr><td>Yetersiz ısı</td><td>Top/damla biçimi, yüzeye yapışmamış</td><td>Hafif itişte düşer</td></tr>
       </tbody>
     </table>
+
+    <div class="svg-wrap">
+      <h3>İyi Lehim vs Soğuk Lehim</h3>
+      <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrL" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/>
+          </marker>
+        </defs>
+        <!-- Left: Good solder -->
+        <text x="18" y="14" fill="#4ade80" font-size="10" font-weight="bold">✓ Sağlıklı Lehim</text>
+        <!-- PCB pad -->
+        <rect x="18" y="95" width="110" height="10" rx="3" fill="#334155" stroke="#64748b" stroke-width="1"/>
+        <!-- Component lead -->
+        <line x1="73" y1="45" x2="73" y2="95" stroke="#e5e7eb" stroke-width="2.5"/>
+        <!-- Cone solder (good shape) -->
+        <path d="M52,95 Q73,55 94,95 Z" fill="#94a3b8" opacity="0.85"/>
+        <!-- Shiny highlight -->
+        <ellipse cx="68" cy="80" rx="5" ry="7" fill="white" opacity="0.2"/>
+        <text x="20" y="118" fill="#4ade80" font-size="8">Parlak · konik · yapışık</text>
+        <!-- Ohmmeter reading OK -->
+        <rect x="30" y="30" width="38" height="18" rx="4" fill="#1e293b" stroke="#4ade80" stroke-width="1.2"/>
+        <text x="34" y="43" fill="#4ade80" font-size="9">0.1 Ω</text>
+        <line x1="49" y1="48" x2="60" y2="55" stroke="#4ade80" stroke-width="1" stroke-dasharray="3,2"/>
+
+        <!-- Divider -->
+        <line x1="160" y1="5" x2="160" y2="128" stroke="#374151" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- Right: Cold solder -->
+        <text x="172" y="14" fill="#f97373" font-size="10" font-weight="bold">✗ Soğuk Lehim</text>
+        <!-- PCB pad -->
+        <rect x="162" y="95" width="110" height="10" rx="3" fill="#334155" stroke="#64748b" stroke-width="1"/>
+        <!-- Component lead -->
+        <line x1="217" y1="45" x2="217" y2="95" stroke="#e5e7eb" stroke-width="2.5"/>
+        <!-- Lumpy solder (irregular) -->
+        <path d="M198,95 Q205,78 200,65 Q212,52 217,58 Q222,52 234,65 Q229,78 236,95 Z" fill="#475569" opacity="0.85"/>
+        <!-- Rough bumps -->
+        <circle cx="205" cy="76" r="4" fill="#64748b"/>
+        <circle cx="222" cy="70" r="3" fill="#64748b"/>
+        <circle cx="228" cy="82" r="2.5" fill="#64748b"/>
+        <text x="162" y="118" fill="#f97373" font-size="8">Mat · topaklanmış · güvensiz</text>
+        <!-- Ohmmeter reading high/open -->
+        <rect x="228" y="30" width="38" height="18" rx="4" fill="#1e293b" stroke="#f97373" stroke-width="1.2"/>
+        <text x="231" y="43" fill="#f97373" font-size="9">∞ / sık</text>
+        <line x1="247" y1="48" x2="232" y2="60" stroke="#f97373" stroke-width="1" stroke-dasharray="3,2"/>
+      </svg>
+      <p class="svg-caption">Sol: parlak, konik, pad'e tam yapışmış sağlıklı lehim — multimetre süreklilik testinde sıfıra yakın direnç okur. Sağ: mat, topaklanmış soğuk lehim — mekanik tutar görünse de aralıklı iletkenlik verir ya da tamamen akım geçirmez.</p>
+    </div>
+
     <div class="callout">
       <strong>Ebubekir'in Notu:</strong> Gemide yedek lehim teli ve küçük bir havya daima işe yarar. Elektronik kart üzerinde çalışmadan önce ESD (statik) koruması al; statik, devre elemanlarını sessizce öldürür.
     </div>
@@ -3973,6 +4022,76 @@
       </tbody>
     </table>
 
+    <div class="svg-wrap">
+      <h3>Asenkron Motor — Kesit &amp; Demontaj Noktaları</h3>
+      <svg viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrM" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 z" fill="#38bdf8"/>
+          </marker>
+          <marker id="arrMR" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M6,0 L0,3 L6,6 z" fill="#38bdf8"/>
+          </marker>
+        </defs>
+        <!-- Motor body (stator frame) -->
+        <rect x="75" y="48" width="190" height="80" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+        <!-- Stator label -->
+        <text x="122" y="65" fill="#64748b" font-size="8">Stator (Sargılar)</text>
+
+        <!-- Rotor + shaft (center bar) -->
+        <rect x="88" y="76" width="164" height="24" rx="5" fill="#334155" stroke="#38bdf8" stroke-width="1.2"/>
+        <text x="140" y="92" fill="#38bdf8" font-size="9" font-weight="bold">Rotor + Mil</text>
+
+        <!-- Shaft extending both sides -->
+        <line x1="10" y1="88" x2="88" y2="88" stroke="#cbd5e1" stroke-width="3.5"/>
+        <line x1="252" y1="88" x2="330" y2="88" stroke="#cbd5e1" stroke-width="3.5"/>
+
+        <!-- DE End Cap (left) -->
+        <rect x="52" y="44" width="28" height="88" rx="5" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.8"/>
+        <text x="26" y="140" fill="#38bdf8" font-size="8" font-weight="bold">DE Kapak</text>
+        <text x="29" y="150" fill="#9ca3af" font-size="7">(Sürücü taraf)</text>
+
+        <!-- NDE End Cap (right) -->
+        <rect x="260" y="44" width="28" height="88" rx="5" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.8"/>
+        <text x="258" y="140" fill="#38bdf8" font-size="8" font-weight="bold">NDE Kapak</text>
+        <text x="257" y="150" fill="#9ca3af" font-size="7">(Karşı taraf)</text>
+
+        <!-- Bearings -->
+        <circle cx="79" cy="88" r="8" fill="none" stroke="#facc15" stroke-width="2"/>
+        <circle cx="79" cy="88" r="3" fill="#facc15" opacity="0.5"/>
+        <text x="56" y="112" fill="#facc15" font-size="7">Rulman</text>
+
+        <circle cx="261" cy="88" r="8" fill="none" stroke="#facc15" stroke-width="2"/>
+        <circle cx="261" cy="88" r="3" fill="#facc15" opacity="0.5"/>
+        <text x="256" y="112" fill="#facc15" font-size="7">Rulman</text>
+
+        <!-- Removal arrows -->
+        <line x1="50" y1="60" x2="18" y2="60" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#arrMR)"/>
+        <line x1="290" y1="60" x2="322" y2="60" stroke="#38bdf8" stroke-width="1.6" marker-end="url(#arrM)"/>
+        <text x="4" y="56" fill="#38bdf8" font-size="8">Sök</text>
+        <text x="313" y="56" fill="#38bdf8" font-size="8">Sök</text>
+
+        <!-- Fan cowl hint (right) -->
+        <rect x="288" y="60" width="20" height="58" rx="4" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="285" y="130" fill="#9ca3af" font-size="7">Fan</text>
+
+        <!-- Cooling fins on body -->
+        <line x1="95" y1="48" x2="95" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="115" y1="48" x2="115" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="135" y1="48" x2="135" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="155" y1="48" x2="155" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="175" y1="48" x2="175" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="195" y1="48" x2="195" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="215" y1="48" x2="215" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <line x1="235" y1="48" x2="235" y2="38" stroke="#475569" stroke-width="1.2"/>
+        <text x="110" y="35" fill="#475569" font-size="7">Soğutma kanatları</text>
+
+        <!-- Puller hint -->
+        <text x="5" y="165" fill="#9ca3af" font-size="7">* Rulman çıkarmada puley çekicisi kullan; mile çekiç vurma!</text>
+      </svg>
+      <p class="svg-caption">DE (Drive End) ve NDE (Non-Drive End) kapaklar mavi ok yönünde söküldüğünde rotor erişilebilir olur. Sarı rulmanlara çekiç değil, puley çekicisi veya ısıtıcı kullanılmalıdır. Kapak cıvataları çapraz sıkma prensibiyle takılır.</p>
+    </div>
+
     <h3>22.4 Sahada Alternatif Malzeme Bulma Pratikleri</h3>
     <p>Okyanusun ortasında malzeme bittiğinde ve yedek parça gelmesine haftalar varken, gemiyi yürütmek ETO'nun yaratıcılığına kalır.</p>
     <h4>Eşdeğer Parça Kullanımı</h4>
@@ -4023,6 +4142,73 @@
         <tr><td>Kullanım süresi</td><td>Sürekli</td><td>Kısa süreli / acil</td></tr>
       </tbody>
     </table>
+
+    <div class="svg-wrap">
+      <h3>Trifaze Motor — Monofaze Kondansatörlü Bağlantı Şeması</h3>
+      <svg viewBox="0 0 340 165" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrP" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L6,3 L0,6 z" fill="#94a3b8"/>
+          </marker>
+        </defs>
+        <!-- L1 line -->
+        <line x1="20" y1="30" x2="140" y2="30" stroke="#38bdf8" stroke-width="2"/>
+        <text x="4" y="34" fill="#38bdf8" font-size="11" font-weight="bold">L1</text>
+
+        <!-- L2 (Nötr) line -->
+        <line x1="20" y1="75" x2="140" y2="75" stroke="#4ade80" stroke-width="2"/>
+        <text x="4" y="79" fill="#4ade80" font-size="11" font-weight="bold">L2</text>
+        <text x="4" y="90" fill="#9ca3af" font-size="7">(Nötr)</text>
+
+        <!-- Capacitor branch (replacing L3) -->
+        <line x1="20" y1="125" x2="75" y2="125" stroke="#facc15" stroke-width="2"/>
+        <text x="4" y="129" fill="#facc15" font-size="11" font-weight="bold">C</text>
+        <!-- Capacitor symbol -->
+        <line x1="75" y1="112" x2="75" y2="138" stroke="#facc15" stroke-width="2.5"/>
+        <line x1="84" y1="112" x2="84" y2="138" stroke="#facc15" stroke-width="2.5"/>
+        <line x1="84" y1="125" x2="140" y2="125" stroke="#facc15" stroke-width="2"/>
+        <text x="52" y="107" fill="#facc15" font-size="8">~70 µF/kW</text>
+
+        <!-- Motor symbol (circle) -->
+        <circle cx="192" cy="77" r="45" fill="#1e293b" stroke="#64748b" stroke-width="1.8"/>
+        <text x="177" y="71" fill="#e5e7eb" font-size="13" font-weight="bold">M</text>
+        <text x="180" y="86" fill="#94a3b8" font-size="9">3 ~</text>
+
+        <!-- Connection lines to motor -->
+        <line x1="140" y1="30" x2="155" y2="48" stroke="#38bdf8" stroke-width="1.8"/>
+        <line x1="140" y1="75" x2="148" y2="77" stroke="#4ade80" stroke-width="1.8"/>
+        <line x1="140" y1="125" x2="155" y2="107" stroke="#facc15" stroke-width="1.8"/>
+
+        <!-- Terminal labels on motor -->
+        <text x="149" y="46" fill="#38bdf8" font-size="7">U1</text>
+        <text x="141" y="93" fill="#4ade80" font-size="7">V1</text>
+        <text x="149" y="113" fill="#facc15" font-size="7">W1</text>
+
+        <!-- Thermik röle warning -->
+        <rect x="248" y="18" width="82" height="55" rx="6" fill="rgba(249,115,22,0.1)" stroke="#fb923c" stroke-width="1.2"/>
+        <text x="255" y="34" fill="#fb923c" font-size="9" font-weight="bold">⚠ Geçici!</text>
+        <text x="253" y="47" fill="#9ca3af" font-size="7">%65 kapasiteyle</text>
+        <text x="253" y="57" fill="#9ca3af" font-size="7">çalışır. Termik</text>
+        <text x="253" y="67" fill="#9ca3af" font-size="7">röleyi yeniden ayarla</text>
+
+        <!-- Capacity bar -->
+        <rect x="248" y="85" width="82" height="12" rx="3" fill="#1e293b" stroke="#334155"/>
+        <rect x="248" y="85" width="53" height="12" rx="3" fill="#facc15" opacity="0.75"/>
+        <text x="252" y="95" fill="#1e293b" font-size="8" font-weight="bold">%65</text>
+        <text x="304" y="95" fill="#9ca3af" font-size="8">güç</text>
+
+        <!-- Phase shift label -->
+        <text x="248" y="115" fill="#9ca3af" font-size="7">Kondansatör faz kayması</text>
+        <text x="248" y="125" fill="#9ca3af" font-size="7">oluşturur → motor döner</text>
+
+        <!-- Ground line bottom -->
+        <line x1="192" y1="122" x2="192" y2="148" stroke="#64748b" stroke-width="1.2"/>
+        <line x1="176" y1="148" x2="208" y2="148" stroke="#64748b" stroke-width="1.2"/>
+        <line x1="180" y1="153" x2="204" y2="153" stroke="#64748b" stroke-width="0.8"/>
+        <line x1="185" y1="158" x2="199" y2="158" stroke="#64748b" stroke-width="0.6"/>
+      </svg>
+      <p class="svg-caption">L1 ve L2 (nötr) motor terminallerine bağlanır; L3 yerine kondansatör (C) devreye girer ve faz kayması oluşturarak motoru döndürür. Kapasite genelde 70 µF/kW civarındadır. Motor ~%65 kapasiteyle çalışır; termik röle ayarı buna göre yeniden yapılmalıdır.</p>
+    </div>
 
     <h3>23.2 Çift Devirli Asenkron Motor (Dahlander Bağlantısı)</h3>
     <p>Tek bir stator üzerinde <strong>iki farklı hız</strong> elde etmek için Dahlander (pole-changing) yöntemi kullanılır.</p>
@@ -4114,6 +4300,91 @@
     </ul>
     <div class="callout">
       <strong>Saha notu:</strong> Jogging sırasında motor her darbede yüksek kalkış akımı çeker. Çok sık jogging kontaktör ve motorun ömrünü kısaltır. Üretici kılavuzuna bak: bazı motorlarda saatte max jogging sayısı belirtilmiştir.
+    </div>
+
+    <div class="svg-wrap">
+      <h3>Normal Start-Stop vs Jogging Devresi (Ladder Diyagram)</h3>
+      <svg viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg">
+        <!-- ====== LEFT: Normal (self-hold) ====== -->
+        <text x="8" y="13" fill="#38bdf8" font-size="9" font-weight="bold">Normal Devre (Mühürlü)</text>
+        <!-- Power rails -->
+        <line x1="8" y1="20" x2="152" y2="20" stroke="#38bdf8" stroke-width="1.5"/>
+        <line x1="8" y1="155" x2="152" y2="155" stroke="#475569" stroke-width="1.5"/>
+        <text x="1" y="19" fill="#38bdf8" font-size="7">L</text>
+        <text x="1" y="158" fill="#475569" font-size="7">N</text>
+
+        <!-- Row 1: STOP(NC) -->
+        <line x1="20" y1="20" x2="20" y2="42" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="14" y1="42" x2="26" y2="42" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="14" y1="50" x2="26" y2="50" stroke="#e5e7eb" stroke-width="1.3"/>
+        <!-- NC diagonal mark -->
+        <line x1="14" y1="43" x2="20" y2="50" stroke="#e5e7eb" stroke-width="0.8"/>
+        <line x1="20" y1="50" x2="20" y2="62" stroke="#e5e7eb" stroke-width="1.3"/>
+        <text x="8" y="40" fill="#f97373" font-size="7">STP</text>
+
+        <!-- START(NO) -->
+        <line x1="45" y1="20" x2="45" y2="42" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="39" y1="42" x2="51" y2="42" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="39" y1="50" x2="51" y2="50" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="45" y1="50" x2="45" y2="62" stroke="#e5e7eb" stroke-width="1.3"/>
+        <text x="36" y="40" fill="#4ade80" font-size="7">STR</text>
+
+        <!-- Connect STOP to START horizontal -->
+        <line x1="20" y1="62" x2="45" y2="62" stroke="#e5e7eb" stroke-width="1.3"/>
+
+        <!-- Coil K1 -->
+        <circle cx="112" cy="56" r="11" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+        <text x="106" y="60" fill="#38bdf8" font-size="9" font-weight="bold">K1</text>
+        <line x1="45" y1="62" x2="45" y2="56" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="45" y1="56" x2="101" y2="56" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="123" y1="56" x2="140" y2="56" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="140" y1="56" x2="140" y2="155" stroke="#475569" stroke-width="1.3"/>
+
+        <!-- Row 2: Self-hold contact K1(NO) parallel to START -->
+        <line x1="45" y1="20" x2="45" y2="82" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+        <line x1="68" y1="82" x2="68" y2="100" stroke="#a78bfa" stroke-width="1.3"/>
+        <line x1="62" y1="100" x2="74" y2="100" stroke="#a78bfa" stroke-width="1.3"/>
+        <line x1="62" y1="108" x2="74" y2="108" stroke="#a78bfa" stroke-width="1.3"/>
+        <line x1="68" y1="108" x2="68" y2="120" stroke="#a78bfa" stroke-width="1.3"/>
+        <line x1="68" y1="120" x2="45" y2="120" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+        <line x1="68" y1="82" x2="45" y2="82" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>
+        <text x="72" y="98" fill="#a78bfa" font-size="7">K1</text>
+        <text x="72" y="107" fill="#a78bfa" font-size="7">NO</text>
+        <text x="2" y="103" fill="#a78bfa" font-size="7">Mühür</text>
+        <text x="2" y="112" fill="#a78bfa" font-size="7">kontağı</text>
+
+        <!-- Divider -->
+        <line x1="165" y1="5" x2="165" y2="158" stroke="#374151" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- ====== RIGHT: Jogging (no self-hold) ====== -->
+        <text x="172" y="13" fill="#facc15" font-size="9" font-weight="bold">Jogging Devresi (Mühürsüz)</text>
+        <!-- Power rails -->
+        <line x1="172" y1="20" x2="332" y2="20" stroke="#38bdf8" stroke-width="1.5"/>
+        <line x1="172" y1="155" x2="332" y2="155" stroke="#475569" stroke-width="1.5"/>
+
+        <!-- JOG button (NO only, direct to coil) -->
+        <line x1="185" y1="20" x2="185" y2="42" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="179" y1="42" x2="191" y2="42" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="179" y1="50" x2="191" y2="50" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="185" y1="50" x2="185" y2="62" stroke="#e5e7eb" stroke-width="1.3"/>
+        <text x="173" y="40" fill="#facc15" font-size="7">JOG</text>
+
+        <!-- Coil K1 -->
+        <circle cx="290" cy="56" r="11" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+        <text x="284" y="60" fill="#38bdf8" font-size="9" font-weight="bold">K1</text>
+        <line x1="185" y1="62" x2="185" y2="56" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="185" y1="56" x2="279" y2="56" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="301" y1="56" x2="318" y2="56" stroke="#e5e7eb" stroke-width="1.3"/>
+        <line x1="318" y1="56" x2="318" y2="155" stroke="#475569" stroke-width="1.3"/>
+
+        <!-- X marks where self-hold would be — absent -->
+        <line x1="215" y1="88" x2="240" y2="115" stroke="#f97373" stroke-width="2"/>
+        <line x1="240" y1="88" x2="215" y2="115" stroke="#f97373" stroke-width="2"/>
+        <rect x="210" y="83" width="35" height="37" rx="4" fill="none" stroke="#f97373" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="196" y="130" fill="#f97373" font-size="8">Mühür yok!</text>
+        <text x="193" y="141" fill="#9ca3af" font-size="7">Bırakınca motor durur</text>
+      </svg>
+      <p class="svg-caption">Sol devrede K1'in NO yardımcı kontağı START'a paralel bağlı "mühür" oluşturur; butonu bıraksan da motor çalışır. Sağ jogging devresinde bu mühür kontağı yoktur — JOG butonuna basılı tutulduğu süre motor döner, bırakınca durur.</p>
     </div>
 
     <h3>23.7 Floresan Lamba Çalışma Prensibi ve Arızaları</h3>
@@ -4235,6 +4506,78 @@
       </tbody>
     </table>
 
+    <div class="svg-wrap">
+      <h3>HELP ve HUDDLE Pozisyonları (Suda Hayatta Kalma)</h3>
+      <svg viewBox="0 0 340 168" xmlns="http://www.w3.org/2000/svg">
+        <!-- Water (left side) -->
+        <path d="M10,108 Q25,103 40,108 Q55,113 70,108 Q85,103 100,108 Q115,113 140,108" fill="none" stroke="#38bdf8" stroke-width="0.8" opacity="0.4"/>
+        <path d="M10,115 Q30,110 55,115 Q80,120 110,115 Q130,110 150,115" fill="none" stroke="#38bdf8" stroke-width="0.6" opacity="0.3"/>
+
+        <!-- ====== HELP Position ====== -->
+        <text x="22" y="14" fill="#38bdf8" font-size="11" font-weight="bold">HELP</text>
+        <text x="18" y="25" fill="#9ca3af" font-size="8">Tek Kişi — Isı Koruması</text>
+        <!-- Head -->
+        <circle cx="80" cy="44" r="12" fill="none" stroke="#e5e7eb" stroke-width="1.8"/>
+        <!-- Torso hunched -->
+        <path d="M80,56 Q78,72 68,85 Q64,93 70,100" fill="none" stroke="#e5e7eb" stroke-width="1.8"/>
+        <!-- Arms crossed over chest (insulating) -->
+        <path d="M72,68 Q55,62 50,72 Q56,78 66,74" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+        <path d="M76,68 Q92,62 97,72 Q91,78 81,74" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+        <!-- Knees drawn up -->
+        <path d="M70,100 Q58,110 60,122" fill="none" stroke="#e5e7eb" stroke-width="1.8"/>
+        <path d="M74,100 Q82,110 80,122" fill="none" stroke="#e5e7eb" stroke-width="1.8"/>
+        <!-- Heat arrows (minimized) -->
+        <line x1="40" y1="78" x2="40" y2="58" stroke="#facc15" stroke-width="1" stroke-dasharray="2,2" opacity="0.7"/>
+        <text x="24" y="57" fill="#facc15" font-size="7">az ısı</text>
+        <text x="23" y="66" fill="#facc15" font-size="7">kaybı ↑</text>
+        <!-- Annotation arrows -->
+        <line x1="99" y1="68" x2="113" y2="62" stroke="#38bdf8" stroke-width="0.8"/>
+        <text x="112" y="61" fill="#38bdf8" font-size="7">kollar</text>
+        <text x="112" y="70" fill="#38bdf8" font-size="7">göğüste</text>
+        <line x1="82" y1="112" x2="113" y2="105" stroke="#9ca3af" stroke-width="0.8"/>
+        <text x="112" y="104" fill="#9ca3af" font-size="7">dizler</text>
+        <text x="112" y="113" fill="#9ca3af" font-size="7">karnında</text>
+
+        <!-- Divider -->
+        <line x1="168" y1="5" x2="168" y2="162" stroke="#374151" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- Water (right side) -->
+        <path d="M178,108 Q200,103 220,108 Q240,113 265,108 Q285,103 328,108" fill="none" stroke="#38bdf8" stroke-width="0.8" opacity="0.4"/>
+
+        <!-- ====== HUDDLE Position ====== -->
+        <text x="195" y="14" fill="#4ade80" font-size="11" font-weight="bold">HUDDLE</text>
+        <text x="182" y="25" fill="#9ca3af" font-size="8">Grup Hâlinde — Toplu Isı Koruması</text>
+
+        <!-- Person 1 (top center) -->
+        <circle cx="253" cy="48" r="9" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+        <line x1="253" y1="57" x2="253" y2="78" stroke="#e5e7eb" stroke-width="1.6"/>
+
+        <!-- Person 2 (bottom-left) -->
+        <circle cx="222" cy="90" r="9" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+        <line x1="222" y1="99" x2="222" y2="120" stroke="#e5e7eb" stroke-width="1.6"/>
+
+        <!-- Person 3 (bottom-right) -->
+        <circle cx="284" cy="90" r="9" fill="none" stroke="#e5e7eb" stroke-width="1.6"/>
+        <line x1="284" y1="99" x2="284" y2="120" stroke="#e5e7eb" stroke-width="1.6"/>
+
+        <!-- Arms linking the group -->
+        <path d="M253,68 Q238,76 228,84" fill="none" stroke="#4ade80" stroke-width="1.8"/>
+        <path d="M253,68 Q268,76 277,84" fill="none" stroke="#4ade80" stroke-width="1.8"/>
+        <path d="M228,105 Q253,115 278,105" fill="none" stroke="#4ade80" stroke-width="1.8"/>
+
+        <!-- Heat conservation zone -->
+        <circle cx="253" cy="88" r="46" fill="none" stroke="#4ade80" stroke-width="0.8" stroke-dasharray="5,3" opacity="0.5"/>
+        <text x="232" y="88" fill="#4ade80" font-size="7" opacity="0.7">Isı</text>
+        <text x="230" y="97" fill="#4ade80" font-size="7" opacity="0.7">koruması</text>
+
+        <!-- Heat arrows (going out, but less) -->
+        <line x1="300" y1="68" x2="315" y2="50" stroke="#facc15" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+        <text x="308" y="48" fill="#facc15" font-size="7">daha az</text>
+        <text x="310" y="57" fill="#facc15" font-size="7">ısı kaybı</text>
+      </svg>
+      <p class="svg-caption">HELP: kolları göğse çekerek, dizleri karna alarak kasık ve koltukaltı gibi büyük damar bölgelerindeki ısı kaybını azaltırsın. HUDDLE: grupta yan yana/kucak kucağa durmak toplu ısı koruması sağlar; çocukları grubun ortasına al.</p>
+    </div>
+
     <h3>24.4 Emniyet Kemeri Kullanımı (Safety Harness)</h3>
     <ul>
       <li><strong>Bağlanma noktası (anchor point):</strong> Standart şeklinde min 5 kN dayanımlı; güçlü yapı elemanına bağlanmalı. Zayıf boru veya korkuluğa bağlama.</li>
@@ -4299,6 +4642,72 @@
       <li>Boyalı metal, plastik, kauçuk: ~0,9–0,95 (doğru okuma).</li>
       <li><strong>Saha tüyosu:</strong> Parlak metal yüzeye elektrik bandı yapıştır, bant üzerini ölç — emisivite 0,95'e yakın, okuma güvenilir.</li>
     </ul>
+
+    <div class="svg-wrap">
+      <h3>Emisivite — Parlak Metal vs Bantlı Yüzey</h3>
+      <svg viewBox="0 0 340 138" xmlns="http://www.w3.org/2000/svg">
+        <!-- ====== LEFT: Shiny metal (low ε) ====== -->
+        <text x="12" y="13" fill="#f97373" font-size="9" font-weight="bold">Parlak Metal  (ε ≈ 0,10)</text>
+        <!-- Surface -->
+        <rect x="12" y="88" width="140" height="14" rx="3" fill="#94a3b8"/>
+        <!-- Metallic shine lines -->
+        <line x1="20" y1="89" x2="20" y2="101" stroke="white" stroke-width="0.7" opacity="0.35"/>
+        <line x1="50" y1="89" x2="50" y2="101" stroke="white" stroke-width="0.7" opacity="0.35"/>
+        <line x1="80" y1="89" x2="80" y2="101" stroke="white" stroke-width="0.7" opacity="0.35"/>
+        <line x1="110" y1="89" x2="110" y2="101" stroke="white" stroke-width="0.7" opacity="0.35"/>
+        <line x1="140" y1="89" x2="140" y2="101" stroke="white" stroke-width="0.7" opacity="0.35"/>
+        <text x="14" y="118" fill="#94a3b8" font-size="7">Çıplak parlak metal</text>
+
+        <!-- IR reflected rays (wrong measurement) -->
+        <line x1="35" y1="88" x2="20" y2="55" stroke="#facc15" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <line x1="65" y1="88" x2="85" y2="45" stroke="#facc15" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <line x1="95" y1="88" x2="115" y2="55" stroke="#facc15" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <text x="28" y="43" fill="#facc15" font-size="7">Yansıma!</text>
+        <text x="75" y="38" fill="#facc15" font-size="7">Çevre ısısı</text>
+        <text x="75" y="47" fill="#facc15" font-size="7">da okunur</text>
+
+        <!-- Pyrometer (showing wrong reading) -->
+        <rect x="100" y="28" width="45" height="24" rx="5" fill="#1e293b" stroke="#f97373" stroke-width="1.5"/>
+        <text x="107" y="41" fill="#f97373" font-size="9" font-weight="bold">150°C</text>
+        <text x="108" y="51" fill="#9ca3af" font-size="6">YANLIŞ</text>
+        <!-- Pyrometer body -->
+        <rect x="96" y="20" width="12" height="12" rx="2" fill="#334155" stroke="#64748b"/>
+        <text x="97" y="29" fill="#64748b" font-size="6">IR</text>
+
+        <!-- Divider -->
+        <line x1="168" y1="5" x2="168" y2="133" stroke="#374151" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- ====== RIGHT: Taped surface (high ε) ====== -->
+        <text x="175" y="13" fill="#4ade80" font-size="9" font-weight="bold">Bantlı Yüzey  (ε ≈ 0,95)</text>
+        <!-- Surface -->
+        <rect x="180" y="88" width="140" height="14" rx="3" fill="#334155"/>
+        <!-- Electrical tape on top -->
+        <rect x="200" y="84" width="55" height="6" rx="2" fill="#1e3a5f" stroke="#38bdf8" stroke-width="0.8"/>
+        <text x="207" y="90" fill="#38bdf8" font-size="5" font-weight="bold">ELEKTRİK BANDI</text>
+        <text x="182" y="118" fill="#94a3b8" font-size="7">Bantlı / boyalı yüzey</text>
+
+        <!-- IR emitted correctly (straight lines up) -->
+        <line x1="210" y1="88" x2="210" y2="52" stroke="#4ade80" stroke-width="1.8"/>
+        <line x1="227" y1="88" x2="227" y2="52" stroke="#4ade80" stroke-width="1.4" opacity="0.7"/>
+        <line x1="244" y1="88" x2="244" y2="52" stroke="#4ade80" stroke-width="1.4" opacity="0.7"/>
+        <!-- Arrowheads on lines -->
+        <polygon points="210,48 207,56 213,56" fill="#4ade80"/>
+        <polygon points="227,48 224,56 230,56" fill="#4ade80" opacity="0.7"/>
+        <polygon points="244,48 241,56 247,56" fill="#4ade80" opacity="0.7"/>
+        <text x="248" y="55" fill="#4ade80" font-size="7">Doğru IR</text>
+        <text x="248" y="64" fill="#4ade80" font-size="7">yayımı</text>
+
+        <!-- Pyrometer (showing correct reading) -->
+        <rect x="182" y="28" width="45" height="24" rx="5" fill="#1e293b" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="189" y="41" fill="#4ade80" font-size="9" font-weight="bold">284°C</text>
+        <text x="191" y="51" fill="#9ca3af" font-size="6">DOĞRU</text>
+        <!-- Pyrometer body -->
+        <rect x="224" y="20" width="12" height="12" rx="2" fill="#334155" stroke="#64748b"/>
+        <text x="225" y="29" fill="#64748b" font-size="6">IR</text>
+      </svg>
+      <p class="svg-caption">Sol: parlak metal IR ışınlarını yansıtır, pirometre çevredeki yansımayı da okuyarak düşük/hatalı değer gösterir. Sağ: yüzeye yapıştırılan elektrik bandı emisiviteyi ~0,95'e çıkarır; IR doğrudan yüzeyden yayılır ve pirometre gerçek sıcaklığı okur.</p>
+    </div>
+
     <h4>Sıcaklık Ölçek Dönüşümleri</h4>
     <table>
       <thead><tr><th>Dönüşüm</th><th>Formül</th><th>Örnek</th></tr></thead>
@@ -4325,6 +4734,53 @@
       <li>Mors'ta: S = · · ·  &nbsp; O = — — —</li>
       <li>Işıkla, düdükle, radyoyla verilebilir; aralıksız tekrarlanır.</li>
     </ul>
+
+    <div class="svg-wrap">
+      <h3>SOS — Mors Kodu Görsel Gösterimi</h3>
+      <svg viewBox="0 0 340 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- Title label -->
+        <text x="125" y="13" fill="#9ca3af" font-size="8">· · · — — — · · ·</text>
+
+        <!-- S = 3 short dots -->
+        <text x="24" y="28" fill="#38bdf8" font-size="9" font-weight="bold">S</text>
+        <circle cx="22" cy="42" r="7" fill="#38bdf8"/>
+        <circle cx="42" cy="42" r="7" fill="#38bdf8"/>
+        <circle cx="62" cy="42" r="7" fill="#38bdf8"/>
+        <text x="28" y="62" fill="#38bdf8" font-size="8">· · ·</text>
+        <text x="22" y="73" fill="#9ca3af" font-size="7">kısa × 3</text>
+
+        <!-- S separator -->
+        <line x1="92" y1="25" x2="92" y2="75" stroke="#374151" stroke-width="1"/>
+
+        <!-- O = 3 long dashes -->
+        <text x="152" y="28" fill="#facc15" font-size="9" font-weight="bold">O</text>
+        <rect x="105" y="35" width="28" height="14" rx="5" fill="#facc15"/>
+        <rect x="148" y="35" width="28" height="14" rx="5" fill="#facc15"/>
+        <rect x="191" y="35" width="28" height="14" rx="5" fill="#facc15"/>
+        <text x="142" y="62" fill="#facc15" font-size="8">— — —</text>
+        <text x="140" y="73" fill="#9ca3af" font-size="7">uzun × 3</text>
+
+        <!-- O separator -->
+        <line x1="235" y1="25" x2="235" y2="75" stroke="#374151" stroke-width="1"/>
+
+        <!-- S = 3 short dots again -->
+        <text x="266" y="28" fill="#38bdf8" font-size="9" font-weight="bold">S</text>
+        <circle cx="252" cy="42" r="7" fill="#38bdf8"/>
+        <circle cx="272" cy="42" r="7" fill="#38bdf8"/>
+        <circle cx="292" cy="42" r="7" fill="#38bdf8"/>
+        <text x="258" y="62" fill="#38bdf8" font-size="8">· · ·</text>
+        <text x="252" y="73" fill="#9ca3af" font-size="7">kısa × 3</text>
+
+        <!-- Repeat arrow -->
+        <text x="314" y="47" fill="#9ca3af" font-size="20">↺</text>
+        <text x="314" y="72" fill="#9ca3af" font-size="7">tekrar</text>
+
+        <!-- Aldis lamp hint -->
+        <text x="90" y="85" fill="#9ca3af" font-size="7">Aldis lambası: kısa basış = nokta · uzun basış = çizgi</text>
+      </svg>
+      <p class="svg-caption">SOS: 3 kısa (S = · · ·) + 3 uzun (O = — — —) + 3 kısa (S = · · ·). Aldis lambasında kısa tetik basışı nokta, uzun basış çizgi olur. Sinyal, aralarında kısa ara bırakılarak aralıksız tekrarlanır.</p>
+    </div>
+
     <h4>Aldis Lambası (Signal Lamp) Kullanımı</h4>
     <ul>
       <li>El tipi veya sabit montajlı yüksek parlaklıklı projektör; manuel veya otomatik Mors kodu gönderir.</li>
