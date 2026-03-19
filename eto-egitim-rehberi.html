@@ -6903,7 +6903,7 @@
     <div class="ai-avatar">🤖</div>
     <div class="ai-info">
       <div class="ai-name">ETO Asistanı</div>
-      <div class="ai-sub">Gemini 2.5 Pro · ETO Uzmanı</div>
+      <div class="ai-sub" id="eto-ai-model-label">Gemini 2.5 Pro · ETO Uzmanı</div>
     </div>
     <div class="ai-status"></div>
     <button id="eto-ai-close" aria-label="Kapat">✕</button>
@@ -6960,10 +6960,18 @@
   'use strict';
 
   /* ── Config ── */
-  const MODEL   = 'gemini-2.5-pro';
-  const STORAGE_KEY = 'eto_gemini_key';
-  const API_URL = key =>
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${key}`;
+  const MODELS = [
+    { id: 'gemini-2.5-pro',   label: 'Gemini 2.5 Pro' },
+    { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
+    { id: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
+  ];
+  const STORAGE_KEY       = 'eto_gemini_key';
+  const STORAGE_MODEL_IDX = 'eto_model_idx';
+  let modelIdx = parseInt(localStorage.getItem(STORAGE_MODEL_IDX) || '0', 10);
+  if (modelIdx >= MODELS.length) modelIdx = 0;
+
+  const API_URL = (key, model) =>
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
 
   const SYSTEM_PROMPT = `Sen "ETO Asistanı"sın — Türk denizcilik sınavlarına (Liman ve Zabitlik) hazırlanan kursiyerlere yardım eden deneyimli bir Elektro-Teknik Zabit eğitimcisin.
 
@@ -7015,9 +7023,16 @@ YANIT KURALLARI:
   let thinking  = false;
   let pendingImg = null; // { mimeType, data (base64) }
 
+  /* ── Model label ── */
+  function updateModelLabel() {
+    const lbl = document.getElementById('eto-ai-model-label');
+    if (lbl) lbl.textContent = MODELS[modelIdx].label + ' · ETO Uzmanı';
+  }
+
   /* ── Key wall ── */
   function refreshKeywall() {
     keywall.style.display = apiKey ? 'none' : 'flex';
+    updateModelLabel();
     if (apiKey && history.length === 0) addBotMsg(
       '👋 Merhaba! Ben ETO Asistanı — gemi elektrikleri, motor devreleri, sınav soruları ve saha arızaları hakkında sorularına yanıt vermeye hazırım.\n\n📷 **Fotoğraf** da yükleyebilirsin — motor etiketi, devre şeması, arıza ekranı gibi görseller gönder, analiz edeyim!'
     );
@@ -7193,35 +7208,56 @@ YANIT KURALLARI:
     };
 
     try {
-      const res = await fetch(API_URL(apiKey), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
+      let res = null;
+      const startModelIdx = modelIdx;
+      let usedIdx = modelIdx;
+
+      // Try current model, fall back through chain on 429
+      for (let i = modelIdx; i < MODELS.length; i++) {
+        res = await fetch(API_URL(apiKey, MODELS[i].id), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        if (res.status !== 429) {
+          usedIdx = i;
+          // Persist new model index if we fell back
+          if (i > startModelIdx) {
+            modelIdx = i;
+            localStorage.setItem(STORAGE_MODEL_IDX, modelIdx);
+            updateModelLabel();
+          }
+          break;
+        }
+        res = null; // mark as failed before next iteration
+      }
 
       removeTyping();
 
-      if (!res.ok) {
+      if (!res) {
+        addBotMsg('⏳ Tüm modellerin günlük kotası doldu. Yarın sıfırlanır. Bir süre sonra tekrar dene.');
+        history.pop();
+      } else if (!res.ok) {
         const err = await res.json().catch(() => ({}));
         const errMsg = err?.error?.message || `HTTP ${res.status}`;
-
         if (res.status === 400 || res.status === 403) {
-          // Bad key
           addBotMsg('⚠️ API key hatalı veya geçersiz. Lütfen yeni bir key gir.');
           localStorage.removeItem(STORAGE_KEY);
           apiKey = '';
           setTimeout(() => { keywall.style.display = 'flex'; }, 800);
-        } else if (res.status === 429) {
-          addBotMsg('⏳ İstek limiti doldu. Gemini 2.5 Pro ücretsiz kotası: **5 istek/dakika, 100 istek/gün**. Bir dakika bekleyip tekrar dene.');
         } else {
           addBotMsg(`❌ Hata: ${errMsg}`);
         }
-        history.pop(); // rollback
+        history.pop();
       } else {
         const data = await res.json();
         const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
           || 'Yanıt alınamadı. Tekrar dene.';
         history.push({ role: 'model', parts: [{ text: reply }] });
+        // Notify user if model changed
+        if (usedIdx > startModelIdx) {
+          addBotMsg(`ℹ️ **${MODELS[startModelIdx].label}** kotası doldu — otomatik olarak **${MODELS[usedIdx].label}**'a geçildi.`);
+        }
         addBotMsg(reply);
       }
     } catch (e) {
