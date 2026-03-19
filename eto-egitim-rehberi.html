@@ -6691,5 +6691,446 @@
     onScroll();
   })();
 </script>
+<!-- ═══════════════════ ETO AI ASISTANI WIDGET ═══════════════════ -->
+<style>
+  /* ── Chat floating button ── */
+  #eto-ai-btn {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    width: 62px; height: 62px; border-radius: 50%;
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+    color: #fff; border: none; cursor: pointer;
+    box-shadow: 0 4px 18px rgba(21,101,192,0.55);
+    font-size: 26px; display: flex; align-items: center; justify-content: center;
+    transition: transform .2s, box-shadow .2s;
+  }
+  #eto-ai-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(21,101,192,0.7); }
+  #eto-ai-btn .ai-badge {
+    position: absolute; top: -4px; right: -4px;
+    background: #e53935; color: #fff; font-size: 8px; font-weight: 700;
+    border-radius: 8px; padding: 2px 5px; line-height: 1; letter-spacing: .3px;
+  }
+
+  /* ── Chat panel ── */
+  #eto-ai-panel {
+    position: fixed; bottom: 104px; right: 28px; z-index: 9998;
+    width: 380px; max-width: calc(100vw - 40px);
+    background: #1a1f2e; border: 1px solid #2a3550;
+    border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,.55);
+    display: flex; flex-direction: column; overflow: hidden;
+    transform: scale(.92) translateY(12px); opacity: 0;
+    pointer-events: none;
+    transition: transform .22s cubic-bezier(.34,1.4,.64,1), opacity .18s;
+    max-height: 520px;
+  }
+  #eto-ai-panel.open {
+    transform: scale(1) translateY(0); opacity: 1; pointer-events: all;
+  }
+
+  /* ── Header ── */
+  #eto-ai-header {
+    background: linear-gradient(90deg, #0d47a1, #1565c0);
+    padding: 13px 16px; display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+  }
+  #eto-ai-header .ai-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,.18); display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  #eto-ai-header .ai-info { flex: 1; }
+  #eto-ai-header .ai-name { color: #fff; font-weight: 700; font-size: 14px; }
+  #eto-ai-header .ai-sub { color: rgba(255,255,255,.7); font-size: 11px; margin-top: 1px; }
+  #eto-ai-header .ai-status {
+    width: 8px; height: 8px; border-radius: 50%; background: #69f0ae;
+    box-shadow: 0 0 6px #69f0ae; flex-shrink: 0;
+  }
+  #eto-ai-close {
+    background: none; border: none; color: rgba(255,255,255,.7);
+    font-size: 20px; cursor: pointer; padding: 0 2px; line-height: 1;
+    flex-shrink: 0;
+  }
+  #eto-ai-close:hover { color: #fff; }
+
+  /* ── Messages ── */
+  #eto-ai-messages {
+    flex: 1; overflow-y: auto; padding: 14px 14px 6px;
+    display: flex; flex-direction: column; gap: 10px;
+    scrollbar-width: thin; scrollbar-color: #2a3550 transparent;
+  }
+  #eto-ai-messages::-webkit-scrollbar { width: 4px; }
+  #eto-ai-messages::-webkit-scrollbar-track { background: transparent; }
+  #eto-ai-messages::-webkit-scrollbar-thumb { background: #2a3550; border-radius: 4px; }
+
+  .ai-msg {
+    max-width: 88%; line-height: 1.55; font-size: 13.5px;
+    border-radius: 14px; padding: 9px 13px; word-break: break-word;
+  }
+  .ai-msg.user {
+    align-self: flex-end;
+    background: #1565c0; color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .ai-msg.bot {
+    align-self: flex-start;
+    background: #252d40; color: #e8eaf6;
+    border-bottom-left-radius: 4px;
+  }
+  .ai-msg.bot strong { color: #90caf9; }
+  .ai-msg.bot code {
+    background: #1a1f2e; color: #80cbc4; padding: 1px 5px;
+    border-radius: 4px; font-size: 12px;
+  }
+
+  /* Typing dots */
+  .ai-typing { display: flex; gap: 5px; align-items: center; padding: 11px 14px; }
+  .ai-typing span {
+    width: 7px; height: 7px; border-radius: 50%; background: #5c7abf;
+    animation: eto-bounce .9s infinite;
+  }
+  .ai-typing span:nth-child(2) { animation-delay: .15s; }
+  .ai-typing span:nth-child(3) { animation-delay: .3s; }
+  @keyframes eto-bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-7px)} }
+
+  /* ── Suggestions ── */
+  #eto-ai-suggestions {
+    padding: 6px 12px; display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0;
+  }
+  .ai-chip {
+    background: #252d40; color: #90caf9; border: 1px solid #2a3550;
+    border-radius: 20px; font-size: 11px; padding: 4px 10px;
+    cursor: pointer; white-space: nowrap; transition: background .15s;
+  }
+  .ai-chip:hover { background: #1565c0; color: #fff; border-color: #1565c0; }
+
+  /* ── Input area ── */
+  #eto-ai-input-row {
+    display: flex; gap: 8px; padding: 10px 12px 13px;
+    border-top: 1px solid #2a3550; flex-shrink: 0;
+  }
+  #eto-ai-input {
+    flex: 1; background: #252d40; border: 1px solid #2a3550;
+    color: #e8eaf6; border-radius: 22px; padding: 9px 14px;
+    font-size: 13px; outline: none; resize: none;
+    font-family: inherit; line-height: 1.4; max-height: 80px;
+    transition: border-color .15s;
+  }
+  #eto-ai-input:focus { border-color: #1565c0; }
+  #eto-ai-input::placeholder { color: #4a5568; }
+  #eto-ai-send {
+    width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: #1565c0; color: #fff; font-size: 16px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; align-self: flex-end; transition: background .15s;
+  }
+  #eto-ai-send:hover { background: #0d47a1; }
+  #eto-ai-send:disabled { background: #2a3550; cursor: default; }
+
+  /* ── API key overlay ── */
+  #eto-ai-keywall {
+    position: absolute; inset: 0; background: #1a1f2e;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 24px; gap: 12px; z-index: 10;
+    border-radius: 16px;
+  }
+  #eto-ai-keywall h3 { color: #90caf9; font-size: 15px; text-align: center; margin: 0; }
+  #eto-ai-keywall p { color: #8892a4; font-size: 12px; text-align: center; margin: 0; line-height: 1.5; }
+  #eto-ai-keywall a { color: #90caf9; }
+  #eto-ai-key-input {
+    width: 100%; background: #252d40; border: 1px solid #2a3550;
+    color: #e8eaf6; border-radius: 8px; padding: 9px 12px;
+    font-size: 13px; outline: none; font-family: monospace;
+    transition: border-color .15s; box-sizing: border-box;
+  }
+  #eto-ai-key-input:focus { border-color: #1565c0; }
+  #eto-ai-key-save {
+    width: 100%; background: #1565c0; color: #fff; border: none;
+    border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: background .15s;
+  }
+  #eto-ai-key-save:hover { background: #0d47a1; }
+
+  @media (max-width: 440px) {
+    #eto-ai-panel { width: calc(100vw - 24px); right: 12px; bottom: 96px; }
+    #eto-ai-btn { bottom: 18px; right: 18px; }
+  }
+</style>
+
+<!-- Widget HTML -->
+<button id="eto-ai-btn" title="ETO Yapay Zeka Asistanı" aria-label="AI Asistan">
+  ⚡
+  <span class="ai-badge">AI</span>
+</button>
+
+<div id="eto-ai-panel" role="dialog" aria-label="ETO AI Asistanı">
+  <!-- Header -->
+  <div id="eto-ai-header">
+    <div class="ai-avatar">🤖</div>
+    <div class="ai-info">
+      <div class="ai-name">ETO Asistanı</div>
+      <div class="ai-sub">Gemini 2.5 Pro · ETO Uzmanı</div>
+    </div>
+    <div class="ai-status"></div>
+    <button id="eto-ai-close" aria-label="Kapat">✕</button>
+  </div>
+
+  <!-- API Key wall (shown when no key saved) -->
+  <div id="eto-ai-keywall">
+    <div style="font-size:40px">🔑</div>
+    <h3>Google Gemini API Key Gir</h3>
+    <p>
+      Ücretsiz API key almak için:<br>
+      <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>
+      → "Create API Key"<br><br>
+      Key bu cihazda <strong>tarayıcı hafızasında</strong> saklanır.<br>
+      Hiçbir sunucuya gönderilmez.
+    </p>
+    <input id="eto-ai-key-input" type="password" placeholder="AIzaSy..." autocomplete="off" spellcheck="false"/>
+    <button id="eto-ai-key-save">Kaydet ve Başlat</button>
+  </div>
+
+  <!-- Messages -->
+  <div id="eto-ai-messages"></div>
+
+  <!-- Quick chips -->
+  <div id="eto-ai-suggestions">
+    <span class="ai-chip">Star-delta farkı?</span>
+    <span class="ai-chip">Megger testi nasıl?</span>
+    <span class="ai-chip">VCB nedir?</span>
+    <span class="ai-chip">Kontaktör seçimi?</span>
+  </div>
+
+  <!-- Input -->
+  <div id="eto-ai-input-row">
+    <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda bir soru sor…" aria-label="Soru yaz"></textarea>
+    <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Config ── */
+  const MODEL   = 'gemini-2.5-pro';
+  const STORAGE_KEY = 'eto_gemini_key';
+  const API_URL = key =>
+    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${key}`;
+
+  const SYSTEM_PROMPT = `Sen "ETO Asistanı"sın — Türk denizcilik sınavlarına (Liman ve Zabitlik) hazırlanan kursiyerlere yardım eden deneyimli bir Elektro-Teknik Zabit eğitimcisin.
+
+UZMANLIK ALANLARI:
+• Gemi elektrigi ve dağıtım sistemleri (IEC 60092)
+• Motor kontrol devreleri: yıldız-üçgen, reversing, Dahlander, VFD
+• DC motorlar: şönt, seri, kompound, PMDC; bobinaj ve arıza tespiti
+• PLC/SCADA, sensörler (PT100, 4-20mA, termokupl)
+• Pnömatik/hidrolik sistemler (ISO 1219, valf türleri, RAM, pompalar)
+• Kablo kesiti seçimi ve bileşen seçim kriterleri (IEC 60947, IEC 60092)
+• Kontaktör, kondansatör, termik röle seçimi
+• Arıza bulma metodolojisi ve megger testi
+• GMDSS, deniz haberleşmesi, navigasyon sistemleri
+• Yüksek gerilim sistemleri (HV), VCB, SF6, LOTO
+• Akü teknolojisi, Baumé skalası, şarj sistemleri
+• STCW, ISM, SOLAS kapsamında ETO yetkinlikleri
+
+YANIT KURALLARI:
+• Her zaman Türkçe yanıt ver
+• Kısa ve net ol (6–8 cümle max, gerekirse madde madde)
+• Formülleri açık yaz: örn. F = P × A
+• Her yanıta kısa bir "⚡ Sınav İpucu:" veya "🔧 Saha Notu:" ekle
+• Emin olmadığın teknik detayı "Bunu sitenin ilgili bölümünde doğrula" diye belirt
+• Matematik içeren sorularda adım adım çöz`;
+
+  /* ── Elements ── */
+  const btn       = document.getElementById('eto-ai-btn');
+  const panel     = document.getElementById('eto-ai-panel');
+  const closeBtn  = document.getElementById('eto-ai-close');
+  const msgs      = document.getElementById('eto-ai-messages');
+  const input     = document.getElementById('eto-ai-input');
+  const sendBtn   = document.getElementById('eto-ai-send');
+  const keywall   = document.getElementById('eto-ai-keywall');
+  const keyInput  = document.getElementById('eto-ai-key-input');
+  const keySave   = document.getElementById('eto-ai-key-save');
+  const chips     = document.querySelectorAll('.ai-chip');
+
+  /* ── State ── */
+  let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
+  let history   = [];   // {role, parts:[{text}]}
+  let thinking  = false;
+
+  /* ── Key wall ── */
+  function refreshKeywall() {
+    keywall.style.display = apiKey ? 'none' : 'flex';
+    if (apiKey && history.length === 0) addBotMsg(
+      '👋 Merhaba! Ben ETO Asistanı — gemi elektrikleri, motor devreleri, sınav soruları ve saha arızaları hakkında sorularına yanıt vermeye hazırım. Ne öğrenmek istersin?'
+    );
+  }
+
+  keySave.addEventListener('click', () => {
+    const v = keyInput.value.trim();
+    if (!v) { keyInput.focus(); return; }
+    apiKey = v;
+    localStorage.setItem(STORAGE_KEY, v);
+    refreshKeywall();
+  });
+  keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') keySave.click(); });
+
+  /* ── Panel toggle ── */
+  btn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) {
+      refreshKeywall();
+      setTimeout(() => input.focus(), 220);
+    }
+  });
+  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && panel.classList.contains('open')) panel.classList.remove('open');
+  });
+
+  /* ── Message helpers ── */
+  function scrollBottom() {
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function renderMarkdown(text) {
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^•\s?/gm, '• ')
+      .replace(/\n/g, '<br>');
+  }
+
+  function addBotMsg(text) {
+    const div = document.createElement('div');
+    div.className = 'ai-msg bot';
+    div.innerHTML = renderMarkdown(text);
+    msgs.appendChild(div);
+    scrollBottom();
+    return div;
+  }
+
+  function addUserMsg(text) {
+    const div = document.createElement('div');
+    div.className = 'ai-msg user';
+    div.textContent = text;
+    msgs.appendChild(div);
+    scrollBottom();
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'ai-msg bot ai-typing';
+    div.id = 'eto-typing';
+    div.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(div);
+    scrollBottom();
+    return div;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('eto-typing');
+    if (t) t.remove();
+  }
+
+  /* ── Send message ── */
+  async function send(text) {
+    if (!text.trim() || thinking || !apiKey) return;
+    thinking = true;
+    sendBtn.disabled = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    addUserMsg(text);
+
+    // Add to history
+    history.push({ role: 'user', parts: [{ text }] });
+
+    // Keep history to last 10 turns (memory management)
+    if (history.length > 20) history = history.slice(-20);
+
+    showTyping();
+
+    const body = {
+      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents: history,
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 1024,
+      }
+    };
+
+    try {
+      const res = await fetch(API_URL(apiKey), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      removeTyping();
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        const errMsg = err?.error?.message || `HTTP ${res.status}`;
+
+        if (res.status === 400 || res.status === 403) {
+          // Bad key
+          addBotMsg('⚠️ API key hatalı veya geçersiz. Lütfen yeni bir key gir.');
+          localStorage.removeItem(STORAGE_KEY);
+          apiKey = '';
+          setTimeout(() => { keywall.style.display = 'flex'; }, 800);
+        } else if (res.status === 429) {
+          addBotMsg('⏳ İstek limiti doldu. Gemini 2.5 Pro ücretsiz kotası: **5 istek/dakika, 100 istek/gün**. Bir dakika bekleyip tekrar dene.');
+        } else {
+          addBotMsg(`❌ Hata: ${errMsg}`);
+        }
+        history.pop(); // rollback
+      } else {
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
+          || 'Yanıt alınamadı. Tekrar dene.';
+        history.push({ role: 'model', parts: [{ text: reply }] });
+        addBotMsg(reply);
+      }
+    } catch (e) {
+      removeTyping();
+      history.pop();
+      addBotMsg('🔌 Bağlantı hatası. İnternet bağlantını ve API key\'i kontrol et.');
+    }
+
+    thinking = false;
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  /* ── Input events ── */
+  sendBtn.addEventListener('click', () => send(input.value));
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send(input.value);
+    }
+  });
+
+  // Auto-resize textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+  });
+
+  // Suggestion chips
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (!apiKey) { panel.classList.add('open'); refreshKeywall(); return; }
+      send(chip.textContent);
+    });
+  });
+
+  // Init
+  refreshKeywall();
+})();
+</script>
+<!-- ══════════════════════════════════════════════════════════════ -->
 </body>
 </html>
