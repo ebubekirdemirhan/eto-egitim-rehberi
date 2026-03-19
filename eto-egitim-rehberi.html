@@ -6903,7 +6903,7 @@
     <div class="ai-avatar">🤖</div>
     <div class="ai-info">
       <div class="ai-name">ETO Asistanı</div>
-      <div class="ai-sub" id="eto-ai-model-label">Gemini 2.5 Pro · ETO Uzmanı</div>
+      <div class="ai-sub" id="eto-ai-model-label">Gemini 2.5 Flash · ETO Uzmanı</div>
     </div>
     <div class="ai-status"></div>
     <button id="eto-ai-close" aria-label="Kapat">✕</button>
@@ -6961,10 +6961,9 @@
 
   /* ── Config ── */
   const MODELS = [
-    { id: 'gemini-2.5-pro',   label: 'Gemini 2.5 Pro'   },   // 100 req/gün
-    { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },   // 1500 req/gün
-    { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },   // çok yüksek
-    { id: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },   // yedek
+    { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },   // varsayılan — 1500 req/gün
+    { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },   // yedek
+    { id: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },   // son yedek
   ];
   const STORAGE_KEY       = 'eto_gemini_key';
   const STORAGE_MODEL_IDX = 'eto_model_idx';
