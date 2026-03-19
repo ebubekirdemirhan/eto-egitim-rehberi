@@ -6691,7 +6691,7 @@
     onScroll();
   })();
 </script>
-<!-- ═══════════════════ ETO AI ASISTANI WIDGET v2 ════════════════ -->
+<!-- ═══════════════════ ETO AI ASISTANI WIDGET v3 ════════════════ -->
 <style>
   /* ── Chat floating button ── */
   #eto-ai-btn {
@@ -6961,12 +6961,21 @@
 
   /* ── Config ── */
   const MODELS = [
-    { id: 'gemini-2.5-pro',   label: 'Gemini 2.5 Pro' },
-    { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
-    { id: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
+    { id: 'gemini-2.5-pro',   label: 'Gemini 2.5 Pro'   },   // 100 req/gün
+    { id: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' },   // 1500 req/gün
+    { id: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },   // çok yüksek
+    { id: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },   // yedek
   ];
   const STORAGE_KEY       = 'eto_gemini_key';
   const STORAGE_MODEL_IDX = 'eto_model_idx';
+  const STORAGE_MODEL_DATE = 'eto_model_date';
+
+  // Her gün sıfırla — kotalar gece yarısı (Pasifik) sıfırlanır
+  const today = new Date().toISOString().slice(0, 10);
+  if (localStorage.getItem(STORAGE_MODEL_DATE) !== today) {
+    localStorage.setItem(STORAGE_MODEL_IDX, '0');
+    localStorage.setItem(STORAGE_MODEL_DATE, today);
+  }
   let modelIdx = parseInt(localStorage.getItem(STORAGE_MODEL_IDX) || '0', 10);
   if (modelIdx >= MODELS.length) modelIdx = 0;
 
