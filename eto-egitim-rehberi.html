@@ -295,6 +295,10 @@
       <div class="toc-item"><a href="#b26"><span class="toc-index">26</span><span><span class="toc-label">Kaçak Akım Tespiti</span><br><span class="toc-en">Earth Fault Detection &amp; Hunting</span></span></a></div>
       <div class="toc-item"><a href="#b27"><span class="toc-index">27</span><span><span class="toc-label">GMDSS &amp; Deniz Haberleşmesi</span><br><span class="toc-en">GMDSS &amp; Maritime Communications</span></span></a></div>
       <div class="toc-item"><a href="#b28"><span class="toc-index">28</span><span><span class="toc-label">Yüksek Gerilim (HV) Sistemleri</span><br><span class="toc-en">High Voltage Systems</span></span></a></div>
+      <div class="toc-item"><a href="#b29"><span class="toc-index">29</span><span><span class="toc-label">Pnömatik Semboller &amp; Devre Okuma</span><br><span class="toc-en">Pneumatic Symbols &amp; Circuit Reading</span></span></a></div>
+      <div class="toc-item"><a href="#b30"><span class="toc-index">30</span><span><span class="toc-label">Valf Türleri, Pompalar &amp; Hidrolik RAM</span><br><span class="toc-en">Valve Types, Pumps &amp; Hydraulic RAM</span></span></a></div>
+      <div class="toc-item"><a href="#b31"><span class="toc-index">31</span><span><span class="toc-label">Kablo Seçimi, Kontaktör, Kondansatör &amp; Termik</span><br><span class="toc-en">Cable Sizing, Contactor, Capacitor &amp; Thermal Relay</span></span></a></div>
+      <div class="toc-item"><a href="#b32"><span class="toc-index">32</span><span><span class="toc-label">DC Motor, Bobinaj, Reversing &amp; Dahlander</span><br><span class="toc-en">DC Motor, Rewinding, Reversing &amp; Dual-Speed Circuits</span></span></a></div>
       <div class="toc-item toc-item-b21"><a href="#b21"><span class="toc-index">21</span><span><span class="toc-label">Soru Bankası — Liman / Zabitlik</span><br><span class="toc-en">Sınav 1, 2 &amp; 3 · 300 Soru · Çözümlü</span></span></a></div>
     </div>
   </nav>
@@ -1381,7 +1385,54 @@
       <div class="warn-box">Akü voltajı şarjlıyken normal görünebilir ama yük altında düşebilir. Her zaman <strong>yük testi</strong> (load test) yapılmalıdır.</div>
     </div>
 
-    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Sahada ölçüm stratejisi şu sıraya uyar: (1) Önce voltmetre ile gerilim var mı/yok mu bak. (2) Gerekirse akım (ampermetre/CT) ile aşırı yük/kaçak var mı? (3) Son olarak megger ile izolasyon sağlığını değerlendir. Çoğu arıza ilk adımda bulunur.</div>
+    <h3>5.8 Pensampermetre (Clamp Meter)</h3>
+    <p>Pensampermetre, devreyi açmadan (kablo kesmeden) akım ölçen cihazdır. Üst çeneleri (jaw) açılır, iletken kablo etrafına geçirilir; kablo içinden geçen manyetik akı indükleme (CT) prensibiyle akım değerine çevrilir.</p>
+    <ul>
+      <li><strong>AC akım modunda:</strong> Kablonun etrafındaki değişen manyetik alanı ölçer. Yüksek akımlı motor ve pano kablolarında hızlı trend takibi.</li>
+      <li><strong>DC akım modunda (Hall sensörlü):</strong> Hall etkisiyle sabit manyetik alanı ölçer; DC devreler, akü şarj akımı.</li>
+      <li><strong>Doğru tutuş:</strong> Çeneyi tam kapalı tut; kablo tam merkezde olmalı. İki iletken (ileri + geri) aynı anda çeneye girerse değer sıfır çıkar — sadece tek iletken girecek.</li>
+      <li><strong>Ek modlar (gelişmiş modeller):</strong> Gerilim, direnç, süreklilik, harmonik, güç faktörü, peak hold.</li>
+    </ul>
+    <div class="note-box"><strong>Saha tüyosu:</strong> Faz akımlarını dengesizlik açısından karşılaştır — L1, L2, L3 değerleri birbirinden %10'dan fazla farklıysa faz dengesizliği var demektir, motor aşırı ısınır.</div>
+
+    <div class="svg-wrap">
+      <h3>Pensampermetre — Tek İletken Ölçümü</h3>
+      <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg">
+        <rect x="100" y="10" width="120" height="110" rx="8" fill="#e8f4f8" stroke="#2979ff" stroke-width="2"/>
+        <rect x="125" y="10" width="70" height="18" rx="4" fill="#fff" stroke="#2979ff" stroke-width="1.5"/>
+        <text x="160" y="23" font-size="10" text-anchor="middle" fill="#1565c0">45.2 A</text>
+        <text x="160" y="35" font-size="8" text-anchor="middle" fill="#555">AC CLAMP</text>
+        <!-- jaw -->
+        <path d="M130,52 Q160,42 190,52" stroke="#333" stroke-width="2.5" fill="none"/>
+        <path d="M130,58 Q160,68 190,58" stroke="#333" stroke-width="2.5" fill="none"/>
+        <!-- cable -->
+        <line x1="160" y1="30" x2="160" y2="55" stroke="#e53935" stroke-width="6" stroke-linecap="round"/>
+        <line x1="160" y1="55" x2="160" y2="80" stroke="#e53935" stroke-width="6" stroke-linecap="round"/>
+        <text x="185" y="57" font-size="9" fill="#e53935">L1</text>
+        <!-- arrow -->
+        <text x="108" y="57" font-size="9" fill="#2e7d32">← tek iletken</text>
+        <text x="160" y="105" font-size="9" text-anchor="middle" fill="#555">Çene tam kapalı olmalı</text>
+        <line x1="130" y1="110" x2="190" y2="110" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+      </svg>
+      <p class="svg-caption">Pensampermetre çenesi sadece tek iletken etrafına geçirilir. İleri ve geri kablo aynı anda girerse manyetik alanlar iptal olur ve cihaz sıfır gösterir. AC modunda devre açmaya gerek yoktur.</p>
+    </div>
+
+    <h3>5.9 Faz Sırası Ölçer (Phase Sequence Meter)</h3>
+    <p>Üç fazlı sistemde faz sırasının (L1–L2–L3) doğru olduğunu doğrular. Yanlış faz sırası, asenkron motorların ters yönde dönmesine neden olur.</p>
+    <ul>
+      <li><strong>Kullanım zamanı:</strong> Liman beslemesi (shore connection) bağlanmadan önce; jeneratör devreye alınmadan önce; kablo eki veya panel değişimi sonrası.</li>
+      <li><strong>Nasıl çalışır:</strong> Üç prob L1, L2, L3'e bağlanır. Cihaz fazların arka arkaya gelip gelmediğini dönen alan ile (veya LED gösterge ile) "RST doğru / yanlış" olarak gösterir.</li>
+      <li><strong>Yanlış sıra tespiti:</strong> Herhangi iki fazı yer değiştirmek sırayı düzeltir (örn. L1↔L3). Değiştirme ana panoda yapılır; motora kadar gelinmez.</li>
+    </ul>
+    <table>
+      <thead><tr><th>Faz Sırası</th><th>Motor Dönüşü</th><th>Gösterge (tipik)</th></tr></thead>
+      <tbody>
+        <tr><td>L1–L2–L3 (doğru)</td><td>Saat yönünde (CW)</td><td>Yeşil LED / "RST"</td></tr>
+        <tr><td>L1–L3–L2 (ters)</td><td>Saat yönünün tersine (CCW)</td><td>Kırmızı LED / "RTS"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> Sahada ölçüm stratejisi şu sıraya uyar: (1) Önce voltmetre ile gerilim var mı/yok mu bak. (2) Gerekirse akım (ampermetre/CT veya pensampermetre) ile aşırı yük/kaçak var mı? (3) Son olarak megger ile izolasyon sağlığını değerlendir. Çoğu arıza ilk adımda bulunur.</div>
     <div class="sinav-box"><strong>Sınavda nasıl sorulur?</strong> "Motor faz-gövde izolasyonu 0.3 MΩ çıktı, ne yaparsınız?" → 1 MΩ'un altı şüpheli, 0.3 kabul edilemez. Motor çalıştırılmaz, sargılar kuru tutulup tekrar ölçülür; gerekirse yenileme.</div>
 
     <div class="quiz-block">
@@ -1559,7 +1610,34 @@
       </tbody>
     </table>
 
-    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> GMDSS akülerini mutlaka yük testi ile kontrol edin. Yalnızca gerilim ölçümü yetmez; yük altında gerilim düşümü kritik bilgidir. 18 aylık periyodik kontrol zorunludur ve sertifika denetimlerde sorulur.</div>
+    <h3>6.5 Baumé (Be°) Skalası ile Akü Elektrolit Yoğunluğu</h3>
+    <p>Kurşun-asit akülerde elektrolitin (sülfürik asit + su) yoğunluğu şarj durumunun en güvenilir göstergesidir. Yoğunluk <strong>hidrometer (areometre)</strong> veya optik refraktometre ile ölçülür ve iki skala kullanılır: özgül ağırlık (g/cm³) ve <strong>Baumé skalası (Be°)</strong>.</p>
+
+    <h4>Hidrometer Kullanımı</h4>
+    <ul>
+      <li>Elektrolit sıvısı şırıngayla hidrometer tüpüne çekilir.</li>
+      <li>Daldırılmış cam şamandıranın üst kenarının hizalandığı değer okunur.</li>
+      <li>Sıcaklık 25 °C değilse düzeltme gerekir: her 10 °C için ±0,007 g/cm³ ekle/çıkar.</li>
+    </ul>
+
+    <h4>Be° ↔ Özgül Ağırlık Dönüşümü</h4>
+    <p>Hafif sıvılar için yaygın formül:</p>
+    <div class="formula-box">ρ (g/cm³) = 144,3 / (144,3 − Be°)</div>
+    <p><strong>Sınav kısayolu (ezber):</strong> Türk denizcilik sınavlarında sıkça sorulan "28 Be° ≈ 1,32 g/cm³" değerini şöyle hatırla: 28 → başına 1 ekle → 128 → 4 ekle → 132 → başına nokta koy → <strong>1.32</strong>.</p>
+
+    <table>
+      <thead><tr><th>Baumé (Be°)</th><th>Özgül Ağırlık (g/cm³)</th><th>Şarj Durumu</th></tr></thead>
+      <tbody>
+        <tr><td>≈ 30–31 Be°</td><td>1,28–1,30</td><td>Tam dolu (%100)</td></tr>
+        <tr><td>≈ 28 Be°</td><td>1,24–1,26</td><td>Yarı dolu (%50–60)</td></tr>
+        <tr><td>≈ 20–22 Be°</td><td>1,15–1,18</td><td>Boş / deşarj (%10–20)</td></tr>
+        <tr><td>&lt; 18 Be°</td><td>&lt; 1,12</td><td>Kritik — şarj et, kontrol et</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box"><strong>Güvenlik:</strong> Sülfürik asit gözlere ve cilde zarar verir. Hidrometer kullanırken gözlük ve nitril eldiven giy. Elektrolit dökülürse bol su ile yıka, ardından soda çözeltisi (karbonat) ile nötralize et.</div>
+
+    <div class="ebu-note note-box"><strong>Ebubekir'in Notu:</strong> GMDSS akülerini mutlaka yük testi ile kontrol edin. Yalnızca gerilim ölçümü yetmez; yük altında gerilim düşümü kritik bilgidir. 18 aylık periyodik kontrol zorunludur ve sertifika denetimlerde sorulur. Aynı şekilde Be° ölçümü de elektrolit yoğunluğunu (dolayısıyla şarj durumunu) direkt gösterir — günlük log'a kaydedin.</div>
 
     <div class="quiz-block">
       <div class="quiz-header">📝 Bölüm 6 — Mini Sınav</div>
@@ -5308,6 +5386,21 @@
       <li><strong>Racking (çek/tak) sistemi:</strong> VCB'yi "test" veya "isolated" pozisyonuna alarak kablo bağlantılarını kesmeden test yapılabilir.</li>
     </ul>
 
+    <h4>SF6 Devre Kesici vs VCB — Karşılaştırma</h4>
+    <table>
+      <thead><tr><th>Özellik</th><th>VCB (Vacuum CB)</th><th>SF6 Kesici</th></tr></thead>
+      <tbody>
+        <tr><td>Ark Söndürme Ortamı</td><td>Vakum tüpü</td><td>SF6 (sülfür hekzaflorür) gazı</td></tr>
+        <tr><td>Bakım Gerekliliği</td><td>Çok az (vakum bütünlüğü periyodik)</td><td>Gaz sızıntısı ve nem takibi gerekir</td></tr>
+        <tr><td>Çevre Etkisi</td><td>Çevre dostu</td><td>SF6 güçlü sera gazı (GWP = 23 500)</td></tr>
+        <tr><td>Yaygınlık (gemi)</td><td>Modern gemilerde standart</td><td>Eski kurulumlar, bazı kara tesisleri</td></tr>
+        <tr><td>Kesme Kapasitesi</td><td>Mükemmel (yüksek voltaja kadar)</td><td>Mükemmel (çok yüksek gerilim)</td></tr>
+        <tr><td>Boyut / Ağırlık</td><td>Kompakt, hafif</td><td>Daha büyük, ağır</td></tr>
+        <tr><td>Maliyet</td><td>Düşük–orta</td><td>Daha yüksek</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><strong>Not:</strong> IEC 62271 ve IMO yönetmelikleri SF6 kullanımını giderek kısıtlamaktadır. Yeni gemi inşasında VCB tercih edilmektedir.</div>
+
     <h3>28.4 ETO'nun HV Görevleri</h3>
     <ul>
       <li>HV sistemlere <strong>sadece yetkili, sertifikalı HV teknisyenleri</strong> dokunabilir. ETO'nun rolü izleme ve koordinasyondur.</li>
@@ -5322,6 +5415,1220 @@
     <details class="quiz-item"><summary>B28-S2: VCB (Vacuum Circuit Breaker) ark söndürme ortamı nedir ve avantajı nedir?</summary><div class="quiz-answer">VCB'de ark söndürme vakum tüpü içinde gerçekleşir. Vakum ortamında ark hızla söner, gaz veya yağ kullanılmaz — dolayısıyla bakım ihtiyacı azdır, kirlenme riski yoktur, ömrü uzundur. Modern HV switchgear'da tercih edilen tiptir.</div></details>
     <details class="quiz-item"><summary>B28-S3: HV LOTO sırasında "earth switch" kapatmanın amacı nedir?</summary><div class="quiz-answer">Earth switch kapatılarak devre dışı bırakılmış HV barası veya kablosundaki kapasitif şarj ve artık enerji güvenle deşarj edilir ve fiziksel olarak topraklanır. Bu sayede yanlışlıkla enerji gelse bile personel korunur. Earth switch kapatılmadan HV bölgesine girilmez.</div></details>
     <details class="quiz-item"><summary>B28-S4: Neden yüksek güçlü gemi motorları için HV kullanılır?</summary><div class="quiz-answer">I = P / (√3 · V · cosφ) formülüne göre, aynı güç için gerilim artırılınca akım düşer. Düşük akım demek daha ince kablo kesiti, daha az ağırlık ve daha az kayıp demektir. Bow thruster veya cargo pump gibi MW seviyesindeki motorlarda LV ile çok büyük kablo kesitleri gerekirdi; HV bu sorunu çözer.</div></details>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ BÖLÜM 29 -->
+  <section id="b29">
+    <h2>Bölüm 29 — Pnömatik Semboller &amp; Devre Okuma</h2>
+    <p>Pnömatik devreler basınçlı havayı iş aktuatörlerine ileten sistemlerdir. ISO 1219-1 standardı tüm sembol ve gösterim kurallarını tanımlar. Bu bölümü öğrendikten sonra herhangi bir pnömatik şemayı okuyabilirsiniz.</p>
+
+    <h3>29.1 ISO 1219-1 Standart Sembolleri</h3>
+    <div class="two-col">
+      <div>
+        <h4>Enerji Kaynağı ve FRL Ünitesi</h4>
+        <ul>
+          <li><strong>Kompresör:</strong> İçi boş daire + ok ile gösterilir; basınçlı hava kaynağı.</li>
+          <li><strong>Filtre (F):</strong> Kareden aşağı sarkan yarım daire; havadaki su ve partikülleri tutar.</li>
+          <li><strong>Basınç Regülatörü (R):</strong> Kare + yay sembolü; devre basıncını sabit tutar. İki oku birbirini keser şekilde çizilir.</li>
+          <li><strong>Yağlayıcı (L):</strong> Kare + içinde damlacık; hareketli parçaları yağlar.</li>
+          <li><strong>FRL Ünitesi:</strong> Filtre + Regülatör + Yağlayıcı üçlü bileşimi. Pnömatik sisteme girmeden önce mutlaka bulunur.</li>
+        </ul>
+        <h4>Silindirler (Aktuatörler)</h4>
+        <ul>
+          <li><strong>Tek etkili silindir:</strong> Dikdörtgen gövde + bir taraftan ok çıkışı + yay geri dönüşü. Basınç bir yönde iter; yay geri döndürür.</li>
+          <li><strong>Çift etkili silindir:</strong> Her iki taraftan ok çıkışı. Basınç iki yönde de çalışır; ileri ve geri hareket kontrolü tam.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Yönlendirme Valfleri (Directional Control Valves)</h4>
+        <p>Valf sembolü <strong>kareler</strong> halinde çizilir. Her kare bir konumu (pozisyon) temsil eder. Kare sayısı = pozisyon sayısı. İçindeki oklar havayı hangi porttan nereye yönlendireceğini gösterir; çizgi uçlarındaki ok üçgeni bağlantı noktalarını (portları) belirtir.</p>
+        <h4>Valf Kodlama Sistemi (Port / Pozisyon)</h4>
+        <ul>
+          <li><strong>2/2 valf:</strong> 2 port, 2 pozisyon — basit açma/kapama vanası.</li>
+          <li><strong>3/2 valf:</strong> 3 port, 2 pozisyon — tek etkili silindiri kontrol eder.</li>
+          <li><strong>4/2 valf:</strong> 4 port, 2 pozisyon — çift etkili silindir (yay geri dönüş yok).</li>
+          <li><strong>5/2 valf:</strong> 5 port, 2 pozisyon — en yaygın endüstriyel valf; A ve B portları ayrı egzoza sahip.</li>
+          <li><strong>5/3 valf:</strong> 5 port, 3 pozisyon — orta pozisyon (kapalı/basınç merkezi/egzoz merkezi) seçeneğiyle hassas kontrol.</li>
+        </ul>
+        <h4>Aktüasyon Sembolleri</h4>
+        <ul>
+          <li><strong>Manuel buton:</strong> Düz çizgi + yatay çizgi (el ile basma).</li>
+          <li><strong>Yay:</strong> Zikzak çizgi (dönüş kuvveti).</li>
+          <li><strong>Solenoid bobin:</strong> Kare üzerine köşeli çizgi (elektriksel aktüasyon).</li>
+          <li><strong>Pnömatik pilot:</strong> Üçgen sembol (hava basıncı ile aktüasyon).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-1: Pnömatik Sembol Referans Kartı</h3>
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <!-- background -->
+        <rect width="700" height="300" fill="#f0f4f8" rx="8"/>
+        <text x="350" y="22" font-size="13" font-weight="bold" text-anchor="middle" fill="#1a237e">ISO 1219-1 Pnömatik Semboller Referans Kartı</text>
+
+        <!-- FRL group -->
+        <text x="20" y="45" font-size="10" fill="#333" font-weight="bold">FRL ÜNİTESİ</text>
+        <!-- Filter -->
+        <rect x="20" y="55" width="30" height="30" fill="white" stroke="#333" stroke-width="1.5"/>
+        <path d="M35,70 L35,85" stroke="#333" stroke-width="1.5"/>
+        <path d="M28,78 Q35,85 42,78" stroke="#333" stroke-width="1.5" fill="none"/>
+        <text x="35" y="100" font-size="8" text-anchor="middle" fill="#555">Filtre</text>
+        <!-- Regulator -->
+        <rect x="60" y="55" width="30" height="30" fill="white" stroke="#333" stroke-width="1.5"/>
+        <line x1="65" y1="65" x2="85" y2="75" stroke="#333" stroke-width="1.5"/>
+        <line x1="65" y1="75" x2="85" y2="65" stroke="#333" stroke-width="1.5"/>
+        <text x="75" y="100" font-size="8" text-anchor="middle" fill="#555">Regülatör</text>
+        <!-- Lubricator -->
+        <rect x="100" y="55" width="30" height="30" fill="white" stroke="#333" stroke-width="1.5"/>
+        <circle cx="115" cy="70" r="5" fill="#87ceeb" stroke="#333" stroke-width="1"/>
+        <text x="115" y="100" font-size="8" text-anchor="middle" fill="#555">Yağlayıcı</text>
+        <!-- FRL divider line -->
+        <line x1="20" y1="85" x2="130" y2="85" stroke="#999" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+        <!-- Single acting cylinder -->
+        <text x="160" y="45" font-size="10" fill="#333" font-weight="bold">SİLİNDİRLER</text>
+        <!-- Tek etkili -->
+        <rect x="160" y="55" width="50" height="25" fill="white" stroke="#333" stroke-width="1.5"/>
+        <rect x="183" y="60" width="8" height="15" fill="#999"/>
+        <line x1="191" y1="67" x2="215" y2="67" stroke="#333" stroke-width="2"/>
+        <!-- spring -->
+        <path d="M210,67 Q213,60 216,67 Q219,74 222,67" stroke="#333" stroke-width="1.5" fill="none"/>
+        <text x="185" y="97" font-size="8" text-anchor="middle" fill="#555">Tek Etkili</text>
+        <!-- Cift etkili -->
+        <rect x="240" y="55" width="50" height="25" fill="white" stroke="#333" stroke-width="1.5"/>
+        <rect x="263" y="60" width="8" height="15" fill="#999"/>
+        <line x1="240" y1="67" x2="248" y2="67" stroke="#333" stroke-width="2"/>
+        <line x1="271" y1="67" x2="295" y2="67" stroke="#333" stroke-width="2"/>
+        <text x="265" y="97" font-size="8" text-anchor="middle" fill="#555">Çift Etkili</text>
+
+        <!-- Valves -->
+        <text x="340" y="45" font-size="10" fill="#333" font-weight="bold">YÖNLENDIRME VALFLERİ</text>
+        <!-- 3/2 valve -->
+        <rect x="340" y="55" width="25" height="30" fill="#dceefa" stroke="#2979ff" stroke-width="1.5"/>
+        <rect x="365" y="55" width="25" height="30" fill="white" stroke="#2979ff" stroke-width="1.5"/>
+        <!-- arrows in left box -->
+        <line x1="345" y1="70" x2="360" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- label -->
+        <text x="365" y="97" font-size="8" text-anchor="middle" fill="#1565c0">3/2 Valf</text>
+
+        <!-- 5/2 valve -->
+        <rect x="420" y="55" width="25" height="30" fill="#dceefa" stroke="#2979ff" stroke-width="1.5"/>
+        <rect x="445" y="55" width="25" height="30" fill="white" stroke="#2979ff" stroke-width="1.5"/>
+        <!-- solenoid -->
+        <rect x="395" y="62" width="18" height="16" fill="#ffd54f" stroke="#f57f17" stroke-width="1"/>
+        <line x1="413" y1="70" x2="420" y2="70" stroke="#333" stroke-width="1.5"/>
+        <!-- spring right -->
+        <path d="M470,70 Q473,63 476,70 Q479,77 482,70" stroke="#333" stroke-width="1.5" fill="none"/>
+        <text x="435" y="97" font-size="8" text-anchor="middle" fill="#1565c0">5/2 Valf (Solenoid+Yay)</text>
+
+        <!-- Port labels -->
+        <text x="395" y="52" font-size="7" fill="#888">Sol: aktif konum</text>
+        <text x="395" y="48" font-size="7" fill="#f57f17">Sarı=Solenoid</text>
+
+        <!-- Coding guide bottom -->
+        <rect x="20" y="115" width="660" height="80" fill="white" stroke="#b0bec5" stroke-width="1" rx="4"/>
+        <text x="350" y="133" font-size="10" font-weight="bold" text-anchor="middle" fill="#1a237e">Valf Kod Okuma Anahtarı: Port Sayısı / Pozisyon Sayısı</text>
+        <text x="30" y="150" font-size="9" fill="#333">2/2 : 2 port, 2 pozisyon — Basit açma/kapama</text>
+        <text x="30" y="163" font-size="9" fill="#333">3/2 : 3 port, 2 pozisyon — Tek etkili silindir kontrolü (P, A, T)</text>
+        <text x="30" y="176" font-size="9" fill="#333">4/2 : 4 port, 2 pozisyon — Çift etkili silindir, tek egzoz</text>
+        <text x="350" y="150" font-size="9" fill="#333">5/2 : 5 port, 2 pozisyon — Çift etkili silindir, A ve B ayrı egzoz</text>
+        <text x="350" y="163" font-size="9" fill="#333">5/3 : 5 port, 3 pozisyon — Orta konum (kapalı/açık/blok)</text>
+        <text x="350" y="176" font-size="9" fill="#333">Port adları: P=Besleme  A/B=Çıkış  T/R=Egzoz</text>
+
+        <!-- Pressure units -->
+        <rect x="20" y="205" width="660" height="75" fill="#fff8e1" stroke="#f9a825" stroke-width="1" rx="4"/>
+        <text x="350" y="222" font-size="10" font-weight="bold" text-anchor="middle" fill="#e65100">Pnömatik Devre Okuma Adımları</text>
+        <text x="30" y="238" font-size="9" fill="#333">1. Enerji kaynağından başla: kompresör → FRL ünitesi → ana hat</text>
+        <text x="30" y="251" font-size="9" fill="#333">2. Yönlendirme valfini bul ve aktüasyon tipini gözlemle (solenoid / manuel / pnömatik pilot)</text>
+        <text x="30" y="264" font-size="9" fill="#333">3. Aktuatöre ilerle: silindir mi, döner motor mu?</text>
+        <text x="350" y="238" font-size="9" fill="#333">4. Egzoz hatlarını takip et: T ve R noktaları havayı atmosfere atar</text>
+        <text x="350" y="251" font-size="9" fill="#333">5. Geri besleme / hız kontrol valfleri (throttle/check) varsa not et</text>
+        <text x="350" y="264" font-size="9" fill="#333">6. Basınç regülatörü ve manometre konumlarını doğrula</text>
+
+        <!-- arrow marker -->
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+          </marker>
+        </defs>
+      </svg>
+      <p class="svg-caption">ISO 1219-1 pnömatik sembol referans kartı. Üst sol: FRL ünitesi bileşenleri (filtre, regülatör, yağlayıcı). Orta: tek ve çift etkili silindirler. Üst sağ: 3/2 ve 5/2 yönlendirme valfleri. Alt tablo: port/pozisyon kodlama anahtarı ve devre okuma adımları.</p>
+    </div>
+
+    <h3>29.2 Örnek Pnömatik Devre — Çift Etkili Silindir + 5/2 Valf</h3>
+    <p>Aşağıdaki örnek devre, gemide sıkça karşılaşılan <strong>çift etkili pnömatik silindir + 5/2 solenoid valf + FRL ünitesi</strong> kombinasyonunu göstermektedir (örn. ambar kapağı, valf aktüatörü, pres).</p>
+    <div class="svg-wrap">
+      <h3>SVG-2: Örnek Pnömatik Devre — 5/2 Valf ile Çift Etkili Silindir</h3>
+      <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="680" height="220" fill="#f7fbff" rx="8"/>
+        <text x="340" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a237e">5/2 Solenoid Valf + Çift Etkili Silindir Devresi</text>
+
+        <!-- Compressor -->
+        <circle cx="50" cy="110" r="20" fill="white" stroke="#333" stroke-width="2"/>
+        <path d="M38,110 L62,110 M50,95 L50,125" stroke="#333" stroke-width="1.5"/>
+        <text x="50" y="145" font-size="8" text-anchor="middle" fill="#555">Kompresör</text>
+
+        <!-- Line from compressor -->
+        <line x1="70" y1="110" x2="100" y2="110" stroke="#2979ff" stroke-width="2.5"/>
+
+        <!-- FRL unit -->
+        <rect x="100" y="90" width="70" height="40" fill="#e3f2fd" stroke="#2979ff" stroke-width="1.5" rx="3"/>
+        <text x="135" y="108" font-size="9" text-anchor="middle" fill="#1565c0" font-weight="bold">FRL</text>
+        <text x="135" y="120" font-size="7" text-anchor="middle" fill="#555">Filtre+Reg+Yağ</text>
+        <!-- pressure gauge -->
+        <circle cx="165" cy="75" r="10" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="165" y="78" font-size="7" text-anchor="middle" fill="#333">⊙</text>
+        <line x1="165" y1="85" x2="165" y2="90" stroke="#333" stroke-width="1"/>
+        <text x="165" y="70" font-size="7" text-anchor="middle" fill="#555">6 bar</text>
+
+        <!-- Line to valve -->
+        <line x1="170" y1="110" x2="220" y2="110" stroke="#2979ff" stroke-width="2.5"/>
+        <text x="195" y="105" font-size="7" fill="#1565c0">P</text>
+
+        <!-- 5/2 Valve body -->
+        <!-- Position 1 (active) -->
+        <rect x="220" y="88" width="45" height="44" fill="#dceefa" stroke="#2979ff" stroke-width="2"/>
+        <!-- arrows in pos 1 -->
+        <line x1="228" y1="100" x2="258" y2="100" stroke="#1565c0" stroke-width="1.5" marker-end="url(#a2)"/>
+        <line x1="258" y1="120" x2="228" y2="120" stroke="#e53935" stroke-width="1.5" marker-end="url(#a2r)"/>
+        <!-- Position 2 (spring) -->
+        <rect x="265" y="88" width="45" height="44" fill="white" stroke="#2979ff" stroke-width="2"/>
+        <!-- spring in pos 2 -->
+        <path d="M280,110 Q284,103 288,110 Q292,117 296,110" stroke="#333" stroke-width="1.5" fill="none"/>
+
+        <!-- Solenoid on left -->
+        <rect x="192" y="97" width="25" height="26" fill="#ffd54f" stroke="#f57f17" stroke-width="1.5" rx="2"/>
+        <text x="204" y="113" font-size="7" text-anchor="middle" fill="#e65100">SOL</text>
+
+        <!-- Port labels below valve -->
+        <text x="232" y="140" font-size="7" fill="#333">A</text>
+        <text x="242" y="140" font-size="7" fill="#333">P</text>
+        <text x="252" y="140" font-size="7" fill="#333">B</text>
+        <text x="268" y="140" font-size="7" fill="#333">T1</text>
+        <text x="295" y="140" font-size="7" fill="#333">T2</text>
+
+        <!-- Port A line up to cylinder rod side -->
+        <line x1="232" y1="88" x2="232" y2="70" stroke="#2e7d32" stroke-width="2"/>
+        <line x1="232" y1="70" x2="380" y2="70" stroke="#2e7d32" stroke-width="2"/>
+        <line x1="380" y1="70" x2="380" y2="95" stroke="#2e7d32" stroke-width="2"/>
+        <text x="305" y="65" font-size="7" fill="#2e7d32">A (ileri)</text>
+
+        <!-- Port B line down to cylinder back -->
+        <line x1="254" y1="88" x2="254" y2="160" stroke="#e53935" stroke-width="2"/>
+        <line x1="254" y1="160" x2="440" y2="160" stroke="#e53935" stroke-width="2"/>
+        <line x1="440" y1="160" x2="440" y2="150" stroke="#e53935" stroke-width="2"/>
+        <text x="340" y="155" font-size="7" fill="#e53935">B (geri)</text>
+
+        <!-- Cylinder -->
+        <rect x="370" y="95" width="100" height="55" fill="white" stroke="#333" stroke-width="2" rx="2"/>
+        <!-- piston -->
+        <rect x="420" y="98" width="10" height="49" fill="#bbb" stroke="#555" stroke-width="1"/>
+        <!-- rod -->
+        <line x1="430" y1="122" x2="480" y2="122" stroke="#555" stroke-width="3"/>
+        <!-- arrowhead on rod -->
+        <polygon points="480,118 492,122 480,126" fill="#555"/>
+        <text x="430" y="170" font-size="8" text-anchor="middle" fill="#555">Çift Etkili Silindir</text>
+        <text x="497" y="125" font-size="8" fill="#555">→ Yük</text>
+
+        <!-- Exhaust lines T1 T2 -->
+        <line x1="268" y1="132" x2="268" y2="185" stroke="#999" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <line x1="296" y1="132" x2="296" y2="185" stroke="#999" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="268" y="195" font-size="7" text-anchor="middle" fill="#999">Egzoz T1</text>
+        <text x="296" y="195" font-size="7" text-anchor="middle" fill="#999">Egzoz T2</text>
+
+        <!-- Signal line from PLC to solenoid -->
+        <line x1="120" y1="50" x2="204" y2="50" stroke="#ff6f00" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <line x1="204" y1="50" x2="204" y2="97" stroke="#ff6f00" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <rect x="85" y="36" width="70" height="22" rx="3" fill="#fff3e0" stroke="#ff6f00" stroke-width="1"/>
+        <text x="120" y="50" font-size="8" text-anchor="middle" fill="#e65100">PLC / Kontrol</text>
+
+        <defs>
+          <marker id="a2" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+            <path d="M0,0 L5,2.5 L0,5 Z" fill="#1565c0"/>
+          </marker>
+          <marker id="a2r" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+            <path d="M0,0 L5,2.5 L0,5 Z" fill="#e53935"/>
+          </marker>
+        </defs>
+      </svg>
+      <p class="svg-caption">Örnek pnömatik devre: Kompresör → FRL ünitesi (6 bar) → 5/2 solenoid valf → çift etkili silindir. Solenoid enerjili olduğunda P→A hattı açılır, silindir ileri iter (mavi hat). Solenoid de-enerjize olunca yay geri döner, P→B hattı açılır, silindir geri çekilir (kırmızı hat). T1 ve T2 egzoz portları hareketi serbest bırakır.</p>
+    </div>
+
+    <h3>29.3 Pnömatik Devre Okuma Pratik Adımları</h3>
+    <ol>
+      <li><strong>Enerji kaynağından başla:</strong> Kompresör → kurutucular → FRL ünitesi → ana hat basıncını not et.</li>
+      <li><strong>Yönlendirme valfini bul:</strong> Kaç porta ve konuma sahip? (5/2, 3/2 vs.) Aktüasyon tipi? (solenoid, manuel, pnömatik pilot?)</li>
+      <li><strong>Normal konum (de-energized state) nedir?</strong> Valfin yay tarafı = normal konum; solenoid enerjisiz halde sistem nasıl çalışır?</li>
+      <li><strong>Aktuatörü tanımla:</strong> Silindir mi (tek/çift etkili), döner motormu, vakum oluşturucu mu?</li>
+      <li><strong>Hız kontrol valflerini kontrol et:</strong> Silindire giden/gelen hatlarda throttle valfi veya check valfi var mı? Bu sürat ayarı yapar.</li>
+      <li><strong>Egzoz hatlarını izle:</strong> T veya R etiketli hatlar atmosfere çıkar; silencer (susturucu) bağlı mı?</li>
+    </ol>
+    <div class="warn-box"><strong>Sınav İpucu:</strong> "5/2 valfde kaç port ve kaç konum vardır?" → 5 port (P, A, B, T1, T2), 2 konum. "3/2 valfin normal kapalı tipinde solenoid enerjisiz iken A portunda basınç var mı?" → Hayır; P bloklanmıştır, A egzoza bağlıdır.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 29 — Mini Sınav</div>
+      <details class="quiz-item"><summary>B29-S1: Bir pnömatik valfin kodu "5/2" ise bu ne anlama gelir? A) 5 bar basınç, 2 konum B) 5 port, 2 konum C) 5 mm çap, 2 delik D) 5 solenoid, 2 pozisyon</summary><div class="quiz-answer"><strong>Cevap: B.</strong> Pnömatik valf kodlamasında ilk rakam port sayısını, ikinci rakam konum sayısını gösterir. 5/2 = 5 port (P, A, B, T1, T2), 2 konum (ileri / geri).</div></details>
+      <details class="quiz-item"><summary>B29-S2: FRL ünitesinin açılımı nedir ve her bileşenin görevi nedir?</summary><div class="quiz-answer"><strong>F</strong>iltre — R<strong>e</strong>gülatör — Ya<strong>ğ</strong>layıcı (Lubricator). Filtre havadaki nem ve partikülleri tutar; regülatör basıncı sabit değerde tutar; yağlayıcı hareketli parçalara yağ püskürtür. Tüm pnömatik sistemlere giriş noktasında bulunur.</div></details>
+      <details class="quiz-item"><summary>B29-S3: Çift etkili silindir ile tek etkili silindirin farkı nedir?</summary><div class="quiz-answer">Tek etkili silindirde basınçlı hava yalnızca bir yönde (ileri) iter; geri dönüş yayla sağlanır. Çift etkili silindirde her iki yönde (ileri ve geri) basınçlı hava kullanılır; daha yüksek kuvvet ve kontrol sağlar.</div></details>
+      <details class="quiz-item"><summary>B29-S4: Pnömatik devre okurken neden normal konum (de-energized state) önemlidir?</summary><div class="quiz-answer">Enerji kesildiğinde sistemin hangi konumda kalacağını belirler. Güvenlik açısından kritiktir: enerji kesilince silindir geri çekilmeli mi, tutmalı mı? Yay tarafı valfin normal konumunu gösterir ve bu, fail-safe (güvenli arıza) davranışını belirler.</div></details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ BÖLÜM 30 -->
+  <section id="b30">
+    <h2>Bölüm 30 — Valf Türleri, Pompa Sistemleri &amp; Hidrolik RAM</h2>
+    <p>Gemi makine dairesinde ve yardımcı sistemlerde onlarca farklı valf ve pompa tipi kullanılır. Bu bölüm ETO'nun sıklıkla karşılaştığı valf ve pompa türlerini, dümen pompasını ve hidrolik RAM sistemini detaylı olarak açıklar.</p>
+
+    <h3>30.1 Valf Türleri</h3>
+    <div class="two-col">
+      <div>
+        <h4>Gate Valf (Sürgülü Valf)</h4>
+        <ul>
+          <li><strong>Çalışma prensibi:</strong> Metal levha (gate) dikey olarak boruyun tam içine iner/çıkar.</li>
+          <li><strong>Kullanım:</strong> Tam açık veya tam kapalı konumlarda — kısmi açık bırakılmaz (titreşim ve erozyon).</li>
+          <li><strong>Avantaj:</strong> Basınç kaybı minimumdur; büyük çaplarda ekonomik.</li>
+          <li><strong>Dezavantaj:</strong> Yavaş açılır/kapanır, su darbesi tehlikesi; kısmi akış kontrolüne uygun değil.</li>
+          <li><strong>Gemi kullanımı:</strong> Sintine ana hatları, balast ana hatları, soğutma suyu ana izolasyon.</li>
+        </ul>
+        <h4>Globe Valf / Kuleli Valf</h4>
+        <ul>
+          <li><strong>Çalışma prensibi:</strong> Disk veya konik tıpa aşağı-yukarı hareketle oturma yüzeyine (seat) oturur/kalkar.</li>
+          <li><strong>Kullanım:</strong> Akış miktarını kademeli ayarlamak için idealdir.</li>
+          <li><strong>Avantaj:</strong> İyi sızdırmazlık, hassas debi kontrolü.</li>
+          <li><strong>Dezavantaj:</strong> Basınç kaybı yüksek (S şeklinde akış yolu); büyük çaplarda pahalı.</li>
+          <li><strong>Gemi kullanımı:</strong> Buhar hatları, yakıt servis devreleri, soğutma suyu ayar.</li>
+        </ul>
+        <h4>Butterfly Valf (Kelebek Valf)</h4>
+        <ul>
+          <li><strong>Çalışma prensibi:</strong> Dairesel disk boru ekseninde döner; 90° dönüş tam açma/kapama.</li>
+          <li><strong>Avantaj:</strong> Hafif, kompakt, hızlı açma/kapama, büyük çap için ekonomik.</li>
+          <li><strong>Dezavantaj:</strong> Yüksek basınçta sızdırmazlık problemi olabilir; disk akışta kaldığından basınç kaybı var.</li>
+          <li><strong>Gemi kullanımı:</strong> Büyük çaplı deniz suyu hatları, balast hatları, havalandırma damperleri.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Check Valf (Çek Valf / Geri Dönmez Valf)</h4>
+        <ul>
+          <li><strong>Çalışma prensibi:</strong> Akışın yalnızca bir yönde geçmesine izin verir; ters basınçta kapanır.</li>
+          <li><strong>Tipler:</strong> Sürgülü (swing), yaylı (spring), kaldırmalı (lift).</li>
+          <li><strong>Avantaj:</strong> Otomatik, aktüasyon gerektirmez; pompayı geri akışa karşı korur.</li>
+          <li><strong>Gemi kullanımı:</strong> Pompa çıkış hatları, yakıt transfer hatları, sintine çıkışları.</li>
+        </ul>
+        <h4>Needle Valf (İğne Valf)</h4>
+        <ul>
+          <li><strong>Çalışma prensibi:</strong> Konik iğne, hassas açıkla küçük bir oturma deliğini açar/kapatır.</li>
+          <li><strong>Avantaj:</strong> Çok hassas debi kontrolü; küçük akış miktarları için idealdir.</li>
+          <li><strong>Dezavantaj:</strong> Büyük akış debisine uygun değil; kirlenmeye duyarlı.</li>
+          <li><strong>Gemi kullanımı:</strong> Ölçüm enstrümanı beslemesi, yağ sistemi orifis ayarı, pnömatik debi kontrolü.</li>
+        </ul>
+        <h4>Ball Valf (Toplu Valf)</h4>
+        <ul>
+          <li><strong>Çalışma prensibi:</strong> Delgeli küre (ball) 90° dönerek tam açık veya tam kapalı konuma geçer.</li>
+          <li><strong>Avantaj:</strong> Hızlı ve kolay; düşük tork; mükemmel sızdırmazlık.</li>
+          <li><strong>Dezavantaj:</strong> Kısmi açık bırakılınca kavitasyon ve erozyon riski.</li>
+          <li><strong>Gemi kullanımı:</strong> Yakıt devre izolasyonu, küçük çaplı boru bağlantıları, enstrüman izolasyonu.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-1: Valf Türleri Karşılaştırma Tablosu</h3>
+      <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="680" height="240" fill="#f5f5f5" rx="8"/>
+        <text x="340" y="22" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a237e">Gemi Valf Türleri — Sembol ve Özellik Karşılaştırması</text>
+
+        <!-- Gate valve symbol -->
+        <g transform="translate(30,50)">
+          <line x1="0" y1="20" x2="20" y2="20" stroke="#333" stroke-width="2"/>
+          <polygon points="20,10 40,20 20,30" fill="#cfd8dc" stroke="#333" stroke-width="1.5"/>
+          <polygon points="40,10 20,20 40,30" fill="#cfd8dc" stroke="#333" stroke-width="1.5"/>
+          <line x1="40" y1="20" x2="60" y2="20" stroke="#333" stroke-width="2"/>
+          <line x1="30" y1="10" x2="30" y2="0" stroke="#555" stroke-width="1.5"/>
+          <text x="30" y="50" font-size="9" text-anchor="middle" fill="#333">Gate</text>
+          <text x="30" y="62" font-size="7" text-anchor="middle" fill="#555">Tam aç/kapa</text>
+          <text x="30" y="72" font-size="7" text-anchor="middle" fill="#555">Düşük ΔP</text>
+        </g>
+
+        <!-- Globe valve symbol -->
+        <g transform="translate(140,50)">
+          <line x1="0" y1="20" x2="15" y2="20" stroke="#333" stroke-width="2"/>
+          <circle cx="30" cy="20" r="15" fill="white" stroke="#333" stroke-width="1.5"/>
+          <polygon points="15,10 45,20 15,30" fill="#90caf9" stroke="#333" stroke-width="1"/>
+          <line x1="45" y1="20" x2="60" y2="20" stroke="#333" stroke-width="2"/>
+          <line x1="30" y1="5" x2="30" y2="-5" stroke="#555" stroke-width="1.5"/>
+          <text x="30" y="50" font-size="9" text-anchor="middle" fill="#333">Globe/Kuleli</text>
+          <text x="30" y="62" font-size="7" text-anchor="middle" fill="#555">Debi kontrolü</text>
+          <text x="30" y="72" font-size="7" text-anchor="middle" fill="#555">Yüksek ΔP</text>
+        </g>
+
+        <!-- Butterfly valve symbol -->
+        <g transform="translate(250,50)">
+          <line x1="0" y1="20" x2="15" y2="20" stroke="#333" stroke-width="2"/>
+          <rect x="15" y="5" width="30" height="30" fill="#c8e6c9" stroke="#333" stroke-width="1.5"/>
+          <line x1="30" y1="5" x2="30" y2="35" stroke="#333" stroke-width="2"/>
+          <line x1="45" y1="20" x2="60" y2="20" stroke="#333" stroke-width="2"/>
+          <line x1="30" y1="5" x2="30" y2="-5" stroke="#555" stroke-width="1.5"/>
+          <text x="30" y="50" font-size="9" text-anchor="middle" fill="#333">Butterfly</text>
+          <text x="30" y="62" font-size="7" text-anchor="middle" fill="#555">Hızlı açma</text>
+          <text x="30" y="72" font-size="7" text-anchor="middle" fill="#555">Büyük çap</text>
+        </g>
+
+        <!-- Check valve symbol -->
+        <g transform="translate(360,50)">
+          <line x1="0" y1="20" x2="15" y2="20" stroke="#333" stroke-width="2"/>
+          <polygon points="15,10 35,20 15,30" fill="#fff9c4" stroke="#333" stroke-width="1.5"/>
+          <line x1="35" y1="10" x2="35" y2="30" stroke="#333" stroke-width="2"/>
+          <line x1="35" y1="20" x2="60" y2="20" stroke="#333" stroke-width="2"/>
+          <text x="30" y="50" font-size="9" text-anchor="middle" fill="#333">Check</text>
+          <text x="30" y="62" font-size="7" text-anchor="middle" fill="#555">Tek yönlü</text>
+          <text x="30" y="72" font-size="7" text-anchor="middle" fill="#555">Otomatik</text>
+        </g>
+
+        <!-- Needle valve symbol -->
+        <g transform="translate(460,50)">
+          <line x1="0" y1="20" x2="15" y2="20" stroke="#333" stroke-width="2"/>
+          <polygon points="15,10 45,20 15,30" fill="#f3e5f5" stroke="#333" stroke-width="1.5"/>
+          <polygon points="45,10 15,20 45,30" fill="#f3e5f5" stroke="#333" stroke-width="1.5"/>
+          <line x1="30" y1="5" x2="30" y2="-8" stroke="#9c27b0" stroke-width="2"/>
+          <line x1="45" y1="20" x2="60" y2="20" stroke="#333" stroke-width="2"/>
+          <text x="30" y="50" font-size="9" text-anchor="middle" fill="#333">Needle (İğne)</text>
+          <text x="30" y="62" font-size="7" text-anchor="middle" fill="#555">Hassas debi</text>
+          <text x="30" y="72" font-size="7" text-anchor="middle" fill="#555">Küçük akış</text>
+        </g>
+
+        <!-- Ball valve symbol -->
+        <g transform="translate(565,50)">
+          <line x1="0" y1="20" x2="12" y2="20" stroke="#333" stroke-width="2"/>
+          <circle cx="25" cy="20" r="13" fill="#ffccbc" stroke="#333" stroke-width="1.5"/>
+          <line x1="25" y1="7" x2="25" y2="33" stroke="#333" stroke-width="2"/>
+          <line x1="38" y1="20" x2="55" y2="20" stroke="#333" stroke-width="2"/>
+          <line x1="25" y1="7" x2="25" y2="-3" stroke="#555" stroke-width="1.5"/>
+          <text x="27" y="50" font-size="9" text-anchor="middle" fill="#333">Ball (Top)</text>
+          <text x="27" y="62" font-size="7" text-anchor="middle" fill="#555">Hızlı tam aç</text>
+          <text x="27" y="72" font-size="7" text-anchor="middle" fill="#555">Düşük tork</text>
+        </g>
+
+        <!-- Comparison table -->
+        <rect x="10" y="145" width="660" height="85" fill="white" stroke="#b0bec5" stroke-width="1" rx="4"/>
+        <text x="20" y="162" font-size="9" font-weight="bold" fill="#1a237e">Valf</text>
+        <text x="100" y="162" font-size="9" font-weight="bold" fill="#1a237e">Kontrol Tipi</text>
+        <text x="220" y="162" font-size="9" font-weight="bold" fill="#1a237e">Basınç Kaybı</text>
+        <text x="330" y="162" font-size="9" font-weight="bold" fill="#1a237e">Tipik Çap</text>
+        <text x="430" y="162" font-size="9" font-weight="bold" fill="#1a237e">Ana Kullanım Alanı</text>
+        <line x1="10" y1="166" x2="670" y2="166" stroke="#ccc" stroke-width="0.8"/>
+        <text x="20" y="179" font-size="8" fill="#333">Gate</text><text x="100" y="179" font-size="8" fill="#333">İzolasyon (tam aç/kapa)</text><text x="220" y="179" font-size="8" fill="#2e7d32">Çok düşük</text><text x="330" y="179" font-size="8" fill="#333">50 – 1200 mm</text><text x="430" y="179" font-size="8" fill="#333">Sintine, balast ana hat</text>
+        <text x="20" y="192" font-size="8" fill="#333">Globe</text><text x="100" y="192" font-size="8" fill="#333">Debi kontrolü</text><text x="220" y="192" font-size="8" fill="#e53935">Yüksek</text><text x="330" y="192" font-size="8" fill="#333">15 – 300 mm</text><text x="430" y="192" font-size="8" fill="#333">Yakıt, buhar ayarı</text>
+        <text x="20" y="205" font-size="8" fill="#333">Butterfly</text><text x="100" y="205" font-size="8" fill="#333">Hızlı izolasyon</text><text x="220" y="205" font-size="8" fill="#f57f17">Orta</text><text x="330" y="205" font-size="8" fill="#333">50 – 2000 mm</text><text x="430" y="205" font-size="8" fill="#333">Deniz suyu, havalandırma</text>
+        <text x="20" y="218" font-size="8" fill="#333">Check / Needle / Ball</text><text x="100" y="218" font-size="8" fill="#333">Geri koruma / Hassas / Hızlı</text><text x="220" y="218" font-size="8" fill="#333">Düşük/Düşük/Düşük</text><text x="330" y="218" font-size="8" fill="#333">Çeşitli</text><text x="430" y="218" font-size="8" fill="#333">Pompa çıkışı / Enstrüman / İzolasyon</text>
+      </svg>
+      <p class="svg-caption">Altı temel valf türü: semboller (üst satır) ve karşılaştırma tablosu (alt). Gate valf basınç kaybı en düşük; Globe en iyi debi kontrolü sağlar; Butterfly büyük çaplarda ekonomik; Check geri akışı önler; Needle hassas debi ayarı; Ball hızlı izolasyon.</p>
+    </div>
+
+    <h3>30.2 Pompa Türleri</h3>
+    <div class="two-col">
+      <div>
+        <h4>Santrifüj Pompa (Centrifugal)</h4>
+        <ul>
+          <li><strong>Prensip:</strong> Dönen impeller santrifüj kuvvetiyle sıvıyı fırlatır; düşük basınç, yüksek debi.</li>
+          <li><strong>Özellik:</strong> İlk çalıştırmada doldurma (priming) gerekebilir; kavitasyona duyarlı.</li>
+          <li><strong>Kullanım:</strong> Soğutma suyu, deniz suyu, sintine, yangın, balast.</li>
+        </ul>
+        <h4>Dişli Pompa (Gear Pump)</h4>
+        <ul>
+          <li><strong>Prensip:</strong> Birbirine geçmeli dişliler sıvıyı diş boşluklarıyla taşır.</li>
+          <li><strong>Özellik:</strong> Self-priming; viskoz sıvılar için uygun; sabit debi sağlar.</li>
+          <li><strong>Kullanım:</strong> Yağlama yağı devreleri, yakıt transferi, hidrolik.</li>
+        </ul>
+        <h4>Vidalı Pompa (Screw Pump)</h4>
+        <ul>
+          <li><strong>Prensip:</strong> Dönen vida(lar) sıvıyı eksenel yönde ilerletir — pürüzsüz, titreşimsiz.</li>
+          <li><strong>Özellik:</strong> Sessiz çalışma, yüksek viskoziteli sıvılar için mükemmel (ağır yakıt, viskoz yağlar).</li>
+          <li><strong>Kullanım:</strong> HFO (heavy fuel oil) transferi, yağlama, kargo pompalama.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pistonlu Pompa (Piston/Plunger Pump)</h4>
+        <ul>
+          <li><strong>Prensip:</strong> Piston ileri-geri hareketiyle sıvıyı emer ve basar; yüksek basınç.</li>
+          <li><strong>Özellik:</strong> Yüksek basınç (100–400 bar) üretebilir; pulsasyonlu akış.</li>
+          <li><strong>Kullanım:</strong> Hidrolik sistemler, yüksek basınçlı yakıt enjeksiyonu.</li>
+        </ul>
+        <h4>Diyafram Pompa (Diaphragm Pump)</h4>
+        <ul>
+          <li><strong>Prensip:</strong> Esnek diyafram ileri-geri esneyerek sıvıyı emer/basar; sıvı mekanikle temas etmez.</li>
+          <li><strong>Özellik:</strong> Kimyasal ve aşındırıcı sıvılar için güvenli; kuru çalışmaya dayanıklı.</li>
+          <li><strong>Kullanım:</strong> Kimyasal transfer, deniz suyu, pislik içeren sıvılar.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>30.3 Dümen Pompası Türleri</h3>
+    <table>
+      <thead><tr><th>Tip</th><th>Çalışma Prensibi</th><th>Avantaj</th><th>Gemi Kullanımı</th></tr></thead>
+      <tbody>
+        <tr><td><strong>RAM Tipi</strong></td><td>Hidrolik silindir (RAM) dümen stokunu doğrudan iter/çeker</td><td>Basit, güçlü, büyük tork</td><td>Büyük gemiler (kargo, tanker)</td></tr>
+        <tr><td><strong>Rotary Vane</strong></td><td>Döner kanatlar hidrolik basınçla dümen açısı oluşturur</td><td>Kompakt, hızlı yanıt</td><td>Orta büyüklükte gemiler</td></tr>
+        <tr><td><strong>Aksiyel Pistonlu</strong></td><td>Pistonlar eksenel düzlemde çalışır; değişken deplasmanla basınç/debi kontrolü</td><td>Verimli, hassas kontrol</td><td>Modern yüksek performanslı sistemler</td></tr>
+      </tbody>
+    </table>
+
+    <h3>30.4 Hidrolik RAM</h3>
+    <p>Hidrolik RAM, yüksek basınçlı sıvının pistonla doğrudan mekanik kuvvete dönüştürüldüğü lineer aktuatördür. Dümen makinelerinde, ambar kapılarında ve yükleme kollarında yaygın kullanılır.</p>
+    <div class="two-col">
+      <div>
+        <h4>Çalışma Prensibi</h4>
+        <p>Temel formül: <strong>F = P × A</strong></p>
+        <ul>
+          <li>F = Kuvvet (Newton)</li>
+          <li>P = Hidrolik basınç (Pa veya N/m²)</li>
+          <li>A = Piston alanı (m²)</li>
+        </ul>
+        <p>Örnek: 150 bar basınç, 100 cm² piston → F = 150 × 10⁵ × 100 × 10⁻⁴ = <strong>150.000 N = 150 kN</strong></p>
+        <h4>Tek Etkili RAM</h4>
+        <ul>
+          <li>Basınç yalnızca bir yönde uygular; dönüşü ağırlık veya yay sağlar.</li>
+          <li>Basit ve düşük maliyetli; tek taraflı yük uygulamalarında kullanılır.</li>
+        </ul>
+        <h4>Çift Etkili RAM</h4>
+        <ul>
+          <li>Her iki yönde basınçlı sıvı kullanılır; ileri ve geri tam kontrol.</li>
+          <li>Dümen makineleri için standart tipdir: iki RAM birbirini dengeler.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sızdırmazlık Elemanları</h4>
+        <ul>
+          <li><strong>O-ring:</strong> Dairesel kesit elastomer; statik sızdırmazlık.</li>
+          <li><strong>U-seal / V-packing:</strong> Dinamik sızdırmazlık; RAM hareket ederken sızdırmaz.</li>
+          <li><strong>Wiper seal:</strong> Harici kirlilik ve su girişini önler.</li>
+          <li><strong>Backup ring:</strong> Yüksek basınçta O-ring'i destekler.</li>
+        </ul>
+        <h4>Arıza Belirtileri</h4>
+        <ul>
+          <li>Yavaşlayan dümen hareketi → düşük yağ seviyesi veya pompa basınç kaybı.</li>
+          <li>RAM etrafında yağ sızıntısı → U-seal veya O-ring aşınması.</li>
+          <li>Yüksek çalışma sesi → hava girişi (kavitasyon) veya kaplin arızası.</li>
+          <li>Isınan hidrolik yağ → soğutucu arızası veya sürekli relief valve açılması.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-2: Dümen RAM Sistemi ve Pompa Türleri Şeması</h3>
+      <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="680" height="230" fill="#fafafa" rx="8"/>
+        <text x="340" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a237e">Hidrolik RAM Dümen Sistemi (Çift RAM — Tek Hat Görünümü)</text>
+
+        <!-- Hydraulic power unit -->
+        <rect x="20" y="40" width="90" height="60" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" rx="4"/>
+        <text x="65" y="65" font-size="9" text-anchor="middle" fill="#1b5e20" font-weight="bold">Hidrolik</text>
+        <text x="65" y="78" font-size="9" text-anchor="middle" fill="#1b5e20">Güç Ünitesi</text>
+        <text x="65" y="91" font-size="7" text-anchor="middle" fill="#555">(Motor+Pompa)</text>
+
+        <!-- pressure line -->
+        <line x1="110" y1="60" x2="180" y2="60" stroke="#e53935" stroke-width="3"/>
+        <text x="145" y="52" font-size="8" fill="#e53935">Yüksek Basınç</text>
+        <!-- return line -->
+        <line x1="110" y1="85" x2="180" y2="85" stroke="#90caf9" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="145" y="98" font-size="8" fill="#1565c0">Dönüş Hattı</text>
+
+        <!-- Directional valve -->
+        <rect x="180" y="48" width="60" height="48" fill="#fff9c4" stroke="#f57f17" stroke-width="2" rx="3"/>
+        <text x="210" y="70" font-size="8" text-anchor="middle" fill="#e65100" font-weight="bold">Yön</text>
+        <text x="210" y="82" font-size="8" text-anchor="middle" fill="#e65100">Valfi</text>
+        <text x="210" y="92" font-size="7" text-anchor="middle" fill="#555">4/3 veya servo</text>
+
+        <!-- Pipe to RAMs -->
+        <line x1="240" y1="60" x2="300" y2="60" stroke="#e53935" stroke-width="2"/>
+        <line x1="240" y1="85" x2="300" y2="85" stroke="#90caf9" stroke-width="2" stroke-dasharray="5,3"/>
+        <!-- vertical split -->
+        <line x1="300" y1="60" x2="300" y2="40" stroke="#e53935" stroke-width="2"/>
+        <line x1="300" y1="60" x2="300" y2="110" stroke="#90caf9" stroke-width="2" stroke-dasharray="5,3"/>
+
+        <!-- RAM 1 (upper) -->
+        <rect x="320" y="25" width="80" height="30" fill="#fce4ec" stroke="#c62828" stroke-width="1.5" rx="2"/>
+        <rect x="362" y="29" width="12" height="22" fill="#ef9a9a" stroke="#c62828" stroke-width="1"/>
+        <line x1="374" y1="40" x2="410" y2="40" stroke="#555" stroke-width="3"/>
+        <text x="360" y="68" font-size="8" text-anchor="middle" fill="#555">RAM 1 (sağ)</text>
+
+        <!-- RAM 2 (lower) -->
+        <rect x="320" y="110" width="80" height="30" fill="#e8eaf6" stroke="#283593" stroke-width="1.5" rx="2"/>
+        <rect x="362" y="114" width="12" height="22" fill="#9fa8da" stroke="#283593" stroke-width="1"/>
+        <line x1="374" y1="125" x2="410" y2="125" stroke="#555" stroke-width="3"/>
+        <text x="360" y="152" font-size="8" text-anchor="middle" fill="#555">RAM 2 (sol)</text>
+
+        <!-- Rudder stock -->
+        <circle cx="430" cy="82" r="20" fill="white" stroke="#333" stroke-width="2"/>
+        <text x="430" y="86" font-size="9" text-anchor="middle" fill="#333">STOK</text>
+        <!-- RAM rods to tiller -->
+        <line x1="410" y1="40" x2="430" y2="62" stroke="#555" stroke-width="2"/>
+        <line x1="410" y1="125" x2="430" y2="102" stroke="#555" stroke-width="2"/>
+        <!-- Rudder blade -->
+        <rect x="450" y="65" width="12" height="34" fill="#607d8b" stroke="#333" stroke-width="1.5" rx="2"/>
+        <text x="456" y="113" font-size="7" text-anchor="middle" fill="#333">Dümen</text>
+
+        <!-- F = P x A formula box -->
+        <rect x="500" y="40" width="160" height="100" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5" rx="5"/>
+        <text x="580" y="58" font-size="10" text-anchor="middle" fill="#1a237e" font-weight="bold">F = P × A</text>
+        <text x="580" y="73" font-size="8" text-anchor="middle" fill="#333">F = Kuvvet (Newton)</text>
+        <text x="580" y="86" font-size="8" text-anchor="middle" fill="#333">P = Basınç (Pa = N/m²)</text>
+        <text x="580" y="99" font-size="8" text-anchor="middle" fill="#333">A = Piston Alanı (m²)</text>
+        <line x1="510" y1="105" x2="650" y2="105" stroke="#ccc" stroke-width="0.8"/>
+        <text x="580" y="118" font-size="8" text-anchor="middle" fill="#555">Örnek: 150 bar × 100 cm²</text>
+        <text x="580" y="130" font-size="8" text-anchor="middle" fill="#e53935">= 150.000 N = 150 kN</text>
+
+        <!-- Sealing types at bottom -->
+        <rect x="10" y="170" width="470" height="50" fill="white" stroke="#b0bec5" stroke-width="1" rx="4"/>
+        <text x="20" y="186" font-size="8" font-weight="bold" fill="#333">Sızdırmazlık:</text>
+        <text x="20" y="200" font-size="8" fill="#555">O-ring: statik bağlantılar</text>
+        <text x="130" y="200" font-size="8" fill="#555">U-seal: dinamik RAM silindir</text>
+        <text x="270" y="200" font-size="8" fill="#555">Wiper: dış kirlilik engeli</text>
+        <text x="380" y="200" font-size="8" fill="#555">Backup: yüksek basınç</text>
+        <text x="20" y="212" font-size="7" fill="#888">Yağ sızıntısı varsa → seal değişimi; yavaş dümen → basınç ve yağ seviyesi kontrol</text>
+      </svg>
+      <p class="svg-caption">Çift RAM dümen sistemi şeması. Hidrolik güç ünitesi yüksek basınçlı yağı yönlendirme valfine gönderir. Valf, RAM 1 veya RAM 2'yi harekete geçirir ve dümen stokunu döndürür. F = P × A formülüyle üretilen kuvvet hesaplanır. Alt satırda sızdırmazlık eleman tipleri özetlenmiştir.</p>
+    </div>
+
+    <div class="warn-box"><strong>Sınav İpucu:</strong> "Globe valf ile gate valf farkı?" → Globe debi kontrolü, gate izolasyon. "Check valf görevi?" → Tek yönlü akış, pompa geri akış koruması. "Dümen RAM'inde F=P·A formülü: 200 bar basınç, 80 cm² piston → F?" → 200×10⁵ × 80×10⁻⁴ = 160.000 N = 160 kN.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 30 — Mini Sınav</div>
+      <details class="quiz-item"><summary>B30-S1: Gate valf hangi konumda kullanılmalıdır? A) Daima kısmi açık B) Yalnızca tam açık veya tam kapalı C) Her zaman %50 açık D) Sadece kapalı</summary><div class="quiz-answer"><strong>Cevap: B.</strong> Gate valf kısmi açık bırakılırsa, gate levhası titreşir ve erozyon meydana gelir. Sadece tam açık (izolasyon sağlıyor) veya tam kapalı konumda kullanılır.</div></details>
+      <details class="quiz-item"><summary>B30-S2: Dümen RAM'inde basınç 180 bar, piston alanı 120 cm² ise üretilen kuvvet nedir?</summary><div class="quiz-answer">F = P × A = 180 × 10⁵ Pa × 120 × 10⁻⁴ m² = <strong>216.000 N = 216 kN</strong>. Büyük gemilerde dümen stokunu döndürmek için bu büyüklükte kuvvetler gereklidir.</div></details>
+      <details class="quiz-item"><summary>B30-S3: Vidalı pompa (screw pump) neden ağır yakıt (HFO) transferinde tercih edilir?</summary><div class="quiz-answer">Vidalı pompa yüksek viskoziteli sıvıları titreşimsiz ve sessiz şekilde taşır. Pürüzsüz akış sağlar, kavitasyon riski düşüktür. Santrifüj pompa viskoz sıvılarda verimini kaybeder.</div></details>
+      <details class="quiz-item"><summary>B30-S4: Check valf ile globe valfin temel işlev farkı nedir?</summary><div class="quiz-answer">Check valf otomatik çalışır — ters basınçta kapanır, ileri akışta açılır; operatör müdahalesi gerekmez. Globe valf ise el veya aktüatörle açılıp kapanır ve akış miktarını kademeli kontrol etmek için kullanılır.</div></details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ BÖLÜM 31 -->
+  <section id="b31">
+    <h2>Bölüm 31 — Kablo Kesitleri, Kontaktör, Kondansatör &amp; Termik Seçim</h2>
+    <p>Doğru bileşen seçimi güvenli ve verimli gemi elektriğinin temelidir. Bu bölüm standart kablo kesitlerini, kontaktör ve kondansatör seçim kriterlerini ve termik röle ayarını kapsamaktadır.</p>
+
+    <h3>31.1 Standart Kablo Kesitleri (IEC 60092)</h3>
+    <p>IEC 60092 gemi elektrik tesisatı standartlarını belirler. Kablo kesiti seçimi üç ana faktöre bağlıdır: akım taşıma kapasitesi, gerilim düşümü ve kısa devre dayanımı.</p>
+    <div class="two-col">
+      <div>
+        <h4>Akım Taşıma Kapasitesi Tablosu (60°C bakır, havada döşeli, tek kablo)</h4>
+        <table>
+          <thead><tr><th>Kesit (mm²)</th><th>Maks. Akım (A)</th><th>Tipik Uygulama</th></tr></thead>
+          <tbody>
+            <tr><td>1,5</td><td>18</td><td>Aydınlatma, sinyal</td></tr>
+            <tr><td>2,5</td><td>26</td><td>Priz, küçük motor</td></tr>
+            <tr><td>4</td><td>34</td><td>Küçük motor (&lt;2 kW)</td></tr>
+            <tr><td>6</td><td>44</td><td>Motor, devre besleme</td></tr>
+            <tr><td>10</td><td>60</td><td>Orta güç devreleri</td></tr>
+            <tr><td>16</td><td>80</td><td>Panel besleme</td></tr>
+            <tr><td>25</td><td>105</td><td>Büyük motor (&lt;30 kW)</td></tr>
+            <tr><td>35</td><td>130</td><td>Jeneratör çıkışı</td></tr>
+            <tr><td>50</td><td>155</td><td>Ana pano bağlantısı</td></tr>
+            <tr><td>70</td><td>195</td><td>Güç dağıtım kablosu</td></tr>
+            <tr><td>95</td><td>235</td><td>HV trafo bağlantısı</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h4>Düzeltme Faktörleri</h4>
+        <ul>
+          <li><strong>Sıcaklık düzeltmesi:</strong> 40°C → ×0,87; 50°C → ×0,71 (referans 30°C)</li>
+          <li><strong>Grup kurulum:</strong> 3 kablo yan yana → ×0,70; 6 kablo → ×0,55</li>
+          <li><strong>Boru/conduit içinde:</strong> ×0,80 uygula</li>
+          <li><strong>Uygulama:</strong> I_izin = I_tablo × k₁ × k₂ × k₃</li>
+        </ul>
+        <h4>Gerilim Düşümü Formülü (3-faz)</h4>
+        <div class="formula-box">ΔV (V) = √3 × I × R × L / 1000</div>
+        <ul>
+          <li>I = hat akımı (A)</li>
+          <li>R = direniş (Ω/km) — bakır 1,5 mm² ≈ 13 Ω/km; 6 mm² ≈ 3,1 Ω/km</li>
+          <li>L = hat uzunluğu (m)</li>
+          <li>IEC 60092: gemide ΔV ≤ %3 (aydınlatma) veya ≤ %5 (motor)</li>
+        </ul>
+        <h4>Paralel Direnç Formülü (3'lü)</h4>
+        <div class="formula-box">1/R = 1/R₁ + 1/R₂ + 1/R₃</div>
+        <p>Örnek: R₁=6Ω, R₂=3Ω, R₃=2Ω → 1/R = 1/6+1/3+1/2 = 1/6+2/6+3/6 = 6/6 = 1 → <strong>R = 1 Ω</strong></p>
+      </div>
+    </div>
+
+    <h3>31.2 Kontaktör Seçim Kriterleri (IEC 60947-4)</h3>
+    <p>Kontaktör, motorları ve yükleri anahtarlamak için kullanılan elektromanyetik anahtardır. Seçimde kullanım kategorisi ve nominal akım en kritik parametrelerdir.</p>
+    <table>
+      <thead><tr><th>Kategori</th><th>Yük Tipi</th><th>Açıklama</th><th>Boyutlandırma Çarpanı</th></tr></thead>
+      <tbody>
+        <tr><td><strong>AC-1</strong></td><td>Omik / Hafif indüktif</td><td>Rezistif ısıtıcılar, aydınlatma, trafolar</td><td>×1,0 (nominal akım)</td></tr>
+        <tr><td><strong>AC-3</strong></td><td>Sincap kafes motor (normal kalkış)</td><td>En yaygın motor kontaktörü; kalkışta 5–7×In</td><td>×1,0 (IEC tablosu)</td></tr>
+        <tr><td><strong>AC-4</strong></td><td>Jogging, reversing, plug braking</td><td>Çok sık çalıştırma/frenleme; ağır koşullar</td><td>×1,5–2,0 (AC-3 tablosuna göre)</td></tr>
+        <tr><td><strong>AC-6b</strong></td><td>Transformatör anahtarlama</td><td>Yüksek açma akımı</td><td>Özel hesap</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><strong>Pratik seçim tablosu:</strong> Motor gücüne göre kontaktör akım sınıfı (AC-3, 400V, 3-faz):
+      <table style="margin-top:6px">
+        <thead><tr><th>Motor Gücü (kW)</th><th>Nominal Motor Akımı (A)</th><th>Kontaktör Ie (A)</th></tr></thead>
+        <tbody>
+          <tr><td>1,5 kW</td><td>≈ 3,5 A</td><td>9 A sınıf</td></tr>
+          <tr><td>5,5 kW</td><td>≈ 11 A</td><td>12 A sınıf</td></tr>
+          <tr><td>11 kW</td><td>≈ 22 A</td><td>25 A sınıf</td></tr>
+          <tr><td>22 kW</td><td>≈ 44 A</td><td>50 A sınıf</td></tr>
+          <tr><td>37 kW</td><td>≈ 70 A</td><td>75 A sınıf</td></tr>
+          <tr><td>75 kW</td><td>≈ 140 A</td><td>150 A sınıf</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>31.3 Kondansatör Seçim Kriterleri</h3>
+    <p>Güç faktörü düzeltmesinde (power factor correction) kondansatör kapasitesi kVAr cinsinden hesaplanır.</p>
+    <div class="formula-box">Q (kVAr) = P × (tan φ₁ − tan φ₂)</div>
+    <p>P = aktif güç (kW), φ₁ = mevcut faz açısı, φ₂ = hedef faz açısı (genellikle cos φ = 0,95 → φ₂ ≈ 18°)</p>
+    <div class="formula-box">C (F) = Q / (2π × f × V²)</div>
+    <ul>
+      <li>Kondansatör gerilim sınıfı: V_nominal ≥ 1,1 × V_şebeke (güvenlik payı)</li>
+      <li>Sıcaklık sınıfı: makine dairesinde minimum 70°C sınıfı tercih edilir</li>
+      <li>Örnek: P=50 kW, cos φ₁=0,75 (φ₁=41°), hedef cos φ₂=0,95 (φ₂=18°)<br>
+        Q = 50 × (tan 41° − tan 18°) = 50 × (0,869 − 0,325) = 50 × 0,544 = <strong>27,2 kVAr</strong></li>
+    </ul>
+
+    <h3>31.4 Termik Röle Seçimi ve Motor Termik Değeri Belirleme</h3>
+    <p>Termik röle motoru aşırı akımdan (overload) ve faz dengesizliğinden korur. IEC 60947-4-1'e göre trip class (tetikleme sınıfı) seçimi kritiktir.</p>
+    <table>
+      <thead><tr><th>Trip Class</th><th>7,2×In'de Trip Süresi</th><th>Tipik Uygulama</th></tr></thead>
+      <tbody>
+        <tr><td><strong>10</strong></td><td>≤ 4 saniye</td><td>Hafif kalkış yükü (pompa, fan, santrifüj)</td></tr>
+        <tr><td><strong>10A</strong></td><td>≤ 10 saniye</td><td>Normal kalkış (konveyör, kompresör)</td></tr>
+        <tr><td><strong>20</strong></td><td>≤ 20 saniye</td><td>Ağır kalkış (yüklü konveyör, santrifüj pompa)</td></tr>
+        <tr><td><strong>30</strong></td><td>≤ 30 saniye</td><td>Çok ağır kalkış (yüksek ataletli yükler)</td></tr>
+      </tbody>
+    </table>
+    <h4>Motor Termik Değeri (Ie) Belirleme Adımları</h4>
+    <ol>
+      <li>Motor plakasından <strong>nominal akımı (In)</strong> oku (örn. "In = 20A").</li>
+      <li>Termik röle ayar aralığını seç: In'i kapsayan bir aralık (örn. 16–25 A sınıfı).</li>
+      <li>Ayar kadranını <strong>0,95 × In ≤ Ie ≤ 1,05 × In</strong> kuralına göre ayarla (örn. 19–21 A arası).</li>
+      <li>Motor soğuk başlatma süresine göre trip class seç (normal kalkış → Class 10A).</li>
+      <li>Faz kaybı korumasını (phase loss protection) etkinleştir — tek faz kesildiğinde termik hızla devreye girsin.</li>
+    </ol>
+    <div class="warn-box"><strong>Önemli:</strong> Termik röle akım ayarını kesinlikle motor nominal akımının üzerine çıkarma. Yüksek ayar motoru korumaz; sargı hasar görür.</div>
+
+    <div class="svg-wrap">
+      <h3>SVG-1: Kablo Kesiti ve Akım Kapasitesi Görsel Tablosu</h3>
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="680" height="200" fill="#f3f9f3" rx="8"/>
+        <text x="340" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="#1a237e">IEC 60092 Kablo Kesit - Akım Kapasitesi Çubuk Grafiği</text>
+        <!-- axes -->
+        <line x1="60" y1="160" x2="660" y2="160" stroke="#333" stroke-width="2"/>
+        <line x1="60" y1="30" x2="60" y2="160" stroke="#333" stroke-width="2"/>
+        <!-- Y axis labels -->
+        <text x="55" y="163" font-size="8" text-anchor="end" fill="#555">0</text>
+        <text x="55" y="130" font-size="8" text-anchor="end" fill="#555">50A</text>
+        <text x="55" y="100" font-size="8" text-anchor="end" fill="#555">100A</text>
+        <text x="55" y="70" font-size="8" text-anchor="end" fill="#555">150A</text>
+        <text x="55" y="40" font-size="8" text-anchor="end" fill="#555">200A</text>
+        <!-- grid lines -->
+        <line x1="60" y1="130" x2="660" y2="130" stroke="#ddd" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="60" y1="100" x2="660" y2="100" stroke="#ddd" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="60" y1="70" x2="660" y2="70" stroke="#ddd" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="60" y1="40" x2="660" y2="40" stroke="#ddd" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <!-- Bars: (kesit, akım, x) -->
+        <!-- 1.5mm²=18A, 2.5=26, 4=34, 6=44, 10=60, 16=80, 25=105, 35=130, 50=155, 70=195, 95=235 -->
+        <!-- scale: 160 - akım*0.55 for y -->
+        <!-- bar width=40, gap=13 -->
+        <rect x="70"  y="150" width="35" height="10"  fill="#42a5f5"/><text x="87"  y="175" font-size="7" text-anchor="middle" fill="#333">1.5mm²</text><text x="87"  y="147" font-size="7" text-anchor="middle" fill="#1565c0">18A</text>
+        <rect x="118" y="146" width="35" height="14"  fill="#42a5f5"/><text x="135" y="175" font-size="7" text-anchor="middle" fill="#333">2.5mm²</text><text x="135" y="143" font-size="7" text-anchor="middle" fill="#1565c0">26A</text>
+        <rect x="166" y="141" width="35" height="19"  fill="#42a5f5"/><text x="183" y="175" font-size="7" text-anchor="middle" fill="#333">4mm²</text><text x="183" y="138" font-size="7" text-anchor="middle" fill="#1565c0">34A</text>
+        <rect x="214" y="136" width="35" height="24"  fill="#29b6f6"/><text x="231" y="175" font-size="7" text-anchor="middle" fill="#333">6mm²</text><text x="231" y="133" font-size="7" text-anchor="middle" fill="#0277bd">44A</text>
+        <rect x="262" y="127" width="35" height="33"  fill="#29b6f6"/><text x="279" y="175" font-size="7" text-anchor="middle" fill="#333">10mm²</text><text x="279" y="124" font-size="7" text-anchor="middle" fill="#0277bd">60A</text>
+        <rect x="310" y="116" width="35" height="44"  fill="#26c6da"/><text x="327" y="175" font-size="7" text-anchor="middle" fill="#333">16mm²</text><text x="327" y="113" font-size="7" text-anchor="middle" fill="#00838f">80A</text>
+        <rect x="358" y="102" width="35" height="58"  fill="#26c6da"/><text x="375" y="175" font-size="7" text-anchor="middle" fill="#333">25mm²</text><text x="375" y="99" font-size="7" text-anchor="middle" fill="#00838f">105A</text>
+        <rect x="406" y="89"  width="35" height="71"  fill="#26a69a"/><text x="423" y="175" font-size="7" text-anchor="middle" fill="#333">35mm²</text><text x="423" y="86" font-size="7" text-anchor="middle" fill="#00695c">130A</text>
+        <rect x="454" y="75"  width="35" height="85"  fill="#26a69a"/><text x="471" y="175" font-size="7" text-anchor="middle" fill="#333">50mm²</text><text x="471" y="72" font-size="7" text-anchor="middle" fill="#00695c">155A</text>
+        <rect x="502" y="53"  width="35" height="107" fill="#66bb6a"/><text x="519" y="175" font-size="7" text-anchor="middle" fill="#333">70mm²</text><text x="519" y="50" font-size="7" text-anchor="middle" fill="#2e7d32">195A</text>
+        <rect x="550" y="31"  width="35" height="129" fill="#66bb6a"/><text x="567" y="175" font-size="7" text-anchor="middle" fill="#333">95mm²</text><text x="567" y="28" font-size="7" text-anchor="middle" fill="#2e7d32">235A</text>
+        <!-- annotation -->
+        <text x="350" y="192" font-size="7" text-anchor="middle" fill="#888">Değerler: bakır iletken, 60°C, havada serbest döşeme, tek kablo (IEC 60092 referans)</text>
+      </svg>
+      <p class="svg-caption">IEC 60092 kablo kesit - akım kapasitesi çubuk grafiği. 1,5 mm²'den 95 mm²'ye standart kesitler ve izin verilen maksimum akımlar. Grup kurulum veya yüksek sıcaklık durumunda tablo değerleri düzeltme faktörleri ile çarpılmalıdır.</p>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-2: Termik Röle Trip Class Zaman-Akım Karakteristiği</h3>
+      <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="500" height="280" fill="#fffde7" rx="8"/>
+        <text x="250" y="20" font-size="11" font-weight="bold" text-anchor="middle" fill="#1a237e">Termik Röle Trip Class — Zaman/Akım Karakteristiği</text>
+        <!-- axes -->
+        <line x1="60" y1="240" x2="460" y2="240" stroke="#333" stroke-width="2"/>
+        <line x1="60" y1="30" x2="60" y2="240" stroke="#333" stroke-width="2"/>
+        <!-- X axis: multiples of In (1x to 7x) -->
+        <text x="250" y="262" font-size="9" text-anchor="middle" fill="#555">Akım (×In)</text>
+        <text x="60"  y="250" font-size="7" text-anchor="middle" fill="#555">1</text>
+        <text x="120" y="250" font-size="7" text-anchor="middle" fill="#555">2</text>
+        <text x="180" y="250" font-size="7" text-anchor="middle" fill="#555">3</text>
+        <text x="240" y="250" font-size="7" text-anchor="middle" fill="#555">4</text>
+        <text x="300" y="250" font-size="7" text-anchor="middle" fill="#555">5</text>
+        <text x="360" y="250" font-size="7" text-anchor="middle" fill="#555">6</text>
+        <text x="420" y="250" font-size="7" text-anchor="middle" fill="#555">7</text>
+        <!-- Y axis: time (seconds) -->
+        <text x="30" y="244" font-size="7" text-anchor="middle" fill="#555">0s</text>
+        <text x="30" y="194" font-size="7" text-anchor="middle" fill="#555">10s</text>
+        <text x="30" y="144" font-size="7" text-anchor="middle" fill="#555">20s</text>
+        <text x="30" y="94"  font-size="7" text-anchor="middle" fill="#555">30s</text>
+        <text x="30" y="44"  font-size="7" text-anchor="middle" fill="#555">40s</text>
+        <text x="15" y="140" font-size="9" fill="#555" transform="rotate(-90,15,140)">Süre (s)</text>
+        <!-- Grid -->
+        <line x1="60" y1="194" x2="460" y2="194" stroke="#eee" stroke-width="1"/>
+        <line x1="60" y1="144" x2="460" y2="144" stroke="#eee" stroke-width="1"/>
+        <line x1="60" y1="94"  x2="460" y2="94"  stroke="#eee" stroke-width="1"/>
+        <line x1="60" y1="44"  x2="460" y2="44"  stroke="#eee" stroke-width="1"/>
+        <!-- Class 10 curve: steeper (trips faster) -->
+        <polyline points="60,238 120,210 180,185 240,160 300,130 360,95 420,55" fill="none" stroke="#43a047" stroke-width="2.5"/>
+        <text x="425" y="52" font-size="8" fill="#43a047" font-weight="bold">Class 10</text>
+        <!-- Class 10A -->
+        <polyline points="60,238 120,218 180,198 240,175 300,150 360,118 420,80" fill="none" stroke="#1e88e5" stroke-width="2.5"/>
+        <text x="425" y="77" font-size="8" fill="#1e88e5" font-weight="bold">Class 10A</text>
+        <!-- Class 20 -->
+        <polyline points="60,238 120,225 180,210 240,193 300,172 360,145 420,110" fill="none" stroke="#fb8c00" stroke-width="2.5"/>
+        <text x="425" y="107" font-size="8" fill="#fb8c00" font-weight="bold">Class 20</text>
+        <!-- Class 30 -->
+        <polyline points="60,238 120,230 180,220 240,208 300,193 360,172 420,145" fill="none" stroke="#e53935" stroke-width="2.5"/>
+        <text x="425" y="142" font-size="8" fill="#e53935" font-weight="bold">Class 30</text>
+        <!-- 7.2xIn reference line -->
+        <line x1="432" y1="30" x2="432" y2="240" stroke="#999" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="435" y="236" font-size="7" fill="#999">7,2×In</text>
+        <!-- annotation box -->
+        <rect x="65" y="35" width="200" height="90" fill="white" stroke="#b0bec5" stroke-width="1" rx="3"/>
+        <text x="165" y="52" font-size="8" text-anchor="middle" fill="#333" font-weight="bold">Trip Class Seçimi</text>
+        <text x="75" y="66" font-size="7" fill="#43a047">Class 10: Pompa, fan (hafif kalkış)</text>
+        <text x="75" y="78" font-size="7" fill="#1e88e5">Class 10A: Normal motor (standart)</text>
+        <text x="75" y="90" font-size="7" fill="#fb8c00">Class 20: Ağır kalkış (konveyör)</text>
+        <text x="75" y="102" font-size="7" fill="#e53935">Class 30: Çok ağır kalkış</text>
+        <text x="75" y="115" font-size="7" fill="#555">↑ Eğri yukarıya kayarsa daha uzun</text>
+        <text x="75" y="125" font-size="7" fill="#555">kalkış süresine izin verir.</text>
+      </svg>
+      <p class="svg-caption">Termik röle trip class zaman-akım karakteristik eğrileri. X ekseni akımı In'nin katları olarak gösterir, Y ekseni trip süresini gösterir. Class 10 en hızlı; Class 30 en yavaş tetikler. Aynı aşırı akımda Class 30, Class 10'dan çok daha uzun süre bekler — ağır kalkış gerektiren yükler için uygundur.</p>
+    </div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 31 — Mini Sınav</div>
+      <details class="quiz-item"><summary>B31-S1: IEC 60947-4 göre hangi kontaktör kullanım kategorisi jogging (kesik çalıştırma) işlemleri için uygundur? A) AC-1 B) AC-3 C) AC-4 D) AC-6b</summary><div class="quiz-answer"><strong>Cevap: C.</strong> AC-4 kategorisi jogging, reversing (yön değiştirme) ve plug braking gibi ağır anahtarlama koşulları için tanımlanmıştır. Bu nedenle AC-3 tablosuna göre 1,5–2 kat daha büyük kontaktör seçilir.</div></details>
+      <details class="quiz-item"><summary>B31-S2: 10 kW'lık bir motor için kondansatör ile güç faktörü 0,75'ten 0,95'e çıkarılmak isteniyor. Gerekli kVAr değeri nedir? (tan 41° ≈ 0,87, tan 18° ≈ 0,32)</summary><div class="quiz-answer">Q = P × (tan φ₁ − tan φ₂) = 10 × (0,87 − 0,32) = 10 × 0,55 = <strong>5,5 kVAr</strong>.</div></details>
+      <details class="quiz-item"><summary>B31-S3: Termik röle ayarı "0,95 × In ≤ Ie ≤ 1,05 × In" kuralı ne anlama gelir?</summary><div class="quiz-answer">Termik röle akım ayarı motor nominal akımının %95–105'i arasında yapılmalıdır. %95'in altına ayarlamak motoru sürekli yük altında gereksiz yere tripler. %105'in üstüne ayarlamak ise aşırı ısınmayı zamanında algılamaz ve motor sargısı yanar.</div></details>
+      <details class="quiz-item"><summary>B31-S4: Grup kurulum düzeltme faktörü neden uygulanır? 6 kablo yan yana döşendiğinde faktör ne olur?</summary><div class="quiz-answer">Kablolar yan yana döşendiğinde ısı birbirini etkiler ve soğuma azalır. Bu nedenle izin verilen akım düşürülür. 6 kablo yan yana ≈ ×0,55 düzeltme faktörü uygulanır: yani tablodaki akımın yalnızca %55'i güvenle taşınabilir.</div></details>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ BÖLÜM 32 -->
+  <section id="b32">
+    <h2>Bölüm 32 — DC Motor, Bobinaj, Reversing &amp; Çift Devirli Güç Devreleri</h2>
+    <p>DC motorlar, bobinaj bilgisi ve güç devre şemaları ETO sınavlarının temel konularındandır. Bu bölüm DC motor yapısını, türlerini, motor sarım onarımını (bobinaj), reversing ve Dahlander güç devresi şemalarını ve floresan lamba bağlantısını kapsamaktadır.</p>
+
+    <h3>32.1 DC Motor Yapısı</h3>
+    <div class="two-col">
+      <div>
+        <h4>Temel Bileşenler</h4>
+        <ul>
+          <li><strong>Armatür (Armature/Rotor):</strong> Dönen kısım; sargılı çekirdekten oluşur. Komütatöre bağlı bobinler içerir.</li>
+          <li><strong>Komütatör (Commutator):</strong> Armatür üzerinde bakır segmentlerden oluşan silindirik yapı; akım yönünü düzenleyerek tek yönlü tork üretir.</li>
+          <li><strong>Fırça (Brush):</strong> Grafit veya karbon malzeme; komütatör üzerinde kayarak dönen armatüre akım iletir. Aşınan bileşen — bakım gerektirir.</li>
+          <li><strong>Kutup (Stator Poles):</strong> Sabit manyetik alan üreten alan sargıları veya kalıcı mıknatıslar. Alan şiddeti devir ve tork kontrolünü belirler.</li>
+          <li><strong>Yoke (Çerçeve):</strong> Kutupları tutan manyetik çelik gövde.</li>
+        </ul>
+        <h4>Çalışma Prensibi</h4>
+        <p>Armatür sargısından geçen akım ile stator manyetik alanı arasındaki Lorentz kuvveti tork üretir: <strong>F = B × I × L</strong>. Komütatör, armatör dönse de bobine aynı yönde akım geçmesini sağlar — sürekli tek yönlü tork elde edilir.</p>
+      </div>
+      <div>
+        <h4>DC Motor Türleri</h4>
+        <ul>
+          <li><strong>Şönt (Paralel Uyartımlı):</strong> Alan sargısı armatürle paralel. Hemen hemen sabit devir; yük değişiminde devir az değişir. Genel amaçlı kullanım (pompalar, fanlar, takım tezgahları).</li>
+          <li><strong>Seri (Seri Uyartımlı):</strong> Alan sargısı armatürle seri. Kalkışta çok yüksek tork; yük azaldıkça devir tehlikeli şekilde artar — <strong>yüksüz bırakılmaz!</strong> (Vinçler, traksiyonlar).</li>
+          <li><strong>Kompound:</strong> Şönt + seri sargı kombinasyonu. Her ikisinin avantajları; daha dengeli özellikler.</li>
+          <li><strong>PMDC (Kalıcı Mıknatıslı):</strong> Stator kalıcı mıknatıs; alan sargısı yok. Küçük güçlü uygulamalar (küçük pompa, fan, otomasyon).</li>
+        </ul>
+        <h4>DC Motor — AC Motor Karşılaştırması</h4>
+        <table>
+          <thead><tr><th>Özellik</th><th>DC Motor</th><th>AC Asenkron</th></tr></thead>
+          <tbody>
+            <tr><td>Devir Kontrolü</td><td>Kolay (gerilim/alan)</td><td>VFD gerektirir</td></tr>
+            <tr><td>Bakım</td><td>Fırça değişimi gerekir</td><td>Bakım azdır</td></tr>
+            <tr><td>Kalkış Torku</td><td>Çok yüksek (seri)</td><td>Orta–yüksek</td></tr>
+            <tr><td>Maliyet</td><td>Daha pahalı</td><td>Ekonomik</td></tr>
+            <tr><td>Sağlamlık</td><td>Orta</td><td>Yüksek</td></tr>
+            <tr><td>Gemi Kullanımı</td><td>Eski gemiler, vinç</td><td>Pompa, fan, kompresör</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-1: DC Motor Kesit Şeması (Fırça, Komütatör, Armatür)</h3>
+      <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="480" height="220" fill="#f8f9fa" rx="8"/>
+        <text x="240" y="18" font-size="11" font-weight="bold" text-anchor="middle" fill="#1a237e">DC Motor — İç Yapı (Enine Kesit)</text>
+        <!-- Yoke (outer) -->
+        <circle cx="180" cy="115" r="90" fill="none" stroke="#607d8b" stroke-width="10"/>
+        <text x="180" y="212" font-size="8" text-anchor="middle" fill="#546e7a">Yoke (Gövde)</text>
+        <!-- Stator poles N/S -->
+        <rect x="135" y="35" width="90" height="22" rx="3" fill="#ef9a9a" stroke="#c62828" stroke-width="1.5"/>
+        <text x="180" y="50" font-size="10" text-anchor="middle" fill="#b71c1c" font-weight="bold">N</text>
+        <rect x="135" y="173" width="90" height="22" rx="3" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+        <text x="180" y="189" font-size="10" text-anchor="middle" fill="#0d47a1" font-weight="bold">S</text>
+        <!-- Armature -->
+        <circle cx="180" cy="115" r="45" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+        <text x="180" y="110" font-size="8" text-anchor="middle" fill="#e65100">Armatür</text>
+        <text x="180" y="122" font-size="8" text-anchor="middle" fill="#e65100">(Rotor)</text>
+        <!-- Armature coil lines -->
+        <line x1="155" y1="90" x2="205" y2="140" stroke="#f57f17" stroke-width="1.5"/>
+        <line x1="205" y1="90" x2="155" y2="140" stroke="#f57f17" stroke-width="1.5"/>
+        <!-- Commutator (right side) -->
+        <rect x="260" y="100" width="35" height="30" rx="3" fill="#ffe082" stroke="#f9a825" stroke-width="2"/>
+        <text x="277" y="117" font-size="7" text-anchor="middle" fill="#e65100">KOM.</text>
+        <line x1="225" y1="115" x2="260" y2="115" stroke="#555" stroke-width="1.5"/>
+        <!-- Brushes -->
+        <rect x="295" y="98" width="18" height="12" rx="2" fill="#616161" stroke="#333" stroke-width="1.5"/>
+        <text x="304" y="107" font-size="6" text-anchor="middle" fill="white">Fır.</text>
+        <rect x="295" y="120" width="18" height="12" rx="2" fill="#616161" stroke="#333" stroke-width="1.5"/>
+        <text x="304" y="129" font-size="6" text-anchor="middle" fill="white">Fır.</text>
+        <!-- Shaft -->
+        <line x1="100" y1="115" x2="140" y2="115" stroke="#777" stroke-width="5"/>
+        <line x1="225" y1="115" x2="265" y2="115" stroke="#777" stroke-width="5"/>
+        <!-- Arrows + direction -->
+        <text x="380" y="60" font-size="9" fill="#333" font-weight="bold">Bileşenler:</text>
+        <rect x="345" y="65" width="125" height="135" fill="white" stroke="#b0bec5" stroke-width="1" rx="4"/>
+        <text x="355" y="82" font-size="8" fill="#c62828">■ N Kutbu (kırmızı)</text>
+        <text x="355" y="95" font-size="8" fill="#1565c0">■ S Kutbu (mavi)</text>
+        <text x="355" y="108" font-size="8" fill="#e65100">● Armatür sargısı</text>
+        <text x="355" y="121" font-size="8" fill="#f9a825">■ Komütatör</text>
+        <text x="355" y="134" font-size="8" fill="#616161">■ Fırça (2 adet)</text>
+        <text x="355" y="147" font-size="8" fill="#546e7a">○ Yoke çerçeve</text>
+        <text x="355" y="165" font-size="7" fill="#555">Fırça→Komütatör→</text>
+        <text x="355" y="177" font-size="7" fill="#555">Armatür sargısı akım</text>
+        <text x="355" y="189" font-size="7" fill="#555">F = B × I × L → Tork</text>
+      </svg>
+      <p class="svg-caption">DC motor enine kesit şeması. Dış halkada yoke (gövde) ve iki stator kutbu (N kırmızı / S mavi). İçeride armatür (rotor) sargıları döner. Sağ tarafta komütatör ve iki fırça armatüre akım iletir. F = B×I×L formülüyle Lorentz kuvveti tork üretir.</p>
+    </div>
+
+    <h3>32.2 Bobinaj (Motor Rewinding)</h3>
+    <div class="two-col">
+      <div>
+        <h4>Sargı Hasarı Belirtileri</h4>
+        <ul>
+          <li>Faz-gövde megger değeri 1 MΩ'un altı → topraklama hatası (earth fault).</li>
+          <li>Faz-faz süreklilik testinde açık devre → sargı kopuk.</li>
+          <li>Motorun anormalden yüksek akım çekmesi → kısa devre (sarım-sarım — inter-turn short).</li>
+          <li>Yanık kokusu, renk değişimi → termal hasar, sargı ezilmesi.</li>
+        </ul>
+        <h4>Bobinaj Süreci (Kısa Özet)</h4>
+        <ol>
+          <li>Hasar görmüş eski sargıları ısı kamarasında yumuşat ve sökülür.</li>
+          <li>Orijinal sarım sayısı, tel çapı ve yiv (slot) konfigürasyonunu kaydet.</li>
+          <li>Yeni lakeli enameled bakır tel ile aynı sarım sayısında yeniden sar.</li>
+          <li>Sargı bittikten sonra reçine (resin) veya vernik (varnish) ile emprenye et; izolasyon güçlenir.</li>
+          <li>Fırın kürlemesi (oven curing) ile sertleştir.</li>
+          <li>Megger testi (1 kV DC): faz-gövde ≥ 100 MΩ beklenir.</li>
+          <li>Çekiş testi (Hi-Pot): kısa süreli yüksek gerilim uygulaması ile sargı dayanımı doğrulanır.</li>
+          <li>Montaj sonrası boşta ve yük altında titreşim + akım ölçümü.</li>
+        </ol>
+      </div>
+      <div>
+        <h4>Sargı Hata Tespiti (Multimetre + Megger)</h4>
+        <table>
+          <thead><tr><th>Test</th><th>Cihaz</th><th>Beklenen</th><th>Hata</th></tr></thead>
+          <tbody>
+            <tr><td>Faz-gövde izolasyon</td><td>Megger 500V</td><td>≥ 1 MΩ</td><td>Earth fault</td></tr>
+            <tr><td>Faz-faz süreklilik</td><td>Multimetre Ω</td><td>Düşük Ω (2–10 Ω)</td><td>Kopuk sargı</td></tr>
+            <tr><td>Faz-faz direnç dengesi</td><td>Multimetre Ω</td><td>3 faz eşit ±%5</td><td>Inter-turn short</td></tr>
+            <tr><td>Rotor süreklilik</td><td>Multimetre Ω</td><td>Düşük Ω</td><td>Kırık çubuk (kafes)</td></tr>
+          </tbody>
+        </table>
+        <div class="note-box"><strong>Pratik Not:</strong> Tüm testler enerjisiz devrede yapılır. Megger testi öncesi armatür ve kondansatörlü devreler deşarj edilmelidir. Sıcak sargılarda değer düşük çıkabilir; motor soğuduktan sonra tekrar ölç.</div>
+      </div>
+    </div>
+
+    <h3>32.3 Reversing Devresi (Sağ / Sol Yön Güç Devresi)</h3>
+    <p>Motor dönüş yönünü değiştirmek için herhangi <strong>iki fazın yerleri değiştirilir</strong> (örn. L1↔L3). Reversing devresinde iki kontaktör kullanılır: <strong>K1 (ileri/forward)</strong> ve <strong>K2 (geri/reverse)</strong>. Her iki kontaktörün aynı anda çekmesi kısa devre oluşturur — mutlaka mekanik ve elektriksel kilitleme (interlock) gereklidir.</p>
+    <div class="svg-wrap">
+      <h3>SVG-2: Reversing Güç Devresi Şeması (İleri / Geri)</h3>
+      <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="520" height="280" fill="#f3f7fb" rx="8"/>
+        <text x="260" y="18" font-size="11" font-weight="bold" text-anchor="middle" fill="#1a237e">Reversing Güç Devresi — K1 İleri / K2 Geri</text>
+
+        <!-- Bus bars L1 L2 L3 -->
+        <line x1="60"  y1="35" x2="60"  y2="240" stroke="#e53935" stroke-width="4"/>
+        <line x1="130" y1="35" x2="130" y2="240" stroke="#fbc02d" stroke-width="4"/>
+        <line x1="200" y1="35" x2="200" y2="240" stroke="#1565c0" stroke-width="4"/>
+        <text x="60"  y="30" font-size="9" text-anchor="middle" fill="#c62828">L1</text>
+        <text x="130" y="30" font-size="9" text-anchor="middle" fill="#f9a825">L2</text>
+        <text x="200" y="30" font-size="9" text-anchor="middle" fill="#1565c0">L3</text>
+
+        <!-- K1 Contactor (forward) -->
+        <text x="130" y="75" font-size="9" text-anchor="middle" fill="#2e7d32" font-weight="bold">K1 — İLERİ</text>
+        <!-- K1 contacts: L1→T1, L2→T2, L3→T3 -->
+        <rect x="45"  y="80" width="30" height="20" rx="2" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="60"  y="93" font-size="7" text-anchor="middle" fill="#1b5e20">K1-1</text>
+        <rect x="115" y="80" width="30" height="20" rx="2" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="130" y="93" font-size="7" text-anchor="middle" fill="#1b5e20">K1-2</text>
+        <rect x="185" y="80" width="30" height="20" rx="2" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="200" y="93" font-size="7" text-anchor="middle" fill="#1b5e20">K1-3</text>
+        <!-- K1 output lines → motor T1,T2,T3 straight -->
+        <line x1="60"  y1="100" x2="60"  y2="200" stroke="#e53935" stroke-width="2"/>
+        <line x1="130" y1="100" x2="130" y2="200" stroke="#fbc02d" stroke-width="2"/>
+        <line x1="200" y1="100" x2="200" y2="200" stroke="#1565c0" stroke-width="2"/>
+
+        <!-- K2 Contactor (reverse) — shifted for clarity -->
+        <text x="370" y="75" font-size="9" text-anchor="middle" fill="#c62828" font-weight="bold">K2 — GERİ</text>
+        <!-- K2: L1→T3, L2→T2, L3→T1 (L1 and L3 swapped) -->
+        <rect x="305" y="80" width="30" height="20" rx="2" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
+        <text x="320" y="93" font-size="7" text-anchor="middle" fill="#b71c1c">K2-1</text>
+        <rect x="355" y="80" width="30" height="20" rx="2" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
+        <text x="370" y="93" font-size="7" text-anchor="middle" fill="#b71c1c">K2-2</text>
+        <rect x="405" y="80" width="30" height="20" rx="2" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
+        <text x="420" y="93" font-size="7" text-anchor="middle" fill="#b71c1c">K2-3</text>
+        <!-- K2 feed from busbars -->
+        <line x1="60"  y1="65" x2="60"  y2="50" stroke="#e53935" stroke-width="2"/>
+        <line x1="60"  y1="50" x2="320" y2="50" stroke="#e53935" stroke-width="2" stroke-dasharray="4,2"/>
+        <line x1="320" y1="50" x2="320" y2="80" stroke="#e53935" stroke-width="2"/>
+        <line x1="130" y1="65" x2="130" y2="55" stroke="#fbc02d" stroke-width="2"/>
+        <line x1="130" y1="55" x2="370" y2="55" stroke="#fbc02d" stroke-width="2" stroke-dasharray="4,2"/>
+        <line x1="370" y1="55" x2="370" y2="80" stroke="#fbc02d" stroke-width="2"/>
+        <line x1="200" y1="65" x2="200" y2="45" stroke="#1565c0" stroke-width="2"/>
+        <line x1="200" y1="45" x2="420" y2="45" stroke="#1565c0" stroke-width="2" stroke-dasharray="4,2"/>
+        <line x1="420" y1="45" x2="420" y2="80" stroke="#1565c0" stroke-width="2"/>
+        <!-- K2 output — note L1 goes to T3, L3 goes to T1 (crossed) -->
+        <line x1="320" y1="100" x2="420" y2="200" stroke="#e53935" stroke-width="2"/>
+        <line x1="370" y1="100" x2="370" y2="200" stroke="#fbc02d" stroke-width="2"/>
+        <line x1="420" y1="100" x2="320" y2="200" stroke="#1565c0" stroke-width="2"/>
+        <text x="375" y="155" font-size="8" fill="#555" transform="rotate(-20,375,155)">L1↔L3</text>
+        <text x="350" y="180" font-size="8" fill="#c62828" font-weight="bold">yer değişimi</text>
+
+        <!-- Motor terminal box -->
+        <rect x="100" y="200" width="300" height="45" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+        <text x="250" y="219" font-size="9" text-anchor="middle" fill="#1b5e20" font-weight="bold">MOTOR</text>
+        <text x="145" y="235" font-size="8" text-anchor="middle" fill="#555">U1</text>
+        <text x="250" y="235" font-size="8" text-anchor="middle" fill="#555">V1</text>
+        <text x="355" y="235" font-size="8" text-anchor="middle" fill="#555">W1</text>
+        <!-- Interlock warning -->
+        <rect x="10" y="248" width="500" height="26" rx="3" fill="#fff3e0" stroke="#f57f17" stroke-width="1.5"/>
+        <text x="260" y="258" font-size="8" text-anchor="middle" fill="#e65100" font-weight="bold">⚠ MEKANİK + ELEKTRİKSEL KİLİTLEME ZORUNLU: K1 ve K2 aynı anda çekemez → kısa devre önleme!</text>
+        <text x="260" y="270" font-size="7" text-anchor="middle" fill="#555">K1'in NC kontağı K2 bobinini, K2'nin NC kontağı K1 bobinini kesmeli (kumanda devresinde çapraz kilitleme)</text>
+      </svg>
+      <p class="svg-caption">Reversing (sağ/sol yön) güç devresi. Sol tarafta K1 (ileri): L1→U1, L2→V1, L3→W1 düz bağlantı. Sağ tarafta K2 (geri): L1→W1, L2→V1, L3→U1 — yani L1 ve L3 çapraz bağlanarak iki faz yer değiştirir, motor ters döner. Her iki kontaktörün aynı anda çekmesi kısa devre oluşturur; mutlaka kilitleme (interlock) uygulanmalıdır.</p>
+    </div>
+
+    <h3>32.4 Dahlander (Çift Devirli) Güç Devresi</h3>
+    <p>Dahlander motor aynı stator içinde iki farklı devirde çalışan özel bağlantılı bir asenkron motordur. Sargı konfigürasyonu değiştirilerek kutup çifti sayısı değiştirilir: az kutup = yüksek devir, çok kutup = düşük devir.</p>
+    <div class="two-col">
+      <div>
+        <h4>Bağlantı Prensibi</h4>
+        <ul>
+          <li><strong>Düşük hız (Low Speed):</strong> Sargılar seri bağlanır → yüksek kutup çifti sayısı → düşük senkron devir (örn. 2p=4 → 1500 rpm).</li>
+          <li><strong>Yüksek hız (High Speed):</strong> Sargılar paralel yıldız bağlanır → kutup çifti sayısı yarıya düşer → devir 2×artar (örn. 2p=2 → 3000 rpm).</li>
+          <li>Terminal kutusu: 1U, 1V, 1W (düşük hız girişleri) + 2U, 2V, 2W (yüksek hız girişleri veya köprüleme noktaları).</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kumanda Mantığı</h4>
+        <ul>
+          <li><strong>KM1 (Düşük hız kontaktörü):</strong> 1U–1V–1W'yi şebekeye bağlar; 2U–2V–2W açık kalır.</li>
+          <li><strong>KM2 + KM3 (Yüksek hız):</strong> KM2, 2U–2V–2W'yi şebekeye bağlar; KM3, 1U–1V–1W'yi kısa devreye (yıldız merkez) alır.</li>
+          <li>KM1 ve KM2 aynı anda çekemez — interlock zorunlu.</li>
+          <li>Tipik uygulama: santrifüj pompa, kompresör (düşük hızda kalkış, yüksek hızda çalışma).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-3: Dahlander Güç Devresi (Düşük Hız / Yüksek Hız)</h3>
+      <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="600" height="260" fill="#f9fbe7" rx="8"/>
+        <text x="300" y="18" font-size="11" font-weight="bold" text-anchor="middle" fill="#1a237e">Dahlander Çift Devirli Güç Devresi (Δ/YY Bağlantısı)</text>
+
+        <!-- Busbars -->
+        <line x1="50" y1="35" x2="50" y2="200" stroke="#e53935" stroke-width="3"/>
+        <line x1="110" y1="35" x2="110" y2="200" stroke="#fbc02d" stroke-width="3"/>
+        <line x1="170" y1="35" x2="170" y2="200" stroke="#1565c0" stroke-width="3"/>
+        <text x="50"  y="30" font-size="8" text-anchor="middle" fill="#c62828">L1</text>
+        <text x="110" y="30" font-size="8" text-anchor="middle" fill="#f9a825">L2</text>
+        <text x="170" y="30" font-size="8" text-anchor="middle" fill="#1565c0">L3</text>
+
+        <!-- KM1 (low speed) -->
+        <rect x="30"  y="55" width="40" height="18" rx="2" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+        <rect x="90"  y="55" width="40" height="18" rx="2" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+        <rect x="150" y="55" width="40" height="18" rx="2" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+        <text x="110" y="47" font-size="9" text-anchor="middle" fill="#2e7d32" font-weight="bold">KM1 (Düşük Hız)</text>
+        <!-- KM1 output to 1U, 1V, 1W -->
+        <line x1="50"  y1="73" x2="50"  y2="175" stroke="#e53935" stroke-width="1.5"/>
+        <line x1="110" y1="73" x2="110" y2="175" stroke="#fbc02d" stroke-width="1.5"/>
+        <line x1="170" y1="73" x2="170" y2="175" stroke="#1565c0" stroke-width="1.5"/>
+
+        <!-- KM2 (high speed — main) -->
+        <rect x="260" y="55" width="40" height="18" rx="2" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
+        <rect x="310" y="55" width="40" height="18" rx="2" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
+        <rect x="360" y="55" width="40" height="18" rx="2" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
+        <text x="330" y="47" font-size="9" text-anchor="middle" fill="#c62828" font-weight="bold">KM2 (Yüksek Hız)</text>
+        <!-- KM2 feed from busbars -->
+        <line x1="50"  y1="40" x2="280" y2="40" stroke="#e53935" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="280" y1="40" x2="280" y2="55" stroke="#e53935" stroke-width="1.5"/>
+        <line x1="110" y1="38" x2="330" y2="38" stroke="#fbc02d" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="330" y1="38" x2="330" y2="55" stroke="#fbc02d" stroke-width="1.5"/>
+        <line x1="170" y1="36" x2="380" y2="36" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="380" y1="36" x2="380" y2="55" stroke="#1565c0" stroke-width="1.5"/>
+        <!-- KM2 output to 2U, 2V, 2W -->
+        <line x1="280" y1="73" x2="280" y2="150" stroke="#e53935" stroke-width="1.5"/>
+        <line x1="330" y1="73" x2="330" y2="150" stroke="#fbc02d" stroke-width="1.5"/>
+        <line x1="380" y1="73" x2="380" y2="150" stroke="#1565c0" stroke-width="1.5"/>
+
+        <!-- KM3 (star point shorting contactor) -->
+        <rect x="445" y="100" width="40" height="18" rx="2" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+        <rect x="495" y="100" width="40" height="18" rx="2" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+        <text x="510" y="93" font-size="9" text-anchor="middle" fill="#1565c0" font-weight="bold">KM3 (Yıldız)</text>
+        <!-- KM3 connects 1U,1V,1W together (star point) -->
+        <line x1="50"  y1="130" x2="445" y2="118" stroke="#e53935" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="110" y1="130" x2="515" y2="118" stroke="#fbc02d" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="170" y1="130" x2="535" y2="118" stroke="#1565c0" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <!-- All 3 to common star node -->
+        <line x1="485" y1="118" x2="485" y2="145" stroke="#555" stroke-width="1.5"/>
+        <line x1="535" y1="118" x2="535" y2="145" stroke="#555" stroke-width="1.5"/>
+        <circle cx="510" cy="148" r="5" fill="#888" stroke="#333" stroke-width="1.5"/>
+        <text x="510" y="162" font-size="7" text-anchor="middle" fill="#555">Yıldız Noktası</text>
+
+        <!-- Motor box -->
+        <rect x="30" y="175" width="200" height="50" rx="4" fill="#fff9c4" stroke="#f57f17" stroke-width="2"/>
+        <text x="130" y="196" font-size="9" text-anchor="middle" fill="#e65100" font-weight="bold">DAHLANDER MOTOR</text>
+        <text x="55"  y="212" font-size="7" text-anchor="middle" fill="#555">1U</text>
+        <text x="110" y="212" font-size="7" text-anchor="middle" fill="#555">1V</text>
+        <text x="165" y="212" font-size="7" text-anchor="middle" fill="#555">1W</text>
+        <!-- 2U 2V 2W -->
+        <rect x="255" y="150" width="150" height="45" rx="4" fill="#e8eaf6" stroke="#3949ab" stroke-width="2"/>
+        <text x="330" y="168" font-size="9" text-anchor="middle" fill="#283593" font-weight="bold">MOTOR (HV)</text>
+        <text x="280" y="184" font-size="7" text-anchor="middle" fill="#555">2U</text>
+        <text x="330" y="184" font-size="7" text-anchor="middle" fill="#555">2V</text>
+        <text x="380" y="184" font-size="7" text-anchor="middle" fill="#555">2W</text>
+
+        <!-- Speed note -->
+        <rect x="30" y="230" width="540" height="25" rx="3" fill="#e8f5e9" stroke="#4caf50" stroke-width="1"/>
+        <text x="300" y="242" font-size="8" text-anchor="middle" fill="#2e7d32">Düşük hız: KM1 açık (1U-1V-1W beslenir) | Yüksek hız: KM2+KM3 açık (2U-2V-2W beslenir, 1U-1V-1W yıldız kısa devre)</text>
+        <text x="300" y="252" font-size="7" text-anchor="middle" fill="#555">KM1 ↔ KM2 çapraz kilitleme zorunlu — aynı anda aktif olamaz!</text>
+      </svg>
+      <p class="svg-caption">Dahlander çift devirli güç devresi. Düşük hız: KM1 kontaktörü 1U-1V-1W terminallerini şebekeye bağlar. Yüksek hız: KM2 kontaktörü 2U-2V-2W'yi şebekeye bağlar; KM3 ise 1U-1V-1W uçlarını birbirine bağlayarak yıldız noktası oluşturur (YY bağlantısı). Kutup sayısı yarıya düşünce devir 2 katına çıkar.</p>
+    </div>
+
+    <h3>32.5 Floresan Lamba Bağlantı Şeması</h3>
+    <div class="two-col">
+      <div>
+        <h4>Manyetik Balastlı Devre (Klasik)</h4>
+        <p>Besleme → Sigorta → <strong>Balast (indüktans)</strong> → Starter → Lamba filamentleri. Balast seri bağlıdır ve akımı sınırlar; starter başlatma sonrası devre dışı kalır.</p>
+        <ul>
+          <li><strong>Balast:</strong> İndüktif bobin; gaz tüpünde akım yükselişini sınırlar ve ateşleme için yüksek gerilim darbesi üretir.</li>
+          <li><strong>Starter:</strong> Bi-metalik anahtar; soğukken açık, ısınınca kapanır, soğuyunca aniden açılır → balastta ani gerilim darbesi oluşturarak ark başlatır.</li>
+          <li><strong>Kondansatör (varsa):</strong> Balastla paralel; güç faktörünü düzeltir ve RF girişimini azaltır.</li>
+          <li>Bağlantı neden "seri" görünür? Filamentler balast ve starter ile seri — ancak balast reaktif güç tüketir, aktif güç kaybı minimumdur.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elektronik Balastlı Devre (Modern)</h4>
+        <p>Besleme → Sigorta → <strong>Elektronik Balast</strong> → Lamba (iki telli). Starter yoktur; elektronik balast 20–50 kHz frekansta lamba akımını kontrol eder.</p>
+        <ul>
+          <li><strong>Avantajlar:</strong> Titreşim yok, daha verimli, frekans titremesi görünmez (gözü rahatsız etmez), boşta kayıp az.</li>
+          <li><strong>Arıza tespiti:</strong> Lamba yanıyorsa ama kararsa → elektronik balast arızası. Lamba hiç yanmıyorsa önce filamentleri (Ω ile) ölç; kopuksa lamba değişimi yeterli.</li>
+        </ul>
+        <h4>Floresan Filament Ölçümü</h4>
+        <ul>
+          <li>Multimetre direnç modunda her iki filamente prob tut.</li>
+          <li>Normal: birkaç ohm (tipik 5–15 Ω).</li>
+          <li>Açık devre (∞ Ω) → filament kopuk → lamba değişimi.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svg-wrap">
+      <h3>SVG-4: Floresan Lamba — Manyetik ve Elektronik Balast Devre Şemaları</h3>
+      <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif">
+        <rect width="640" height="200" fill="#f3f3f3" rx="8"/>
+        <text x="320" y="18" font-size="11" font-weight="bold" text-anchor="middle" fill="#1a237e">Floresan Bağlantı: Manyetik Balast (sol) — Elektronik Balast (sağ)</text>
+
+        <!-- Left: Magnetic ballast circuit -->
+        <!-- Neutral line bottom -->
+        <line x1="20"  y1="165" x2="290" y2="165" stroke="#1565c0" stroke-width="2"/>
+        <text x="20" y="180" font-size="8" fill="#1565c0">N (Nötr)</text>
+        <!-- Live line top -->
+        <line x1="20"  y1="40" x2="50"  y2="40" stroke="#e53935" stroke-width="2"/>
+        <text x="20" y="35" font-size="8" fill="#e53935">L (Faz)</text>
+        <!-- Fuse -->
+        <rect x="50" y="32" width="30" height="16" rx="3" fill="white" stroke="#f57f17" stroke-width="1.5"/>
+        <text x="65" y="43" font-size="7" text-anchor="middle" fill="#e65100">Sig.</text>
+        <line x1="80" y1="40" x2="105" y2="40" stroke="#e53935" stroke-width="2"/>
+        <!-- Ballast (inductor) -->
+        <path d="M105,40 Q112,30 119,40 Q126,50 133,40 Q140,30 147,40" fill="none" stroke="#333" stroke-width="2"/>
+        <text x="126" y="28" font-size="8" text-anchor="middle" fill="#333">Balast</text>
+        <line x1="147" y1="40" x2="165" y2="40" stroke="#e53935" stroke-width="2"/>
+        <!-- Starter -->
+        <circle cx="172" cy="40" r="10" fill="white" stroke="#9c27b0" stroke-width="1.5"/>
+        <text x="172" y="43" font-size="6" text-anchor="middle" fill="#7b1fa2">St</text>
+        <line x1="182" y1="40" x2="210" y2="40" stroke="#e53935" stroke-width="2"/>
+        <!-- Lamp filament 1 (left) -->
+        <rect x="210" y="30" width="8" height="20" rx="2" fill="#ffe082" stroke="#f9a825" stroke-width="1.5"/>
+        <text x="214" y="25" font-size="6" text-anchor="middle" fill="#e65100">F1</text>
+        <!-- Lamp tube -->
+        <rect x="218" y="33" width="50" height="14" rx="5" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/>
+        <text x="243" y="43" font-size="7" text-anchor="middle" fill="#006064">LAMBA</text>
+        <!-- Lamp filament 2 (right) -->
+        <rect x="268" y="30" width="8" height="20" rx="2" fill="#ffe082" stroke="#f9a825" stroke-width="1.5"/>
+        <text x="272" y="25" font-size="6" text-anchor="middle" fill="#e65100">F2</text>
+        <!-- complete circuit bottom: F1 bottom → N, F2 bottom → N -->
+        <line x1="214" y1="50" x2="214" y2="165" stroke="#1565c0" stroke-width="1.5"/>
+        <line x1="272" y1="50" x2="272" y2="165" stroke="#1565c0" stroke-width="1.5"/>
+        <!-- Capacitor (parallel to ballast) -->
+        <line x1="105" y1="40" x2="105" y2="90" stroke="#555" stroke-width="1"/>
+        <line x1="147" y1="40" x2="147" y2="90" stroke="#555" stroke-width="1"/>
+        <line x1="95"  y1="88" x2="157" y2="88" stroke="#555" stroke-width="2"/>
+        <line x1="95"  y1="93" x2="157" y2="93" stroke="#555" stroke-width="2"/>
+        <text x="126" y="106" font-size="7" text-anchor="middle" fill="#555">Kond. (cos φ)</text>
+
+        <!-- Left title -->
+        <text x="155" y="150" font-size="8" text-anchor="middle" fill="#333" font-weight="bold">Manyetik Balast (klasik)</text>
+        <text x="155" y="162" font-size="7" text-anchor="middle" fill="#555">Starter + Balast + Lamba</text>
+
+        <!-- Divider -->
+        <line x1="310" y1="20" x2="310" y2="185" stroke="#ccc" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+        <!-- Right: Electronic ballast circuit -->
+        <line x1="330" y1="40" x2="355" y2="40" stroke="#e53935" stroke-width="2"/>
+        <text x="330" y="35" font-size="8" fill="#e53935">L (Faz)</text>
+        <!-- Fuse -->
+        <rect x="355" y="32" width="30" height="16" rx="3" fill="white" stroke="#f57f17" stroke-width="1.5"/>
+        <text x="370" y="43" font-size="7" text-anchor="middle" fill="#e65100">Sig.</text>
+        <line x1="385" y1="40" x2="420" y2="40" stroke="#e53935" stroke-width="2"/>
+        <!-- Electronic ballast box -->
+        <rect x="420" y="25" width="80" height="30" rx="4" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+        <text x="460" y="38" font-size="8" text-anchor="middle" fill="#1565c0" font-weight="bold">Elektronik</text>
+        <text x="460" y="49" font-size="8" text-anchor="middle" fill="#1565c0">Balast</text>
+        <line x1="500" y1="40" x2="530" y2="40" stroke="#e53935" stroke-width="2"/>
+        <!-- Lamp (2-wire, no starter) -->
+        <rect x="530" y="33" width="60" height="14" rx="5" fill="#e0f7fa" stroke="#00838f" stroke-width="2"/>
+        <text x="560" y="43" font-size="7" text-anchor="middle" fill="#006064">LAMBA</text>
+        <!-- Neutral -->
+        <line x1="330" y1="165" x2="615" y2="165" stroke="#1565c0" stroke-width="2"/>
+        <text x="330" y="180" font-size="8" fill="#1565c0">N (Nötr)</text>
+        <line x1="420" y1="55" x2="420" y2="165" stroke="#1565c0" stroke-width="1.5"/>
+        <line x1="590" y1="47" x2="590" y2="165" stroke="#1565c0" stroke-width="1.5"/>
+        <!-- Frequency annotation -->
+        <text x="460" y="78" font-size="7" text-anchor="middle" fill="#555">20–50 kHz çalışma</text>
+        <text x="460" y="90" font-size="7" text-anchor="middle" fill="#555">Starter YOK</text>
+        <text x="460" y="102" font-size="7" text-anchor="middle" fill="#2e7d32">✓ Verimli, titreşimsiz</text>
+
+        <!-- Right title -->
+        <text x="470" y="150" font-size="8" text-anchor="middle" fill="#333" font-weight="bold">Elektronik Balast (modern)</text>
+        <text x="470" y="162" font-size="7" text-anchor="middle" fill="#555">Sadece Elektronik Balast + Lamba</text>
+      </svg>
+      <p class="svg-caption">Floresan lamba bağlantı şemaları. Sol devre: manyetik balast (indüktör) + starter + lamba filamentleri (F1, F2) seri bağlantısı; kondansatör güç faktörünü düzeltmek için balastla paralel. Sağ devre: modern elektronik balast — starter olmadan iki telle lamba sürümü, 20–50 kHz frekansta çalışır, daha verimli ve titreşimsiz.</p>
+    </div>
+
+    <div class="warn-box"><strong>Sınav İpucu:</strong> "DC seri motorun yüksüz bırakılmaması neden?" → Yük azaldıkça alan akımı azalır, devir kontrolsüz artar — motor kendini yıkabilir. "Reversing devresinde hangi iki faz yer değiştirir?" → Herhangi ikisi; pratikte L1↔L3. "Dahlander motorda yüksek hızda hangi kontaktörler açık?" → KM2 ve KM3 (KM1 kapalı).</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 32 — Mini Sınav</div>
+      <details class="quiz-item"><summary>B32-S1: DC seri motor yüksüz bırakılırsa ne olur? A) Durur B) Normal çalışır C) Devir kontrolsüz artar D) Aşırı ısınır</summary><div class="quiz-answer"><strong>Cevap: C.</strong> DC seri motorda alan sargısı armatürle seridir. Yük kaldırılınca alan akımı ve dolayısıyla manyetik alan azalır. Motor giderek hızlanır ve mekanik olarak zarar görebilir. Bu yüzden seri DC motorlar asla yüksüz çalıştırılmaz.</div></details>
+      <details class="quiz-item"><summary>B32-S2: Reversing devresinde mekanik ve elektriksel kilitleme neden zorunludur?</summary><div class="quiz-answer">K1 ve K2 kontaktörleri aynı anda çekerse L1 ile L3 aynı baraya (veya birbirine) kısa devre oluşturur. Elektriksel kilitleme: K1 NC kontağı K2 bobinini, K2 NC kontağı K1 bobinini keser — elektronik önlem. Mekanik kilitleme: fiziksel manivela düzeneği her iki kontaktörün aynı anda çekmesini engeller — mekanik önlem. Her ikisi de birlikte uygulanır.</div></details>
+      <details class="quiz-item"><summary>B32-S3: Manyetik balastlı floresan devresi neden starter gerektirir?</summary><div class="quiz-answer">Floresan lamba soğukken elektriği iletmez — önce ark ateşlemek için yüksek gerilim darbesi gerekir. Starter (bi-metalik anahtar) ısındığında kapanır, soğuyunca aniden açılır; bu ani açılmada balast (indüktans) yüksek gerilim darbesi üretir ve lampayı ateşler. Elektronik balastlarda bu işlem elektronik devre tarafından yapıldığından starter gerekmez.</div></details>
+      <details class="quiz-item"><summary>B32-S4: Dahlander motorun düşük hızdan yüksek hıza geçişinde sargılarda ne değişir?</summary><div class="quiz-answer">Düşük hızda sargılar seri bağlıdır → kutup çifti sayısı fazla (örn. 4 kutup çifti → 1500 rpm). Yüksek hıza geçişte sargılar paralel/yıldız konfigürasyonuna alınır → kutup çifti sayısı yarıya düşer (2 kutup çifti → 3000 rpm). Devir 2×artar. Nominal güç da değişir — her hız için ayrı motor nameplate değerleri vardır.</div></details>
+    </div>
   </section>
 
   <div class="footer">
