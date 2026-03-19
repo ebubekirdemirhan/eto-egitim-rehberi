@@ -6783,17 +6783,75 @@
 
   /* ── SVG renders inside chat ── */
   .ai-svg-wrap {
-    margin: 8px 0 4px;
+    margin: 10px 0 6px;
     background: #fff;
-    border-radius: 8px;
-    padding: 8px;
+    border-radius: 10px;
+    padding: 10px;
     overflow-x: auto;
-    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;
+    position: relative;
   }
   .ai-svg-wrap svg {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     display: block;
+    min-height: 120px;
+  }
+  .ai-svg-expand {
+    position: absolute;
+    top: 6px; right: 8px;
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: .75rem;
+    cursor: pointer;
+    z-index: 2;
+    transition: background .15s;
+  }
+  .ai-svg-expand:hover { background: rgba(0,0,0,.8); }
+  /* SVG Lightbox */
+  #ai-svg-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.82);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  #ai-svg-modal.open { display: flex; }
+  #ai-svg-modal-inner {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px;
+    max-width: 96vw;
+    max-height: 90vh;
+    overflow: auto;
+    width: 700px;
+    position: relative;
+  }
+  #ai-svg-modal-inner svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  #ai-svg-modal-close {
+    position: absolute;
+    top: 10px; right: 14px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 700;
+    z-index: 2;
   }
   pre.ai-code-block {
     background: #0d1117;
@@ -6940,6 +6998,13 @@
   }
 </style>
 
+<!-- SVG Lightbox Modal -->
+<div id="ai-svg-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div id="ai-svg-modal-inner">
+    <button id="ai-svg-modal-close" onclick="document.getElementById('ai-svg-modal').classList.remove('open')">✕ Kapat</button>
+  </div>
+</div>
+
 <!-- Widget HTML -->
 <button id="eto-ai-btn" title="ETO Yapay Zeka Asistanı" aria-label="AI Asistan">
   ⚡
@@ -7057,7 +7122,15 @@ GENİŞ YARDIM ALANLARIn:
 YANIT YAPISI — HER CEVAPTA BU SIRAYA UY:
 1. **💡 Kısa Cevap:** Tek cümle veya 2–3 kelime — sorunun özü, net ve doğrudan.
 2. **📋 Detay:** Açıklama, sebep, formül, adımlar — gerektiği kadar uzun.
-3. **🖼️ SVG Görsel (uygunsa):** Devre şeması, sistem diyagramı, karşılaştırma tablosu, akış diyagramı gibi görseller için SVG kodu üret. SVG'yi şu format içine yaz: \`\`\`svg ... \`\`\` — basit, temiz, Türkçe etiketli olsun. Karmaşık renk kullanma; beyaz zemin, koyu çizgiler.
+3. **🖼️ SVG Görsel (uygunsa):** Devre şeması, sistem diyagramı, karşılaştırma tablosu, akış diyagramı gibi görseller için SVG kodu üret. SVG'yi şu format içine yaz: \`\`\`svg ... \`\`\`
+SVG KURALLARI (KESİNLİKLE UY):
+- viewBox="0 0 600 400" gibi geniş bir viewBox kullan (en az 500 genişlik)
+- width="100%" height="auto" kullan, asla sabit piksel genişliği verme
+- font-size en az 14 kullan, kritik etiketlerde 16-18
+- Metin etiketlerini çakışmayacak şekilde yerleştir, yeterli boşluk bırak
+- Beyaz (#fff) arka plan, koyu (#1a1a1a veya #333) çizgi ve metin
+- Vurgulamak için açık renkler kullan: mavi (#1565c0), kırmızı (#c62828), yeşil (#2e7d32)
+- Karmaşık diyagramı bölümlere ayır, üst üste gelme olmasın
 4. **⚡ Sınav İpucu:** veya **🔧 Saha Notu:** — pratik hatırlatıcı.
 
 YANIT KURALLARI:
@@ -7214,10 +7287,33 @@ YANIT KURALLARI:
   }
 
   function sanitizeSVG(svgCode) {
-    // Strip script tags and event handlers for safety
-    return svgCode
+    // 1. Security: strip scripts and event handlers
+    let code = svgCode
       .replace(/<script[\s\S]*?<\/script>/gi, '')
       .replace(/\bon\w+\s*=\s*["'][^"']*["']/gi, '');
+
+    // 2. Force width="100%" so it fills the container
+    code = code.replace(/<svg\b([^>]*)>/i, (match, attrs) => {
+      // Remove fixed width/height px values so it scales
+      attrs = attrs.replace(/\bwidth\s*=\s*["']\d+(?:px)?["']/gi, 'width="100%"');
+      // Keep height if it's a ratio, otherwise remove fixed pixel height
+      attrs = attrs.replace(/\bheight\s*=\s*["']\d+(?:px)?["']/gi, '');
+      // Ensure width="100%" is present
+      if (!/\bwidth\s*=/i.test(attrs)) attrs += ' width="100%"';
+      return `<svg${attrs}>`;
+    });
+
+    // 3. Boost small font-sizes to minimum 13px for readability
+    code = code.replace(/\bfont-size\s*:\s*(\d+(?:\.\d+)?)(px)?/gi, (m, n) => {
+      const size = parseFloat(n);
+      return `font-size:${size < 13 ? 13 : size}px`;
+    });
+    code = code.replace(/\bfont-size\s*=\s*["'](\d+(?:\.\d+)?)["']/gi, (m, n) => {
+      const size = parseFloat(n);
+      return `font-size="${size < 13 ? 13 : size}"`;
+    });
+
+    return code;
   }
 
   function renderMarkdown(text) {
@@ -7225,9 +7321,12 @@ YANIT KURALLARI:
     const svgBlocks = [];
     let processed = text.replace(/```svg([\s\S]*?)```/gi, (_, svgContent) => {
       const clean = sanitizeSVG(svgContent.trim());
-      // Wrap in a responsive container
-      const wrapped = `<div class="ai-svg-wrap">${clean}</div>`;
-      const placeholder = `%%SVG_BLOCK_${svgBlocks.length}%%`;
+      const idx = svgBlocks.length;
+      const wrapped = `<div class="ai-svg-wrap" id="aisvg${idx}">
+        <button class="ai-svg-expand" onclick="(function(){var s=document.querySelector('#aisvg${idx} svg');if(s){document.getElementById('ai-svg-modal-inner').innerHTML=s.outerHTML+'<button id=\\'ai-svg-modal-close\\' onclick=\\'document.getElementById(\\'ai-svg-modal\\').classList.remove(\\'open\\')\\'>✕ Kapat</button>';document.getElementById('ai-svg-modal').classList.add('open');}})()" title="Tam ekranda gör">🔍 Büyüt</button>
+        ${clean}
+      </div>`;
+      const placeholder = `%%SVG_BLOCK_${idx}%%`;
       svgBlocks.push(wrapped);
       return placeholder;
     });
