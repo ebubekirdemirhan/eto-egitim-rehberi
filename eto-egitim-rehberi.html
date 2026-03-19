@@ -177,7 +177,7 @@
     .back-to-top {
       position: fixed;
       right: 1.5rem;
-      bottom: 1.5rem;
+      bottom: 6.5rem;
       width: 2.6rem;
       height: 2.6rem;
       border-radius: 999px;
@@ -6691,7 +6691,7 @@
     onScroll();
   })();
 </script>
-<!-- ═══════════════════ ETO AI ASISTANI WIDGET ═══════════════════ -->
+<!-- ═══════════════════ ETO AI ASISTANI WIDGET v2 ════════════════ -->
 <style>
   /* ── Chat floating button ── */
   #eto-ai-btn {
@@ -6826,32 +6826,68 @@
   #eto-ai-send:disabled { background: #2a3550; cursor: default; }
 
   /* ── API key overlay ── */
+  /* ── Key wall ── */
   #eto-ai-keywall {
     position: absolute; inset: 0; background: #1a1f2e;
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; padding: 24px; gap: 12px; z-index: 10;
-    border-radius: 16px;
+    border-radius: 16px; overflow-y: auto;
   }
   #eto-ai-keywall h3 { color: #90caf9; font-size: 15px; text-align: center; margin: 0; }
   #eto-ai-keywall p { color: #8892a4; font-size: 12px; text-align: center; margin: 0; line-height: 1.5; }
   #eto-ai-keywall a { color: #90caf9; }
+  .eto-key-row { width: 100%; display: flex; gap: 6px; align-items: center; }
   #eto-ai-key-input {
-    width: 100%; background: #252d40; border: 1px solid #2a3550;
-    color: #e8eaf6; border-radius: 8px; padding: 9px 12px;
-    font-size: 13px; outline: none; font-family: monospace;
-    transition: border-color .15s; box-sizing: border-box;
+    flex: 1; background: #252d40; border: 1px solid #2a3550;
+    color: #e8eaf6; border-radius: 8px; padding: 11px 12px;
+    font-size: 14px; outline: none; font-family: monospace;
+    transition: border-color .15s; box-sizing: border-box; min-width: 0;
   }
   #eto-ai-key-input:focus { border-color: #1565c0; }
+  #eto-ai-key-toggle {
+    background: #252d40; border: 1px solid #2a3550; color: #8892a4;
+    border-radius: 8px; padding: 11px 13px; cursor: pointer; font-size: 15px;
+    flex-shrink: 0; transition: color .15s, border-color .15s;
+  }
+  #eto-ai-key-toggle:hover { color: #90caf9; border-color: #1565c0; }
   #eto-ai-key-save {
     width: 100%; background: #1565c0; color: #fff; border: none;
-    border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 700;
-    cursor: pointer; transition: background .15s;
+    border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: background .15s; touch-action: manipulation;
   }
   #eto-ai-key-save:hover { background: #0d47a1; }
-
-  @media (max-width: 440px) {
-    #eto-ai-panel { width: calc(100vw - 24px); right: 12px; bottom: 96px; }
-    #eto-ai-btn { bottom: 18px; right: 18px; }
+  #eto-ai-key-clear {
+    background: none; border: none; color: #4a5568; font-size: 11px;
+    cursor: pointer; text-decoration: underline; padding: 0;
+  }
+  #eto-ai-key-clear:hover { color: #e53935; }
+  /* ── Image preview strip ── */
+  #eto-img-preview {
+    display: none; padding: 6px 12px; align-items: center; gap: 8px;
+    background: #1e2538; border-top: 1px solid #2a3550; flex-shrink: 0;
+  }
+  #eto-img-preview.active { display: flex; }
+  #eto-img-thumb {
+    width: 48px; height: 48px; border-radius: 6px; object-fit: cover;
+    border: 1px solid #2a3550;
+  }
+  #eto-img-label { color: #8892a4; font-size: 11px; flex: 1; }
+  #eto-img-remove {
+    background: none; border: none; color: #e53935; font-size: 18px;
+    cursor: pointer; line-height: 1; padding: 0 4px;
+  }
+  #eto-img-btn {
+    width: 40px; height: 40px; border-radius: 50%; border: 1px solid #2a3550;
+    background: #252d40; color: #8892a4; font-size: 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; align-self: flex-end; transition: color .15s, border-color .15s;
+  }
+  #eto-img-btn:hover { color: #90caf9; border-color: #1565c0; }
+  #eto-img-file { display: none; }
+  @media (max-width: 480px) {
+    #eto-ai-panel { width: calc(100vw - 20px); right: 10px; bottom: 92px; max-height: 70vh; }
+    #eto-ai-btn { bottom: 16px; right: 16px; width: 56px; height: 56px; font-size: 22px; }
+    #eto-ai-key-input { font-size: 16px; }
   }
 </style>
 
@@ -6884,8 +6920,12 @@
       Key bu cihazda <strong>tarayıcı hafızasında</strong> saklanır.<br>
       Hiçbir sunucuya gönderilmez.
     </p>
-    <input id="eto-ai-key-input" type="password" placeholder="AIzaSy..." autocomplete="off" spellcheck="false"/>
-    <button id="eto-ai-key-save">Kaydet ve Başlat</button>
+    <div class="eto-key-row">
+      <input id="eto-ai-key-input" type="password" placeholder="AIzaSy…" autocomplete="off" spellcheck="false" inputmode="text"/>
+      <button id="eto-ai-key-toggle" title="Göster/Gizle" aria-label="Şifreyi göster">👁</button>
+    </div>
+    <button id="eto-ai-key-save">✓ Kaydet ve Başlat</button>
+    <button id="eto-ai-key-clear">Kayıtlı key'i sil</button>
   </div>
 
   <!-- Messages -->
@@ -6899,9 +6939,18 @@
     <span class="ai-chip">Kontaktör seçimi?</span>
   </div>
 
+  <!-- Image preview strip -->
+  <div id="eto-img-preview">
+    <img id="eto-img-thumb" src="" alt="Seçilen görsel"/>
+    <span id="eto-img-label">Görsel eklendi</span>
+    <button id="eto-img-remove" title="Görseli kaldır">✕</button>
+  </div>
+
   <!-- Input -->
   <div id="eto-ai-input-row">
-    <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda bir soru sor…" aria-label="Soru yaz"></textarea>
+    <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
+    <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
+    <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
     <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
   </div>
 </div>
@@ -6941,27 +6990,36 @@ YANIT KURALLARI:
 • Matematik içeren sorularda adım adım çöz`;
 
   /* ── Elements ── */
-  const btn       = document.getElementById('eto-ai-btn');
-  const panel     = document.getElementById('eto-ai-panel');
-  const closeBtn  = document.getElementById('eto-ai-close');
-  const msgs      = document.getElementById('eto-ai-messages');
-  const input     = document.getElementById('eto-ai-input');
-  const sendBtn   = document.getElementById('eto-ai-send');
-  const keywall   = document.getElementById('eto-ai-keywall');
-  const keyInput  = document.getElementById('eto-ai-key-input');
-  const keySave   = document.getElementById('eto-ai-key-save');
-  const chips     = document.querySelectorAll('.ai-chip');
+  const btn         = document.getElementById('eto-ai-btn');
+  const panel       = document.getElementById('eto-ai-panel');
+  const closeBtn    = document.getElementById('eto-ai-close');
+  const msgs        = document.getElementById('eto-ai-messages');
+  const input       = document.getElementById('eto-ai-input');
+  const sendBtn     = document.getElementById('eto-ai-send');
+  const keywall     = document.getElementById('eto-ai-keywall');
+  const keyInput    = document.getElementById('eto-ai-key-input');
+  const keySave     = document.getElementById('eto-ai-key-save');
+  const keyToggle   = document.getElementById('eto-ai-key-toggle');
+  const keyClear    = document.getElementById('eto-ai-key-clear');
+  const chips       = document.querySelectorAll('.ai-chip');
+  const imgBtn      = document.getElementById('eto-img-btn');
+  const imgFile     = document.getElementById('eto-img-file');
+  const imgPreview  = document.getElementById('eto-img-preview');
+  const imgThumb    = document.getElementById('eto-img-thumb');
+  const imgLabel    = document.getElementById('eto-img-label');
+  const imgRemove   = document.getElementById('eto-img-remove');
 
   /* ── State ── */
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
-  let history   = [];   // {role, parts:[{text}]}
+  let history   = [];
   let thinking  = false;
+  let pendingImg = null; // { mimeType, data (base64) }
 
   /* ── Key wall ── */
   function refreshKeywall() {
     keywall.style.display = apiKey ? 'none' : 'flex';
     if (apiKey && history.length === 0) addBotMsg(
-      '👋 Merhaba! Ben ETO Asistanı — gemi elektrikleri, motor devreleri, sınav soruları ve saha arızaları hakkında sorularına yanıt vermeye hazırım. Ne öğrenmek istersin?'
+      '👋 Merhaba! Ben ETO Asistanı — gemi elektrikleri, motor devreleri, sınav soruları ve saha arızaları hakkında sorularına yanıt vermeye hazırım.\n\n📷 **Fotoğraf** da yükleyebilirsin — motor etiketi, devre şeması, arıza ekranı gibi görseller gönder, analiz edeyim!'
     );
   }
 
@@ -6973,6 +7031,49 @@ YANIT KURALLARI:
     refreshKeywall();
   });
   keyInput.addEventListener('keydown', e => { if (e.key === 'Enter') keySave.click(); });
+
+  // Show/hide toggle
+  keyToggle.addEventListener('click', () => {
+    const isPass = keyInput.type === 'password';
+    keyInput.type = isPass ? 'text' : 'password';
+    keyToggle.textContent = isPass ? '🙈' : '👁';
+  });
+
+  // Clear saved key
+  keyClear.addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY);
+    apiKey = '';
+    keyInput.value = '';
+    keyInput.type = 'password';
+    keyToggle.textContent = '👁';
+    keywall.style.display = 'flex';
+  });
+
+  /* ── Image upload ── */
+  imgBtn.addEventListener('click', () => imgFile.click());
+  imgFile.addEventListener('change', () => {
+    const file = imgFile.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result;
+      const base64  = dataUrl.split(',')[1];
+      pendingImg = { mimeType: file.type, data: base64 };
+      imgThumb.src = dataUrl;
+      imgLabel.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+      imgPreview.classList.add('active');
+      input.placeholder = 'Bu görsel hakkında soruyu yaz…';
+      input.focus();
+    };
+    reader.readAsDataURL(file);
+    imgFile.value = ''; // reset so same file can be re-selected
+  });
+  imgRemove.addEventListener('click', () => {
+    pendingImg = null;
+    imgPreview.classList.remove('active');
+    imgThumb.src = '';
+    input.placeholder = 'ETO konusunda soru sor veya fotoğraf ekle…';
+  });
 
   /* ── Panel toggle ── */
   btn.addEventListener('click', () => {
@@ -7010,10 +7111,20 @@ YANIT KURALLARI:
     return div;
   }
 
-  function addUserMsg(text) {
+  function addUserMsg(text, imgSrc) {
     const div = document.createElement('div');
     div.className = 'ai-msg user';
-    div.textContent = text;
+    if (imgSrc) {
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.style.cssText = 'max-width:100%;border-radius:6px;display:block;margin-bottom:4px;';
+      div.appendChild(img);
+    }
+    if (text) {
+      const t = document.createElement('span');
+      t.textContent = text;
+      div.appendChild(t);
+    }
     msgs.appendChild(div);
     scrollBottom();
   }
@@ -7035,25 +7146,46 @@ YANIT KURALLARI:
 
   /* ── Send message ── */
   async function send(text) {
-    if (!text.trim() || thinking || !apiKey) return;
+    const hasImg = !!pendingImg;
+    if (!text.trim() && !hasImg) return;
+    if (thinking || !apiKey) return;
+
     thinking = true;
     sendBtn.disabled = true;
+    const sentText = text.trim();
     input.value = '';
     input.style.height = 'auto';
 
-    addUserMsg(text);
+    // Show user message with optional image
+    const imgSrc = hasImg ? imgThumb.src : null;
+    addUserMsg(sentText, imgSrc);
 
-    // Add to history
-    history.push({ role: 'user', parts: [{ text }] });
+    // Build parts array
+    const userParts = [];
+    if (hasImg) {
+      userParts.push({ inlineData: { mimeType: pendingImg.mimeType, data: pendingImg.data } });
+    }
+    if (sentText) userParts.push({ text: sentText });
+    if (!sentText && hasImg) userParts.push({ text: 'Bu görseli ETO perspektifinden incele ve açıkla.' });
 
-    // Keep history to last 10 turns (memory management)
+    // Clear pending image
+    pendingImg = null;
+    imgPreview.classList.remove('active');
+    imgThumb.src = '';
+    input.placeholder = 'ETO konusunda soru sor veya fotoğraf ekle…';
+
+    // Add to history (images not stored in history to keep token count low)
+    const historyEntry = { role: 'user', parts: sentText ? [{ text: sentText }] : [{ text: '(görsel analiz)' }] };
+    history.push(historyEntry);
     if (history.length > 20) history = history.slice(-20);
 
     showTyping();
 
+    // Build full contents: history (without current) + current with image
+    const historyWithoutLast = history.slice(0, -1);
     const body = {
       system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      contents: history,
+      contents: [...historyWithoutLast, { role: 'user', parts: userParts }],
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 1024,
@@ -7123,6 +7255,7 @@ YANIT KURALLARI:
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
       if (!apiKey) { panel.classList.add('open'); refreshKeywall(); return; }
+      input.value = chip.textContent;
       send(chip.textContent);
     });
   });
