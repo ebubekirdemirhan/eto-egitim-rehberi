@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ETO Eğitim Rehberi — Stajyerden Zabite | Ebubekir</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ETO Rehber">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
+    }
+  </script>
   <style>
     :root {
       --bg: #0f172a; --bg-alt: #020617; --text: #e5e7eb; --muted: #9ca3af;
@@ -215,14 +225,7 @@
     @media print {
       body { background: #fff; color: #000; }
       header.hero { position: static; background: #fff; border: none; box-shadow: none; border-radius: 0; }
-      /* İçindekiler bölümünü yazdırmada zorunlu göster */
-      nav.toc {
-        display: block !important;
-        background: #fff;
-        box-shadow: none;
-        border-radius: 0;
-        page-break-after: always;
-      }
+      nav.toc { display: block !important; background: #fff; box-shadow: none; border-radius: 0; page-break-after: always; }
       section { background: #fff; box-shadow: none; border-radius: 0; border: 1px solid #e5e7eb; page-break-inside: avoid; }
       .print-hint { display: none; }
       .info-box, .warn-box, .danger-box, .note-box, .saha-box, .sinav-box, .ebu-note { background: #f9fafb !important; }
@@ -230,12 +233,223 @@
       .page { padding: 0; }
       @page { margin: 1.5cm; }
     }
+
+    /* ═══════════════ LIGHT MODE ═══════════════ */
+    body.light-mode {
+      background: #f0f4f8 !important;
+      color: #1e293b !important;
+    }
+    body.light-mode { --text: #1e293b; --muted: #64748b; --accent: #0ea5e9; --link: #0284c7; --link-hover: #0369a1; --border: #cbd5e1; }
+    body.light-mode header.hero { background: radial-gradient(circle at top left,#bfdbfe 0,#e0f2fe 55%); border-color: #93c5fd; }
+    body.light-mode header.hero h1, body.light-mode header.hero p { color: #1e293b; }
+    body.light-mode header.hero small, body.light-mode .toc-en, body.light-mode .toc-index { color: #64748b; }
+    body.light-mode nav.toc { background: #fff; border-color: #cbd5e1; }
+    body.light-mode nav.toc h2, body.light-mode .toc-label { color: #1e293b; }
+    body.light-mode .toc-item a { color: #334155; }
+    body.light-mode .toc-item a:hover { background: #e0f2fe; }
+    body.light-mode section { background: #fff; border-color: #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+    body.light-mode section h2, body.light-mode h3, body.light-mode p, body.light-mode li { color: #1e293b; }
+    body.light-mode .card { background: #f8fafc; border-color: #e2e8f0; }
+    body.light-mode code, body.light-mode .formula { background: #e2e8f0; color: #0f172a; }
+    body.light-mode .formula-big { background: #e0f2fe; color: #0369a1; border-color: #7dd3fc; }
+    body.light-mode .info-box { background: rgba(22,163,74,.07); }
+    body.light-mode .warn-box { background: rgba(202,138,4,.07); }
+    body.light-mode .danger-box { background: rgba(220,38,38,.07); }
+    body.light-mode .note-box { background: rgba(2,132,199,.07); }
+    body.light-mode .saha-box { background: rgba(8,145,178,.07); }
+    body.light-mode .sinav-box { background: rgba(124,58,237,.07); }
+    body.light-mode .quiz-block { background: rgba(241,245,249,.9); border-color: #cbd5e1; }
+    body.light-mode .quiz-header { color: #1e293b; background: rgba(226,232,240,.8); }
+    body.light-mode details.quiz-item summary { color: #0f172a; }
+    body.light-mode .quiz-answer { background: #f1f5f9; color: #1e293b; }
+    body.light-mode .level-chip { background: #e2e8f0; color: #334155; border-color: #94a3b8; }
+    body.light-mode .badge { background: #e2e8f0; color: #334155; }
+    body.light-mode table { color: #1e293b; }
+    body.light-mode th { background: #1e40af; color: #fff; }
+    body.light-mode td { border-color: #e2e8f0; }
+    body.light-mode .back-to-top { background: rgba(255,255,255,.9); color: #0f172a; border-color: #94a3b8; }
+    body.light-mode section::before { background: linear-gradient(#dbeafe,#e0f2fe); color: #1e3a5f; }
+
+    /* Theme toggle button */
+    #theme-toggle {
+      position: fixed; right: 1.5rem; bottom: 11rem;
+      width: 2.6rem; height: 2.6rem; border-radius: 50%;
+      background: rgba(15,23,42,.85); color: #e5e7eb;
+      border: 1px solid rgba(148,163,184,.5);
+      font-size: 1.1rem; cursor: pointer; z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+      transition: transform .2s, background .2s;
+    }
+    #theme-toggle:hover { transform: translateY(-2px); }
+    body.light-mode #theme-toggle { background: rgba(255,255,255,.9); color: #1e293b; border-color: #94a3b8; }
+
+    /* ═══════════════ SEARCH BAR ═══════════════ */
+    #eto-search-wrap {
+      margin: 0 0 1.5rem;
+      position: relative;
+    }
+    #eto-search-input {
+      width: 100%; padding: .65rem 1rem .65rem 2.8rem;
+      border-radius: .9rem; border: 1px solid rgba(148,163,184,.4);
+      background: rgba(15,23,42,.9); color: #e5e7eb;
+      font-size: .95rem; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    #eto-search-input:focus { border-color: rgba(56,189,248,.7); box-shadow: 0 0 0 3px rgba(56,189,248,.12); }
+    body.light-mode #eto-search-input { background: #fff; color: #1e293b; border-color: #cbd5e1; }
+    body.light-mode #eto-search-input:focus { border-color: #38bdf8; }
+    .search-icon {
+      position: absolute; left: .9rem; top: 50%; transform: translateY(-50%);
+      color: #64748b; font-size: 1rem; pointer-events: none;
+    }
+    #eto-search-results {
+      margin-top: .5rem; display: none;
+      background: rgba(15,23,42,.97); border: 1px solid rgba(148,163,184,.3);
+      border-radius: .9rem; overflow: hidden; max-height: 320px; overflow-y: auto;
+    }
+    body.light-mode #eto-search-results { background: #fff; border-color: #cbd5e1; }
+    #eto-search-results.active { display: block; }
+    .search-result-item {
+      padding: .65rem 1rem; border-bottom: 1px solid rgba(148,163,184,.12);
+      cursor: pointer; transition: background .15s;
+      font-size: .88rem; color: #e5e7eb;
+    }
+    body.light-mode .search-result-item { color: #1e293b; border-color: #e2e8f0; }
+    .search-result-item:hover { background: rgba(56,189,248,.12); }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item strong { color: #38bdf8; }
+    body.light-mode .search-result-item strong { color: #0284c7; }
+    .search-result-snippet { font-size: .8rem; color: #94a3b8; margin-top: 2px; }
+    body.light-mode .search-result-snippet { color: #64748b; }
+    .search-no-result { padding: .9rem 1rem; color: #64748b; font-size: .88rem; text-align: center; }
+    mark.eto-highlight { background: rgba(250,204,21,.3); color: inherit; border-radius: 2px; padding: 0 1px; }
+
+    /* ═══════════════ QUIZ PROGRESS BADGE ═══════════════ */
+    .quiz-progress-badge {
+      float: right; font-size: .75rem; font-weight: 700;
+      background: rgba(56,189,248,.15); border: 1px solid rgba(56,189,248,.4);
+      color: #7dd3fc; border-radius: 999px; padding: 2px 9px;
+      transition: background .3s;
+    }
+    .quiz-progress-badge.done { background: rgba(74,222,128,.15); border-color: rgba(74,222,128,.4); color: #4ade80; }
+    body.light-mode .quiz-progress-badge { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+    body.light-mode .quiz-progress-badge.done { background: #dcfce7; color: #15803d; border-color: #86efac; }
+
+    /* ═══════════════ FLASHCARD MODE ═══════════════ */
+    #flashcard-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.85); z-index: 99998;
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    #flashcard-modal.open { display: flex; }
+    #flashcard-box {
+      background: #0f172a; border-radius: 18px;
+      border: 1px solid rgba(148,163,184,.3);
+      padding: 0; width: 100%; max-width: 540px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.7);
+      overflow: hidden; position: relative;
+    }
+    body.light-mode #flashcard-box { background: #fff; border-color: #cbd5e1; }
+    #fc-header {
+      padding: .75rem 1.1rem; background: rgba(15,23,42,.95);
+      border-bottom: 1px solid rgba(148,163,184,.2);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    body.light-mode #fc-header { background: #f1f5f9; border-color: #e2e8f0; }
+    #fc-progress-text { font-size: .82rem; color: #94a3b8; }
+    body.light-mode #fc-progress-text { color: #64748b; }
+    #fc-close-btn {
+      background: none; border: none; color: #94a3b8;
+      font-size: 1.3rem; cursor: pointer; padding: 0 4px; line-height: 1;
+    }
+    #fc-close-btn:hover { color: #f87171; }
+    #fc-progress-bar-wrap { height: 4px; background: rgba(148,163,184,.15); }
+    #fc-progress-bar { height: 100%; background: linear-gradient(90deg,#38bdf8,#818cf8); transition: width .3s; }
+    #fc-card {
+      padding: 2rem 1.5rem 1.5rem;
+      min-height: 200px; display: flex; flex-direction: column;
+    }
+    #fc-section-label { font-size: .72rem; color: #64748b; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .6rem; }
+    #fc-question { font-size: 1.05rem; font-weight: 600; color: #e2e8f0; flex: 1; line-height: 1.55; }
+    body.light-mode #fc-question { color: #0f172a; }
+    #fc-answer {
+      margin-top: 1rem; padding: .85rem 1rem;
+      background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.25);
+      border-radius: .75rem; font-size: .9rem; color: #7dd3fc;
+      display: none; line-height: 1.5;
+    }
+    body.light-mode #fc-answer { background: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
+    #fc-answer.visible { display: block; }
+    #fc-actions {
+      padding: .9rem 1.5rem 1.2rem;
+      display: flex; gap: .7rem; flex-wrap: wrap;
+    }
+    .fc-btn {
+      flex: 1; padding: .6rem .5rem; border: none; border-radius: .75rem;
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      transition: opacity .15s, transform .1s;
+    }
+    .fc-btn:hover { opacity: .88; transform: translateY(-1px); }
+    #fc-show-btn { background: rgba(56,189,248,.15); color: #38bdf8; border: 1px solid rgba(56,189,248,.4); }
+    #fc-know-btn { background: rgba(74,222,128,.15); color: #4ade80; border: 1px solid rgba(74,222,128,.4); }
+    #fc-skip-btn { background: rgba(248,113,113,.12); color: #f87171; border: 1px solid rgba(248,113,113,.35); }
+    #fc-shuffle-btn { background: rgba(167,139,250,.12); color: #a78bfa; border: 1px solid rgba(167,139,250,.35); }
+    #fc-stats { padding: .5rem 1.5rem .9rem; font-size: .8rem; color: #64748b; display: flex; gap: 1rem; }
+    .fc-stat-good { color: #4ade80; font-weight: 700; }
+    .fc-stat-skip { color: #f87171; font-weight: 700; }
+
+    /* Flashcard open button */
+    #flashcard-open-btn {
+      position: fixed; right: 1.5rem; bottom: 14.5rem;
+      width: 2.6rem; height: 2.6rem; border-radius: 50%;
+      background: rgba(167,139,250,.2); color: #a78bfa;
+      border: 1px solid rgba(167,139,250,.5);
+      font-size: 1rem; cursor: pointer; z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+      transition: transform .2s, background .2s;
+      title: "Flashcard Modu";
+    }
+    #flashcard-open-btn:hover { transform: translateY(-2px); background: rgba(167,139,250,.35); }
+
+    @media (max-width: 640px) {
+      #theme-toggle { bottom: 14rem; }
+      #flashcard-open-btn { bottom: 17rem; }
+    }
   </style>
 </head>
 <body>
-<button class="back-to-top" type="button" aria-label="Yukarı dön">
-  ↑
-</button>
+<button class="back-to-top" type="button" aria-label="Yukarı dön">↑</button>
+<button id="theme-toggle" title="Tema değiştir" aria-label="Tema değiştir">🌙</button>
+<button id="flashcard-open-btn" title="Flashcard çalışma modu" aria-label="Flashcard modu">🃏</button>
+
+<!-- ═══ FLASHCARD MODAL ═══ -->
+<div id="flashcard-modal" role="dialog" aria-modal="true" aria-label="Flashcard Modu">
+  <div id="flashcard-box">
+    <div id="fc-header">
+      <span id="fc-progress-text">Yükleniyor…</span>
+      <button id="fc-close-btn" aria-label="Kapat">✕</button>
+    </div>
+    <div id="fc-progress-bar-wrap"><div id="fc-progress-bar" style="width:0%"></div></div>
+    <div id="fc-card">
+      <div id="fc-section-label"></div>
+      <div id="fc-question">Kartlar yükleniyor…</div>
+      <div id="fc-answer"></div>
+    </div>
+    <div id="fc-actions">
+      <button class="fc-btn" id="fc-show-btn">👁 Cevabı Gör</button>
+      <button class="fc-btn" id="fc-know-btn">✅ Bilirim</button>
+      <button class="fc-btn" id="fc-skip-btn">❌ Bilmiyorum</button>
+      <button class="fc-btn" id="fc-shuffle-btn">🔀 Karıştır</button>
+    </div>
+    <div id="fc-stats">
+      <span>Biliyor: <span class="fc-stat-good" id="fc-count-know">0</span></span>
+      <span>Bilmiyor: <span class="fc-stat-skip" id="fc-count-skip">0</span></span>
+      <span id="fc-remaining"></span>
+    </div>
+  </div>
+</div>
 <div class="page">
 
   <!-- ══════════ HEADER ══════════ -->
@@ -302,6 +516,13 @@
       <div class="toc-item toc-item-b21"><a href="#b21"><span class="toc-index">21</span><span><span class="toc-label">Soru Bankası — Liman / Zabitlik</span><br><span class="toc-en">Sınav 1, 2 &amp; 3 · 300 Soru · Çözümlü</span></span></a></div>
     </div>
   </nav>
+
+  <!-- ═══ SEARCH BAR ═══ -->
+  <div id="eto-search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="search" id="eto-search-input" placeholder="Ara… (örn: kondansatör, megger, röle, jeneratör)" autocomplete="off" />
+    <div id="eto-search-results"></div>
+  </div>
 
   <main>
 
@@ -7616,6 +7837,282 @@ YANIT KURALLARI:
 
   // Init
   refreshKeywall();
+
+  /* ── AI Chat History (localStorage) ── */
+  const CHAT_HISTORY_KEY = 'eto-chat-v1';
+
+  function saveChatHistory() {
+    try { localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(history.slice(-40))); } catch(e) {}
+  }
+
+  function clearChatHistory() {
+    try { localStorage.removeItem(CHAT_HISTORY_KEY); } catch(e) {}
+    msgs.innerHTML = '';
+    history.length = 0;
+    welcomeShown = false;
+    refreshKeywall();
+  }
+
+  // Load saved history when panel first opens
+  let historyLoaded = false;
+  const _origPanelToggle = btn.onclick;
+  btn.addEventListener('click', () => {
+    if (!historyLoaded) {
+      historyLoaded = true;
+      try {
+        const saved = JSON.parse(localStorage.getItem(CHAT_HISTORY_KEY) || '[]');
+        if (saved.length && !welcomeShown) {
+          saved.forEach(m => {
+            const parts = m.parts || [];
+            const textPart = parts.find(p => p.text);
+            if (m.role === 'user') addUserMsg(textPart ? textPart.text : '(görsel)');
+            else if (m.role === 'model' && textPart) addBotMsg(textPart.text);
+          });
+          history.push(...saved);
+          welcomeShown = true;
+        }
+      } catch(e) {}
+    }
+  }, { once: false });
+
+  // Patch addBotMsg to auto-save after each bot reply
+  const _origAddBotMsg2 = addBotMsg;
+  // We can't reassign a const in strict mode, so hook via wrapper
+  // Instead, auto-save history inside the send() flow via timeout
+  const _origThinkingFalse = () => {
+    saveChatHistory();
+  };
+  // Observe msgs for new bot messages and save
+  const chatObserver = new MutationObserver(() => saveChatHistory());
+  chatObserver.observe(msgs, { childList: true });
+
+  // Add "Geçmişi Temizle" button to panel header
+  (function() {
+    const hdr = document.querySelector('#eto-ai-panel .ai-header');
+    if (!hdr) return;
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = '🗑';
+    clearBtn.title = 'Sohbet geçmişini temizle';
+    clearBtn.style.cssText = 'background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1rem;padding:0 4px;margin-left:4px;';
+    clearBtn.addEventListener('click', clearChatHistory);
+    const closeButton = hdr.querySelector('button');
+    if (closeButton) hdr.insertBefore(clearBtn, closeButton);
+    else hdr.appendChild(clearBtn);
+  })();
+})();
+
+/* ══════════════════════════════════════════════
+   BACK-TO-TOP + DARK MODE + SEARCH + QUIZ TRACK + FLASHCARDS
+══════════════════════════════════════════════ */
+(function() {
+  /* Back to top */
+  const backBtn = document.querySelector('.back-to-top');
+  window.addEventListener('scroll', () => {
+    backBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ══ DARK / LIGHT MODE ══ */
+  const themeBtn = document.getElementById('theme-toggle');
+  const applyTheme = (light) => {
+    document.body.classList.toggle('light-mode', light);
+    themeBtn.textContent = light ? '☀️' : '🌙';
+  };
+  applyTheme(localStorage.getItem('eto-theme') === 'light');
+  themeBtn.addEventListener('click', () => {
+    const isLight = !document.body.classList.contains('light-mode');
+    localStorage.setItem('eto-theme', isLight ? 'light' : 'dark');
+    applyTheme(isLight);
+  });
+
+  /* ══ SEARCH ══ */
+  const searchInput = document.getElementById('eto-search-input');
+  const searchResults = document.getElementById('eto-search-results');
+
+  // Build search index from sections
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const searchIndex = sections.map(sec => {
+    const h2 = sec.querySelector('h2');
+    const label = sec.getAttribute('data-label') || sec.id;
+    const title = h2 ? h2.textContent.trim() : label;
+    const text = sec.innerText || sec.textContent;
+    return { id: sec.id, title, label, text: text.toLowerCase(), raw: text };
+  });
+
+  function highlight(str, query) {
+    const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return str.replace(re, '<mark class="eto-highlight">$1</mark>');
+  }
+
+  function getSnippet(text, query, len = 100) {
+    const idx = text.toLowerCase().indexOf(query.toLowerCase());
+    if (idx < 0) return text.slice(0, len) + '…';
+    const start = Math.max(0, idx - 30);
+    return (start > 0 ? '…' : '') + text.slice(start, start + len) + '…';
+  }
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim();
+    if (q.length < 2) { searchResults.innerHTML = ''; searchResults.classList.remove('active'); return; }
+    const matches = searchIndex.filter(s => s.text.includes(q.toLowerCase())).slice(0, 8);
+    if (!matches.length) {
+      searchResults.innerHTML = `<div class="search-no-result">Sonuç bulunamadı: "${q}"</div>`;
+    } else {
+      searchResults.innerHTML = matches.map(m =>
+        `<div class="search-result-item" onclick="document.getElementById('${m.id}').scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('eto-search-input').value='';document.getElementById('eto-search-results').classList.remove('active')">
+          <strong>${highlight(m.title, q)}</strong> <span style="font-size:.75rem;color:#64748b">(${m.label || m.id})</span>
+          <div class="search-result-snippet">${highlight(getSnippet(m.raw, q), q)}</div>
+        </div>`
+      ).join('');
+    }
+    searchResults.classList.add('active');
+  });
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('eto-search-wrap').contains(e.target)) {
+      searchResults.classList.remove('active');
+    }
+  });
+
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { searchResults.classList.remove('active'); searchInput.value = ''; }
+  });
+
+  /* ══ QUIZ PROGRESS TRACKING ══ */
+  const QUIZ_KEY = 'eto-quiz-seen-v1';
+  let quizSeen = {};
+  try { quizSeen = JSON.parse(localStorage.getItem(QUIZ_KEY) || '{}'); } catch(e) {}
+
+  document.querySelectorAll('.quiz-block').forEach((block, blockIdx) => {
+    const items = block.querySelectorAll('details.quiz-item');
+    const total = items.length;
+    const blockId = 'qb_' + blockIdx;
+
+    // Add progress badge to header
+    const header = block.querySelector('.quiz-header');
+    if (header) {
+      const badge = document.createElement('span');
+      badge.className = 'quiz-progress-badge';
+      badge.id = 'qpb_' + blockIdx;
+      header.appendChild(badge);
+    }
+
+    function updateBadge() {
+      const seen = Object.keys(quizSeen).filter(k => k.startsWith(blockId + '_')).length;
+      const badge = document.getElementById('qpb_' + blockIdx);
+      if (badge) {
+        badge.textContent = seen + '/' + total;
+        badge.classList.toggle('done', seen >= total);
+      }
+    }
+    updateBadge();
+
+    items.forEach((item, itemIdx) => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          quizSeen[blockId + '_' + itemIdx] = 1;
+          try { localStorage.setItem(QUIZ_KEY, JSON.stringify(quizSeen)); } catch(e) {}
+          updateBadge();
+        }
+      }, { passive: true });
+    });
+  });
+
+  /* ══ FLASHCARD MODE ══ */
+  const fcModal   = document.getElementById('flashcard-modal');
+  const fcOpenBtn = document.getElementById('flashcard-open-btn');
+  const fcCloseBtn= document.getElementById('fc-close-btn');
+  const fcQuestion= document.getElementById('fc-question');
+  const fcAnswer  = document.getElementById('fc-answer');
+  const fcLabel   = document.getElementById('fc-section-label');
+  const fcProgress= document.getElementById('fc-progress-text');
+  const fcBar     = document.getElementById('fc-progress-bar');
+  const fcRemain  = document.getElementById('fc-remaining');
+  const fcCountKnow = document.getElementById('fc-count-know');
+  const fcCountSkip = document.getElementById('fc-count-skip');
+
+  // Extract all quiz cards from page
+  function buildCards() {
+    const cards = [];
+    document.querySelectorAll('.quiz-block').forEach(block => {
+      const header = block.querySelector('.quiz-header');
+      const sectionLabel = header ? header.textContent.replace(/\d+\/\d+/, '').trim() : '';
+      block.querySelectorAll('details.quiz-item').forEach(item => {
+        const q = item.querySelector('summary');
+        const a = item.querySelector('.quiz-answer');
+        if (q && a) cards.push({
+          question: q.textContent.trim(),
+          answer: a.innerHTML,
+          section: sectionLabel
+        });
+      });
+    });
+    return cards;
+  }
+
+  let fcCards = [], fcIdx = 0, fcKnow = 0, fcSkip = 0;
+
+  function fcShuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function fcShow(idx) {
+    if (!fcCards.length) { fcQuestion.textContent = 'Kart bulunamadı.'; return; }
+    const card = fcCards[idx % fcCards.length];
+    fcLabel.textContent = card.section;
+    fcQuestion.textContent = card.question;
+    fcAnswer.innerHTML = card.answer;
+    fcAnswer.classList.remove('visible');
+    const pos = (idx % fcCards.length) + 1;
+    const total = fcCards.length;
+    fcProgress.textContent = `${pos} / ${total}`;
+    fcBar.style.width = (pos / total * 100) + '%';
+    fcRemain.textContent = `Kalan: ${total - pos}`;
+    fcCountKnow.textContent = fcKnow;
+    fcCountSkip.textContent = fcSkip;
+    document.getElementById('fc-show-btn').style.display = '';
+    document.getElementById('fc-know-btn').style.display = 'none';
+    document.getElementById('fc-skip-btn').style.display = 'none';
+  }
+
+  document.getElementById('fc-show-btn').addEventListener('click', () => {
+    fcAnswer.classList.add('visible');
+    document.getElementById('fc-show-btn').style.display = 'none';
+    document.getElementById('fc-know-btn').style.display = '';
+    document.getElementById('fc-skip-btn').style.display = '';
+  });
+
+  document.getElementById('fc-know-btn').addEventListener('click', () => {
+    fcKnow++; fcIdx++;
+    fcShow(fcIdx);
+  });
+
+  document.getElementById('fc-skip-btn').addEventListener('click', () => {
+    fcSkip++; fcIdx++;
+    fcShow(fcIdx);
+  });
+
+  document.getElementById('fc-shuffle-btn').addEventListener('click', () => {
+    fcCards = fcShuffle(fcCards); fcIdx = 0; fcKnow = 0; fcSkip = 0;
+    fcShow(0);
+  });
+
+  fcOpenBtn.addEventListener('click', () => {
+    fcCards = fcShuffle(buildCards()); fcIdx = 0; fcKnow = 0; fcSkip = 0;
+    fcModal.classList.add('open');
+    fcShow(0);
+  });
+
+  fcCloseBtn.addEventListener('click', () => fcModal.classList.remove('open'));
+  fcModal.addEventListener('click', e => { if (e.target === fcModal) fcModal.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') fcModal.classList.remove('open');
+  });
+
 })();
 </script>
 <!-- ══════════════════════════════════════════════════════════════ -->
