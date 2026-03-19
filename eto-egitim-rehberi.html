@@ -364,14 +364,198 @@
     }
     #flashcard-open-btn:hover { transform: translateY(-2px); background: rgba(167,139,250,.35); }
 
+    /* Sınav simülasyon butonu */
+    #exam-open-btn {
+      position: fixed; right: 1.5rem; bottom: 18rem;
+      width: 2.6rem; height: 2.6rem; border-radius: 50%;
+      background: rgba(251,146,60,.2); color: #fb923c;
+      border: 1px solid rgba(251,146,60,.5);
+      font-size: 1rem; cursor: pointer; z-index: 999;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+      transition: transform .2s, background .2s;
+    }
+    #exam-open-btn:hover { transform: translateY(-2px); background: rgba(251,146,60,.35); }
+
     @media (max-width: 640px) {
       #flashcard-open-btn { bottom: 14rem; }
+      #exam-open-btn { bottom: 17.5rem; }
     }
+
+    /* ═══════════════ SINAV SİMÜLASYONU ═══════════════ */
+    #exam-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.88); z-index: 99997;
+      align-items: center; justify-content: center; padding: 12px;
+    }
+    #exam-modal.open { display: flex; }
+    #exam-box {
+      background: #0f172a; border-radius: 18px;
+      border: 1px solid rgba(251,146,60,.3);
+      width: 100%; max-width: 580px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.8);
+      overflow: hidden; max-height: 96vh; display: flex; flex-direction: column;
+    }
+    #exam-header {
+      padding: .75rem 1.1rem; background: rgba(15,23,42,.97);
+      border-bottom: 1px solid rgba(148,163,184,.15);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    #exam-title { font-size: .95rem; font-weight: 700; color: #fb923c; }
+    #exam-timer {
+      font-size: 1.1rem; font-weight: 800; font-family: monospace;
+      color: #4ade80; min-width: 60px; text-align: right;
+    }
+    #exam-timer.warn { color: #facc15; }
+    #exam-timer.danger { color: #f87171; animation: pulse .6s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+    #exam-close-btn { background:none;border:none;color:#94a3b8;font-size:1.3rem;cursor:pointer;padding:0 4px;line-height:1; }
+    #exam-close-btn:hover { color:#f87171; }
+    #exam-progress-bar-wrap { height: 4px; background: rgba(148,163,184,.1); flex-shrink:0; }
+    #exam-progress-bar { height:100%; background: linear-gradient(90deg,#fb923c,#fbbf24); transition:width .3s; }
+
+    /* Setup screen */
+    #exam-setup {
+      padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; overflow-y: auto;
+    }
+    #exam-setup h3 { margin: 0; color: #e2e8f0; font-size: 1.1rem; }
+    .exam-setup-row { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .exam-setup-label { color: #94a3b8; font-size: .88rem; min-width: 120px; }
+    .exam-option-btn {
+      padding: .4rem .9rem; border-radius: .6rem; border: 1px solid rgba(148,163,184,.3);
+      background: rgba(15,23,42,.8); color: #e2e8f0; font-size: .85rem; cursor: pointer; transition: all .15s;
+    }
+    .exam-option-btn.active { background: rgba(251,146,60,.2); border-color: #fb923c; color: #fb923c; font-weight:700; }
+    #exam-start-btn {
+      padding: .75rem; border-radius: .9rem; border: none;
+      background: linear-gradient(135deg,#ea580c,#f97316); color:#fff;
+      font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: .5rem;
+      transition: opacity .15s;
+    }
+    #exam-start-btn:hover { opacity: .88; }
+
+    /* Question screen */
+    #exam-question-screen { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    #exam-q-meta { padding: .6rem 1.1rem; font-size: .78rem; color: #64748b; flex-shrink:0; }
+    #exam-q-section { color: #94a3b8; }
+    #exam-q-body { padding: 1rem 1.1rem; flex: 1; overflow-y: auto; }
+    #exam-q-text { font-size: 1rem; font-weight: 600; color: #e2e8f0; line-height: 1.55; margin-bottom: 1rem; }
+    #exam-answer-area {
+      background: rgba(56,189,248,.07); border: 1px solid rgba(56,189,248,.2);
+      border-radius: .75rem; padding: .85rem 1rem;
+      font-size: .9rem; color: #7dd3fc; line-height: 1.5;
+      display: none;
+    }
+    #exam-answer-area.visible { display: block; }
+    #exam-q-actions { padding: .75rem 1.1rem 1rem; display: flex; gap: .6rem; flex-shrink:0; }
+    .exam-q-btn {
+      flex: 1; padding: .6rem .4rem; border-radius: .7rem; border: none;
+      font-size: .85rem; font-weight: 600; cursor: pointer; transition: opacity .15s;
+    }
+    .exam-q-btn:hover { opacity: .85; }
+    #exam-show-ans-btn { background: rgba(56,189,248,.15); color: #38bdf8; border:1px solid rgba(56,189,248,.4); }
+    #exam-correct-btn { background: rgba(74,222,128,.15); color: #4ade80; border:1px solid rgba(74,222,128,.4); }
+    #exam-wrong-btn   { background: rgba(248,113,113,.12); color: #f87171; border:1px solid rgba(248,113,113,.35); }
+    #exam-skip-btn-q  { background: rgba(148,163,184,.1); color: #94a3b8; border:1px solid rgba(148,163,184,.25); }
+
+    /* Result screen */
+    #exam-result-screen {
+      display: none; padding: 1.5rem; overflow-y: auto;
+      flex-direction: column; gap: 1rem;
+    }
+    #exam-score-circle {
+      width: 110px; height: 110px; border-radius: 50%;
+      border: 6px solid #fb923c; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; margin: 0 auto;
+    }
+    #exam-score-num { font-size: 2rem; font-weight: 900; color: #fb923c; line-height: 1; }
+    #exam-score-denom { font-size: .8rem; color: #64748b; }
+    #exam-score-pct { font-size: 1.4rem; font-weight: 800; color: #e2e8f0; text-align: center; }
+    #exam-verdict { text-align:center; font-size: .95rem; padding: .6rem 1rem; border-radius: .75rem; }
+    .verdict-pass { background: rgba(74,222,128,.12); color: #4ade80; border:1px solid rgba(74,222,128,.3); }
+    .verdict-fail { background: rgba(248,113,113,.1); color: #f87171; border:1px solid rgba(248,113,113,.3); }
+    #exam-weak-sections { font-size: .85rem; }
+    #exam-weak-sections h4 { color: #f87171; margin: 0 0 .4rem; }
+    #exam-weak-sections ul { margin: 0; padding-left: 1.2rem; color: #94a3b8; }
+    #exam-retry-btn, #exam-retry-wrong-btn {
+      padding: .65rem; border-radius: .75rem; border: none;
+      font-size: .9rem; font-weight: 700; cursor: pointer;
+    }
+    #exam-retry-btn { background: rgba(251,146,60,.2); color: #fb923c; border:1px solid rgba(251,146,60,.4); }
+    #exam-retry-wrong-btn { background: rgba(248,113,113,.15); color: #f87171; border:1px solid rgba(248,113,113,.4); }
   </style>
 </head>
 <body>
 <button class="back-to-top" type="button" aria-label="Yukarı dön">↑</button>
 <button id="flashcard-open-btn" title="Flashcard çalışma modu" aria-label="Flashcard modu">🃏</button>
+<button id="exam-open-btn" title="Sınav Simülasyonu" aria-label="Sınav Simülasyonu">📝</button>
+
+<!-- ═══ SINAV SİMÜLASYONU MODAL ═══ -->
+<div id="exam-modal" role="dialog" aria-modal="true" aria-label="Sınav Simülasyonu">
+  <div id="exam-box">
+    <div id="exam-header">
+      <span id="exam-title">📝 Sınav Simülasyonu</span>
+      <span id="exam-timer">45:00</span>
+      <button id="exam-close-btn" aria-label="Kapat">✕</button>
+    </div>
+    <div id="exam-progress-bar-wrap"><div id="exam-progress-bar" style="width:0%"></div></div>
+
+    <!-- Setup -->
+    <div id="exam-setup">
+      <h3>⚙️ Sınav Ayarları</h3>
+      <div class="exam-setup-row">
+        <span class="exam-setup-label">Soru sayısı:</span>
+        <button class="exam-option-btn" data-group="count" data-val="15">15</button>
+        <button class="exam-option-btn active" data-group="count" data-val="25">25</button>
+        <button class="exam-option-btn" data-group="count" data-val="40">40</button>
+        <button class="exam-option-btn" data-group="count" data-val="0">Tümü</button>
+      </div>
+      <div class="exam-setup-row">
+        <span class="exam-setup-label">Süre:</span>
+        <button class="exam-option-btn" data-group="time" data-val="20">20 dk</button>
+        <button class="exam-option-btn active" data-group="time" data-val="45">45 dk</button>
+        <button class="exam-option-btn" data-group="time" data-val="90">90 dk</button>
+        <button class="exam-option-btn" data-group="time" data-val="0">Süresiz</button>
+      </div>
+      <div class="exam-setup-row">
+        <span class="exam-setup-label">Sorular:</span>
+        <button class="exam-option-btn active" data-group="source" data-val="all">Tüm bölümler</button>
+        <button class="exam-option-btn" data-group="source" data-val="wrong">Sadece hatalar 🔴</button>
+      </div>
+      <button id="exam-start-btn">🚀 Sınavı Başlat</button>
+    </div>
+
+    <!-- Question -->
+    <div id="exam-question-screen">
+      <div id="exam-q-meta">
+        <span id="exam-q-num"></span> · <span id="exam-q-section"></span>
+      </div>
+      <div id="exam-q-body">
+        <div id="exam-q-text"></div>
+        <div id="exam-answer-area"></div>
+      </div>
+      <div id="exam-q-actions">
+        <button class="exam-q-btn" id="exam-show-ans-btn">👁 Cevabı Gör</button>
+        <button class="exam-q-btn" id="exam-correct-btn" style="display:none">✅ Doğru</button>
+        <button class="exam-q-btn" id="exam-wrong-btn" style="display:none">❌ Yanlış</button>
+        <button class="exam-q-btn" id="exam-skip-btn-q" style="display:none">⏭ Atla</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="exam-result-screen">
+      <div id="exam-score-circle">
+        <div id="exam-score-num">0</div>
+        <div id="exam-score-denom"></div>
+      </div>
+      <div id="exam-score-pct"></div>
+      <div id="exam-verdict"></div>
+      <div id="exam-weak-sections"></div>
+      <button id="exam-retry-btn">🔄 Yeni Sınav</button>
+      <button id="exam-retry-wrong-btn">❌ Hataları Tekrar Çöz</button>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ FLASHCARD MODAL ═══ -->
 <div id="flashcard-modal" role="dialog" aria-modal="true" aria-label="Flashcard Modu">
@@ -8023,12 +8207,24 @@ YANIT KURALLARI:
     document.getElementById('fc-skip-btn').style.display = '';
   });
 
+  const FC_WRONG_KEY = 'eto-fc-wrong-v1';
+  let fcWrongSet = new Set();
+  try { fcWrongSet = new Set(JSON.parse(localStorage.getItem(FC_WRONG_KEY) || '[]')); } catch(e) {}
+
+  function saveWrong() {
+    try { localStorage.setItem(FC_WRONG_KEY, JSON.stringify([...fcWrongSet])); } catch(e) {}
+  }
+
   document.getElementById('fc-know-btn').addEventListener('click', () => {
+    const card = fcCards[fcIdx % fcCards.length];
+    fcWrongSet.delete(card.question); saveWrong();
     fcKnow++; fcIdx++;
     fcShow(fcIdx);
   });
 
   document.getElementById('fc-skip-btn').addEventListener('click', () => {
+    const card = fcCards[fcIdx % fcCards.length];
+    fcWrongSet.add(card.question); saveWrong();
     fcSkip++; fcIdx++;
     fcShow(fcIdx);
   });
@@ -8038,6 +8234,26 @@ YANIT KURALLARI:
     fcShow(0);
   });
 
+  // Add "Hataları Çalış" button to flashcard footer
+  (function() {
+    const stats = document.getElementById('fc-stats');
+    if (!stats) return;
+    const btn = document.createElement('button');
+    btn.className = 'fc-btn';
+    btn.style.cssText = 'flex:none;background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.35);';
+    btn.title = 'Sadece "Bilmiyorum" dediklerini çalış';
+    btn.textContent = '🔴 Hataları Çalış';
+    btn.addEventListener('click', () => {
+      const all = buildCards();
+      const wrong = all.filter(c => fcWrongSet.has(c.question));
+      if (!wrong.length) { alert('Henüz hiç "Bilmiyorum" dediğin soru yok!'); return; }
+      fcCards = fcShuffle(wrong); fcIdx = 0; fcKnow = 0; fcSkip = 0;
+      fcShow(0);
+    });
+    const actions = document.getElementById('fc-actions');
+    if (actions) actions.appendChild(btn);
+  })();
+
   fcOpenBtn.addEventListener('click', () => {
     fcCards = fcShuffle(buildCards()); fcIdx = 0; fcKnow = 0; fcSkip = 0;
     fcModal.classList.add('open');
@@ -8046,9 +8262,182 @@ YANIT KURALLARI:
 
   fcCloseBtn.addEventListener('click', () => fcModal.classList.remove('open'));
   fcModal.addEventListener('click', e => { if (e.target === fcModal) fcModal.classList.remove('open'); });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') fcModal.classList.remove('open');
-  });
+
+  /* ══ SINAV SİMÜLASYONU ══ */
+  (function() {
+    const modal       = document.getElementById('exam-modal');
+    const openBtn     = document.getElementById('exam-open-btn');
+    const closeBtn    = document.getElementById('exam-close-btn');
+    const timerEl     = document.getElementById('exam-timer');
+    const progressBar = document.getElementById('exam-progress-bar');
+    const setupEl     = document.getElementById('exam-setup');
+    const questionEl  = document.getElementById('exam-question-screen');
+    const resultEl    = document.getElementById('exam-result-screen');
+
+    const WRONG_KEY = 'eto-exam-wrong-v1';
+    let examWrong = {};
+    try { examWrong = JSON.parse(localStorage.getItem(WRONG_KEY) || '{}'); } catch(e) {}
+
+    let cfg = { count: 25, time: 45, source: 'all' };
+    let questions = [], qIdx = 0, correct = 0, wrong = 0, timerInt = null, secLeft = 0;
+    let sectionErrors = {};
+
+    // Setup option buttons
+    document.querySelectorAll('.exam-option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const g = btn.dataset.group;
+        document.querySelectorAll(`.exam-option-btn[data-group="${g}"]`).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        cfg[g] = btn.dataset.val === '0' ? 0 : (isNaN(btn.dataset.val) ? btn.dataset.val : +btn.dataset.val);
+      });
+    });
+
+    function buildExamQuestions() {
+      const all = buildCards();
+      let pool = cfg.source === 'wrong'
+        ? all.filter(c => examWrong[c.question])
+        : all;
+      if (!pool.length) pool = all;
+      pool = fcShuffle([...pool]);
+      return cfg.count > 0 ? pool.slice(0, cfg.count) : pool;
+    }
+
+    function showScreen(name) {
+      setupEl.style.display    = name === 'setup'    ? 'flex' : 'none';
+      questionEl.style.display = name === 'question' ? 'flex' : 'none';
+      resultEl.style.display   = name === 'result'   ? 'flex' : 'none';
+    }
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60).toString().padStart(2,'0');
+      const ss = (s % 60).toString().padStart(2,'0');
+      return `${m}:${ss}`;
+    }
+
+    function startTimer() {
+      if (!cfg.time) { timerEl.textContent = '∞'; return; }
+      secLeft = cfg.time * 60;
+      timerEl.classList.remove('warn','danger');
+      timerEl.textContent = formatTime(secLeft);
+      timerInt = setInterval(() => {
+        secLeft--;
+        timerEl.textContent = formatTime(secLeft);
+        timerEl.classList.toggle('warn', secLeft <= 300 && secLeft > 60);
+        timerEl.classList.toggle('danger', secLeft <= 60);
+        if (secLeft <= 0) { clearInterval(timerInt); showResult(); }
+      }, 1000);
+    }
+
+    function stopTimer() { clearInterval(timerInt); }
+
+    function showQuestion(idx) {
+      if (idx >= questions.length) { showResult(); return; }
+      const q = questions[idx];
+      document.getElementById('exam-q-num').textContent = `Soru ${idx+1}/${questions.length}`;
+      document.getElementById('exam-q-section').textContent = q.section || '';
+      document.getElementById('exam-q-text').textContent = q.question;
+      document.getElementById('exam-answer-area').innerHTML = q.answer;
+      document.getElementById('exam-answer-area').classList.remove('visible');
+      progressBar.style.width = (idx / questions.length * 100) + '%';
+      document.getElementById('exam-show-ans-btn').style.display = '';
+      document.getElementById('exam-correct-btn').style.display = 'none';
+      document.getElementById('exam-wrong-btn').style.display   = 'none';
+      document.getElementById('exam-skip-btn-q').style.display  = 'none';
+      showScreen('question');
+    }
+
+    function showResult() {
+      stopTimer();
+      const total = questions.length;
+      const pct = total ? Math.round(correct / total * 100) : 0;
+      document.getElementById('exam-score-num').textContent  = correct;
+      document.getElementById('exam-score-denom').textContent = '/ ' + total;
+      document.getElementById('exam-score-pct').textContent  = pct + '% başarı';
+      const verdict = document.getElementById('exam-verdict');
+      if (pct >= 70) {
+        verdict.textContent = '✅ Geçer not! Sınava hazırsın.';
+        verdict.className = 'verdict-pass';
+        document.getElementById('exam-score-circle').style.borderColor = '#4ade80';
+        document.getElementById('exam-score-num').style.color = '#4ade80';
+      } else {
+        verdict.textContent = '❌ Geçemedi. Zayıf bölümleri tekrar çalış.';
+        verdict.className = 'verdict-fail';
+      }
+      const weakSecs = Object.entries(sectionErrors).sort((a,b)=>b[1]-a[1]).slice(0,5);
+      const weakEl = document.getElementById('exam-weak-sections');
+      if (weakSecs.length) {
+        weakEl.innerHTML = '<h4>⚠️ Zayıf Bölümler:</h4><ul>' +
+          weakSecs.map(([s,n]) => `<li>${s} — ${n} hata</li>`).join('') + '</ul>';
+      } else { weakEl.innerHTML = ''; }
+      progressBar.style.width = '100%';
+      const hasWrong = Object.keys(examWrong).length > 0;
+      document.getElementById('exam-retry-wrong-btn').style.display = hasWrong ? '' : 'none';
+      showScreen('result');
+    }
+
+    document.getElementById('exam-start-btn').addEventListener('click', () => {
+      questions = buildExamQuestions();
+      if (!questions.length) { alert('Bu filtreye göre soru bulunamadı.'); return; }
+      qIdx = 0; correct = 0; wrong = 0; sectionErrors = {};
+      startTimer();
+      showQuestion(0);
+    });
+
+    document.getElementById('exam-show-ans-btn').addEventListener('click', () => {
+      document.getElementById('exam-answer-area').classList.add('visible');
+      document.getElementById('exam-show-ans-btn').style.display = 'none';
+      document.getElementById('exam-correct-btn').style.display = '';
+      document.getElementById('exam-wrong-btn').style.display   = '';
+      document.getElementById('exam-skip-btn-q').style.display  = '';
+    });
+
+    document.getElementById('exam-correct-btn').addEventListener('click', () => {
+      correct++;
+      const q = questions[qIdx];
+      delete examWrong[q.question];
+      try { localStorage.setItem(WRONG_KEY, JSON.stringify(examWrong)); } catch(e) {}
+      qIdx++; showQuestion(qIdx);
+    });
+
+    document.getElementById('exam-wrong-btn').addEventListener('click', () => {
+      wrong++;
+      const q = questions[qIdx];
+      examWrong[q.question] = (examWrong[q.question] || 0) + 1;
+      sectionErrors[q.section] = (sectionErrors[q.section] || 0) + 1;
+      try { localStorage.setItem(WRONG_KEY, JSON.stringify(examWrong)); } catch(e) {}
+      qIdx++; showQuestion(qIdx);
+    });
+
+    document.getElementById('exam-skip-btn-q').addEventListener('click', () => {
+      qIdx++; showQuestion(qIdx);
+    });
+
+    document.getElementById('exam-retry-btn').addEventListener('click', () => {
+      stopTimer(); showScreen('setup');
+    });
+
+    document.getElementById('exam-retry-wrong-btn').addEventListener('click', () => {
+      cfg.source = 'wrong';
+      document.querySelectorAll('.exam-option-btn[data-group="source"]').forEach(b => {
+        b.classList.toggle('active', b.dataset.val === 'wrong');
+      });
+      stopTimer();
+      questions = buildExamQuestions();
+      if (!questions.length) { alert('Kayıtlı hata yok!'); return; }
+      qIdx = 0; correct = 0; wrong = 0; sectionErrors = {};
+      startTimer();
+      showQuestion(0);
+    });
+
+    openBtn.addEventListener('click', () => {
+      showScreen('setup'); modal.classList.add('open');
+    });
+    closeBtn.addEventListener('click', () => { stopTimer(); modal.classList.remove('open'); });
+    modal.addEventListener('click', e => { if (e.target === modal) { stopTimer(); modal.classList.remove('open'); } });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) { stopTimer(); modal.classList.remove('open'); }
+    });
+  })();
 
 })();
 </script>
