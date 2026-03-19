@@ -7180,6 +7180,20 @@ YANIT KURALLARI:
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+  function scrollToMsg(el) {
+    // Mesajın tepesini görünür yap; kısa mesajlarda en alta kaydır
+    const msgTop = el.offsetTop - msgs.offsetTop;
+    const msgH   = el.offsetHeight;
+    const boxH   = msgs.clientHeight;
+    if (msgH >= boxH * 0.6) {
+      // Uzun mesaj: tepesine git
+      msgs.scrollTo({ top: msgTop - 8, behavior: 'smooth' });
+    } else {
+      // Kısa mesaj: normal alta kaydır
+      msgs.scrollTo({ top: msgs.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
   function sanitizeSVG(svgCode) {
     // Strip script tags and event handlers for safety
     return svgCode
@@ -7231,7 +7245,8 @@ YANIT KURALLARI:
     div.className = 'ai-msg bot';
     div.innerHTML = renderMarkdown(text);
     msgs.appendChild(div);
-    scrollBottom();
+    // SVG/img yüklendikten sonra kaydır
+    requestAnimationFrame(() => scrollToMsg(div));
     return div;
   }
 
