@@ -7082,12 +7082,16 @@ YANIT KURALLARI:
   }
 
   /* ── Key wall ── */
+  let welcomeShown = false;
   function refreshKeywall() {
     keywall.style.display = apiKey ? 'none' : 'flex';
     updateModelLabel();
-    if (apiKey && history.length === 0) addBotMsg(
-      '👋 Merhaba! Ben ETO Asistanı — gemi elektrikleri, motor devreleri, sınav soruları ve saha arızaları hakkında sorularına yanıt vermeye hazırım.\n\n📷 **Fotoğraf** da yükleyebilirsin — motor etiketi, devre şeması, arıza ekranı gibi görseller gönder, analiz edeyim!'
-    );
+    if (apiKey && !welcomeShown) {
+      welcomeShown = true;
+      addBotMsg(
+        '👋 Merhaba! Ben ETO Asistanı — gemi elektrikleri, motor devreleri, sınav soruları ve saha arızaları hakkında sorularına yanıt vermeye hazırım.\n\n📷 **Fotoğraf** da yükleyebilirsin — motor etiketi, devre şeması, arıza ekranı gibi görseller gönder, analiz edeyim!'
+      );
+    }
   }
 
   keySave.addEventListener('click', () => {
