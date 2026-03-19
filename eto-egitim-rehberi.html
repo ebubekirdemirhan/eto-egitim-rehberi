@@ -6869,6 +6869,37 @@
     font-size: inherit;
   }
 
+  /* AI chat markdown tabloları */
+  .ai-table-wrap {
+    overflow-x: auto;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #dde3ea;
+  }
+  .ai-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .82rem;
+    background: #fff;
+    color: #1a1a1a;
+  }
+  .ai-table th {
+    background: #1565c0;
+    color: #fff;
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .ai-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #e8edf2;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .ai-table tbody tr:nth-child(even) td { background: #f4f7fb; }
+  .ai-table tbody tr:last-child td { border-bottom: none; }
+
   /* Bölüm referans linkleri */
   .ai-bolum-link {
     color: #64b5f6;
@@ -7345,6 +7376,25 @@ YANIT KURALLARI:
       const placeholder = `%%CODE_BLOCK_${codeBlocks.length}%%`;
       codeBlocks.push(`<pre class="ai-code-block"><code>${code.trim()}</code></pre>`);
       return placeholder;
+    });
+
+    // 3a. Markdown tables → HTML
+    processed = processed.replace(/((?:\|.+\|\n?)+)/g, (tableBlock) => {
+      const rows = tableBlock.trim().split('\n').filter(r => r.trim());
+      if (rows.length < 2) return tableBlock;
+      // Check separator row (---|--- pattern)
+      const sepIdx = rows.findIndex(r => /^\|[\s\-|:]+\|$/.test(r.trim()));
+      if (sepIdx < 1) return tableBlock;
+      const headerRow = rows[0];
+      const bodyRows  = rows.filter((_, i) => i !== 0 && i !== sepIdx);
+      const parseCells = row =>
+        row.trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+      const headerCells = parseCells(headerRow)
+        .map(c => `<th>${c}</th>`).join('');
+      const bodyHtml = bodyRows.map(r =>
+        '<tr>' + parseCells(r).map(c => `<td>${c}</td>`).join('') + '</tr>'
+      ).join('');
+      return `<div class="ai-table-wrap"><table class="ai-table"><thead><tr>${headerCells}</tr></thead><tbody>${bodyHtml}</tbody></table></div>`;
     });
 
     // 3. Inline markdown
