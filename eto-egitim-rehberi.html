@@ -7075,6 +7075,22 @@ YANIT KURALLARI:
   let thinking  = false;
   let pendingImg = null; // { mimeType, data (base64) }
 
+  /* ── Site content extraction ── */
+  function extractSiteContent() {
+    const main = document.querySelector('main');
+    if (!main) return '';
+    const clone = main.cloneNode(true);
+    // Remove SVG (çok fazla gürültü ekler), script, style, quiz cevapları
+    clone.querySelectorAll('svg, script, style, .quiz-answer, .back-to-top, nav').forEach(el => el.remove());
+    let text = (clone.innerText || clone.textContent || '').replace(/\s{3,}/g, '\n\n').trim();
+    // 120.000 karakter ≈ 30.000 token — Gemini 2.5 Flash için yeterli
+    if (text.length > 120000) text = text.substring(0, 120000) + '\n...[devamı mevcut]';
+    return text;
+  }
+
+  // Sayfa yüklenince bir kez çek, cache'le
+  const SITE_CONTENT = extractSiteContent();
+
   /* ── Model label ── */
   function updateModelLabel() {
     const lbl = document.getElementById('eto-ai-model-label');
@@ -7291,8 +7307,13 @@ YANIT KURALLARI:
 
     // Build full contents: history (without current) + current with image
     const historyWithoutLast = history.slice(0, -1);
+    const fullSystemPrompt = SYSTEM_PROMPT +
+      (SITE_CONTENT
+        ? `\n\n---\nAŞAĞIDA SİTENİN İÇERİĞİ VAR. Sorulara yanıt verirken önce bu içeriği referans al, sitenin ilgili bölümüne atıfta bulun (örn. "Bölüm 5'te açıklandığı gibi..."). Sitede olmayan konularda genel bilginle yardımcı ol.\n\nSİTE İÇERİĞİ:\n${SITE_CONTENT}`
+        : '');
+
     const body = {
-      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      system_instruction: { parts: [{ text: fullSystemPrompt }] },
       contents: [...historyWithoutLast, { role: 'user', parts: userParts }],
       generationConfig: {
         temperature: 0.7,
