@@ -234,55 +234,6 @@
       @page { margin: 1.5cm; }
     }
 
-    /* ═══════════════ LIGHT MODE ═══════════════ */
-    body.light-mode {
-      background: #f0f4f8 !important;
-      color: #1e293b !important;
-    }
-    body.light-mode { --text: #1e293b; --muted: #64748b; --accent: #0ea5e9; --link: #0284c7; --link-hover: #0369a1; --border: #cbd5e1; }
-    body.light-mode header.hero { background: radial-gradient(circle at top left,#bfdbfe 0,#e0f2fe 55%); border-color: #93c5fd; }
-    body.light-mode header.hero h1, body.light-mode header.hero p { color: #1e293b; }
-    body.light-mode header.hero small, body.light-mode .toc-en, body.light-mode .toc-index { color: #64748b; }
-    body.light-mode nav.toc { background: #fff; border-color: #cbd5e1; }
-    body.light-mode nav.toc h2, body.light-mode .toc-label { color: #1e293b; }
-    body.light-mode .toc-item a { color: #334155; }
-    body.light-mode .toc-item a:hover { background: #e0f2fe; }
-    body.light-mode section { background: #fff; border-color: #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
-    body.light-mode section h2, body.light-mode h3, body.light-mode p, body.light-mode li { color: #1e293b; }
-    body.light-mode .card { background: #f8fafc; border-color: #e2e8f0; }
-    body.light-mode code, body.light-mode .formula { background: #e2e8f0; color: #0f172a; }
-    body.light-mode .formula-big { background: #e0f2fe; color: #0369a1; border-color: #7dd3fc; }
-    body.light-mode .info-box { background: rgba(22,163,74,.07); }
-    body.light-mode .warn-box { background: rgba(202,138,4,.07); }
-    body.light-mode .danger-box { background: rgba(220,38,38,.07); }
-    body.light-mode .note-box { background: rgba(2,132,199,.07); }
-    body.light-mode .saha-box { background: rgba(8,145,178,.07); }
-    body.light-mode .sinav-box { background: rgba(124,58,237,.07); }
-    body.light-mode .quiz-block { background: rgba(241,245,249,.9); border-color: #cbd5e1; }
-    body.light-mode .quiz-header { color: #1e293b; background: rgba(226,232,240,.8); }
-    body.light-mode details.quiz-item summary { color: #0f172a; }
-    body.light-mode .quiz-answer { background: #f1f5f9; color: #1e293b; }
-    body.light-mode .level-chip { background: #e2e8f0; color: #334155; border-color: #94a3b8; }
-    body.light-mode .badge { background: #e2e8f0; color: #334155; }
-    body.light-mode table { color: #1e293b; }
-    body.light-mode th { background: #1e40af; color: #fff; }
-    body.light-mode td { border-color: #e2e8f0; }
-    body.light-mode .back-to-top { background: rgba(255,255,255,.9); color: #0f172a; border-color: #94a3b8; }
-    body.light-mode section::before { background: linear-gradient(#dbeafe,#e0f2fe); color: #1e3a5f; }
-
-    /* Theme toggle button */
-    #theme-toggle {
-      position: fixed; right: 1.5rem; bottom: 11rem;
-      width: 2.6rem; height: 2.6rem; border-radius: 50%;
-      background: rgba(15,23,42,.85); color: #e5e7eb;
-      border: 1px solid rgba(148,163,184,.5);
-      font-size: 1.1rem; cursor: pointer; z-index: 999;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 14px rgba(0,0,0,.35);
-      transition: transform .2s, background .2s;
-    }
-    #theme-toggle:hover { transform: translateY(-2px); }
-    body.light-mode #theme-toggle { background: rgba(255,255,255,.9); color: #1e293b; border-color: #94a3b8; }
 
     /* ═══════════════ SEARCH BAR ═══════════════ */
     #eto-search-wrap {
@@ -414,14 +365,12 @@
     #flashcard-open-btn:hover { transform: translateY(-2px); background: rgba(167,139,250,.35); }
 
     @media (max-width: 640px) {
-      #theme-toggle { bottom: 14rem; }
-      #flashcard-open-btn { bottom: 17rem; }
+      #flashcard-open-btn { bottom: 14rem; }
     }
   </style>
 </head>
 <body>
 <button class="back-to-top" type="button" aria-label="Yukarı dön">↑</button>
-<button id="theme-toggle" title="Tema değiştir" aria-label="Tema değiştir">🌙</button>
 <button id="flashcard-open-btn" title="Flashcard çalışma modu" aria-label="Flashcard modu">🃏</button>
 
 <!-- ═══ FLASHCARD MODAL ═══ -->
@@ -7912,18 +7861,6 @@ YANIT KURALLARI:
   }, { passive: true });
   backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  /* ══ DARK / LIGHT MODE ══ */
-  const themeBtn = document.getElementById('theme-toggle');
-  const applyTheme = (light) => {
-    document.body.classList.toggle('light-mode', light);
-    themeBtn.textContent = light ? '☀️' : '🌙';
-  };
-  applyTheme(localStorage.getItem('eto-theme') === 'light');
-  themeBtn.addEventListener('click', () => {
-    const isLight = !document.body.classList.contains('light-mode');
-    localStorage.setItem('eto-theme', isLight ? 'light' : 'dark');
-    applyTheme(isLight);
-  });
 
   /* ══ SEARCH ══ */
   const searchInput = document.getElementById('eto-search-input');
