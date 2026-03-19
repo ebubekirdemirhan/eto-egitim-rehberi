@@ -7272,6 +7272,14 @@ YANIT KURALLARI:
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+  // Global helper: AI mesajındaki bölüm linklerine tıklayınca çağrılır
+  window.gotoSection = function(id) {
+    document.getElementById('eto-ai-panel').classList.remove('open');
+    var el = document.getElementById(id);
+    if (el) { setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 120); }
+    return false;
+  };
+
   function scrollToMsg(el) {
     // Mesajın tepesini görünür yap; kısa mesajlarda en alta kaydır
     const msgTop = el.offsetTop - msgs.offsetTop;
@@ -7346,9 +7354,18 @@ YANIT KURALLARI:
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       .replace(/^#{1,3}\s(.+)$/gm, '<strong>$1</strong>')
       // "Bölüm 5.1" veya "Bölüm 5" → tıklanabilir link (paneli kapat + bölüme git)
+      // "Bölüm 5" veya "Bölüm 5.1" → link
       .replace(/B[oö]l[uü]m\s+(\d+)(?:[.\-](\d+))?/gi, (match, main) => {
         const id = 'b' + main;
-        return `<a href="#${id}" class="ai-bolum-link" onclick="document.getElementById('eto-ai-panel').classList.remove('open');document.getElementById('${id}') && document.getElementById('${id}').scrollIntoView({behavior:'smooth',block:'start'});return false;" title="Bölüme git">${match} ↗</a>`;
+        return `<a href="#${id}" class="ai-bolum-link" onclick="return gotoSection('${id}')" title="Bölüme git">${match} ↗</a>`;
+      })
+      // "bölümleri (1, 5, 6, 8)" veya "bölümler (13, 16)" → her sayı link olur
+      .replace(/(b[oö]l[uü]m[a-zçğışöü]*\s*)\((\d[\d,\s]*)\)/gi, (_, prefix, numList) => {
+        const linkedNums = numList.replace(/\b(\d+)\b/g, (__, n) => {
+          const id = 'b' + n;
+          return `<a href="#${id}" class="ai-bolum-link" onclick="return gotoSection('${id}')" title="Bölüm ${n}">${n} ↗</a>`;
+        });
+        return prefix + '(' + linkedNums + ')';
       })
       .replace(/\n/g, '<br>');
 
