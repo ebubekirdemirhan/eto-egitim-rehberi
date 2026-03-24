@@ -7075,6 +7075,7 @@
     pointer-events: none;
     transition: transform .22s cubic-bezier(.34,1.4,.64,1), opacity .18s;
     max-height: 520px;
+    isolation: isolate;
   }
   #eto-ai-panel.open {
     transform: scale(1) translateY(0); opacity: 1; pointer-events: all;
@@ -7294,10 +7295,21 @@
   }
   .ai-chip:hover { background: #1565c0; color: #fff; border-color: #1565c0; }
 
-  /* ── Input area ── */
+  /* ── Composer: tek satır araç çubuğu + üst bildirimler ── */
+  #eto-ai-composer {
+    flex-shrink: 0;
+    border-top: 1px solid #2a3550;
+    background: linear-gradient(180deg, rgba(30,37,56,.45) 0%, #1a1f2e 100%);
+  }
+  #eto-ai-composer #eto-ai-mic-hint {
+    margin-top: 6px;
+  }
   #eto-ai-input-row {
-    display: flex; gap: 8px; padding: 10px 12px 13px;
-    border-top: 1px solid #2a3550; flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 8px 10px 10px;
+    flex-shrink: 0;
   }
   #eto-ai-input {
     flex: 1; background: #252d40; border: 1px solid #2a3550;
@@ -7318,13 +7330,28 @@
   #eto-ai-send:disabled { background: #2a3550; cursor: default; }
 
   #eto-ai-mic,
-  #eto-ai-speak {
+  #eto-ai-speak,
+  #eto-ai-settings-btn {
     width: 40px; height: 40px; border-radius: 50%;
     border: 1px solid #2a3550;
     background: #252d40; color: #e8eaf6; font-size: 16px;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; align-self: flex-end;
     transition: background .15s, border-color .15s, color .15s, opacity .15s;
+  }
+  #eto-ai-settings-btn {
+    font-size: 18px;
+    color: #90caf9;
+  }
+  #eto-ai-settings-btn:hover {
+    background: #2d3a54;
+    border-color: #1565c0;
+    color: #fff;
+  }
+  #eto-ai-settings-btn[aria-expanded="true"] {
+    background: #1565c0;
+    border-color: #1565c0;
+    color: #fff;
   }
   #eto-ai-mic:hover { background: #1565c0; border-color: #1565c0; }
   #eto-ai-mic.active { background: #b91c1c; border-color: #b91c1c; }
@@ -7335,8 +7362,8 @@
 
   #eto-ai-mic-hint {
     display: none;
-    margin: -4px 12px 10px;
-    padding: 8px 10px;
+    margin: 0 10px 0;
+    padding: 6px 9px;
     border-radius: 8px;
     font-size: 11px;
     line-height: 1.45;
@@ -7350,62 +7377,146 @@
     background: #291518;
   }
 
-  #eto-ai-controls-wrap {
-    padding: 0 12px 12px;
-    display: grid;
-    gap: 8px;
+  /* ── Ayarlar çekmecesi (panel içi) ── */
+  #eto-ai-settings-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 28;
+    background: rgba(8, 12, 22, .58);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease;
+  }
+  #eto-ai-settings-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #eto-ai-settings-drawer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 29;
+    max-height: min(56vh, 320px);
+    background: linear-gradient(165deg, #222a3d 0%, #151b2b 100%);
+    border-top: 1px solid #3d4f72;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, .45);
+    transform: translateY(100%);
+    transition: transform .3s cubic-bezier(.32, .72, .25, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #eto-ai-settings-drawer.open {
+    transform: translateY(0);
+  }
+  #eto-ai-settings-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid #2a3550;
     flex-shrink: 0;
+  }
+  #eto-ai-settings-drawer-head h4 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #e8eaf6;
+    letter-spacing: .02em;
+  }
+  #eto-ai-settings-close {
+    background: #252d40;
+    border: 1px solid #2a3550;
+    color: #94a3b8;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  #eto-ai-settings-close:hover {
+    background: #1565c0;
+    border-color: #1565c0;
+    color: #fff;
+  }
+  #eto-ai-settings-drawer-body {
+    padding: 12px 14px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
   #eto-ai-tts-toggle-row {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
     color: #cbd5e1;
     font-size: 12px;
   }
   #eto-ai-tts-toggle-row .ai-opt {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 10px;
     cursor: pointer;
     user-select: none;
-    background: #1e2538;
+    background: #1a2233;
     border: 1px solid #2a3550;
-    border-radius: 999px;
-    padding: 6px 10px;
-    white-space: nowrap;
+    border-radius: 10px;
+    padding: 10px 12px;
+    transition: border-color .15s, background .15s;
+  }
+  #eto-ai-tts-toggle-row .ai-opt:hover {
+    border-color: #3d5280;
+    background: #1e283c;
   }
   #eto-ai-tts-toggle-row input[type="checkbox"] {
     accent-color: #1565c0;
     margin: 0;
+    flex-shrink: 0;
   }
   #eto-ai-voice-wrap {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #cbd5e1;
-    font-size: 12px;
-    background: #1e2538;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 7px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    background: #1a2233;
     border: 1px solid #2a3550;
     border-radius: 10px;
-    padding: 6px 10px;
+    padding: 10px 12px;
+  }
+  #eto-ai-voice-wrap .eto-ai-voice-label {
+    font-size: 11px;
+    color: #94a3b8;
   }
   #eto-ai-voice {
-    flex: 1;
-    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
     background: #252d40;
     border: 1px solid #2a3550;
     color: #e8eaf6;
     border-radius: 8px;
-    padding: 5px 8px;
-    font-size: 12px;
-    height: 30px;
+    padding: 8px 10px;
+    font-size: 13px;
+    height: 38px;
   }
   #eto-ai-voice:focus { outline: none; border-color: #1565c0; }
   #eto-ai-autosend-pending {
     display: none;
-    margin: 0 12px 12px;
+    margin: 8px 10px 0;
     padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid #2a3550;
@@ -7490,8 +7601,9 @@
     #eto-ai-panel { width: calc(100vw - 20px); right: 10px; bottom: 92px; max-height: 70vh; }
     #eto-ai-btn { bottom: 16px; right: 16px; width: 56px; height: 56px; font-size: 22px; }
     #eto-ai-key-input { font-size: 16px; }
-    #eto-ai-controls-wrap { gap: 7px; }
-    #eto-ai-voice-wrap { padding: 6px 8px; }
+    #eto-ai-input-row { gap: 5px; padding: 7px 8px 9px; }
+    #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
+    #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
 </style>
 
@@ -7557,35 +7669,46 @@
     <button id="eto-img-remove" title="Görseli kaldır">✕</button>
   </div>
 
-  <!-- Input -->
-  <div id="eto-ai-input-row">
-    <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
-    <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
-    <button id="eto-ai-mic" title="Sesli yaz" aria-label="Sesli yaz">🎙️</button>
-    <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
-    <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
-    <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
-  </div>
-  <div id="eto-ai-mic-hint" role="status" aria-live="polite"></div>
-  <div id="eto-ai-controls-wrap">
-    <div id="eto-ai-tts-toggle-row">
-      <label class="ai-opt" for="eto-ai-autospeak">
-        <input type="checkbox" id="eto-ai-autospeak" checked/>
-        Otomatik oku
-      </label>
-      <label class="ai-opt" for="eto-ai-autosend">
-        <input type="checkbox" id="eto-ai-autosend"/>
-        Dikte bitince otomatik gönder
-      </label>
+  <!-- Composer: bildirimler + tek satır araç çubuğu -->
+  <div id="eto-ai-composer">
+    <div id="eto-ai-autosend-pending">
+      <span id="eto-ai-autosend-text">Dikte tamamlandı. 1.0 sn içinde gönderilecek…</span>
+      <button id="eto-ai-autosend-cancel" type="button">İptal</button>
     </div>
-    <div id="eto-ai-voice-wrap">
-      <span>Ses</span>
-      <select id="eto-ai-voice" aria-label="Ses seçimi"></select>
+    <div id="eto-ai-mic-hint" role="status" aria-live="polite"></div>
+    <div id="eto-ai-input-row">
+      <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
+      <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
+      <button id="eto-ai-mic" title="Sesli yaz" aria-label="Sesli yaz">🎙️</button>
+      <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
+      <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
+      <button type="button" id="eto-ai-settings-btn" title="Ses ve dikte ayarları" aria-label="Ayarlar" aria-expanded="false" aria-haspopup="dialog">⚙</button>
+      <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
     </div>
   </div>
-  <div id="eto-ai-autosend-pending">
-    <span id="eto-ai-autosend-text">Dikte tamamlandı. 1.0 sn içinde gönderilecek…</span>
-    <button id="eto-ai-autosend-cancel" type="button">İptal</button>
+
+  <div id="eto-ai-settings-backdrop" aria-hidden="true"></div>
+  <div id="eto-ai-settings-drawer" role="dialog" aria-modal="true" aria-labelledby="eto-ai-settings-title" aria-hidden="true">
+    <div id="eto-ai-settings-drawer-head">
+      <h4 id="eto-ai-settings-title">Ses ve dikte</h4>
+      <button type="button" id="eto-ai-settings-close" aria-label="Ayarları kapat">✕</button>
+    </div>
+    <div id="eto-ai-settings-drawer-body">
+      <div id="eto-ai-tts-toggle-row">
+        <label class="ai-opt" for="eto-ai-autospeak">
+          <input type="checkbox" id="eto-ai-autospeak" checked/>
+          Yanıtları otomatik sesli oku
+        </label>
+        <label class="ai-opt" for="eto-ai-autosend">
+          <input type="checkbox" id="eto-ai-autosend"/>
+          Dikte bitince otomatik gönder (1 sn iptal ile)
+        </label>
+      </div>
+      <div id="eto-ai-voice-wrap">
+        <span class="eto-ai-voice-label">Okuma sesi</span>
+        <select id="eto-ai-voice" aria-label="Ses seçimi"></select>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -7688,6 +7811,24 @@ YANIT KURALLARI:
   const autoSendPendingText = document.getElementById('eto-ai-autosend-text');
   const autoSendCancelBtn = document.getElementById('eto-ai-autosend-cancel');
   const micHint         = document.getElementById('eto-ai-mic-hint');
+  const settingsBtn       = document.getElementById('eto-ai-settings-btn');
+  const settingsBackdrop  = document.getElementById('eto-ai-settings-backdrop');
+  const settingsDrawer    = document.getElementById('eto-ai-settings-drawer');
+  const settingsClose     = document.getElementById('eto-ai-settings-close');
+
+  function setAiSettingsOpen(open) {
+    if (!settingsBackdrop || !settingsDrawer || !settingsBtn) return;
+    const on = !!open;
+    settingsBackdrop.classList.toggle('open', on);
+    settingsDrawer.classList.toggle('open', on);
+    settingsBackdrop.setAttribute('aria-hidden', on ? 'false' : 'true');
+    settingsDrawer.setAttribute('aria-hidden', on ? 'false' : 'true');
+    settingsBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    if (on) {
+      setTimeout(() => { if (settingsClose) settingsClose.focus(); }, 200);
+    }
+  }
+  window.closeEtoAiSettings = function () { setAiSettingsOpen(false); };
 
   /* ── State ── */
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
@@ -8168,17 +8309,37 @@ YANIT KURALLARI:
     input.placeholder = 'ETO konusunda soru sor veya fotoğraf ekle…';
   });
 
+  /* ── Ayarlar çekmecesi ── */
+  if (settingsBtn && settingsBackdrop && settingsDrawer && settingsClose) {
+    settingsBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      setAiSettingsOpen(!settingsDrawer.classList.contains('open'));
+    });
+    settingsBackdrop.addEventListener('click', () => setAiSettingsOpen(false));
+    settingsClose.addEventListener('click', () => setAiSettingsOpen(false));
+  }
+
   /* ── Panel toggle ── */
   btn.addEventListener('click', () => {
     panel.classList.toggle('open');
+    if (!panel.classList.contains('open')) setAiSettingsOpen(false);
     if (panel.classList.contains('open')) {
       refreshKeywall();
       setTimeout(() => input.focus(), 220);
     }
   });
-  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+  closeBtn.addEventListener('click', () => {
+    setAiSettingsOpen(false);
+    panel.classList.remove('open');
+  });
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && panel.classList.contains('open')) panel.classList.remove('open');
+    if (e.key !== 'Escape' || !panel.classList.contains('open')) return;
+    if (settingsDrawer && settingsDrawer.classList.contains('open')) {
+      setAiSettingsOpen(false);
+      e.preventDefault();
+      return;
+    }
+    panel.classList.remove('open');
   });
 
   /* ── Message helpers ── */
@@ -8188,6 +8349,7 @@ YANIT KURALLARI:
 
   // Global helper: AI mesajındaki bölüm linklerine tıklayınca çağrılır
   window.gotoSection = function(id) {
+    if (window.closeEtoAiSettings) window.closeEtoAiSettings();
     document.getElementById('eto-ai-panel').classList.remove('open');
     var el = document.getElementById(id);
     if (el) { setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 120); }
