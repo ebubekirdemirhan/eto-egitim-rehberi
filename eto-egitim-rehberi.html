@@ -7301,9 +7301,6 @@
     border-top: 1px solid #2a3550;
     background: linear-gradient(180deg, rgba(30,37,56,.45) 0%, #1a1f2e 100%);
   }
-  #eto-ai-composer #eto-ai-mic-hint {
-    margin-top: 6px;
-  }
   #eto-ai-input-row {
     display: flex;
     align-items: flex-end;
@@ -7312,12 +7309,20 @@
     flex-shrink: 0;
   }
   #eto-ai-input {
-    flex: 1; background: #252d40; border: 1px solid #2a3550;
+    flex: 1;
+    min-width: 0;
+    background: #252d40; border: 1px solid #2a3550;
     color: #e8eaf6; border-radius: 22px; padding: 9px 14px;
     font-size: 13px; outline: none; resize: none;
     font-family: inherit; line-height: 1.4; max-height: 80px;
     transition: border-color .15s;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #2a3550 transparent;
   }
+  #eto-ai-input::-webkit-scrollbar { width: 4px; }
+  #eto-ai-input::-webkit-scrollbar-thumb { background: #2a3550; border-radius: 4px; }
   #eto-ai-input:focus { border-color: #1565c0; }
   #eto-ai-input::placeholder { color: #4a5568; }
   #eto-ai-send {
@@ -7329,7 +7334,6 @@
   #eto-ai-send:hover { background: #0d47a1; }
   #eto-ai-send:disabled { background: #2a3550; cursor: default; }
 
-  #eto-ai-mic,
   #eto-ai-speak,
   #eto-ai-settings-btn {
     width: 40px; height: 40px; border-radius: 50%;
@@ -7353,29 +7357,9 @@
     border-color: #1565c0;
     color: #fff;
   }
-  #eto-ai-mic:hover { background: #1565c0; border-color: #1565c0; }
-  #eto-ai-mic.active { background: #b91c1c; border-color: #b91c1c; }
   #eto-ai-speak:hover { background: #0d47a1; border-color: #0d47a1; }
   #eto-ai-speak.active { background: #0d47a1; border-color: #0d47a1; }
-  #eto-ai-mic:disabled,
   #eto-ai-speak:disabled { background: #2a3550; cursor: default; opacity: .7; }
-
-  #eto-ai-mic-hint {
-    display: none;
-    margin: 0 10px 0;
-    padding: 6px 9px;
-    border-radius: 8px;
-    font-size: 11px;
-    line-height: 1.45;
-    color: #94a3b8;
-    background: #161d2e;
-    border: 1px solid #2a4060;
-  }
-  #eto-ai-mic-hint.error {
-    color: #fecdd3;
-    border-color: #991b1b;
-    background: #291518;
-  }
 
   /* ── Ayarlar çekmecesi (panel içi) ── */
   #eto-ai-settings-backdrop {
@@ -7514,29 +7498,6 @@
     height: 38px;
   }
   #eto-ai-voice:focus { outline: none; border-color: #1565c0; }
-  #eto-ai-autosend-pending {
-    display: none;
-    margin: 8px 10px 0;
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #2a3550;
-    background: #1e2538;
-    color: #cbd5e1;
-    font-size: 11px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  #eto-ai-autosend-pending.active { display: flex; }
-  #eto-ai-autosend-cancel {
-    border: 1px solid #3b4a66;
-    background: #252d40;
-    color: #e8eaf6;
-    border-radius: 6px;
-    font-size: 11px;
-    padding: 3px 8px;
-    cursor: pointer;
-  }
 
   /* ── API key overlay ── */
   /* ── Key wall ── */
@@ -7602,7 +7563,7 @@
     #eto-ai-btn { bottom: 16px; right: 16px; width: 56px; height: 56px; font-size: 22px; }
     #eto-ai-key-input { font-size: 16px; }
     #eto-ai-input-row { gap: 5px; padding: 7px 8px 9px; }
-    #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
+    #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
 </style>
@@ -7669,20 +7630,14 @@
     <button id="eto-img-remove" title="Görseli kaldır">✕</button>
   </div>
 
-  <!-- Composer: bildirimler + tek satır araç çubuğu -->
+  <!-- Composer: tek satır araç çubuğu -->
   <div id="eto-ai-composer">
-    <div id="eto-ai-autosend-pending">
-      <span id="eto-ai-autosend-text">Dikte tamamlandı. 1.0 sn içinde gönderilecek…</span>
-      <button id="eto-ai-autosend-cancel" type="button">İptal</button>
-    </div>
-    <div id="eto-ai-mic-hint" role="status" aria-live="polite"></div>
     <div id="eto-ai-input-row">
       <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
       <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
-      <button id="eto-ai-mic" title="Sesli yaz" aria-label="Sesli yaz">🎙️</button>
       <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
       <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
-      <button type="button" id="eto-ai-settings-btn" title="Ses ve dikte ayarları" aria-label="Ayarlar" aria-expanded="false" aria-haspopup="dialog">⚙</button>
+      <button type="button" id="eto-ai-settings-btn" title="Ses ayarları" aria-label="Ayarlar" aria-expanded="false" aria-haspopup="dialog">⚙</button>
       <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
     </div>
   </div>
@@ -7690,7 +7645,7 @@
   <div id="eto-ai-settings-backdrop" aria-hidden="true"></div>
   <div id="eto-ai-settings-drawer" role="dialog" aria-modal="true" aria-labelledby="eto-ai-settings-title" aria-hidden="true">
     <div id="eto-ai-settings-drawer-head">
-      <h4 id="eto-ai-settings-title">Ses ve dikte</h4>
+      <h4 id="eto-ai-settings-title">Ses ayarları</h4>
       <button type="button" id="eto-ai-settings-close" aria-label="Ayarları kapat">✕</button>
     </div>
     <div id="eto-ai-settings-drawer-body">
@@ -7698,10 +7653,6 @@
         <label class="ai-opt" for="eto-ai-autospeak">
           <input type="checkbox" id="eto-ai-autospeak" checked/>
           Yanıtları otomatik sesli oku
-        </label>
-        <label class="ai-opt" for="eto-ai-autosend">
-          <input type="checkbox" id="eto-ai-autosend"/>
-          Dikte bitince otomatik gönder (1 sn iptal ile)
         </label>
       </div>
       <div id="eto-ai-voice-wrap">
@@ -7802,15 +7753,9 @@ YANIT KURALLARI:
   const imgThumb    = document.getElementById('eto-img-thumb');
   const imgLabel    = document.getElementById('eto-img-label');
   const imgRemove   = document.getElementById('eto-img-remove');
-  const micBtn      = document.getElementById('eto-ai-mic');
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
-  const autoSendChk = document.getElementById('eto-ai-autosend');
   const voiceSelect = document.getElementById('eto-ai-voice');
-  const autoSendPending = document.getElementById('eto-ai-autosend-pending');
-  const autoSendPendingText = document.getElementById('eto-ai-autosend-text');
-  const autoSendCancelBtn = document.getElementById('eto-ai-autosend-cancel');
-  const micHint         = document.getElementById('eto-ai-mic-hint');
   const settingsBtn       = document.getElementById('eto-ai-settings-btn');
   const settingsBackdrop  = document.getElementById('eto-ai-settings-backdrop');
   const settingsDrawer    = document.getElementById('eto-ai-settings-drawer');
@@ -7836,40 +7781,12 @@ YANIT KURALLARI:
   let thinking  = false;
   let pendingImg = null; // { mimeType, data (base64) }
   const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
-  const STORAGE_AUTOSEND_KEY  = 'eto-auto-send-v1';
   const STORAGE_TTS_VOICE_KEY = 'eto-tts-voice-uri-v1';
   let lastBotTextForTTS = '';
 
-  /* ── Speech to text (sesle yaz) + Text to speech (sesli dinle) ── */
-  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  /* ── Text to speech (sesli dinle) ── */
   const TTS_OK = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-  let recognition = null;
-  let recognizing = false;
-  let lastRecognitionError = '';
-  let shouldAutoSendAfterDictation = false;
-  let autoSendTimer = null;
-  let autoSendInterval = null;
   let ttsVoiceUri = '';
-  let lastSpeechErrorToastAt = 0;
-  let lastSpeechErrorType = '';
-  let micGen = 0;
-  /** Kullanıcı 🎙️ ile durdurunca true; Chrome no-speech'te otomatik kapanmayı engeller */
-  let micUserStop = false;
-  let micNoSpeechRestarts = 0;
-  const MIC_NO_SPEECH_RESTART_MAX = 12;
-
-  function setMicHint(text, asError) {
-    if (!micHint) return;
-    if (!text) {
-      micHint.textContent = '';
-      micHint.classList.remove('error');
-      micHint.style.display = 'none';
-      return;
-    }
-    micHint.textContent = text;
-    micHint.classList.toggle('error', !!asError);
-    micHint.style.display = 'block';
-  }
 
   function normalizeForTTS(md) {
     if (!md) return '';
@@ -7892,38 +7809,6 @@ YANIT KURALLARI:
   function stopTTS() {
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
     if (ttsBtn) ttsBtn.classList.remove('active');
-  }
-
-  function cancelAutoSendCountdown() {
-    if (autoSendTimer) {
-      clearTimeout(autoSendTimer);
-      autoSendTimer = null;
-    }
-    if (autoSendInterval) {
-      clearInterval(autoSendInterval);
-      autoSendInterval = null;
-    }
-    if (autoSendPending) autoSendPending.classList.remove('active');
-  }
-
-  function startAutoSendCountdown(getTextFn) {
-    cancelAutoSendCountdown();
-    if (!autoSendPending || !autoSendPendingText) return;
-    const totalMs = 1000;
-    const start = Date.now();
-    autoSendPendingText.textContent = 'Dikte tamamlandı. 1.0 sn içinde gönderilecek…';
-    autoSendPending.classList.add('active');
-
-    autoSendInterval = setInterval(() => {
-      const left = Math.max(0, totalMs - (Date.now() - start));
-      autoSendPendingText.textContent = `Dikte tamamlandı. ${(left / 1000).toFixed(1)} sn içinde gönderilecek…`;
-    }, 100);
-
-    autoSendTimer = setTimeout(() => {
-      cancelAutoSendCountdown();
-      const finalText = (getTextFn ? getTextFn() : '').trim();
-      if (finalText.length >= 4 && !thinking && apiKey) send(finalText);
-    }, totalMs);
   }
 
   function speakMarkdown(md) {
@@ -7993,22 +7878,6 @@ YANIT KURALLARI:
     });
   }
 
-  if (autoSendChk) {
-    try {
-      const v = localStorage.getItem(STORAGE_AUTOSEND_KEY);
-      autoSendChk.checked = v === '1';
-    } catch (e) {}
-
-    autoSendChk.addEventListener('change', () => {
-      try { localStorage.setItem(STORAGE_AUTOSEND_KEY, autoSendChk.checked ? '1' : '0'); } catch (e) {}
-      if (!autoSendChk.checked) cancelAutoSendCountdown();
-    });
-  }
-
-  if (autoSendCancelBtn) {
-    autoSendCancelBtn.addEventListener('click', cancelAutoSendCountdown);
-  }
-
   if (ttsBtn) {
     if (!TTS_OK) {
       ttsBtn.disabled = true;
@@ -8036,188 +7905,6 @@ YANIT KURALLARI:
         }
         if (!lastBotTextForTTS) return;
         speakMarkdown(lastBotTextForTTS);
-      });
-    }
-  }
-
-  if (micBtn) {
-    if (!SpeechRec) {
-      micBtn.disabled = true;
-      micBtn.title = 'Sesle yazma bu tarayıcıda desteklenmiyor (Chrome veya Edge önerilir).';
-    } else {
-      function bindRecognitionHandlers(rec, gen) {
-        rec.onstart = () => {
-          if (gen !== micGen) return;
-          recognizing = true;
-          lastRecognitionError = '';
-          shouldAutoSendAfterDictation = !!(autoSendChk && autoSendChk.checked);
-          cancelAutoSendCountdown();
-          micBtn.classList.add('active');
-          micBtn.title = 'Dinlemeyi durdur';
-          setMicHint('Dinleniyor… Konuşman yazıya dökülüyor. Bitirmek için tekrar 🎙️.', false);
-        };
-
-        rec.onresult = (event) => {
-          if (gen !== micGen) return;
-          let transcript = '';
-          for (let i = 0; i < event.results.length; i++) {
-            const r = event.results[i];
-            if (r && r[0] && r[0].transcript) transcript += r[0].transcript;
-          }
-          const t = transcript.trim();
-          if (t.length > 0) micNoSpeechRestarts = 0;
-          input.value = t;
-          input.style.height = 'auto';
-          input.style.height = Math.min(input.scrollHeight, 80) + 'px';
-        };
-
-        rec.onerror = (event) => {
-          if (gen !== micGen) return;
-          const err = (event && event.error) ? event.error : 'unknown';
-          lastRecognitionError = err;
-
-          /* Chrome/Edge: kısa sessizlikte no-speech verip oturumu keser; UI kapatmadan yeniden başlatırız */
-          if (err === 'no-speech' && !micUserStop) {
-            setMicHint('Dinleniyor… Konuşunca yazı alanına düşecek. Bitirmek için tekrar 🎙️.', false);
-            micBtn.classList.add('active');
-            micBtn.title = 'Dinlemeyi durdur';
-            recognizing = true;
-            return;
-          }
-          if (err === 'aborted') {
-            setMicHint('');
-            if (micUserStop) {
-              recognizing = false;
-              micBtn.classList.remove('active');
-              micBtn.title = 'Sesli yaz';
-            }
-            return;
-          }
-
-          recognizing = false;
-          micBtn.classList.remove('active');
-          micBtn.title = 'Sesli yaz';
-          if (err === 'network') {
-            setMicHint('Konuşma servisine ulaşılamadı (ağ, VPN veya kurum engeli olabilir). Microsoft Edge veya farklı bağlantı dene; site için mikrofon iznini kontrol et.', true);
-            micBtn.title = 'Konuşma servisi — bağlantı sorunu';
-            return;
-          }
-
-          const now = Date.now();
-          if (err === lastSpeechErrorType && (now - lastSpeechErrorToastAt) < 15000) return;
-          lastSpeechErrorType = err;
-          lastSpeechErrorToastAt = now;
-
-          setMicHint('');
-          let msg = '🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.';
-          if (err === 'not-allowed' || err === 'service-not-allowed') {
-            msg = '🎙️ Mikrofon izni kapalı. Adres çubuğundaki kilit simgesinden bu site için mikrofonu aç.';
-          } else if (err === 'audio-capture') {
-            msg = '🎙️ Mikrofon bulunamadı veya kullanılamıyor. Mikrofon ayarını kontrol et.';
-          }
-          try { addBotMsg(msg); } catch (e) {}
-        };
-
-        rec.onend = () => {
-          if (gen !== micGen) return;
-
-          if (!micUserStop && lastRecognitionError === 'no-speech') {
-            lastRecognitionError = '';
-            if (micNoSpeechRestarts >= MIC_NO_SPEECH_RESTART_MAX) {
-              micNoSpeechRestarts = 0;
-              recognizing = false;
-              micBtn.classList.remove('active');
-              micBtn.title = 'Sesli yaz';
-              setMicHint('Uzun süre konuşma algılanmadı. Tekrar 🎙️ ile dene.', true);
-              return;
-            }
-            micNoSpeechRestarts++;
-            micBtn.classList.add('active');
-            micBtn.title = 'Dinlemeyi durdur';
-            recognizing = true;
-            setMicHint('Dinleniyor…', false);
-            setTimeout(() => {
-              if (gen !== micGen || micUserStop || recognition !== rec) return;
-              try {
-                rec.start();
-              } catch (e) {
-                setTimeout(() => {
-                  if (gen !== micGen || micUserStop || recognition !== rec) return;
-                  try {
-                    rec.start();
-                  } catch (e2) {
-                    if (!micUserStop) startMicSession();
-                  }
-                }, 120);
-              }
-            }, 60);
-            return;
-          }
-
-          recognizing = false;
-          micBtn.classList.remove('active');
-          micBtn.title = 'Sesli yaz';
-          setMicHint('');
-
-          if (!shouldAutoSendAfterDictation) return;
-          shouldAutoSendAfterDictation = false;
-
-          if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
-          if (lastRecognitionError) return;
-          const text = (input.value || '').trim();
-          if (text.length < 4) return;
-          if (thinking || !apiKey) return;
-
-          setTimeout(() => {
-            startAutoSendCountdown(() => input.value || '');
-          }, 350);
-        };
-      }
-
-      function startMicSession() {
-        const gen = ++micGen;
-        micUserStop = false;
-        micNoSpeechRestarts = 0;
-        stopTTS();
-        if (recognition) {
-          try { recognition.stop(); } catch (e) {}
-          try { recognition.abort(); } catch (e) {}
-          recognition = null;
-        }
-
-        const rec = new SpeechRec();
-        rec.lang = 'tr-TR';
-        rec.continuous = true;
-        rec.interimResults = true;
-        rec.maxAlternatives = 1;
-        bindRecognitionHandlers(rec, gen);
-        recognition = rec;
-        input.focus();
-
-        const tryStart = (n) => {
-          if (gen !== micGen) return;
-          try {
-            rec.start();
-          } catch (e) {
-            if (e && e.name === 'InvalidStateError' && n < 6) {
-              setTimeout(() => tryStart(n + 1), 80 + n * 40);
-              return;
-            }
-            setMicHint('Mikrofon başlatılamadı. Başka sekmede mikrofon kullanılıyor olabilir; izinleri kontrol et.', true);
-            recognizing = false;
-            micBtn.classList.remove('active');
-          }
-        };
-        setTimeout(() => tryStart(0), 50);
-      }
-
-      micBtn.addEventListener('click', () => {
-        if (recognizing && recognition) {
-          micUserStop = true;
-          try { recognition.stop(); } catch (e) {}
-          return;
-        }
-        startMicSession();
       });
     }
   }
@@ -8521,8 +8208,6 @@ YANIT KURALLARI:
   /* ── Send message ── */
   async function send(text) {
     const hasImg = !!pendingImg;
-    cancelAutoSendCountdown();
-    if (recognition && recognizing) { try { recognition.stop(); } catch(e) {} }
     if (!text.trim() && !hasImg) return;
     if (thinking || !apiKey) return;
 
