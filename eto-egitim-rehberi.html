@@ -7666,11 +7666,11 @@
           Dikte bitince otomatik gönder
         </label>
         <label class="ai-opt" for="eto-ai-polish-mic">
-          <input type="checkbox" id="eto-ai-polish-mic" checked/>
-          Dikteyi düzelt (yazım ve teknik terimler)
+          <input type="checkbox" id="eto-ai-polish-mic"/>
+          Dikteyi hafifçe düzelt (yazım / noktalama)
         </label>
       </div>
-      <p class="eto-ai-settings-hint">🎙️ <strong>Konuşarak yaz</strong> sesinizi kaydedip aynı Gemini API anahtarıyla metne çevirir (sohbet kotanıza ek istek olarak yazılır). Bitirmek için 🎙️’e tekrar basın. <strong>Dikteyi düzelt</strong> açıkken ses sonrası ek bir istekle metin temizlenir (kota +1). Sesli okuma için tarayıcının Türkçe sesi otomatik kullanılır.</p>
+      <p class="eto-ai-settings-hint">🎙️ <strong>Konuşarak yaz</strong> sesinizi kaydedip aynı Gemini API anahtarıyla metne çevirir (sohbet kotanıza ek istek olarak yazılır). Bitirmek için 🎙️’e tekrar basın. <strong>Dikteyi hafifçe düzelt</strong> varsayılan kapalıdır; açılırsa ek istek (kota +1) ile yalnızca bariz yazım ve noktalama düzeltilir — çoğu kullanıcıda ham dikte daha doğru kalır. Sesli okuma için tarayıcının Türkçe sesi otomatik kullanılır.</p>
     </div>
   </div>
 </div>
@@ -7877,7 +7877,7 @@ YANIT KURALLARI:
   if (polishMicChk) {
     try {
       const v = localStorage.getItem(STORAGE_POLISH_MIC_KEY);
-      polishMicChk.checked = v !== '0';
+      polishMicChk.checked = v === '1';
     } catch (e) {}
     polishMicChk.addEventListener('change', () => {
       try { localStorage.setItem(STORAGE_POLISH_MIC_KEY, polishMicChk.checked ? '1' : '0'); } catch (e) {}
@@ -8215,13 +8215,16 @@ YANIT KURALLARI:
     'Yanıtta yalnızca duyduğun konuşma metni olsun (başlık veya madde işareti kullanma).';
 
   const GEMINI_POLISH_DICTATION_PROMPT =
-    'Aşağıdaki metin mikrofon kaydından oluşmuş ham bir Türkçe diktedir.\n\n' +
-    'Görevin — anlamı ve kullanıcının asıl sorusunu/emrini değiştirmeden:\n' +
-    '• Yazım ve noktalamayı düzelt.\n' +
-    '• Gereksiz dolgu hecelerini (ör. "ıı", "eee") temizle; anlamı bozma.\n' +
-    '• Denizcilik ve gemi elektriği terimlerini doğru yaz: jeneratör, yıldız-üçgen, Dahlander, VFD, invertör, PLC, SCADA, megger, IEC, buş bar, kontaktör, şalter, GMDSS vb.\n' +
-    '• Rakam ve birimleri koru; yeni cümle veya cevap uydurma.\n\n' +
-    'Yanıtta yalnızca düzeltilmiş düz metin olsun. Başlık, tırnak veya açıklama ekleme.\n\n' +
+    'Aşağıdaki metin otomatik konuşma tanıma çıktısıdır.\n\n' +
+    'ÇOK MUHAFAZAKAR ol: kelime sırasını, anlatımı ve teknik ifadeleri OLDUĞU GİBİ koru. ' +
+    'Şüphede kaldığında metne DOKUNMA — ham hâli daha doğru kabul et.\n\n' +
+    'Yalnızca şunları yap:\n' +
+    '• Bariz yazım hatalarını düzelt (ör. bitişik yazımlar, yaygın klavye hataları).\n' +
+    '• Noktalama ekle veya netleştir; cümleleri yeniden yazma veya kısaltma.\n' +
+    '• Rakam, birim, kısaltma ve özel isimleri aynen bırak.\n' +
+    '• Terimleri "daha doğru" diye değiştirme (model yanlış düzeltmesin).\n' +
+    '• Dolgu seslerini ("ıı", "eee") ancak cümleyi bozmadan kaldırılabiliyorsa sil.\n\n' +
+    'Yanıtta yalnızca tek parça düz metin; açıklama veya başlık yok.\n\n' +
     'HAM METİN:\n';
 
   let geminiMicWorkletBlobUrl = null;
@@ -8480,7 +8483,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
         parts: [{ text: GEMINI_POLISH_DICTATION_PROMPT + t }],
       }],
       generationConfig: {
-        temperature: 0.15,
+        temperature: 0.05,
         maxOutputTokens: 2048,
       },
     };
@@ -8512,6 +8515,23 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     const txt = data?.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!txt || !String(txt).trim()) throw new Error('empty-polish');
     return String(txt).trim();
+  }
+
+  /** Uzunluk / kelime değişimi ile ham transkripti çok bozduysa hamı kullan. */
+  function pickSaferDictation(raw, polished) {
+    const a = String(raw || '').trim();
+    const b = String(polished || '').trim();
+    if (!b) return a;
+    if (!a) return b;
+    const ratio = b.length / Math.max(1, a.length);
+    if (ratio < 0.65 || ratio > 1.45) return a;
+    const wordsA = a.split(/\s+/).filter(Boolean).length;
+    const wordsB = b.split(/\s+/).filter(Boolean).length;
+    if (wordsA > 2 && wordsB > 2) {
+      const wr = wordsB / wordsA;
+      if (wr < 0.7 || wr > 1.35) return a;
+    }
+    return b;
   }
 
   async function geminiMicStopAndTranscribe() {
@@ -8549,8 +8569,10 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     try {
       let text = await geminiTranscribeFromWav(wavBlob);
       if (polishMicChk && polishMicChk.checked && text.length <= 12000) {
+        const rawTxt = text;
         try {
-          text = await geminiPolishDictationRaw(text);
+          const polished = await geminiPolishDictationRaw(rawTxt);
+          text = pickSaferDictation(rawTxt, polished);
         } catch (pe) {
           /* ham transkript yeterli */
         }
