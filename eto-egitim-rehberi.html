@@ -7486,6 +7486,10 @@
       <input type="checkbox" id="eto-ai-autospeak" checked/>
       Otomatik oku
     </label>
+    <label for="eto-ai-autosend">
+      <input type="checkbox" id="eto-ai-autosend"/>
+      Dikte bitince otomatik gönder
+    </label>
   </div>
 </div>
 
@@ -7582,6 +7586,7 @@ YANIT KURALLARI:
   const micBtn      = document.getElementById('eto-ai-mic');
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
+  const autoSendChk = document.getElementById('eto-ai-autosend');
 
   /* ── State ── */
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
@@ -7589,6 +7594,7 @@ YANIT KURALLARI:
   let thinking  = false;
   let pendingImg = null; // { mimeType, data (base64) }
   const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
+  const STORAGE_AUTOSEND_KEY  = 'eto-auto-send-v1';
   let lastBotTextForTTS = '';
 
   /* ── Speech to text (sesle yaz) + Text to speech (sesli dinle) ── */
@@ -7596,6 +7602,8 @@ YANIT KURALLARI:
   const TTS_OK = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
   let recognition = null;
   let recognizing = false;
+  let lastRecognitionError = '';
+  let shouldAutoSendAfterDictation = false;
 
   function normalizeForTTS(md) {
     if (!md) return '';
@@ -7650,6 +7658,17 @@ YANIT KURALLARI:
     });
   }
 
+  if (autoSendChk) {
+    try {
+      const v = localStorage.getItem(STORAGE_AUTOSEND_KEY);
+      autoSendChk.checked = v === '1';
+    } catch (e) {}
+
+    autoSendChk.addEventListener('change', () => {
+      try { localStorage.setItem(STORAGE_AUTOSEND_KEY, autoSendChk.checked ? '1' : '0'); } catch (e) {}
+    });
+  }
+
   if (ttsBtn) {
     if (!TTS_OK) {
       ttsBtn.disabled = true;
@@ -7674,6 +7693,8 @@ YANIT KURALLARI:
 
       recognition.onstart = () => {
         recognizing = true;
+        lastRecognitionError = '';
+        shouldAutoSendAfterDictation = !!(autoSendChk && autoSendChk.checked);
         micBtn.classList.add('active');
       };
 
@@ -7687,16 +7708,45 @@ YANIT KURALLARI:
         input.style.height = Math.min(input.scrollHeight, 80) + 'px';
       };
 
-      recognition.onerror = () => {
+      recognition.onerror = (event) => {
         recognizing = false;
         micBtn.classList.remove('active');
-        // Sistem mesajı: otomatik seslendirme yapılmaz
-        try { addBotMsg('🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.'); } catch (e) {}
+        lastRecognitionError = (event && event.error) ? event.error : 'unknown';
+
+        // Benign durumlarda kullanıcıyı gereksiz korkutma
+        if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
+
+        let msg = '🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.';
+        if (lastRecognitionError === 'not-allowed' || lastRecognitionError === 'service-not-allowed') {
+          msg = '🎙️ Mikrofon izni kapalı. Tarayıcıdan mikrofon iznini açıp tekrar dene.';
+        } else if (lastRecognitionError === 'audio-capture') {
+          msg = '🎙️ Mikrofon bulunamadı veya kullanılamıyor. Mikrofon ayarını kontrol et.';
+        } else if (lastRecognitionError === 'network') {
+          msg = '🎙️ Sesli yazma ağ hatası verdi. İnternetini kontrol edip tekrar dene.';
+        }
+        try { addBotMsg(msg); } catch (e) {}
       };
 
       recognition.onend = () => {
         recognizing = false;
         micBtn.classList.remove('active');
+
+        // Dikte biter bitmez otomatik gönder (istenirse)
+        if (!shouldAutoSendAfterDictation) return;
+        shouldAutoSendAfterDictation = false;
+
+        // Hata aldıysa veya konuşma yoksa otomatik göndermeyi atla
+        if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
+        if (lastRecognitionError) return;
+        const text = (input.value || '').trim();
+        if (text.length < 4) return;
+        if (thinking || !apiKey) return;
+
+        // Son transkriptin textarea'ya tam oturması için kısa gecikme
+        setTimeout(() => {
+          const finalText = (input.value || '').trim();
+          if (finalText.length >= 4 && !thinking && apiKey) send(finalText);
+        }, 350);
       };
 
       micBtn.addEventListener('click', () => {
