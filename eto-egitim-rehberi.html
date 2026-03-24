@@ -7333,30 +7333,62 @@
   #eto-ai-mic:disabled,
   #eto-ai-speak:disabled { background: #2a3550; cursor: default; opacity: .7; }
 
-  #eto-ai-tts-toggle-row {
+  #eto-ai-controls-wrap {
     padding: 0 12px 12px;
-    display: flex; align-items: center; gap: 10px;
-    color: #94a3b8; font-size: 11px; flex-shrink: 0;
+    display: grid;
+    gap: 8px;
+    flex-shrink: 0;
   }
-  #eto-ai-tts-toggle-row label {
-    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  #eto-ai-tts-toggle-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    color: #cbd5e1;
+    font-size: 12px;
+  }
+  #eto-ai-tts-toggle-row .ai-opt {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
     user-select: none;
+    background: #1e2538;
+    border: 1px solid #2a3550;
+    border-radius: 999px;
+    padding: 6px 10px;
+    white-space: nowrap;
   }
-  #eto-ai-tts-toggle-row input[type="checkbox"] { accent-color: #1565c0; }
+  #eto-ai-tts-toggle-row input[type="checkbox"] {
+    accent-color: #1565c0;
+    margin: 0;
+  }
+  #eto-ai-voice-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #cbd5e1;
+    font-size: 12px;
+    background: #1e2538;
+    border: 1px solid #2a3550;
+    border-radius: 10px;
+    padding: 6px 10px;
+  }
   #eto-ai-voice {
+    flex: 1;
+    min-width: 0;
     background: #252d40;
     border: 1px solid #2a3550;
     color: #e8eaf6;
     border-radius: 8px;
-    padding: 4px 8px;
-    font-size: 11px;
-    min-width: 130px;
-    max-width: 180px;
+    padding: 5px 8px;
+    font-size: 12px;
+    height: 30px;
   }
   #eto-ai-voice:focus { outline: none; border-color: #1565c0; }
   #eto-ai-autosend-pending {
     display: none;
-    margin: 0 12px 10px;
+    margin: 0 12px 12px;
     padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid #2a3550;
@@ -7441,6 +7473,8 @@
     #eto-ai-panel { width: calc(100vw - 20px); right: 10px; bottom: 92px; max-height: 70vh; }
     #eto-ai-btn { bottom: 16px; right: 16px; width: 56px; height: 56px; font-size: 22px; }
     #eto-ai-key-input { font-size: 16px; }
+    #eto-ai-controls-wrap { gap: 7px; }
+    #eto-ai-voice-wrap { padding: 6px 8px; }
   }
 </style>
 
@@ -7515,19 +7549,21 @@
     <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
     <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
   </div>
-  <div id="eto-ai-tts-toggle-row">
-    <label for="eto-ai-autospeak">
-      <input type="checkbox" id="eto-ai-autospeak" checked/>
-      Otomatik oku
-    </label>
-    <label for="eto-ai-autosend">
-      <input type="checkbox" id="eto-ai-autosend"/>
-      Dikte bitince otomatik gönder
-    </label>
-    <label for="eto-ai-voice">
-      Ses:
+  <div id="eto-ai-controls-wrap">
+    <div id="eto-ai-tts-toggle-row">
+      <label class="ai-opt" for="eto-ai-autospeak">
+        <input type="checkbox" id="eto-ai-autospeak" checked/>
+        Otomatik oku
+      </label>
+      <label class="ai-opt" for="eto-ai-autosend">
+        <input type="checkbox" id="eto-ai-autosend"/>
+        Dikte bitince otomatik gönder
+      </label>
+    </div>
+    <div id="eto-ai-voice-wrap">
+      <span>Ses</span>
       <select id="eto-ai-voice" aria-label="Ses seçimi"></select>
-    </label>
+    </div>
   </div>
   <div id="eto-ai-autosend-pending">
     <span id="eto-ai-autosend-text">Dikte tamamlandı. 1.0 sn içinde gönderilecek…</span>
@@ -7654,6 +7690,8 @@ YANIT KURALLARI:
   let autoSendTimer = null;
   let autoSendInterval = null;
   let ttsVoiceUri = '';
+  let lastSpeechErrorToastAt = 0;
+  let lastSpeechErrorType = '';
 
   function normalizeForTTS(md) {
     if (!md) return '';
@@ -7859,14 +7897,23 @@ YANIT KURALLARI:
 
         // Benign durumlarda kullanıcıyı gereksiz korkutma
         if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
+        // Browser speech service geçici kopmalarında chat'e hata dökme
+        if (lastRecognitionError === 'network') {
+          micBtn.title = 'Ses servisine erişilemiyor. Biraz sonra tekrar dene.';
+          return;
+        }
+
+        // Aynı hatayı kısa aralıkla tekrarlama (chat spam önleme)
+        const now = Date.now();
+        if (lastRecognitionError === lastSpeechErrorType && (now - lastSpeechErrorToastAt) < 15000) return;
+        lastSpeechErrorType = lastRecognitionError;
+        lastSpeechErrorToastAt = now;
 
         let msg = '🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.';
         if (lastRecognitionError === 'not-allowed' || lastRecognitionError === 'service-not-allowed') {
           msg = '🎙️ Mikrofon izni kapalı. Tarayıcıdan mikrofon iznini açıp tekrar dene.';
         } else if (lastRecognitionError === 'audio-capture') {
           msg = '🎙️ Mikrofon bulunamadı veya kullanılamıyor. Mikrofon ayarını kontrol et.';
-        } else if (lastRecognitionError === 'network') {
-          msg = '🎙️ Sesli yazma ağ hatası verdi. İnternetini kontrol edip tekrar dene.';
         }
         try { addBotMsg(msg); } catch (e) {}
       };
