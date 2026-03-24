@@ -7314,7 +7314,7 @@
     background: #252d40; border: 1px solid #2a3550;
     color: #e8eaf6; border-radius: 22px; padding: 9px 14px;
     font-size: 13px; outline: none; resize: none;
-    font-family: inherit; line-height: 1.4; max-height: 80px;
+    font-family: inherit; line-height: 1.4; max-height: 120px;
     transition: border-color .15s;
     overflow-y: auto;
     overflow-x: hidden;
@@ -7345,8 +7345,32 @@
     transition: background .15s, border-color .15s, color .15s, opacity .15s;
   }
   #eto-ai-mic:hover { background: #1565c0; border-color: #1565c0; }
-  #eto-ai-mic.active { background: #b91c1c; border-color: #b91c1c; }
+  #eto-ai-mic.active {
+    background: #b91c1c;
+    border-color: #b91c1c;
+    transition: box-shadow .1s ease-out, transform .1s ease-out, background .15s, border-color .15s;
+    box-shadow: 0 0 0 calc(2px + var(--mic-level, 0) * 12px) rgba(185, 28, 28, 0.42);
+    transform: scale(calc(1 + var(--mic-level, 0) * 0.07));
+  }
   #eto-ai-mic:disabled { background: #2a3550; cursor: default; opacity: .7; }
+  .eto-ai-mic-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+    align-self: flex-end;
+  }
+  #eto-ai-rec-timer {
+    display: none;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    color: #90caf9;
+    line-height: 1.2;
+    min-height: 12px;
+    letter-spacing: .02em;
+  }
+  #eto-ai-rec-timer.visible { display: block; }
   #eto-ai-settings-btn {
     font-size: 18px;
     color: #90caf9;
@@ -7471,37 +7495,6 @@
     margin: 0;
     flex-shrink: 0;
   }
-  #eto-ai-voice-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 7px;
-    color: #94a3b8;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    background: #1a2233;
-    border: 1px solid #2a3550;
-    border-radius: 10px;
-    padding: 10px 12px;
-  }
-  #eto-ai-voice-wrap .eto-ai-voice-label {
-    font-size: 11px;
-    color: #94a3b8;
-  }
-  #eto-ai-voice {
-    width: 100%;
-    box-sizing: border-box;
-    background: #252d40;
-    border: 1px solid #2a3550;
-    color: #e8eaf6;
-    border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 13px;
-    height: 38px;
-  }
-  #eto-ai-voice:focus { outline: none; border-color: #1565c0; }
   .eto-ai-settings-hint {
     margin: 0;
     font-size: 11px;
@@ -7645,7 +7638,10 @@
     <div id="eto-ai-input-row">
       <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
       <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
-      <button type="button" id="eto-ai-mic" title="Konuşarak yaz (Gemini)" aria-label="Konuşarak yaz">🎙️</button>
+      <div class="eto-ai-mic-wrap">
+        <button type="button" id="eto-ai-mic" title="Konuşarak yaz (Gemini)" aria-label="Konuşarak yaz">🎙️</button>
+        <span id="eto-ai-rec-timer" aria-live="polite"></span>
+      </div>
       <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
       <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
       <button type="button" id="eto-ai-settings-btn" title="Ses ayarları" aria-label="Ayarlar" aria-expanded="false" aria-haspopup="dialog">⚙</button>
@@ -7665,12 +7661,12 @@
           <input type="checkbox" id="eto-ai-autospeak" checked/>
           Yanıtları otomatik sesli oku
         </label>
+        <label class="ai-opt" for="eto-ai-autosend-mic">
+          <input type="checkbox" id="eto-ai-autosend-mic"/>
+          Dikte bitince otomatik gönder
+        </label>
       </div>
-      <div id="eto-ai-voice-wrap">
-        <span class="eto-ai-voice-label">Okuma sesi</span>
-        <select id="eto-ai-voice" aria-label="Ses seçimi"></select>
-      </div>
-      <p class="eto-ai-settings-hint">🎙️ <strong>Konuşarak yaz</strong> sesinizi kaydedip aynı Gemini API anahtarıyla metne çevirir (sohbet kotanıza ek istek olarak yazılır). Bitirmek için 🎙️’e tekrar basın.</p>
+      <p class="eto-ai-settings-hint">🎙️ <strong>Konuşarak yaz</strong> sesinizi kaydedip aynı Gemini API anahtarıyla metne çevirir (sohbet kotanıza ek istek olarak yazılır). Bitirmek için 🎙️’e tekrar basın. Sesli okuma için tarayıcının Türkçe sesi otomatik kullanılır.</p>
     </div>
   </div>
 </div>
@@ -7768,7 +7764,8 @@ YANIT KURALLARI:
   const micBtn      = document.getElementById('eto-ai-mic');
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
-  const voiceSelect = document.getElementById('eto-ai-voice');
+  const autoSendMicChk = document.getElementById('eto-ai-autosend-mic');
+  const recTimerEl = document.getElementById('eto-ai-rec-timer');
   const settingsBtn       = document.getElementById('eto-ai-settings-btn');
   const settingsBackdrop  = document.getElementById('eto-ai-settings-backdrop');
   const settingsDrawer    = document.getElementById('eto-ai-settings-drawer');
@@ -7794,12 +7791,11 @@ YANIT KURALLARI:
   let thinking  = false;
   let pendingImg = null; // { mimeType, data (base64) }
   const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
-  const STORAGE_TTS_VOICE_KEY = 'eto-tts-voice-uri-v1';
+  const STORAGE_AUTOSEND_MIC_KEY = 'eto-auto-send-mic-v1';
   let lastBotTextForTTS = '';
 
   /* ── Text to speech (sesli dinle) ── */
   const TTS_OK = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-  let ttsVoiceUri = '';
 
   function normalizeForTTS(md) {
     if (!md) return '';
@@ -7838,46 +7834,17 @@ YANIT KURALLARI:
     u.pitch = 1;
     u.volume = 1;
 
-    // Apply selected voice when available
     const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
-    if (ttsVoiceUri && voices.length) {
-      const selectedVoice = voices.find(v => v.voiceURI === ttsVoiceUri);
-      if (selectedVoice) {
-        u.voice = selectedVoice;
-        if (selectedVoice.lang) u.lang = selectedVoice.lang;
-      }
+    const trVoice = voices.length ? voices.find(v => /^tr(-|$)/i.test(v.lang)) : null;
+    if (trVoice) {
+      u.voice = trVoice;
+      if (trVoice.lang) u.lang = trVoice.lang;
     }
 
     u.onstart = () => { if (ttsBtn) ttsBtn.classList.add('active'); };
     u.onend = () => { if (ttsBtn) ttsBtn.classList.remove('active'); };
     u.onerror = () => { if (ttsBtn) ttsBtn.classList.remove('active'); };
     window.speechSynthesis.speak(u);
-  }
-
-  function populateVoiceSelect() {
-    if (!voiceSelect || !TTS_OK || !window.speechSynthesis.getVoices) return;
-    const voices = window.speechSynthesis.getVoices();
-    if (!voices || !voices.length) return;
-
-    const preferred = voices.filter(v => /^tr(-|$)/i.test(v.lang));
-    const list = preferred.length ? preferred : voices;
-    const prevValue = ttsVoiceUri || localStorage.getItem(STORAGE_TTS_VOICE_KEY) || '';
-
-    voiceSelect.innerHTML = '';
-    const autoOpt = document.createElement('option');
-    autoOpt.value = '';
-    autoOpt.textContent = 'Varsayılan ses';
-    voiceSelect.appendChild(autoOpt);
-
-    list.forEach(v => {
-      const opt = document.createElement('option');
-      opt.value = v.voiceURI;
-      opt.textContent = `${v.name} (${v.lang})`;
-      voiceSelect.appendChild(opt);
-    });
-
-    ttsVoiceUri = prevValue;
-    voiceSelect.value = list.some(v => v.voiceURI === prevValue) ? prevValue : '';
   }
 
   if (autoSpeakChk) {
@@ -7891,23 +7858,23 @@ YANIT KURALLARI:
     });
   }
 
+  if (autoSendMicChk) {
+    try {
+      const v = localStorage.getItem(STORAGE_AUTOSEND_MIC_KEY);
+      autoSendMicChk.checked = v === '1';
+    } catch (e) {}
+    autoSendMicChk.addEventListener('change', () => {
+      try { localStorage.setItem(STORAGE_AUTOSEND_MIC_KEY, autoSendMicChk.checked ? '1' : '0'); } catch (e) {}
+    });
+  }
+
   if (ttsBtn) {
     if (!TTS_OK) {
       ttsBtn.disabled = true;
       ttsBtn.title = 'Sesli dinleme bu tarayıcıda desteklenmiyor';
-      if (voiceSelect) voiceSelect.disabled = true;
     } else {
-      try { ttsVoiceUri = localStorage.getItem(STORAGE_TTS_VOICE_KEY) || ''; } catch (e) {}
-      populateVoiceSelect();
       if (window.speechSynthesis && 'onvoiceschanged' in window.speechSynthesis) {
-        window.speechSynthesis.onvoiceschanged = populateVoiceSelect;
-      }
-
-      if (voiceSelect) {
-        voiceSelect.addEventListener('change', () => {
-          ttsVoiceUri = voiceSelect.value || '';
-          try { localStorage.setItem(STORAGE_TTS_VOICE_KEY, ttsVoiceUri); } catch (e) {}
-        });
+        window.speechSynthesis.onvoiceschanged = function () { /* TTS: Türkçe ses speakMarkdown içinde anlık seçilir */ };
       }
 
       ttsBtn.addEventListener('click', () => {
@@ -8220,6 +8187,7 @@ YANIT KURALLARI:
 
   /* ── Konuşarak yaz: WAV kayıt → Gemini ile çeviri (Web Speech değil) ── */
   const GEMINI_MIC_MAX_MS = 120000;
+  const GEMINI_WAV_TARGET_HZ = 16000;
   const GEMINI_TRANSCRIBE_PROMPT =
     'Bu ses kaydındaki konuşmayı yazıya dök. Yanıtta yalnızca duyduğun metin olsun (konuşmacı Türkçe konuşuyorsa Türkçe yaz). Başlık, tırnak, madde işareti, özet veya açıklama ekleme.';
 
@@ -8234,7 +8202,34 @@ YANIT KURALLARI:
     buffers: [],
     sampleRate: 48000,
     maxTimer: null,
+    timerInterval: null,
+    recordStartedAt: 0,
   };
+
+  function geminiRecTimerStop() {
+    if (geminiMic.timerInterval) {
+      clearInterval(geminiMic.timerInterval);
+      geminiMic.timerInterval = null;
+    }
+    if (recTimerEl) {
+      recTimerEl.classList.remove('visible');
+      recTimerEl.textContent = '';
+    }
+  }
+
+  function geminiRecTimerStart() {
+    geminiRecTimerStop();
+    if (!recTimerEl) return;
+    geminiMic.recordStartedAt = Date.now();
+    recTimerEl.classList.add('visible');
+    recTimerEl.textContent = '0:00';
+    geminiMic.timerInterval = setInterval(() => {
+      const s = Math.floor((Date.now() - geminiMic.recordStartedAt) / 1000);
+      const m = Math.floor(s / 60);
+      const r = s % 60;
+      recTimerEl.textContent = m + ':' + (r < 10 ? '0' : '') + r;
+    }, 1000);
+  }
 
   function mergeFloat32Buffers(buffers) {
     let n = 0;
@@ -8272,6 +8267,22 @@ YANIT KURALLARI:
     return buffer;
   }
 
+  function downsampleBuffer(buffer, fromRate, toRate) {
+    if (!buffer.length || toRate >= fromRate) return buffer;
+    const ratio = fromRate / toRate;
+    const newLength = Math.floor(buffer.length / ratio);
+    if (newLength < 1) return buffer;
+    const result = new Float32Array(newLength);
+    for (let i = 0; i < newLength; i++) {
+      const src = i * ratio;
+      const i0 = Math.floor(src);
+      const i1 = Math.min(i0 + 1, buffer.length - 1);
+      const frac = src - i0;
+      result[i] = buffer[i0] * (1 - frac) + buffer[i1] * frac;
+    }
+    return result;
+  }
+
   function geminiMicBlobToBase64(blob) {
     return new Promise((resolve, reject) => {
       const fr = new FileReader();
@@ -8289,6 +8300,8 @@ YANIT KURALLARI:
   }
 
   function geminiMicTeardownGraph() {
+    geminiRecTimerStop();
+    if (micBtn) try { micBtn.style.removeProperty('--mic-level'); } catch (e) {}
     try {
       if (geminiMic.processor) {
         geminiMic.processor.disconnect();
@@ -8380,7 +8393,8 @@ YANIT KURALLARI:
       return;
     }
 
-    const wavBlob = new Blob([encodeWAV(merged, sr)], { type: 'audio/wav' });
+    const pcmOut = downsampleBuffer(merged, sr, GEMINI_WAV_TARGET_HZ);
+    const wavBlob = new Blob([encodeWAV(pcmOut, GEMINI_WAV_TARGET_HZ)], { type: 'audio/wav' });
     if (wavBlob.size > 18 * 1024 * 1024) {
       addBotMsg('🎙️ Kayıt çok büyük. Daha kısa konuşmayı dene (en fazla ~2 dakika).');
       geminiMicRefreshButton();
@@ -8398,6 +8412,9 @@ YANIT KURALLARI:
       input.value = prev ? prev + ' ' + text : text;
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.focus();
+      if (autoSendMicChk && autoSendMicChk.checked && input.value.trim()) {
+        await send(input.value);
+      }
     } catch (e) {
       const msg = (e && e.message) ? e.message : String(e);
       if (msg === 'quota') {
@@ -8451,6 +8468,11 @@ YANIT KURALLARI:
         if (!geminiMic.recording) return;
         const ch = ev.inputBuffer.getChannelData(0);
         geminiMic.buffers.push(new Float32Array(ch));
+        let sum = 0;
+        for (let i = 0; i < ch.length; i++) sum += ch[i] * ch[i];
+        const rms = Math.sqrt(sum / ch.length);
+        const norm = Math.min(1, rms * 4.2);
+        if (micBtn) micBtn.style.setProperty('--mic-level', norm.toFixed(3));
       };
 
       geminiMic.source.connect(geminiMic.processor);
@@ -8467,6 +8489,7 @@ YANIT KURALLARI:
       micBtn.classList.add('active');
       micBtn.title = 'Durdur ve metne çevir';
     }
+    geminiRecTimerStart();
     geminiMic.maxTimer = setTimeout(() => {
       if (geminiMic.recording) geminiMicStopAndTranscribe();
     }, GEMINI_MIC_MAX_MS);
@@ -8641,7 +8664,7 @@ YANIT KURALLARI:
   // Auto-resize textarea
   input.addEventListener('input', () => {
     input.style.height = 'auto';
-    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
   });
 
   // Suggestion chips
