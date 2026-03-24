@@ -7333,6 +7333,23 @@
   #eto-ai-mic:disabled,
   #eto-ai-speak:disabled { background: #2a3550; cursor: default; opacity: .7; }
 
+  #eto-ai-mic-hint {
+    display: none;
+    margin: -4px 12px 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #94a3b8;
+    background: #161d2e;
+    border: 1px solid #2a4060;
+  }
+  #eto-ai-mic-hint.error {
+    color: #fecdd3;
+    border-color: #991b1b;
+    background: #291518;
+  }
+
   #eto-ai-controls-wrap {
     padding: 0 12px 12px;
     display: grid;
@@ -7549,6 +7566,7 @@
     <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
     <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
   </div>
+  <div id="eto-ai-mic-hint" role="status" aria-live="polite"></div>
   <div id="eto-ai-controls-wrap">
     <div id="eto-ai-tts-toggle-row">
       <label class="ai-opt" for="eto-ai-autospeak">
@@ -7669,6 +7687,7 @@ YANIT KURALLARI:
   const autoSendPending = document.getElementById('eto-ai-autosend-pending');
   const autoSendPendingText = document.getElementById('eto-ai-autosend-text');
   const autoSendCancelBtn = document.getElementById('eto-ai-autosend-cancel');
+  const micHint         = document.getElementById('eto-ai-mic-hint');
 
   /* ── State ── */
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
@@ -7692,6 +7711,20 @@ YANIT KURALLARI:
   let ttsVoiceUri = '';
   let lastSpeechErrorToastAt = 0;
   let lastSpeechErrorType = '';
+  let micGen = 0;
+
+  function setMicHint(text, asError) {
+    if (!micHint) return;
+    if (!text) {
+      micHint.textContent = '';
+      micHint.classList.remove('error');
+      micHint.style.display = 'none';
+      return;
+    }
+    micHint.textContent = text;
+    micHint.classList.toggle('error', !!asError);
+    micHint.style.display = 'block';
+  }
 
   function normalizeForTTS(md) {
     if (!md) return '';
@@ -7865,91 +7898,129 @@ YANIT KURALLARI:
   if (micBtn) {
     if (!SpeechRec) {
       micBtn.disabled = true;
-      micBtn.title = 'Sesle yazma bu tarayıcıda desteklenmiyor (Chrome önerilir).';
+      micBtn.title = 'Sesle yazma bu tarayıcıda desteklenmiyor (Chrome veya Edge önerilir).';
     } else {
-      recognition = new SpeechRec();
-      recognition.lang = 'tr-TR';
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
+      function bindRecognitionHandlers(rec, gen) {
+        rec.onstart = () => {
+          if (gen !== micGen) return;
+          recognizing = true;
+          lastRecognitionError = '';
+          shouldAutoSendAfterDictation = !!(autoSendChk && autoSendChk.checked);
+          cancelAutoSendCountdown();
+          micBtn.classList.add('active');
+          micBtn.title = 'Dinlemeyi durdur';
+          setMicHint('Dinleniyor… Konuşman yazıya dökülüyor. Bitirmek için tekrar 🎙️.', false);
+        };
 
-      recognition.onstart = () => {
-        recognizing = true;
-        lastRecognitionError = '';
-        shouldAutoSendAfterDictation = !!(autoSendChk && autoSendChk.checked);
-        cancelAutoSendCountdown();
-        micBtn.classList.add('active');
-      };
+        rec.onresult = (event) => {
+          if (gen !== micGen) return;
+          let transcript = '';
+          for (let i = 0; i < event.results.length; i++) {
+            const r = event.results[i];
+            if (r && r[0] && r[0].transcript) transcript += r[0].transcript;
+          }
+          const t = transcript.trim();
+          input.value = t;
+          input.style.height = 'auto';
+          input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+        };
 
-      recognition.onresult = (event) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
+        rec.onerror = (event) => {
+          if (gen !== micGen) return;
+          recognizing = false;
+          micBtn.classList.remove('active');
+          micBtn.title = 'Sesli yaz';
+          const err = (event && event.error) ? event.error : 'unknown';
+          lastRecognitionError = err;
+
+          if (err === 'no-speech' || err === 'aborted') {
+            setMicHint('');
+            return;
+          }
+          if (err === 'network') {
+            setMicHint('Konuşma servisine ulaşılamadı (ağ, VPN veya kurum engeli olabilir). Microsoft Edge veya farklı bağlantı dene; site için mikrofon iznini kontrol et.', true);
+            micBtn.title = 'Konuşma servisi — bağlantı sorunu';
+            return;
+          }
+
+          const now = Date.now();
+          if (err === lastSpeechErrorType && (now - lastSpeechErrorToastAt) < 15000) return;
+          lastSpeechErrorType = err;
+          lastSpeechErrorToastAt = now;
+
+          setMicHint('');
+          let msg = '🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.';
+          if (err === 'not-allowed' || err === 'service-not-allowed') {
+            msg = '🎙️ Mikrofon izni kapalı. Adres çubuğundaki kilit simgesinden bu site için mikrofonu aç.';
+          } else if (err === 'audio-capture') {
+            msg = '🎙️ Mikrofon bulunamadı veya kullanılamıyor. Mikrofon ayarını kontrol et.';
+          }
+          try { addBotMsg(msg); } catch (e) {}
+        };
+
+        rec.onend = () => {
+          if (gen !== micGen) return;
+          recognizing = false;
+          micBtn.classList.remove('active');
+          micBtn.title = 'Sesli yaz';
+          setMicHint('');
+
+          if (!shouldAutoSendAfterDictation) return;
+          shouldAutoSendAfterDictation = false;
+
+          if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
+          if (lastRecognitionError) return;
+          const text = (input.value || '').trim();
+          if (text.length < 4) return;
+          if (thinking || !apiKey) return;
+
+          setTimeout(() => {
+            startAutoSendCountdown(() => input.value || '');
+          }, 350);
+        };
+      }
+
+      function startMicSession() {
+        const gen = ++micGen;
+        stopTTS();
+        if (recognition) {
+          try { recognition.stop(); } catch (e) {}
+          try { recognition.abort(); } catch (e) {}
+          recognition = null;
         }
-        input.value = transcript.trim();
-        input.style.height = 'auto';
-        input.style.height = Math.min(input.scrollHeight, 80) + 'px';
-      };
 
-      recognition.onerror = (event) => {
-        recognizing = false;
-        micBtn.classList.remove('active');
-        lastRecognitionError = (event && event.error) ? event.error : 'unknown';
+        const rec = new SpeechRec();
+        rec.lang = 'tr-TR';
+        rec.continuous = true;
+        rec.interimResults = true;
+        rec.maxAlternatives = 1;
+        bindRecognitionHandlers(rec, gen);
+        recognition = rec;
+        input.focus();
 
-        // Benign durumlarda kullanıcıyı gereksiz korkutma
-        if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
-        // Browser speech service geçici kopmalarında chat'e hata dökme
-        if (lastRecognitionError === 'network') {
-          micBtn.title = 'Ses servisine erişilemiyor. Biraz sonra tekrar dene.';
-          return;
-        }
-
-        // Aynı hatayı kısa aralıkla tekrarlama (chat spam önleme)
-        const now = Date.now();
-        if (lastRecognitionError === lastSpeechErrorType && (now - lastSpeechErrorToastAt) < 15000) return;
-        lastSpeechErrorType = lastRecognitionError;
-        lastSpeechErrorToastAt = now;
-
-        let msg = '🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.';
-        if (lastRecognitionError === 'not-allowed' || lastRecognitionError === 'service-not-allowed') {
-          msg = '🎙️ Mikrofon izni kapalı. Tarayıcıdan mikrofon iznini açıp tekrar dene.';
-        } else if (lastRecognitionError === 'audio-capture') {
-          msg = '🎙️ Mikrofon bulunamadı veya kullanılamıyor. Mikrofon ayarını kontrol et.';
-        }
-        try { addBotMsg(msg); } catch (e) {}
-      };
-
-      recognition.onend = () => {
-        recognizing = false;
-        micBtn.classList.remove('active');
-
-        // Dikte biter bitmez otomatik gönder (istenirse)
-        if (!shouldAutoSendAfterDictation) return;
-        shouldAutoSendAfterDictation = false;
-
-        // Hata aldıysa veya konuşma yoksa otomatik göndermeyi atla
-        if (lastRecognitionError === 'no-speech' || lastRecognitionError === 'aborted') return;
-        if (lastRecognitionError) return;
-        const text = (input.value || '').trim();
-        if (text.length < 4) return;
-        if (thinking || !apiKey) return;
-
-        // Son transkriptin textarea'ya tam oturması için kısa gecikme
-        setTimeout(() => {
-          startAutoSendCountdown(() => input.value || '');
-        }, 350);
-      };
+        const tryStart = (n) => {
+          if (gen !== micGen) return;
+          try {
+            rec.start();
+          } catch (e) {
+            if (e && e.name === 'InvalidStateError' && n < 6) {
+              setTimeout(() => tryStart(n + 1), 80 + n * 40);
+              return;
+            }
+            setMicHint('Mikrofon başlatılamadı. Başka sekmede mikrofon kullanılıyor olabilir; izinleri kontrol et.', true);
+            recognizing = false;
+            micBtn.classList.remove('active');
+          }
+        };
+        setTimeout(() => tryStart(0), 50);
+      }
 
       micBtn.addEventListener('click', () => {
-        if (!recognition) return;
-        if (recognizing) {
+        if (recognizing && recognition) {
           try { recognition.stop(); } catch (e) {}
           return;
         }
-        stopTTS();
-        try {
-          input.focus();
-          recognition.start();
-        } catch (e) {}
+        startMicSession();
       });
     }
   }
