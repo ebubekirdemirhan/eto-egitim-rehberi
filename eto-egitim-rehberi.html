@@ -7432,7 +7432,7 @@
   #eto-ai-keywall {
     position: absolute; inset: 0; background: #1a1f2e;
     display: flex; flex-direction: column; align-items: center;
-    justify-content: center; padding: 24px; gap: 12px; z-index: 10;
+    justify-content: center; padding: 24px; gap: 12px; z-index: 40;
     border-radius: 16px; overflow-y: auto;
   }
   #eto-ai-keywall h3 { color: #90caf9; font-size: 15px; text-align: center; margin: 0; }
@@ -7712,6 +7712,10 @@ YANIT KURALLARI:
   let lastSpeechErrorToastAt = 0;
   let lastSpeechErrorType = '';
   let micGen = 0;
+  /** Kullanıcı 🎙️ ile durdurunca true; Chrome no-speech'te otomatik kapanmayı engeller */
+  let micUserStop = false;
+  let micNoSpeechRestarts = 0;
+  const MIC_NO_SPEECH_RESTART_MAX = 12;
 
   function setMicHint(text, asError) {
     if (!micHint) return;
@@ -7920,6 +7924,7 @@ YANIT KURALLARI:
             if (r && r[0] && r[0].transcript) transcript += r[0].transcript;
           }
           const t = transcript.trim();
+          if (t.length > 0) micNoSpeechRestarts = 0;
           input.value = t;
           input.style.height = 'auto';
           input.style.height = Math.min(input.scrollHeight, 80) + 'px';
@@ -7927,16 +7932,30 @@ YANIT KURALLARI:
 
         rec.onerror = (event) => {
           if (gen !== micGen) return;
-          recognizing = false;
-          micBtn.classList.remove('active');
-          micBtn.title = 'Sesli yaz';
           const err = (event && event.error) ? event.error : 'unknown';
           lastRecognitionError = err;
 
-          if (err === 'no-speech' || err === 'aborted') {
-            setMicHint('');
+          /* Chrome/Edge: kısa sessizlikte no-speech verip oturumu keser; UI kapatmadan yeniden başlatırız */
+          if (err === 'no-speech' && !micUserStop) {
+            setMicHint('Dinleniyor… Konuşunca yazı alanına düşecek. Bitirmek için tekrar 🎙️.', false);
+            micBtn.classList.add('active');
+            micBtn.title = 'Dinlemeyi durdur';
+            recognizing = true;
             return;
           }
+          if (err === 'aborted') {
+            setMicHint('');
+            if (micUserStop) {
+              recognizing = false;
+              micBtn.classList.remove('active');
+              micBtn.title = 'Sesli yaz';
+            }
+            return;
+          }
+
+          recognizing = false;
+          micBtn.classList.remove('active');
+          micBtn.title = 'Sesli yaz';
           if (err === 'network') {
             setMicHint('Konuşma servisine ulaşılamadı (ağ, VPN veya kurum engeli olabilir). Microsoft Edge veya farklı bağlantı dene; site için mikrofon iznini kontrol et.', true);
             micBtn.title = 'Konuşma servisi — bağlantı sorunu';
@@ -7960,6 +7979,40 @@ YANIT KURALLARI:
 
         rec.onend = () => {
           if (gen !== micGen) return;
+
+          if (!micUserStop && lastRecognitionError === 'no-speech') {
+            lastRecognitionError = '';
+            if (micNoSpeechRestarts >= MIC_NO_SPEECH_RESTART_MAX) {
+              micNoSpeechRestarts = 0;
+              recognizing = false;
+              micBtn.classList.remove('active');
+              micBtn.title = 'Sesli yaz';
+              setMicHint('Uzun süre konuşma algılanmadı. Tekrar 🎙️ ile dene.', true);
+              return;
+            }
+            micNoSpeechRestarts++;
+            micBtn.classList.add('active');
+            micBtn.title = 'Dinlemeyi durdur';
+            recognizing = true;
+            setMicHint('Dinleniyor…', false);
+            setTimeout(() => {
+              if (gen !== micGen || micUserStop || recognition !== rec) return;
+              try {
+                rec.start();
+              } catch (e) {
+                setTimeout(() => {
+                  if (gen !== micGen || micUserStop || recognition !== rec) return;
+                  try {
+                    rec.start();
+                  } catch (e2) {
+                    if (!micUserStop) startMicSession();
+                  }
+                }, 120);
+              }
+            }, 60);
+            return;
+          }
+
           recognizing = false;
           micBtn.classList.remove('active');
           micBtn.title = 'Sesli yaz';
@@ -7982,6 +8035,8 @@ YANIT KURALLARI:
 
       function startMicSession() {
         const gen = ++micGen;
+        micUserStop = false;
+        micNoSpeechRestarts = 0;
         stopTTS();
         if (recognition) {
           try { recognition.stop(); } catch (e) {}
@@ -8017,6 +8072,7 @@ YANIT KURALLARI:
 
       micBtn.addEventListener('click', () => {
         if (recognizing && recognition) {
+          micUserStop = true;
           try { recognition.stop(); } catch (e) {}
           return;
         }
