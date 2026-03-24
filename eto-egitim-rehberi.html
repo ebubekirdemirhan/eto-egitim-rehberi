@@ -7334,6 +7334,7 @@
   #eto-ai-send:hover { background: #0d47a1; }
   #eto-ai-send:disabled { background: #2a3550; cursor: default; }
 
+  #eto-ai-mic,
   #eto-ai-speak,
   #eto-ai-settings-btn {
     width: 40px; height: 40px; border-radius: 50%;
@@ -7343,6 +7344,9 @@
     flex-shrink: 0; align-self: flex-end;
     transition: background .15s, border-color .15s, color .15s, opacity .15s;
   }
+  #eto-ai-mic:hover { background: #1565c0; border-color: #1565c0; }
+  #eto-ai-mic.active { background: #b91c1c; border-color: #b91c1c; }
+  #eto-ai-mic:disabled { background: #2a3550; cursor: default; opacity: .7; }
   #eto-ai-settings-btn {
     font-size: 18px;
     color: #90caf9;
@@ -7498,6 +7502,12 @@
     height: 38px;
   }
   #eto-ai-voice:focus { outline: none; border-color: #1565c0; }
+  .eto-ai-settings-hint {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #6b7a94;
+  }
 
   /* ── API key overlay ── */
   /* ── Key wall ── */
@@ -7563,7 +7573,7 @@
     #eto-ai-btn { bottom: 16px; right: 16px; width: 56px; height: 56px; font-size: 22px; }
     #eto-ai-key-input { font-size: 16px; }
     #eto-ai-input-row { gap: 5px; padding: 7px 8px 9px; }
-    #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
+    #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
 </style>
@@ -7635,6 +7645,7 @@
     <div id="eto-ai-input-row">
       <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
       <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
+      <button type="button" id="eto-ai-mic" title="Konuşarak yaz (Gemini)" aria-label="Konuşarak yaz">🎙️</button>
       <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
       <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
       <button type="button" id="eto-ai-settings-btn" title="Ses ayarları" aria-label="Ayarlar" aria-expanded="false" aria-haspopup="dialog">⚙</button>
@@ -7659,6 +7670,7 @@
         <span class="eto-ai-voice-label">Okuma sesi</span>
         <select id="eto-ai-voice" aria-label="Ses seçimi"></select>
       </div>
+      <p class="eto-ai-settings-hint">🎙️ <strong>Konuşarak yaz</strong> sesinizi kaydedip aynı Gemini API anahtarıyla metne çevirir (sohbet kotanıza ek istek olarak yazılır). Bitirmek için 🎙️’e tekrar basın.</p>
     </div>
   </div>
 </div>
@@ -7753,6 +7765,7 @@ YANIT KURALLARI:
   const imgThumb    = document.getElementById('eto-img-thumb');
   const imgLabel    = document.getElementById('eto-img-label');
   const imgRemove   = document.getElementById('eto-img-remove');
+  const micBtn      = document.getElementById('eto-ai-mic');
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
   const voiceSelect = document.getElementById('eto-ai-voice');
@@ -8205,14 +8218,304 @@ YANIT KURALLARI:
     if (t) t.remove();
   }
 
+  /* ── Konuşarak yaz: WAV kayıt → Gemini ile çeviri (Web Speech değil) ── */
+  const GEMINI_MIC_MAX_MS = 120000;
+  const GEMINI_TRANSCRIBE_PROMPT =
+    'Bu ses kaydındaki konuşmayı yazıya dök. Yanıtta yalnızca duyduğun metin olsun (konuşmacı Türkçe konuşuyorsa Türkçe yaz). Başlık, tırnak, madde işareti, özet veya açıklama ekleme.';
+
+  const geminiMic = {
+    recording: false,
+    transcribing: false,
+    stream: null,
+    ctx: null,
+    processor: null,
+    source: null,
+    gain: null,
+    buffers: [],
+    sampleRate: 48000,
+    maxTimer: null,
+  };
+
+  function mergeFloat32Buffers(buffers) {
+    let n = 0;
+    buffers.forEach(b => { n += b.length; });
+    const out = new Float32Array(n);
+    let o = 0;
+    buffers.forEach(b => { out.set(b, o); o += b.length; });
+    return out;
+  }
+
+  function encodeWAV(samples, sampleRate) {
+    const buffer = new ArrayBuffer(44 + samples.length * 2);
+    const view = new DataView(buffer);
+    const writeStr = (offset, str) => {
+      for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+    };
+    writeStr(0, 'RIFF');
+    view.setUint32(4, 36 + samples.length * 2, true);
+    writeStr(8, 'WAVE');
+    writeStr(12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    writeStr(36, 'data');
+    view.setUint32(40, samples.length * 2, true);
+    let offset = 44;
+    for (let i = 0; i < samples.length; i++, offset += 2) {
+      const s = Math.max(-1, Math.min(1, samples[i]));
+      view.setInt16(offset, s < 0 ? Math.floor(s * 0x8000) : Math.floor(s * 0x7FFF), true);
+    }
+    return buffer;
+  }
+
+  function geminiMicBlobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = () => resolve(String(fr.result).split(',')[1] || '');
+      fr.onerror = () => reject(fr.error || new Error('read-fail'));
+      fr.readAsDataURL(blob);
+    });
+  }
+
+  function geminiMicRefreshButton() {
+    if (!micBtn) return;
+    const can = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia &&
+      (window.AudioContext || window.webkitAudioContext));
+    micBtn.disabled = !can || thinking || geminiMic.transcribing;
+  }
+
+  function geminiMicTeardownGraph() {
+    try {
+      if (geminiMic.processor) {
+        geminiMic.processor.disconnect();
+        geminiMic.processor.onaudioprocess = null;
+      }
+    } catch (e) {}
+    try { if (geminiMic.source) geminiMic.source.disconnect(); } catch (e) {}
+    try { if (geminiMic.gain) geminiMic.gain.disconnect(); } catch (e) {}
+    geminiMic.processor = null;
+    geminiMic.source = null;
+    geminiMic.gain = null;
+    if (geminiMic.stream) {
+      geminiMic.stream.getTracks().forEach(t => { try { t.stop(); } catch (err) {} });
+    }
+    geminiMic.stream = null;
+    const c = geminiMic.ctx;
+    geminiMic.ctx = null;
+    if (c) c.close().catch(() => {});
+    if (geminiMic.maxTimer) {
+      clearTimeout(geminiMic.maxTimer);
+      geminiMic.maxTimer = null;
+    }
+  }
+
+  async function geminiTranscribeFromWav(wavBlob) {
+    const b64 = await geminiMicBlobToBase64(wavBlob);
+    if (!b64) throw new Error('Boş ses');
+    const body = {
+      contents: [{
+        role: 'user',
+        parts: [
+          { inlineData: { mimeType: 'audio/wav', data: b64 } },
+          { text: GEMINI_TRANSCRIBE_PROMPT },
+        ],
+      }],
+      generationConfig: {
+        temperature: 0.1,
+        maxOutputTokens: 2048,
+      },
+    };
+
+    let res = null;
+    const startModelIdx = modelIdx;
+    let usedIdx = modelIdx;
+    for (let i = modelIdx; i < MODELS.length; i++) {
+      res = await fetch(API_URL(apiKey, MODELS[i].id), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (res.status !== 429) {
+        usedIdx = i;
+        if (i > startModelIdx) {
+          modelIdx = i;
+          localStorage.setItem(STORAGE_MODEL_IDX, String(modelIdx));
+          updateModelLabel();
+        }
+        break;
+      }
+      res = null;
+    }
+    if (!res) throw new Error('quota');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err?.error?.message || ('HTTP ' + res.status));
+    }
+    const data = await res.json();
+    const txt = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!txt || !String(txt).trim()) throw new Error('empty-transcript');
+    return String(txt).trim();
+  }
+
+  async function geminiMicStopAndTranscribe() {
+    geminiMic.recording = false;
+    const sr = geminiMic.sampleRate;
+    const bufs = geminiMic.buffers.slice();
+    geminiMic.buffers = [];
+    geminiMicTeardownGraph();
+    if (micBtn) {
+      micBtn.classList.remove('active');
+      micBtn.title = 'Konuşarak yaz (Gemini)';
+    }
+
+    const merged = mergeFloat32Buffers(bufs);
+    const minN = Math.max(2400, Math.floor(sr * 0.2));
+    if (merged.length < minN) {
+      addBotMsg('🎙️ Kayıt çok kısa görünüyor. Biraz daha konuşup tekrar dene.');
+      geminiMicRefreshButton();
+      return;
+    }
+
+    const wavBlob = new Blob([encodeWAV(merged, sr)], { type: 'audio/wav' });
+    if (wavBlob.size > 18 * 1024 * 1024) {
+      addBotMsg('🎙️ Kayıt çok büyük. Daha kısa konuşmayı dene (en fazla ~2 dakika).');
+      geminiMicRefreshButton();
+      return;
+    }
+
+    geminiMic.transcribing = true;
+    if (micBtn) {
+      micBtn.disabled = true;
+      micBtn.title = 'Metne çevriliyor…';
+    }
+    try {
+      const text = await geminiTranscribeFromWav(wavBlob);
+      const prev = (input.value || '').trim();
+      input.value = prev ? prev + ' ' + text : text;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.focus();
+    } catch (e) {
+      const msg = (e && e.message) ? e.message : String(e);
+      if (msg === 'quota') {
+        addBotMsg('⏳ Dikte için kullanılabilir model kotası şimdilik dolu. Bir süre sonra tekrar dene.');
+      } else if (/empty-transcript|Boş ses/i.test(msg)) {
+        addBotMsg('🎙️ Konuşma metne dökülemedi. Net konuşup tekrar dene.');
+      } else {
+        addBotMsg('🎙️ Çeviri hatası: ' + msg);
+      }
+    } finally {
+      geminiMic.transcribing = false;
+      geminiMicRefreshButton();
+    }
+  }
+
+  async function geminiMicStart() {
+    if (!apiKey) {
+      panel.classList.add('open');
+      refreshKeywall();
+      return;
+    }
+    if (thinking || geminiMic.transcribing) return;
+    stopTTS();
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !AC) {
+      addBotMsg('🎙️ Bu tarayıcıda mikrofon kaydı desteklenmiyor (Chrome veya güncel Edge önerilir).');
+      return;
+    }
+
+    try {
+      geminiMic.stream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 },
+      });
+    } catch (e) {
+      addBotMsg('🎙️ Mikrofon izni gerekli. Adres çubuğundaki kilit simgesinden bu site için mikrofonu aç.');
+      return;
+    }
+
+    try {
+      geminiMic.ctx = new AC();
+      await geminiMic.ctx.resume();
+      geminiMic.sampleRate = geminiMic.ctx.sampleRate;
+      geminiMic.source = geminiMic.ctx.createMediaStreamSource(geminiMic.stream);
+      geminiMic.processor = geminiMic.ctx.createScriptProcessor(4096, 1, 1);
+      geminiMic.gain = geminiMic.ctx.createGain();
+      geminiMic.gain.gain.value = 0;
+      geminiMic.buffers = [];
+      geminiMic.recording = true;
+
+      geminiMic.processor.onaudioprocess = (ev) => {
+        if (!geminiMic.recording) return;
+        const ch = ev.inputBuffer.getChannelData(0);
+        geminiMic.buffers.push(new Float32Array(ch));
+      };
+
+      geminiMic.source.connect(geminiMic.processor);
+      geminiMic.processor.connect(geminiMic.gain);
+      geminiMic.gain.connect(geminiMic.ctx.destination);
+    } catch (e) {
+      geminiMicTeardownGraph();
+      addBotMsg('🎙️ Ses kaydı başlatılamadı. Başka tarayıcı dene veya sekmeyi yenile.');
+      geminiMicRefreshButton();
+      return;
+    }
+
+    if (micBtn) {
+      micBtn.classList.add('active');
+      micBtn.title = 'Durdur ve metne çevir';
+    }
+    geminiMic.maxTimer = setTimeout(() => {
+      if (geminiMic.recording) geminiMicStopAndTranscribe();
+    }, GEMINI_MIC_MAX_MS);
+  }
+
+  if (micBtn) {
+    geminiMicRefreshButton();
+    micBtn.addEventListener('click', async () => {
+      if (geminiMic.transcribing || thinking) return;
+      if (!apiKey) {
+        panel.classList.add('open');
+        refreshKeywall();
+        return;
+      }
+      if (geminiMic.recording) {
+        if (geminiMic.maxTimer) {
+          clearTimeout(geminiMic.maxTimer);
+          geminiMic.maxTimer = null;
+        }
+        await geminiMicStopAndTranscribe();
+      } else {
+        await geminiMicStart();
+      }
+    });
+  }
+
   /* ── Send message ── */
   async function send(text) {
     const hasImg = !!pendingImg;
     if (!text.trim() && !hasImg) return;
     if (thinking || !apiKey) return;
 
+    if (geminiMic.recording) {
+      geminiMic.recording = false;
+      if (geminiMic.maxTimer) {
+        clearTimeout(geminiMic.maxTimer);
+        geminiMic.maxTimer = null;
+      }
+      geminiMic.buffers = [];
+      geminiMicTeardownGraph();
+      if (micBtn) {
+        micBtn.classList.remove('active');
+        micBtn.title = 'Konuşarak yaz (Gemini)';
+      }
+    }
+
     thinking = true;
     sendBtn.disabled = true;
+    if (micBtn) micBtn.disabled = true;
     const sentText = text.trim();
     input.value = '';
     input.style.height = 'auto';
@@ -8321,6 +8624,7 @@ YANIT KURALLARI:
 
     thinking = false;
     sendBtn.disabled = false;
+    geminiMicRefreshButton();
     input.focus();
   }
 
