@@ -8191,6 +8191,38 @@ YANIT KURALLARI:
   const GEMINI_TRANSCRIBE_PROMPT =
     'Bu ses kaydındaki konuşmayı yazıya dök. Yanıtta yalnızca duyduğun metin olsun (konuşmacı Türkçe konuşuyorsa Türkçe yaz). Başlık, tırnak, madde işareti, özet veya açıklama ekleme.';
 
+  let geminiMicWorkletBlobUrl = null;
+  function getGeminiMicWorkletBlobUrl() {
+    if (geminiMicWorkletBlobUrl) return geminiMicWorkletBlobUrl;
+    const workletSrc = `
+class GeminiMicRecorderProcessor extends AudioWorkletProcessor {
+  process(inputs, outputs) {
+    const outs = outputs[0];
+    if (outs && outs.length) {
+      for (let c = 0; c < outs.length; c++) outs[c].fill(0);
+    }
+    const input = inputs[0];
+    if (input && input.length > 0) {
+      const ch = input[0];
+      const n = ch.length;
+      if (n > 0) {
+        const copy = new Float32Array(n);
+        copy.set(ch);
+        let sum = 0;
+        for (let i = 0; i < n; i++) sum += copy[i] * copy[i];
+        const rms = Math.sqrt(sum / n);
+        this.port.postMessage({ type: 'frame', buffer: copy.buffer, rms }, [copy.buffer]);
+      }
+    }
+    return true;
+  }
+}
+registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
+`;
+    geminiMicWorkletBlobUrl = URL.createObjectURL(new Blob([workletSrc], { type: 'application/javascript' }));
+    return geminiMicWorkletBlobUrl;
+  }
+
   const geminiMic = {
     recording: false,
     transcribing: false,
@@ -8304,8 +8336,11 @@ YANIT KURALLARI:
     if (micBtn) try { micBtn.style.removeProperty('--mic-level'); } catch (e) {}
     try {
       if (geminiMic.processor) {
+        try {
+          if (geminiMic.processor.port) geminiMic.processor.port.onmessage = null;
+        } catch (err) {}
+        try { geminiMic.processor.onaudioprocess = null; } catch (err) {}
         geminiMic.processor.disconnect();
-        geminiMic.processor.onaudioprocess = null;
       }
     } catch (e) {}
     try { if (geminiMic.source) geminiMic.source.disconnect(); } catch (e) {}
@@ -8413,7 +8448,10 @@ YANIT KURALLARI:
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.focus();
       if (autoSendMicChk && autoSendMicChk.checked && input.value.trim()) {
-        await send(input.value);
+        const sentOk = await send(input.value, { fromAutoMic: true });
+        if (!sentOk) {
+          addBotMsg('📤 Metin yazı alanında kaldı; **Gönder** ile tekrar deneyebilirsin.');
+        }
       }
     } catch (e) {
       const msg = (e && e.message) ? e.message : String(e);
@@ -8458,22 +8496,47 @@ YANIT KURALLARI:
       await geminiMic.ctx.resume();
       geminiMic.sampleRate = geminiMic.ctx.sampleRate;
       geminiMic.source = geminiMic.ctx.createMediaStreamSource(geminiMic.stream);
-      geminiMic.processor = geminiMic.ctx.createScriptProcessor(4096, 1, 1);
       geminiMic.gain = geminiMic.ctx.createGain();
       geminiMic.gain.gain.value = 0;
       geminiMic.buffers = [];
       geminiMic.recording = true;
 
-      geminiMic.processor.onaudioprocess = (ev) => {
-        if (!geminiMic.recording) return;
-        const ch = ev.inputBuffer.getChannelData(0);
-        geminiMic.buffers.push(new Float32Array(ch));
-        let sum = 0;
-        for (let i = 0; i < ch.length; i++) sum += ch[i] * ch[i];
-        const rms = Math.sqrt(sum / ch.length);
-        const norm = Math.min(1, rms * 4.2);
-        if (micBtn) micBtn.style.setProperty('--mic-level', norm.toFixed(3));
-      };
+      let usedWorklet = false;
+      if (geminiMic.ctx.audioWorklet && typeof AudioWorkletNode !== 'undefined') {
+        try {
+          await geminiMic.ctx.audioWorklet.addModule(getGeminiMicWorkletBlobUrl());
+          geminiMic.processor = new AudioWorkletNode(geminiMic.ctx, 'gemini-mic-recorder', {
+            numberOfInputs: 1,
+            numberOfOutputs: 1,
+            channelCount: 1,
+          });
+          geminiMic.processor.port.onmessage = (ev) => {
+            if (!geminiMic.recording || !ev.data || ev.data.type !== 'frame') return;
+            const { buffer, rms } = ev.data;
+            geminiMic.buffers.push(new Float32Array(buffer));
+            const norm = Math.min(1, (rms || 0) * 4.2);
+            if (micBtn) micBtn.style.setProperty('--mic-level', norm.toFixed(3));
+          };
+          usedWorklet = true;
+        } catch (wErr) {
+          geminiMic.processor = null;
+          usedWorklet = false;
+        }
+      }
+
+      if (!usedWorklet) {
+        geminiMic.processor = geminiMic.ctx.createScriptProcessor(4096, 1, 1);
+        geminiMic.processor.onaudioprocess = (ev) => {
+          if (!geminiMic.recording) return;
+          const ch = ev.inputBuffer.getChannelData(0);
+          geminiMic.buffers.push(new Float32Array(ch));
+          let sum = 0;
+          for (let i = 0; i < ch.length; i++) sum += ch[i] * ch[i];
+          const rms = Math.sqrt(sum / ch.length);
+          const norm = Math.min(1, rms * 4.2);
+          if (micBtn) micBtn.style.setProperty('--mic-level', norm.toFixed(3));
+        };
+      }
 
       geminiMic.source.connect(geminiMic.processor);
       geminiMic.processor.connect(geminiMic.gain);
@@ -8517,10 +8580,11 @@ YANIT KURALLARI:
   }
 
   /* ── Send message ── */
-  async function send(text) {
+  async function send(text, opts) {
+    const fromAutoMic = !!(opts && opts.fromAutoMic);
     const hasImg = !!pendingImg;
-    if (!text.trim() && !hasImg) return;
-    if (thinking || !apiKey) return;
+    if (!text.trim() && !hasImg) return false;
+    if (thinking || !apiKey) return false;
 
     if (geminiMic.recording) {
       geminiMic.recording = false;
@@ -8540,8 +8604,10 @@ YANIT KURALLARI:
     sendBtn.disabled = true;
     if (micBtn) micBtn.disabled = true;
     const sentText = text.trim();
-    input.value = '';
-    input.style.height = 'auto';
+    if (!fromAutoMic) {
+      input.value = '';
+      input.style.height = 'auto';
+    }
 
     // Show user message with optional image
     const imgSrc = hasImg ? imgThumb.src : null;
@@ -8584,6 +8650,7 @@ YANIT KURALLARI:
       }
     };
 
+    let sendOk = false;
     try {
       let res = null;
       const startModelIdx = modelIdx;
@@ -8601,7 +8668,7 @@ YANIT KURALLARI:
           // Persist new model index if we fell back
           if (i > startModelIdx) {
             modelIdx = i;
-            localStorage.setItem(STORAGE_MODEL_IDX, modelIdx);
+            localStorage.setItem(STORAGE_MODEL_IDX, String(modelIdx));
             updateModelLabel();
           }
           break;
@@ -8638,6 +8705,7 @@ YANIT KURALLARI:
         lastBotTextForTTS = reply;
         addBotMsg(reply);
         if (autoSpeakChk && autoSpeakChk.checked) speakMarkdown(reply);
+        sendOk = true;
       }
     } catch (e) {
       removeTyping();
@@ -8648,7 +8716,12 @@ YANIT KURALLARI:
     thinking = false;
     sendBtn.disabled = false;
     geminiMicRefreshButton();
+    if (sendOk && fromAutoMic) {
+      input.value = '';
+      input.style.height = 'auto';
+    }
     input.focus();
+    return sendOk;
   }
 
   /* ── Input events ── */
