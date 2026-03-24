@@ -7317,6 +7317,33 @@
   #eto-ai-send:hover { background: #0d47a1; }
   #eto-ai-send:disabled { background: #2a3550; cursor: default; }
 
+  #eto-ai-mic,
+  #eto-ai-speak {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid #2a3550;
+    background: #252d40; color: #e8eaf6; font-size: 16px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; align-self: flex-end;
+    transition: background .15s, border-color .15s, color .15s, opacity .15s;
+  }
+  #eto-ai-mic:hover { background: #1565c0; border-color: #1565c0; }
+  #eto-ai-mic.active { background: #b91c1c; border-color: #b91c1c; }
+  #eto-ai-speak:hover { background: #0d47a1; border-color: #0d47a1; }
+  #eto-ai-speak.active { background: #0d47a1; border-color: #0d47a1; }
+  #eto-ai-mic:disabled,
+  #eto-ai-speak:disabled { background: #2a3550; cursor: default; opacity: .7; }
+
+  #eto-ai-tts-toggle-row {
+    padding: 0 12px 12px;
+    display: flex; align-items: center; gap: 10px;
+    color: #94a3b8; font-size: 11px; flex-shrink: 0;
+  }
+  #eto-ai-tts-toggle-row label {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    user-select: none;
+  }
+  #eto-ai-tts-toggle-row input[type="checkbox"] { accent-color: #1565c0; }
+
   /* ── API key overlay ── */
   /* ── Key wall ── */
   #eto-ai-keywall {
@@ -7449,8 +7476,16 @@
   <div id="eto-ai-input-row">
     <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
     <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
+    <button id="eto-ai-mic" title="Sesli yaz" aria-label="Sesli yaz">🎙️</button>
     <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
+    <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
     <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
+  </div>
+  <div id="eto-ai-tts-toggle-row">
+    <label for="eto-ai-autospeak">
+      <input type="checkbox" id="eto-ai-autospeak" checked/>
+      Otomatik oku
+    </label>
   </div>
 </div>
 
@@ -7544,12 +7579,140 @@ YANIT KURALLARI:
   const imgThumb    = document.getElementById('eto-img-thumb');
   const imgLabel    = document.getElementById('eto-img-label');
   const imgRemove   = document.getElementById('eto-img-remove');
+  const micBtn      = document.getElementById('eto-ai-mic');
+  const ttsBtn      = document.getElementById('eto-ai-speak');
+  const autoSpeakChk= document.getElementById('eto-ai-autospeak');
 
   /* ── State ── */
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
   let history   = [];
   let thinking  = false;
   let pendingImg = null; // { mimeType, data (base64) }
+  const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
+  let lastBotTextForTTS = '';
+
+  /* ── Speech to text (sesle yaz) + Text to speech (sesli dinle) ── */
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const TTS_OK = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+  let recognition = null;
+  let recognizing = false;
+
+  function normalizeForTTS(md) {
+    if (!md) return '';
+    let t = String(md);
+    // Remove fenced blocks (```...```) including SVG/code
+    t = t.replace(/```[\s\S]*?```/g, ' ');
+    // Remove markdown links: [text](url) -> text
+    t = t.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+    // Inline code: `text` -> text
+    t = t.replace(/`([^`]+)`/g, '$1');
+    // Bold **text**
+    t = t.replace(/\*\*([^*]+)\*\*/g, '$1');
+    // Remove remaining markdown markers
+    t = t.replace(/[*_#]/g, '');
+    // Collapse spaces/newlines
+    t = t.replace(/\s+/g, ' ').trim();
+    return t;
+  }
+
+  function stopTTS() {
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+  }
+
+  function speakMarkdown(md) {
+    if (!TTS_OK) return;
+    const text = normalizeForTTS(md);
+    if (!text) return;
+    stopTTS();
+
+    // Keep it reasonable for browsers/voices
+    const safeText = text.length > 5000 ? text.slice(0, 5000) + '…' : text;
+    const u = new SpeechSynthesisUtterance(safeText);
+    u.lang = 'tr-TR';
+    u.rate = 1;
+    u.pitch = 1;
+    u.volume = 1;
+
+    u.onstart = () => { if (ttsBtn) ttsBtn.classList.add('active'); };
+    u.onend = () => { if (ttsBtn) ttsBtn.classList.remove('active'); };
+    u.onerror = () => { if (ttsBtn) ttsBtn.classList.remove('active'); };
+    window.speechSynthesis.speak(u);
+  }
+
+  if (autoSpeakChk) {
+    try {
+      const v = localStorage.getItem(STORAGE_AUTOSPEAK_KEY);
+      autoSpeakChk.checked = v ? v !== '0' : true;
+    } catch (e) {}
+
+    autoSpeakChk.addEventListener('change', () => {
+      try { localStorage.setItem(STORAGE_AUTOSPEAK_KEY, autoSpeakChk.checked ? '1' : '0'); } catch (e) {}
+    });
+  }
+
+  if (ttsBtn) {
+    if (!TTS_OK) {
+      ttsBtn.disabled = true;
+      ttsBtn.title = 'Sesli dinleme bu tarayıcıda desteklenmiyor';
+    } else {
+      ttsBtn.addEventListener('click', () => {
+        if (!lastBotTextForTTS) return;
+        speakMarkdown(lastBotTextForTTS);
+      });
+    }
+  }
+
+  if (micBtn) {
+    if (!SpeechRec) {
+      micBtn.disabled = true;
+      micBtn.title = 'Sesle yazma bu tarayıcıda desteklenmiyor (Chrome önerilir).';
+    } else {
+      recognition = new SpeechRec();
+      recognition.lang = 'tr-TR';
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        recognizing = true;
+        micBtn.classList.add('active');
+      };
+
+      recognition.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        input.value = transcript.trim();
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+      };
+
+      recognition.onerror = () => {
+        recognizing = false;
+        micBtn.classList.remove('active');
+        // Sistem mesajı: otomatik seslendirme yapılmaz
+        try { addBotMsg('🎙️ Sesli yazma sırasında bir hata oluştu. Lütfen tekrar dene.'); } catch (e) {}
+      };
+
+      recognition.onend = () => {
+        recognizing = false;
+        micBtn.classList.remove('active');
+      };
+
+      micBtn.addEventListener('click', () => {
+        if (!recognition) return;
+        if (recognizing) {
+          try { recognition.stop(); } catch (e) {}
+          return;
+        }
+        stopTTS();
+        try {
+          input.focus();
+          recognition.start();
+        } catch (e) {}
+      });
+    }
+  }
 
   /* ── Site content extraction ── */
   function extractSiteContent() {
@@ -7829,6 +7992,7 @@ YANIT KURALLARI:
   /* ── Send message ── */
   async function send(text) {
     const hasImg = !!pendingImg;
+    if (recognition && recognizing) { try { recognition.stop(); } catch(e) {} }
     if (!text.trim() && !hasImg) return;
     if (thinking || !apiKey) return;
 
@@ -7930,7 +8094,9 @@ YANIT KURALLARI:
         if (usedIdx > startModelIdx) {
           addBotMsg(`ℹ️ **${MODELS[startModelIdx].label}** kotası doldu — otomatik olarak **${MODELS[usedIdx].label}**'a geçildi.`);
         }
+        lastBotTextForTTS = reply;
         addBotMsg(reply);
+        if (autoSpeakChk && autoSpeakChk.checked) speakMarkdown(reply);
       }
     } catch (e) {
       removeTyping();
@@ -7983,6 +8149,8 @@ YANIT KURALLARI:
     msgs.innerHTML = '';
     history.length = 0;
     welcomeShown = false;
+    lastBotTextForTTS = '';
+    stopTTS();
     refreshKeywall();
   }
 
@@ -7999,7 +8167,7 @@ YANIT KURALLARI:
             const parts = m.parts || [];
             const textPart = parts.find(p => p.text);
             if (m.role === 'user') addUserMsg(textPart ? textPart.text : '(görsel)');
-            else if (m.role === 'model' && textPart) addBotMsg(textPart.text);
+            else if (m.role === 'model' && textPart) { addBotMsg(textPart.text); lastBotTextForTTS = textPart.text; }
           });
           history.push(...saved);
           welcomeShown = true;
