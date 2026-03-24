@@ -7343,6 +7343,40 @@
     user-select: none;
   }
   #eto-ai-tts-toggle-row input[type="checkbox"] { accent-color: #1565c0; }
+  #eto-ai-voice {
+    background: #252d40;
+    border: 1px solid #2a3550;
+    color: #e8eaf6;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 11px;
+    min-width: 130px;
+    max-width: 180px;
+  }
+  #eto-ai-voice:focus { outline: none; border-color: #1565c0; }
+  #eto-ai-autosend-pending {
+    display: none;
+    margin: 0 12px 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #2a3550;
+    background: #1e2538;
+    color: #cbd5e1;
+    font-size: 11px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  #eto-ai-autosend-pending.active { display: flex; }
+  #eto-ai-autosend-cancel {
+    border: 1px solid #3b4a66;
+    background: #252d40;
+    color: #e8eaf6;
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 3px 8px;
+    cursor: pointer;
+  }
 
   /* ── API key overlay ── */
   /* ── Key wall ── */
@@ -7490,6 +7524,14 @@
       <input type="checkbox" id="eto-ai-autosend"/>
       Dikte bitince otomatik gönder
     </label>
+    <label for="eto-ai-voice">
+      Ses:
+      <select id="eto-ai-voice" aria-label="Ses seçimi"></select>
+    </label>
+  </div>
+  <div id="eto-ai-autosend-pending">
+    <span id="eto-ai-autosend-text">Dikte tamamlandı. 1.0 sn içinde gönderilecek…</span>
+    <button id="eto-ai-autosend-cancel" type="button">İptal</button>
   </div>
 </div>
 
@@ -7587,6 +7629,10 @@ YANIT KURALLARI:
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
   const autoSendChk = document.getElementById('eto-ai-autosend');
+  const voiceSelect = document.getElementById('eto-ai-voice');
+  const autoSendPending = document.getElementById('eto-ai-autosend-pending');
+  const autoSendPendingText = document.getElementById('eto-ai-autosend-text');
+  const autoSendCancelBtn = document.getElementById('eto-ai-autosend-cancel');
 
   /* ── State ── */
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
@@ -7595,6 +7641,7 @@ YANIT KURALLARI:
   let pendingImg = null; // { mimeType, data (base64) }
   const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
   const STORAGE_AUTOSEND_KEY  = 'eto-auto-send-v1';
+  const STORAGE_TTS_VOICE_KEY = 'eto-tts-voice-uri-v1';
   let lastBotTextForTTS = '';
 
   /* ── Speech to text (sesle yaz) + Text to speech (sesli dinle) ── */
@@ -7604,6 +7651,9 @@ YANIT KURALLARI:
   let recognizing = false;
   let lastRecognitionError = '';
   let shouldAutoSendAfterDictation = false;
+  let autoSendTimer = null;
+  let autoSendInterval = null;
+  let ttsVoiceUri = '';
 
   function normalizeForTTS(md) {
     if (!md) return '';
@@ -7625,6 +7675,39 @@ YANIT KURALLARI:
 
   function stopTTS() {
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+    if (ttsBtn) ttsBtn.classList.remove('active');
+  }
+
+  function cancelAutoSendCountdown() {
+    if (autoSendTimer) {
+      clearTimeout(autoSendTimer);
+      autoSendTimer = null;
+    }
+    if (autoSendInterval) {
+      clearInterval(autoSendInterval);
+      autoSendInterval = null;
+    }
+    if (autoSendPending) autoSendPending.classList.remove('active');
+  }
+
+  function startAutoSendCountdown(getTextFn) {
+    cancelAutoSendCountdown();
+    if (!autoSendPending || !autoSendPendingText) return;
+    const totalMs = 1000;
+    const start = Date.now();
+    autoSendPendingText.textContent = 'Dikte tamamlandı. 1.0 sn içinde gönderilecek…';
+    autoSendPending.classList.add('active');
+
+    autoSendInterval = setInterval(() => {
+      const left = Math.max(0, totalMs - (Date.now() - start));
+      autoSendPendingText.textContent = `Dikte tamamlandı. ${(left / 1000).toFixed(1)} sn içinde gönderilecek…`;
+    }, 100);
+
+    autoSendTimer = setTimeout(() => {
+      cancelAutoSendCountdown();
+      const finalText = (getTextFn ? getTextFn() : '').trim();
+      if (finalText.length >= 4 && !thinking && apiKey) send(finalText);
+    }, totalMs);
   }
 
   function speakMarkdown(md) {
@@ -7641,10 +7724,46 @@ YANIT KURALLARI:
     u.pitch = 1;
     u.volume = 1;
 
+    // Apply selected voice when available
+    const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+    if (ttsVoiceUri && voices.length) {
+      const selectedVoice = voices.find(v => v.voiceURI === ttsVoiceUri);
+      if (selectedVoice) {
+        u.voice = selectedVoice;
+        if (selectedVoice.lang) u.lang = selectedVoice.lang;
+      }
+    }
+
     u.onstart = () => { if (ttsBtn) ttsBtn.classList.add('active'); };
     u.onend = () => { if (ttsBtn) ttsBtn.classList.remove('active'); };
     u.onerror = () => { if (ttsBtn) ttsBtn.classList.remove('active'); };
     window.speechSynthesis.speak(u);
+  }
+
+  function populateVoiceSelect() {
+    if (!voiceSelect || !TTS_OK || !window.speechSynthesis.getVoices) return;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || !voices.length) return;
+
+    const preferred = voices.filter(v => /^tr(-|$)/i.test(v.lang));
+    const list = preferred.length ? preferred : voices;
+    const prevValue = ttsVoiceUri || localStorage.getItem(STORAGE_TTS_VOICE_KEY) || '';
+
+    voiceSelect.innerHTML = '';
+    const autoOpt = document.createElement('option');
+    autoOpt.value = '';
+    autoOpt.textContent = 'Varsayılan ses';
+    voiceSelect.appendChild(autoOpt);
+
+    list.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.voiceURI;
+      opt.textContent = `${v.name} (${v.lang})`;
+      voiceSelect.appendChild(opt);
+    });
+
+    ttsVoiceUri = prevValue;
+    voiceSelect.value = list.some(v => v.voiceURI === prevValue) ? prevValue : '';
   }
 
   if (autoSpeakChk) {
@@ -7666,15 +7785,39 @@ YANIT KURALLARI:
 
     autoSendChk.addEventListener('change', () => {
       try { localStorage.setItem(STORAGE_AUTOSEND_KEY, autoSendChk.checked ? '1' : '0'); } catch (e) {}
+      if (!autoSendChk.checked) cancelAutoSendCountdown();
     });
+  }
+
+  if (autoSendCancelBtn) {
+    autoSendCancelBtn.addEventListener('click', cancelAutoSendCountdown);
   }
 
   if (ttsBtn) {
     if (!TTS_OK) {
       ttsBtn.disabled = true;
       ttsBtn.title = 'Sesli dinleme bu tarayıcıda desteklenmiyor';
+      if (voiceSelect) voiceSelect.disabled = true;
     } else {
+      try { ttsVoiceUri = localStorage.getItem(STORAGE_TTS_VOICE_KEY) || ''; } catch (e) {}
+      populateVoiceSelect();
+      if (window.speechSynthesis && 'onvoiceschanged' in window.speechSynthesis) {
+        window.speechSynthesis.onvoiceschanged = populateVoiceSelect;
+      }
+
+      if (voiceSelect) {
+        voiceSelect.addEventListener('change', () => {
+          ttsVoiceUri = voiceSelect.value || '';
+          try { localStorage.setItem(STORAGE_TTS_VOICE_KEY, ttsVoiceUri); } catch (e) {}
+        });
+      }
+
       ttsBtn.addEventListener('click', () => {
+        // Toggle: konuşma sürüyorsa durdur
+        if (window.speechSynthesis && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) {
+          stopTTS();
+          return;
+        }
         if (!lastBotTextForTTS) return;
         speakMarkdown(lastBotTextForTTS);
       });
@@ -7695,6 +7838,7 @@ YANIT KURALLARI:
         recognizing = true;
         lastRecognitionError = '';
         shouldAutoSendAfterDictation = !!(autoSendChk && autoSendChk.checked);
+        cancelAutoSendCountdown();
         micBtn.classList.add('active');
       };
 
@@ -7744,8 +7888,7 @@ YANIT KURALLARI:
 
         // Son transkriptin textarea'ya tam oturması için kısa gecikme
         setTimeout(() => {
-          const finalText = (input.value || '').trim();
-          if (finalText.length >= 4 && !thinking && apiKey) send(finalText);
+          startAutoSendCountdown(() => input.value || '');
         }, 350);
       };
 
@@ -8042,6 +8185,7 @@ YANIT KURALLARI:
   /* ── Send message ── */
   async function send(text) {
     const hasImg = !!pendingImg;
+    cancelAutoSendCountdown();
     if (recognition && recognizing) { try { recognition.stop(); } catch(e) {} }
     if (!text.trim() && !hasImg) return;
     if (thinking || !apiKey) return;
