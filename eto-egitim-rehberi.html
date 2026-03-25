@@ -7486,6 +7486,24 @@
     padding: 10px 12px;
     transition: border-color .15s, background .15s;
   }
+
+  #eto-ai-tts-mode-wrap {
+    cursor: default;
+  }
+
+  #eto-ai-tts-mode {
+    background: #252d40;
+    border: 1px solid #2a3550;
+    color: #e8eaf6;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    outline: none;
+    flex-shrink: 0;
+    max-width: 150px;
+  }
+
+  #eto-ai-tts-mode:disabled { opacity: .75; }
   #eto-ai-tts-toggle-row .ai-opt:hover {
     border-color: #3d5280;
     background: #1e283c;
@@ -7661,6 +7679,16 @@
           <input type="checkbox" id="eto-ai-autospeak" checked/>
           Yanıtları otomatik sesli oku
         </label>
+        <div class="ai-opt" id="eto-ai-tts-mode-wrap">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%;">
+            <span>Sesli okuma modu</span>
+            <select id="eto-ai-tts-mode" aria-label="Sesli okuma modu">
+              <option value="short">Kısa</option>
+              <option value="medium">Orta</option>
+              <option value="normal">Normal</option>
+            </select>
+          </div>
+        </div>
         <label class="ai-opt" for="eto-ai-autosend-mic">
           <input type="checkbox" id="eto-ai-autosend-mic"/>
           Dikte bitince otomatik gönder
@@ -7769,6 +7797,7 @@ YANIT KURALLARI:
   const micBtn      = document.getElementById('eto-ai-mic');
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
+  const ttsModeSel  = document.getElementById('eto-ai-tts-mode');
   const autoSendMicChk = document.getElementById('eto-ai-autosend-mic');
   const polishMicChk = document.getElementById('eto-ai-polish-mic');
   const recTimerEl = document.getElementById('eto-ai-rec-timer');
@@ -7798,6 +7827,8 @@ YANIT KURALLARI:
   let pendingImg = null; // { mimeType, data (base64) }
   const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
   const STORAGE_AUTOSEND_MIC_KEY = 'eto-auto-send-mic-v1';
+  const STORAGE_TTS_MODE_KEY = 'eto-tts-mode-v1';
+  let ttsMode = localStorage.getItem(STORAGE_TTS_MODE_KEY) || 'short';
   let lastBotTextForTTS = '';
 
   /* ── Text to speech (sesli dinle) ── */
@@ -7841,13 +7872,14 @@ YANIT KURALLARI:
     return t;
   }
 
-  function getShortTTSReadText(md) {
+  function getShortTTSReadText(md, detailSentenceCount, maxChars) {
+    const detailCount = (typeof detailSentenceCount === 'number') ? detailSentenceCount : 1;
+    const maxLen = (typeof maxChars === 'number') ? maxChars : 520;
     const raw = String(md || '');
     // Gemini cevap formatında genelde şu etiketler olur:
     // "💡 Kısa Cevap:" ve "📋 Detay:"
-    // TTS için: Kısa Cevap'ı al, Detay'dan sadece 1 cümle ekle.
     let shortPart = '';
-    let detailFirstSentence = '';
+    let detailText = '';
     const cleaned = raw.replace(/```[\s\S]*?```/g, ' ');
 
     const shortRe = /(?:💡\s*)?Kısa\s*Cevap\s*:\s*([\s\S]*?)(?:(?:📋\s*)?Detay\s*:|⚡|🔧|$)/i;
@@ -7859,18 +7891,17 @@ YANIT KURALLARI:
     if (mDetail && mDetail[1]) {
       const detail = mDetail[1].trim();
       const sentences = detail.split(/(?<=[.!?])\s+/);
-      detailFirstSentence = (sentences[0] || '').trim();
+      detailText = sentences.slice(0, detailCount).join(' ').trim();
     }
 
     let out = '';
     if (shortPart) out = shortPart;
-    if (detailFirstSentence) out = (out ? (out + ' ') : '') + detailFirstSentence;
+    if (detailText) out = (out ? (out + ' ') : '') + detailText;
 
     out = normalizeForTTS(out || raw);
 
     // Aşırı uzamasın (uyku getiriyordu)
-    const MAX_CHARS = 520;
-    if (out.length > MAX_CHARS) out = out.slice(0, MAX_CHARS).trimEnd() + '…';
+    if (out.length > maxLen) out = out.slice(0, maxLen).trimEnd() + '…';
     return out;
   }
 
@@ -7881,7 +7912,7 @@ YANIT KURALLARI:
 
   function speakMarkdown(md) {
     if (!TTS_OK) return;
-    const text = getShortTTSReadText(md);
+    const text = getTTSReadText(md);
     if (!text) return;
     stopTTS();
 
@@ -7906,6 +7937,13 @@ YANIT KURALLARI:
     window.speechSynthesis.speak(u);
   }
 
+  function getTTSReadText(md) {
+    const mode = (ttsModeSel && ttsModeSel.value) ? ttsModeSel.value : ttsMode;
+    if (mode === 'normal') return normalizeForTTS(md);
+    if (mode === 'medium') return getShortTTSReadText(md, 2, 900);
+    return getShortTTSReadText(md, 1, 520);
+  }
+
   if (autoSpeakChk) {
     try {
       const v = localStorage.getItem(STORAGE_AUTOSPEAK_KEY);
@@ -7914,6 +7952,20 @@ YANIT KURALLARI:
 
     autoSpeakChk.addEventListener('change', () => {
       try { localStorage.setItem(STORAGE_AUTOSPEAK_KEY, autoSpeakChk.checked ? '1' : '0'); } catch (e) {}
+    });
+  }
+
+  if (ttsModeSel) {
+    try {
+      const v = localStorage.getItem(STORAGE_TTS_MODE_KEY);
+      ttsMode = v || 'short';
+      ttsModeSel.value = ttsMode;
+    } catch (e) {}
+    ttsModeSel.addEventListener('change', () => {
+      try {
+        ttsMode = ttsModeSel.value;
+        localStorage.setItem(STORAGE_TTS_MODE_KEY, ttsMode);
+      } catch (e) {}
     });
   }
 
