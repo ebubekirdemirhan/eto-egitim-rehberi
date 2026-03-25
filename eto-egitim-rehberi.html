@@ -7841,6 +7841,39 @@ YANIT KURALLARI:
     return t;
   }
 
+  function getShortTTSReadText(md) {
+    const raw = String(md || '');
+    // Gemini cevap formatında genelde şu etiketler olur:
+    // "💡 Kısa Cevap:" ve "📋 Detay:"
+    // TTS için: Kısa Cevap'ı al, Detay'dan sadece 1 cümle ekle.
+    let shortPart = '';
+    let detailFirstSentence = '';
+    const cleaned = raw.replace(/```[\s\S]*?```/g, ' ');
+
+    const shortRe = /(?:💡\s*)?Kısa\s*Cevap\s*:\s*([\s\S]*?)(?:(?:📋\s*)?Detay\s*:|⚡|🔧|$)/i;
+    const detailRe = /(?:📋\s*)?Detay\s*:\s*([\s\S]*?)(?:(?:⚡|🔧)|$)/i;
+
+    const mShort = cleaned.match(shortRe);
+    const mDetail = cleaned.match(detailRe);
+    if (mShort && mShort[1]) shortPart = mShort[1].trim();
+    if (mDetail && mDetail[1]) {
+      const detail = mDetail[1].trim();
+      const sentences = detail.split(/(?<=[.!?])\s+/);
+      detailFirstSentence = (sentences[0] || '').trim();
+    }
+
+    let out = '';
+    if (shortPart) out = shortPart;
+    if (detailFirstSentence) out = (out ? (out + ' ') : '') + detailFirstSentence;
+
+    out = normalizeForTTS(out || raw);
+
+    // Aşırı uzamasın (uyku getiriyordu)
+    const MAX_CHARS = 520;
+    if (out.length > MAX_CHARS) out = out.slice(0, MAX_CHARS).trimEnd() + '…';
+    return out;
+  }
+
   function stopTTS() {
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
     if (ttsBtn) ttsBtn.classList.remove('active');
@@ -7848,7 +7881,7 @@ YANIT KURALLARI:
 
   function speakMarkdown(md) {
     if (!TTS_OK) return;
-    const text = normalizeForTTS(md);
+    const text = getShortTTSReadText(md);
     if (!text) return;
     stopTTS();
 
