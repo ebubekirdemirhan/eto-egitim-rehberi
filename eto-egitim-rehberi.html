@@ -7664,13 +7664,13 @@
   <!-- Composer: tek satır araç çubuğu -->
   <div id="eto-ai-composer">
     <div id="eto-ai-input-row">
-      <input type="file" id="eto-img-file" accept="image/*" capture="environment"/>
-      <button id="eto-img-btn" title="Fotoğraf veya görsel ekle" aria-label="Görsel ekle">📷</button>
+      <input type="file" id="eto-img-file" accept="image/*,application/pdf,.pdf"/>
+      <button id="eto-img-btn" title="Görsel veya PDF ekle" aria-label="Görsel veya PDF ekle">📷</button>
       <div class="eto-ai-mic-wrap">
         <button type="button" id="eto-ai-mic" title="Konuşarak yaz (Gemini)" aria-label="Konuşarak yaz">🎙️</button>
         <span id="eto-ai-rec-timer" aria-live="polite"></span>
       </div>
-      <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya fotoğraf ekle…" aria-label="Soru yaz"></textarea>
+      <textarea id="eto-ai-input" rows="1" placeholder="ETO konusunda soru sor veya görsel/PDF ekle…" aria-label="Soru yaz"></textarea>
       <button id="eto-ai-speak" title="Cevabı sesli dinle" aria-label="Cevabı sesli dinle">🔊</button>
       <button type="button" id="eto-ai-settings-btn" title="Ses ayarları" aria-label="Ayarlar" aria-expanded="false" aria-haspopup="dialog">⚙</button>
       <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
@@ -8085,19 +8085,29 @@ YANIT KURALLARI:
   imgBtn.addEventListener('click', () => imgFile.click());
   function loadImageFile(file) {
     if (!file) return;
-    if (!file.type || !file.type.startsWith('image/')) {
-      addBotMsg('📷 Sadece görsel (image) dosyası yükleyebilirim.');
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '');
+    const isImage = file.type && file.type.startsWith('image/');
+    if (!isPdf && !isImage) {
+      addBotMsg('📎 Sadece görüntü veya PDF yükleyebilirsin.');
       return;
     }
+    const mimeType = isPdf ? 'application/pdf' : file.type;
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result;
       const base64  = dataUrl.split(',')[1];
-      pendingImg = { mimeType: file.type, data: base64 };
-      imgThumb.src = dataUrl;
-      imgLabel.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+      pendingImg = { mimeType, data: base64 };
+      if (!isPdf) {
+        imgThumb.style.display = 'block';
+        imgThumb.src = dataUrl;
+        imgLabel.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+      } else {
+        imgThumb.style.display = 'none';
+        imgThumb.src = '';
+        imgLabel.textContent = file.name + ' (PDF)';
+      }
       imgPreview.classList.add('active');
-      input.placeholder = 'Bu görsel hakkında soruyu yaz…';
+      input.placeholder = isPdf ? 'Bu PDF hakkında sorunu yaz…' : 'Bu görsel hakkında soruyu yaz…';
       input.focus();
     };
     reader.readAsDataURL(file);
@@ -8134,7 +8144,9 @@ YANIT KURALLARI:
     pendingImg = null;
     imgPreview.classList.remove('active');
     imgThumb.src = '';
-    input.placeholder = 'ETO konusunda soru sor veya fotoğraf ekle…';
+    try { imgThumb.style.display = 'block'; } catch (e) {}
+    if (imgLabel) imgLabel.textContent = 'Görsel eklendi';
+    input.placeholder = 'ETO konusunda soru sor veya görsel/PDF ekle…';
   });
 
   /* ── Ayarlar çekmecesi ── */
@@ -8866,6 +8878,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
   async function send(text, opts) {
     const fromAutoMic = !!(opts && opts.fromAutoMic);
     const hasImg = !!pendingImg;
+    const isPdf = !!(pendingImg && pendingImg.mimeType === 'application/pdf');
     if (!text.trim() && !hasImg) return false;
     if (thinking || !apiKey) return false;
 
@@ -8893,8 +8906,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     }
 
     // Show user message with optional image
-    const imgSrc = hasImg ? imgThumb.src : null;
-    addUserMsg(sentText, imgSrc);
+    const imgSrc = (hasImg && !isPdf) ? imgThumb.src : null;
+    const bubbleText = sentText || (hasImg ? (isPdf ? '📄 PDF eklendi' : '📷 Görsel eklendi') : '');
+    addUserMsg(bubbleText, imgSrc);
 
     // Build parts array
     const userParts = [];
@@ -8902,16 +8916,25 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       userParts.push({ inlineData: { mimeType: pendingImg.mimeType, data: pendingImg.data } });
     }
     if (sentText) userParts.push({ text: sentText });
-    if (!sentText && hasImg) userParts.push({ text: 'Bu görseli ETO perspektifinden incele ve açıkla.' });
+    if (!sentText && hasImg) userParts.push({
+      text: isPdf
+        ? 'Bu PDF dokümanını ETO perspektifinden incele ve ilgili kısımları açıkla.'
+        : 'Bu görseli ETO perspektifinden incele ve açıkla.'
+    });
 
-    // Clear pending image
+    // Clear pending attachment
     pendingImg = null;
     imgPreview.classList.remove('active');
     imgThumb.src = '';
-    input.placeholder = 'ETO konusunda soru sor veya fotoğraf ekle…';
+    try { imgThumb.style.display = 'block'; } catch (e) {}
+    if (imgLabel) imgLabel.textContent = 'Görsel eklendi';
+    input.placeholder = isPdf ? 'ETO konusunda soru sor veya PDF ekle…' : 'ETO konusunda soru sor veya görsel ekle…';
 
     // Add to history (images not stored in history to keep token count low)
-    const historyEntry = { role: 'user', parts: sentText ? [{ text: sentText }] : [{ text: '(görsel analiz)' }] };
+    const historyEntry = {
+      role: 'user',
+      parts: sentText ? [{ text: sentText }] : [{ text: isPdf ? '(PDF doküman analizi)' : '(görsel analiz)' }],
+    };
     history.push(historyEntry);
     if (history.length > 20) history = history.slice(-20);
 
