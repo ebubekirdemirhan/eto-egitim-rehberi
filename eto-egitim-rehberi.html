@@ -7827,6 +7827,15 @@ YANIT KURALLARI:
     }
     // Bazı ikon karakterleri (ör. oklar/çizgiler) konuşmaya anlam katmadığı için temizle
     t = t.replace(/[→➡️🔊🔁✅❌ℹ️⚠️⏳📤🎙️🎙]/g, '');
+    // Yapı başlıklarını kaldır: Gemini promptu her cevapta "Kısa Cevap / Detay" gibi etiketler üretiyor
+    // TTS'de bu etiketleri okumak çoğu zaman istenmiyor.
+    t = t.replace(/\bKısa\s*Cevap\s*:\s*/gi, '');
+    t = t.replace(/\bDetay\s*:\s*/gi, '');
+    t = t.replace(/\bSVG\s*Görsel\s*:\s*/gi, '');
+    t = t.replace(/\bSaha\s*Notu\s*:\s*/gi, '');
+    t = t.replace(/\bSınav\s*İpucu\b[^:]*:\s*/gi, '');
+    // Ön taraftaki liste numaralarını da temizle: "1. ...", "2. ..."
+    t = t.replace(/(^|\s)\d+\.\s+/g, '$1');
     // Collapse spaces/newlines
     t = t.replace(/\s+/g, ' ').trim();
     return t;
