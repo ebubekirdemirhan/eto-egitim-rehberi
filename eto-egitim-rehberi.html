@@ -7308,6 +7308,16 @@
     padding: 8px 10px 10px;
     flex-shrink: 0;
   }
+
+  #eto-ai-input-row.eto-ai-drop-active #eto-ai-input {
+    border-color: #1565c0;
+    box-shadow: 0 0 0 2px rgba(21, 101, 192, .35);
+  }
+
+  #eto-ai-input-row.eto-ai-drop-active {
+    background: rgba(21, 101, 192, .06);
+    border-radius: 18px;
+  }
   #eto-ai-input {
     flex: 1;
     min-width: 0;
@@ -8073,9 +8083,12 @@ YANIT KURALLARI:
 
   /* ── Image upload ── */
   imgBtn.addEventListener('click', () => imgFile.click());
-  imgFile.addEventListener('change', () => {
-    const file = imgFile.files[0];
+  function loadImageFile(file) {
     if (!file) return;
+    if (!file.type || !file.type.startsWith('image/')) {
+      addBotMsg('📷 Sadece görsel (image) dosyası yükleyebilirim.');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result;
@@ -8089,7 +8102,34 @@ YANIT KURALLARI:
     };
     reader.readAsDataURL(file);
     imgFile.value = ''; // reset so same file can be re-selected
+  }
+
+  imgFile.addEventListener('change', () => {
+    loadImageFile(imgFile.files[0]);
   });
+
+  // Drag & Drop support
+  const dropTarget = document.getElementById('eto-ai-input-row') || document.getElementById('eto-ai-composer');
+  if (dropTarget) {
+    ['dragenter', 'dragover'].forEach(evt => {
+      dropTarget.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropTarget.classList.add('eto-ai-drop-active');
+      });
+    });
+    ['dragleave', 'drop'].forEach(evt => {
+      dropTarget.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropTarget.classList.remove('eto-ai-drop-active');
+      });
+    });
+    dropTarget.addEventListener('drop', (e) => {
+      const files = e.dataTransfer && e.dataTransfer.files ? e.dataTransfer.files : null;
+      if (files && files.length) loadImageFile(files[0]);
+    });
+  }
   imgRemove.addEventListener('click', () => {
     pendingImg = null;
     imgPreview.classList.remove('active');
