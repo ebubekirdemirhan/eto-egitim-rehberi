@@ -7572,9 +7572,22 @@
     background: #1e2538; border-top: 1px solid #2a3550; flex-shrink: 0;
   }
   #eto-img-preview.active { display: flex; }
+  #eto-attach-media {
+    width: 48px; height: 48px; border-radius: 6px;
+    overflow: hidden; border: 1px solid #2a3550;
+    background: #252d40; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
   #eto-img-thumb {
     width: 48px; height: 48px; border-radius: 6px; object-fit: cover;
-    border: 1px solid #2a3550;
+    border: none;
+    display: block;
+  }
+  #eto-pdf-embed {
+    width: 100%; height: 100%;
+    display: none;
+    background: #252d40;
+    border: 0;
   }
   #eto-img-label { color: #8892a4; font-size: 11px; flex: 1; }
   #eto-img-remove {
@@ -7656,7 +7669,10 @@
 
   <!-- Image preview strip -->
   <div id="eto-img-preview">
-    <img id="eto-img-thumb" src="" alt="Seçilen görsel"/>
+    <div id="eto-attach-media">
+      <img id="eto-img-thumb" src="" alt="Seçilen görsel"/>
+      <embed id="eto-pdf-embed" type="application/pdf" />
+    </div>
     <span id="eto-img-label">Görsel eklendi</span>
     <button id="eto-img-remove" title="Görseli kaldır">✕</button>
   </div>
@@ -7664,7 +7680,7 @@
   <!-- Composer: tek satır araç çubuğu -->
   <div id="eto-ai-composer">
     <div id="eto-ai-input-row">
-      <input type="file" id="eto-img-file" accept="image/*,application/pdf,.pdf"/>
+      <input type="file" id="eto-img-file" accept="image/*,application/pdf,.pdf" multiple/>
       <button id="eto-img-btn" title="Görsel veya PDF ekle" aria-label="Görsel veya PDF ekle">📷</button>
       <div class="eto-ai-mic-wrap">
         <button type="button" id="eto-ai-mic" title="Konuşarak yaz (Gemini)" aria-label="Konuşarak yaz">🎙️</button>
@@ -7802,6 +7818,7 @@ YANIT KURALLARI:
   const imgFile     = document.getElementById('eto-img-file');
   const imgPreview  = document.getElementById('eto-img-preview');
   const imgThumb    = document.getElementById('eto-img-thumb');
+  const pdfEmbedEl  = document.getElementById('eto-pdf-embed');
   const imgLabel    = document.getElementById('eto-img-label');
   const imgRemove   = document.getElementById('eto-img-remove');
   const micBtn      = document.getElementById('eto-ai-mic');
@@ -7834,12 +7851,54 @@ YANIT KURALLARI:
   let apiKey    = localStorage.getItem(STORAGE_KEY) || '';
   let history   = [];
   let thinking  = false;
-  let pendingImg = null; // { mimeType, data (base64) }
+  // Yüklenen dosyalar (görsel/PDF) — Gemini'ye inlineData olarak gönderilir.
+  let pendingAttachments = []; // { mimeType, data (base64), name, isPdf }
   const STORAGE_AUTOSPEAK_KEY = 'eto-auto-tts-v1';
   const STORAGE_AUTOSEND_MIC_KEY = 'eto-auto-send-mic-v1';
   const STORAGE_TTS_MODE_KEY = 'eto-tts-mode-v1';
   let ttsMode = localStorage.getItem(STORAGE_TTS_MODE_KEY) || 'short';
   let lastBotTextForTTS = '';
+
+  const MAX_ATTACHMENTS = 8;
+
+  function isPdfAttachment(a) {
+    return !!(a && a.isPdf);
+  }
+
+  function renderAttachmentPreview() {
+    if (!imgPreview || !imgLabel || !imgThumb) return;
+    if (!pendingAttachments.length) {
+      imgPreview.classList.remove('active');
+      if (imgThumb) { imgThumb.style.display = 'block'; imgThumb.src = ''; }
+      if (pdfEmbedEl) { pdfEmbedEl.style.display = 'none'; pdfEmbedEl.removeAttribute('src'); }
+      imgLabel.textContent = 'Görsel eklendi';
+      return;
+    }
+
+    const first = pendingAttachments[0];
+    imgLabel.textContent = pendingAttachments.length > 1
+      ? ('Eklenen: ' + pendingAttachments.length + ' dosya')
+      : ((first && first.name) ? first.name : 'Dosya eklendi');
+
+    if (isPdfAttachment(first)) {
+      if (imgThumb) imgThumb.style.display = 'none';
+      if (pdfEmbedEl) {
+        pdfEmbedEl.style.display = 'block';
+        pdfEmbedEl.src = first.dataUrl || ('data:application/pdf;base64,' + first.data);
+      }
+    } else {
+      if (imgThumb) {
+        imgThumb.style.display = 'block';
+        imgThumb.src = first.dataUrl || ('data:' + first.mimeType + ';base64,' + first.data);
+      }
+      if (pdfEmbedEl) {
+        pdfEmbedEl.style.display = 'none';
+        pdfEmbedEl.removeAttribute('src');
+      }
+    }
+
+    imgPreview.classList.add('active');
+  }
 
   /* ── Text to speech (sesli dinle) ── */
   const TTS_OK = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
@@ -8085,37 +8144,43 @@ YANIT KURALLARI:
   imgBtn.addEventListener('click', () => imgFile.click());
   function loadImageFile(file) {
     if (!file) return;
+    if (pendingAttachments.length >= MAX_ATTACHMENTS) {
+      addBotMsg('📎 En fazla ' + MAX_ATTACHMENTS + ' dosya eklenebilir.');
+      return;
+    }
+
     const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '');
     const isImage = file.type && file.type.startsWith('image/');
     if (!isPdf && !isImage) {
       addBotMsg('📎 Sadece görüntü veya PDF yükleyebilirsin.');
       return;
     }
+
     const mimeType = isPdf ? 'application/pdf' : file.type;
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result;
-      const base64  = dataUrl.split(',')[1];
-      pendingImg = { mimeType, data: base64 };
-      if (!isPdf) {
-        imgThumb.style.display = 'block';
-        imgThumb.src = dataUrl;
-        imgLabel.textContent = file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
-      } else {
-        imgThumb.style.display = 'none';
-        imgThumb.src = '';
-        imgLabel.textContent = file.name + ' (PDF)';
-      }
-      imgPreview.classList.add('active');
-      input.placeholder = isPdf ? 'Bu PDF hakkında sorunu yaz…' : 'Bu görsel hakkında soruyu yaz…';
+      const base64 = String(dataUrl).split(',')[1];
+      pendingAttachments.push({
+        mimeType,
+        data: base64,
+        name: file.name || 'dosya',
+        isPdf,
+        dataUrl,
+      });
+      renderAttachmentPreview();
+      input.placeholder = 'ETO konusunda soru sor veya görsel/PDF ekle…';
       input.focus();
     };
     reader.readAsDataURL(file);
-    imgFile.value = ''; // reset so same file can be re-selected
   }
 
   imgFile.addEventListener('change', () => {
-    loadImageFile(imgFile.files[0]);
+    const files = imgFile.files ? Array.from(imgFile.files) : [];
+    if (!files.length) return;
+    files.forEach(f => loadImageFile(f));
+    // reset so same file(s) can be re-selected
+    try { imgFile.value = ''; } catch (e) {}
   });
 
   // Drag & Drop support
@@ -8137,15 +8202,13 @@ YANIT KURALLARI:
     });
     dropTarget.addEventListener('drop', (e) => {
       const files = e.dataTransfer && e.dataTransfer.files ? e.dataTransfer.files : null;
-      if (files && files.length) loadImageFile(files[0]);
+      if (!files || !files.length) return;
+      Array.from(files).forEach(f => loadImageFile(f));
     });
   }
   imgRemove.addEventListener('click', () => {
-    pendingImg = null;
-    imgPreview.classList.remove('active');
-    imgThumb.src = '';
-    try { imgThumb.style.display = 'block'; } catch (e) {}
-    if (imgLabel) imgLabel.textContent = 'Görsel eklendi';
+    pendingAttachments = [];
+    renderAttachmentPreview();
     input.placeholder = 'ETO konusunda soru sor veya görsel/PDF ekle…';
   });
 
@@ -8877,9 +8940,11 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
   /* ── Send message ── */
   async function send(text, opts) {
     const fromAutoMic = !!(opts && opts.fromAutoMic);
-    const hasImg = !!pendingImg;
-    const isPdf = !!(pendingImg && pendingImg.mimeType === 'application/pdf');
-    if (!text.trim() && !hasImg) return false;
+    const attachments = (pendingAttachments && pendingAttachments.length) ? pendingAttachments.slice() : [];
+    const hasAttachments = attachments.length > 0;
+    const hasPdf = !!attachments.some(a => a && a.isPdf);
+    const hasImage = !!attachments.some(a => a && !a.isPdf);
+    if (!text.trim() && !hasAttachments) return false;
     if (thinking || !apiKey) return false;
 
     if (geminiMic.recording) {
@@ -8906,37 +8971,45 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     }
 
     // Show user message with optional image
-    const imgSrc = (hasImg && !isPdf) ? imgThumb.src : null;
-    const bubbleText = sentText || (hasImg ? (isPdf ? '📄 PDF eklendi' : '📷 Görsel eklendi') : '');
+    const firstImg = attachments.find(a => a && !a.isPdf);
+    const imgSrc = (firstImg && firstImg.dataUrl) ? firstImg.dataUrl : null;
+    const bubbleText = sentText || (hasAttachments ? ('📎 ' + attachments.length + ' dosya eklendi') : '');
     addUserMsg(bubbleText, imgSrc);
 
     // Build parts array
     const userParts = [];
-    if (hasImg) {
-      userParts.push({ inlineData: { mimeType: pendingImg.mimeType, data: pendingImg.data } });
+    if (hasAttachments) {
+      attachments.forEach(a => {
+        if (!a || !a.mimeType || !a.data) return;
+        userParts.push({ inlineData: { mimeType: a.mimeType, data: a.data } });
+      });
     }
-    if (sentText) userParts.push({ text: sentText });
-    if (!sentText && hasImg) userParts.push({
-      text: isPdf
-        ? 'Bu PDF dokümanını ETO perspektifinden incele ve ilgili kısımları açıkla.'
-        : 'Bu görseli ETO perspektifinden incele ve açıkla.'
-    });
-
-    // Clear pending attachment
-    pendingImg = null;
-    imgPreview.classList.remove('active');
-    imgThumb.src = '';
-    try { imgThumb.style.display = 'block'; } catch (e) {}
-    if (imgLabel) imgLabel.textContent = 'Görsel eklendi';
-    input.placeholder = isPdf ? 'ETO konusunda soru sor veya PDF ekle…' : 'ETO konusunda soru sor veya görsel ekle…';
+    if (sentText) {
+      userParts.push({ text: sentText });
+    } else if (hasAttachments) {
+      const prompt = (hasPdf && hasImage)
+        ? 'Bu görsel ve PDF dokümanlarını ETO perspektifinden incele ve ilgili kısımları açıkla.'
+        : (hasPdf ? 'Bu PDF dokümanını ETO perspektifinden incele ve ilgili kısımları açıkla.'
+                  : 'Bu görselleri ETO perspektifinden incele ve ilgili kısımları açıkla.');
+      userParts.push({ text: prompt });
+    }
 
     // Add to history (images not stored in history to keep token count low)
     const historyEntry = {
       role: 'user',
-      parts: sentText ? [{ text: sentText }] : [{ text: isPdf ? '(PDF doküman analizi)' : '(görsel analiz)' }],
+      parts: sentText
+        ? [{ text: sentText }]
+        : [{ text: (hasPdf && hasImage) ? '(Görsel + PDF analizi)'
+                      : (hasPdf ? '(PDF analizi)' : '(Görsel analizi)') }],
     };
     history.push(historyEntry);
     if (history.length > 20) history = history.slice(-20);
+
+    // Clear pending attachments immediately (UI), we already snapshotted them into `attachments`.
+    if (pendingAttachments && pendingAttachments.length) {
+      pendingAttachments = [];
+      renderAttachmentPreview();
+    }
 
     showTyping();
 
