@@ -7816,6 +7816,17 @@ YANIT KURALLARI:
     t = t.replace(/\*\*([^*]+)\*\*/g, '$1');
     // Remove remaining markdown markers
     t = t.replace(/[*_#]/g, '');
+    // Remove emojis / pictograms so TTS sadece metin okur
+    // Extended_Pictographic desteği varsa onu kullanır; yoksa fallback aralıklar.
+    try {
+      // eslint-disable-next-line no-useless-escape
+      t = t.replace(/\p{Extended_Pictographic}/gu, '');
+    } catch (e) {
+      // Temel emoji aralıkları + variation selector
+      t = t.replace(/[\u2600-\u27BF\u1F300-\u1FAFF\uFE0F]/gu, '');
+    }
+    // Bazı ikon karakterleri (ör. oklar/çizgiler) konuşmaya anlam katmadığı için temizle
+    t = t.replace(/[→➡️🔊🔁✅❌ℹ️⚠️⏳📤🎙️🎙]/g, '');
     // Collapse spaces/newlines
     t = t.replace(/\s+/g, ' ').trim();
     return t;
