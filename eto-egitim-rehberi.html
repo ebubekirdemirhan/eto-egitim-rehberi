@@ -7631,7 +7631,7 @@
     <div class="ai-avatar">🤖</div>
     <div class="ai-info">
       <div class="ai-name">ETO Asistanı</div>
-      <div class="ai-sub" id="eto-ai-model-label">Gemini 2.5 Flash · ETO Uzmanı</div>
+      <div class="ai-sub" id="eto-ai-model-label">Gemini 3.1 Flash Lite · ETO Uzmanı</div>
     </div>
     <div class="ai-status"></div>
     <button id="eto-ai-close" aria-label="Kapat">✕</button>
@@ -7735,8 +7735,9 @@
 
   /* ── Config ── */
   const MODELS = [
-    { id: 'gemini-2.5-flash',      label: 'Gemini 2.5 Flash'      },  // varsayılan — 1500 req/gün
-    { id: 'gemini-2.5-flash-lite', label: 'Gemini 2.5 Flash Lite' },  // yedek — çok yüksek kota
+    { id: 'gemini-3.1-flash-lite-preview', label: 'Gemini 3.1 Flash Lite' },  // varsayılan — hızlı, düşük maliyet, çok modlu (önizleme)
+    { id: 'gemini-2.5-flash',               label: 'Gemini 2.5 Flash'       },  // yedek — kota / API uyumluluğu
+    { id: 'gemini-2.5-flash-lite',          label: 'Gemini 2.5 Flash Lite'  },  // yedek 2 — yüksek kota
   ];
   const STORAGE_KEY       = 'eto_gemini_key';
   const STORAGE_MODEL_IDX = 'eto_model_idx';
@@ -8087,7 +8088,7 @@ YANIT KURALLARI:
     // Remove SVG (çok fazla gürültü ekler), script, style, quiz cevapları
     clone.querySelectorAll('svg, script, style, .quiz-answer, .back-to-top, nav').forEach(el => el.remove());
     let text = (clone.innerText || clone.textContent || '').replace(/\s{3,}/g, '\n\n').trim();
-    // 120.000 karakter ≈ 30.000 token — Gemini 2.5 Flash için yeterli
+    // 120.000 karakter ≈ 30.000 token — Gemini 3.1 Flash Lite / 2.5 Flash için yeterli
     if (text.length > 120000) text = text.substring(0, 120000) + '\n...[devamı mevcut]';
     return text;
   }
