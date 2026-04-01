@@ -93,6 +93,7 @@
     section h2 { margin-top: .2rem; margin-bottom: .35rem; font-size: 1.22rem; }
     .section-sub { margin: 0; font-size: .84rem; color: var(--muted); }
     h3 { margin-top: 1.1rem; margin-bottom: .45rem; font-size: 1rem; }
+    h3[id] { scroll-margin-top: 5.25rem; }
     p { margin: .25rem 0; font-size: .92rem; }
     ul, ol { margin: .25rem 0 .35rem 1.1rem; padding-left: .8rem; font-size: .91rem; }
     li { margin-bottom: .15rem; }
@@ -120,6 +121,46 @@
       border-radius: .6rem; background: rgba(34,211,238,.06); font-size: .87rem; margin: .45rem 0; }
     .sinav-box { border-left: 3px solid #a78bfa; padding: .4rem .7rem;
       border-radius: .6rem; background: rgba(167,139,250,.06); font-size: .87rem; margin: .45rem 0; }
+
+    .doc-meta-bar {
+      margin: -0.5rem auto 1.25rem;
+      padding: .55rem 1rem;
+      border-radius: .65rem;
+      border: 1px solid rgba(148,163,184,.35);
+      background: rgba(15,23,42,.75);
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .doc-meta-bar strong { color: #cbd5e1; }
+    .learn-outcomes {
+      border-left: 3px solid #818cf8;
+      padding: .45rem .75rem;
+      border-radius: .6rem;
+      background: rgba(129,140,248,.08);
+      font-size: .87rem;
+      margin: .5rem 0 .6rem;
+    }
+    .learn-outcomes ul { margin: .2rem 0 0 1rem; }
+    .mini-toc {
+      font-size: .82rem;
+      color: #cbd5e1;
+      margin: 0 0 .85rem;
+      padding: .35rem .5rem;
+      border-radius: .5rem;
+      background: rgba(15,23,42,.5);
+      border: 1px dashed rgba(148,163,184,.35);
+    }
+    .mini-toc a { margin-right: .65rem; white-space: nowrap; }
+    .mistake-box {
+      border-left: 3px solid #fb7185;
+      padding: .45rem .75rem;
+      border-radius: .6rem;
+      background: rgba(251,113,133,.08);
+      font-size: .87rem;
+      margin: .5rem 0;
+    }
+    .mistake-box strong { color: #fda4af; }
 
     code, .formula { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       background: rgba(15,23,42,.9); padding: .12rem .3rem; border-radius: .35rem; font-size: .85rem; }
@@ -228,7 +269,7 @@
       nav.toc { display: block !important; background: #fff; box-shadow: none; border-radius: 0; page-break-after: always; }
       section { background: #fff; box-shadow: none; border-radius: 0; border: 1px solid #e5e7eb; page-break-inside: avoid; }
       .print-hint { display: none; }
-      .info-box, .warn-box, .danger-box, .note-box, .saha-box, .sinav-box, .ebu-note { background: #f9fafb !important; }
+      .info-box, .warn-box, .danger-box, .note-box, .saha-box, .sinav-box, .ebu-note, .mistake-box, .learn-outcomes, .doc-meta-bar, .mini-toc { background: #f9fafb !important; }
       a { color: #000; text-decoration: none; }
       .page { padding: 0; }
       @page { margin: 1.5cm; }
@@ -610,6 +651,11 @@
     </div>
   </header>
 
+  <aside class="doc-meta-bar" role="note">
+    <strong>Sürüm 1.2</strong> · Bu belge eğitim amaçlıdır; gemi prosedürleri, emniyet talimatları ve sınıf/kıta kuralları her zaman önceliklidir.
+    STCW yetkinlikleri ve güncel SOLAS / IMO düzenlemeleri resmi kaynaklardan doğrulanmalıdır.
+  </aside>
+
   <!-- ══════════ TOC ══════════ -->
   <nav class="toc">
     <h2>İçindekiler · Contents</h2>
@@ -646,6 +692,7 @@
       <div class="toc-item"><a href="#b30"><span class="toc-index">30</span><span><span class="toc-label">Valf Türleri, Pompalar &amp; Hidrolik RAM</span><br><span class="toc-en">Valve Types, Pumps &amp; Hydraulic RAM</span></span></a></div>
       <div class="toc-item"><a href="#b31"><span class="toc-index">31</span><span><span class="toc-label">Kablo Seçimi, Kontaktör, Kondansatör &amp; Termik</span><br><span class="toc-en">Cable Sizing, Contactor, Capacitor &amp; Thermal Relay</span></span></a></div>
       <div class="toc-item"><a href="#b32"><span class="toc-index">32</span><span><span class="toc-label">DC Motor, Bobinaj, Reversing &amp; Dahlander</span><br><span class="toc-en">DC Motor, Rewinding, Reversing &amp; Dual-Speed Circuits</span></span></a></div>
+      <div class="toc-item"><a href="#b33"><span class="toc-index">33</span><span><span class="toc-label">Ağ &amp; Deniz Siber Güvenliği</span><br><span class="toc-en">Shipboard Networks &amp; Maritime Cyber</span></span></a></div>
       <div class="toc-item toc-item-b21"><a href="#b21"><span class="toc-index">21</span><span><span class="toc-label">Soru Bankası — Liman / Zabitlik</span><br><span class="toc-en">Sınav 1, 2 &amp; 3 · 300 Soru · Çözümlü</span></span></a></div>
     </div>
   </nav>
@@ -666,11 +713,13 @@
     <h2>Elektriğin Temelleri <span class="lvl lvl-1">Seviye 1</span></h2>
     <p class="section-sub">Akım (I), Gerilim (V), Direnç (R), Güç (P) · AC / DC · Tek faz / Üç faz · Omik &amp; Endüktif yükler · Kirchhoff Kanunları</p>
     <p><em>Bu bölüm, gemide gördüğünüz her panonun, her motorun ve her kumanda devresinin temel dilini öğretir. Burası sağlamsa geri kalan her şey oturur.</em></p>
+    <div class="learn-outcomes"><strong>Öğrenme çıktıları:</strong> V, I, R, P ve cosφ ilişkilerini; AC/DC ve RMS kavramını; tek/üç faz hat–faz gerilimlerini; yük tiplerini ve Kirchhoff yasalarını saha ve sınav dilinde kullanabilmen.</div>
+    <nav class="mini-toc" aria-label="Bölüm 1 alt başlıkları"><a href="#b1-s1">1.1 Büyüklükler</a><a href="#b1-s2">1.2 AC/DC</a><a href="#b1-s3">1.3 3 faz</a><a href="#b1-s4">1.4 Yükler</a><a href="#b1-s5">1.5 Kirchhoff</a></nav>
 
     <!-- 1.1 Temel Kavramlar -->
     <div class="two-col">
       <div class="card">
-        <h3>1.1 Temel Büyüklükler</h3>
+        <h3 id="b1-s1">1.1 Temel Büyüklükler</h3>
         <ul>
           <li><strong>Akım (Current, I)</strong> — İletken içinden birim zamanda geçen yük. Birimi <strong>Ampere (A)</strong>.</li>
           <li><strong>Gerilim (Voltage, V)</strong> — Yükleri hareket ettiren itici güç; potansiyel fark. Birimi <strong>Volt (V)</strong>.</li>
@@ -719,7 +768,7 @@
     </div>
 
     <!-- 1.2 AC / DC -->
-    <h3>1.2 AC ve DC Akım</h3>
+    <h3 id="b1-s2">1.2 AC ve DC Akım</h3>
     <div class="two-col">
       <div>
         <ul>
@@ -746,7 +795,7 @@
     </div>
 
     <!-- 1.3 Tek Faz / 3 Faz -->
-    <h3>1.3 Tek Faz ve Üç Faz Sistemler</h3>
+    <h3 id="b1-s3">1.3 Tek Faz ve Üç Faz Sistemler</h3>
     <div class="two-col">
       <div>
         <ul>
@@ -784,7 +833,7 @@
     </div>
 
     <!-- 1.4 Yük Tipleri -->
-    <h3>1.4 Omik, Endüktif ve Kapasitif Yükler</h3>
+    <h3 id="b1-s4">1.4 Omik, Endüktif ve Kapasitif Yükler</h3>
     <p>Bir devredeki yük tipi, akım ile gerilimin birbirine göre nasıl davrandığını belirler. Bu, özellikle güç faktörü (cosφ) için kritiktir.</p>
     <div class="three-col">
       <div class="card">
@@ -818,7 +867,7 @@
     <div class="info-box"><strong>Neden önemli?</strong> Motor plakasındaki <strong>cosφ = 0.85</strong> değeri, motorun çektiği görünür güçten sadece %85'ini gerçek işe dönüştürdüğünü söyler. Geri kalan %15, reaktif güç olarak şebekede boş döner. Bu yüzden kablo boyutlandırması nominal akım (<em>S/V</em>) üzerinden, değil nominal güç (P) üzerinden yapılır.</div>
 
     <!-- 1.5 Kirchhoff -->
-    <h3>1.5 Kirchhoff Kanunları</h3>
+    <h3 id="b1-s5">1.5 Kirchhoff Kanunları</h3>
     <div class="two-col">
       <div>
         <p><strong>KCL (Akım Kanunu)</strong>: Bir düğüme giren akımlar toplamı = çıkan akımlar toplamı.</p>
@@ -1090,6 +1139,8 @@
       </div>
     </div>
 
+    <div class="mistake-box"><strong>Sık hata — CT:</strong> Sekonder uçları “şimdilik” açık bırakmak veya ampermetre sökülürken kısa devre köprüsünü unutmak. CT sekonderi için prosedür: önce güvenli şekilde kısa devre / köprüle, sonra aleti ayır; tersini asla atlama.</div>
+
     <h3>2.7 Özet Ekipman Tablosu</h3>
     <table>
       <thead><tr><th>Ekipman</th><th>İngilizce</th><th>Temel Görevi</th><th>Gemide Kullanım</th></tr></thead>
@@ -1329,8 +1380,10 @@
     <h2>Motorlar <span class="lvl lvl-1">Seviye 1–3</span></h2>
     <p class="section-sub">Asenkron motor yapısı · Kayma (slip) · Motor plaka okuma · Yıldız/Üçgen bağlantı · Yıldız-Üçgen kalkış · Arıza senaryoları</p>
     <p><em>Gemideki neredeyse her büyük motor kafanızda canlandırabileceğiniz tek bir yapıya sahiptir.</em></p>
+    <div class="learn-outcomes"><strong>Öğrenme çıktıları:</strong> Motor kesitinde stator/rotor ilişkisini; slip ve senkron hız hesaplarını; plakadan Δ/Y akım–gerilim okumasını; doğru bağlantı ve Y–Δ kalkış sırasını; arıza ayıklama önceliklerini uygulayabilmen.</div>
+    <nav class="mini-toc" aria-label="Bölüm 4 alt başlıkları"><a href="#b4-s1">4.1 Yapı</a><a href="#b4-s2">4.2 Slip</a><a href="#b4-s3">4.3 Plaka</a><a href="#b4-s4">4.4 Y/Δ</a><a href="#b4-s5">4.5 Y–Δ</a></nav>
 
-    <h3>4.1 Asenkron Motor (Induction Motor) Yapısı</h3>
+    <h3 id="b4-s1">4.1 Asenkron Motor (Induction Motor) Yapısı</h3>
     <div class="two-col">
       <div class="card">
         <ul>
@@ -1373,7 +1426,7 @@
       </div>
     </div>
 
-    <h3>4.2 Kayma (Slip)</h3>
+    <h3 id="b4-s2">4.2 Kayma (Slip)</h3>
     <p>Senkron hız (n<sub>s</sub>), statorun oluşturduğu dönen alanın hızıdır. Rotor bu hıza tam ulaşamaz; aralarındaki fark <strong>kayma (slip, s)</strong> olarak adlandırılır.</p>
     <div class="two-col">
       <div>
@@ -1400,7 +1453,7 @@
       </div>
     </div>
 
-    <h3>4.3 Motor Plaka Bilgileri (Nameplate)</h3>
+    <h3 id="b4-s3">4.3 Motor Plaka Bilgileri (Nameplate)</h3>
     <div class="two-col">
       <div class="svg-wrap">
         <h3>Örnek Motor Plakası</h3>
@@ -1438,7 +1491,7 @@
       </div>
     </div>
 
-    <h3>4.4 Yıldız (Star, Y) ve Üçgen (Delta, Δ) Bağlantı</h3>
+    <h3 id="b4-s4">4.4 Yıldız (Star, Y) ve Üçgen (Delta, Δ) Bağlantı</h3>
     <p>Motor klemens kutusunda <strong>6 uç</strong> çıkar (U1, V1, W1, U2, V2, W2). Köprüleme baraları ile bağlantı şekli değiştirilir.</p>
     <div class="two-col">
       <div class="svg-wrap">
@@ -1499,8 +1552,9 @@
       </div>
     </div>
     <div class="info-box"><strong>Genel kural:</strong> Plakada <strong>Δ/Y 400/690V</strong> yazıyorsa; 400V şebekede <strong>Δ (üçgen)</strong>, 690V şebekede <strong>Y (yıldız)</strong> bağla. Yanlış bağlarsan motor ya yanar ya döndüremiyor.</div>
+    <div class="mistake-box"><strong>Sık hata — Y / Δ:</strong> “Δ 400V / Y 690V” plakada varken 400V hat üzerinde motoru Y’ye bağlamak: sargı gerilimi düşük kalır → zayıf tork, kalkmama veya aşırı akım. 690V şebekede Δ seçmek ise sargıları aşırı gerer — izolasyon ve yangın riski. Her zaman <em>hat gerilimi ↔ plaka</em> eşlemesini tek satırda yazıp doğrula.</div>
 
-    <h3>4.5 Yıldız-Üçgen Kalkış (Star-Delta Starting)</h3>
+    <h3 id="b4-s5">4.5 Yıldız-Üçgen Kalkış (Star-Delta Starting)</h3>
     <p>Büyük motorlar kalkışta nominal akımın <strong>5–7 katı</strong> çekebilir. Y-Δ kalkışı bu ani akımı yaklaşık <strong>1/3'e</strong> düşürür.</p>
     <div class="two-col">
       <div class="card">
@@ -2021,8 +2075,10 @@
     <h2>Şema Okuma <span class="lvl lvl-2">Seviye 2–3</span></h2>
     <p class="section-sub">IEC semboller · Tek hat şeması · Güç ve kumanda devresi · Kablo numaralandırma · Pratik okuma adımları</p>
     <p><em>Şemada yolunuzu bulabiliyorsanız, işin yarısını bitirmişsiniz demektir.</em></p>
+    <div class="learn-outcomes"><strong>Öğrenme çıktıları:</strong> Yaygın IEC sembollerini; tek hat (SLD) üzerinde enerji akışını; güç–kumanda katmanlarını; kablo/terminal kodlarını ve PLC mimarisinin şemayla bağlantısını okuyup arıza yolunu tarif edebilmen.</div>
+    <nav class="mini-toc" aria-label="Bölüm 7 alt başlıkları"><a href="#b7-s1">7.1 Sembol</a><a href="#b7-s2">7.2 SLD</a><a href="#b7-s3">7.3 Güç/kumanda</a><a href="#b7-s4">7.4 Kablo</a><a href="#b7-s5">7.5 PLC</a><a href="#b7-s5a">7.5.1 Start</a><a href="#b7-s6">7.6 MSB</a></nav>
 
-    <h3>7.1 Temel IEC Elektrik Sembolleri</h3>
+    <h3 id="b7-s1">7.1 Temel IEC Elektrik Sembolleri</h3>
     <table>
       <thead><tr><th>Sembol Adı</th><th>IEC / NEMA</th><th>Açıklama</th></tr></thead>
       <tbody>
@@ -2043,7 +2099,7 @@
       </tbody>
     </table>
 
-    <h3>7.2 Tek Hat Şeması (Single Line Diagram — SLD)</h3>
+    <h3 id="b7-s2">7.2 Tek Hat Şeması (Single Line Diagram — SLD)</h3>
     <div class="two-col">
       <div>
         <p>Tek hat şeması, sistemin <strong>enerji akışını</strong> basitleştirilmiş biçimde gösterir. Her 3 fazlı hat tek bir çizgiyle temsil edilir.</p>
@@ -2110,7 +2166,7 @@
       </div>
     </div>
 
-    <h3>7.3 Güç ve Kumanda Devresi Okuma Stratejisi</h3>
+    <h3 id="b7-s3">7.3 Güç ve Kumanda Devresi Okuma Stratejisi</h3>
     <div class="two-col">
       <div class="card">
         <h3>Güç Devresi (Power Circuit)</h3>
@@ -2132,7 +2188,7 @@
       </div>
     </div>
 
-    <h3>7.4 Kablo Numaralandırma ve Terminal İşaretleme</h3>
+    <h3 id="b7-s4">7.4 Kablo Numaralandırma ve Terminal İşaretleme</h3>
     <div class="two-col">
       <div>
         <p>Profesyonel şemalarda her kablo ve terminal sistematik şekilde numaralandırılır:</p>
@@ -2159,7 +2215,7 @@
       </div>
     </div>
 
-    <h3>7.5 Otomasyon ve PLC Temelleri</h3>
+    <h3 id="b7-s5">7.5 Otomasyon ve PLC Temelleri</h3>
     <div class="two-col">
       <div class="card">
         <h3>PLC Nedir? Mimarisi</h3>
@@ -2208,7 +2264,7 @@
 
     <div class="sinav-box"><strong>PLC için sınav ve saha tüyosu:</strong> PLC'yi anlamak için önce <strong>klasik start-stop devresini</strong> iyi bil; Ladder diyagram aslında aynı devrenin yatay \"merdiven\" olarak çizilmiş halidir. Adresleri (I/Q/M) fiziksel giriş-çıkışlarla eşleştirebilirsen, arızayı hem şemadan hem PLC ekranından rahatlıkla takip edersin.</div>
 
-    <h3>7.5.1 Motor Start Prosedürü (PLC Mantığıyla)</h3>
+    <h3 id="b7-s5a">7.5.1 Motor Start Prosedürü (PLC Mantığıyla)</h3>
     <div class="two-col">
       <div class="card">
         <h3>Start-Stop Sırası — Saha Adımları</h3>
@@ -2247,7 +2303,7 @@
       </details>
     </div>
 
-    <h3>7.6 Ana Dağıtım Panosu — 3 DG + Emergency (Şematik)</h3>
+    <h3 id="b7-s6">7.6 Ana Dağıtım Panosu — 3 DG + Emergency (Şematik)</h3>
     <div class="two-col">
       <div class="card">
         <p>Bu şema, ticari gemilerin büyük çoğunluğunda neredeyse aynı mantıkla kurulan <strong>ana dağıtım panosu (MSB)</strong> yapısını özetler:</p>
@@ -3642,8 +3698,18 @@
           <li>Gemideki ana bara, liman şebekesiyle <strong>asla doğrudan paralel</strong> bağlanmaz; özel shore kesicisi ve interlock'lar kullanılır.</li>
           <li>Faz sırası, gerilim ve topraklama liman prosedürüne göre mutlaka kontrol edilir.</li>
           <li>Shore kesicisi kapalıyken gemi jeneratörlerinin ana kesicileri kilitlenir (mekanik/elektriksel kilitleme).</li>
+          <li><strong>Cold ironing (yüksek güçlü liman beslemesi):</strong> ana makineler kapalıyken gemiyi tek noktadan besleme; genelde trafo, harmonik filtre/reaktif bankalar ve güç kalitesi göstergeleri içerir — gemi el kitabındaki kapama sırası ve PMS ekranları takip edilir.</li>
         </ul>
       </div>
+    </div>
+    <div class="note-box"><strong>Shore / cold ironing — ETO kontrol listesi (özet):</strong>
+      <ol>
+        <li>Gemi–liman gerilimi, frekans ve faz sırası talimata uygun mu? (Gerekliyse faz dönüş uyarıları doğrulandı mı?)</li>
+        <li>Shore kesicisi ile DG ACB’leri arasındaki interlock’lar fiilen test edildi mi?</li>
+        <li>Kablaj, fiş/razye ve bara bağlantılarında sıcak nokta ve gevşeklik var mı?</li>
+        <li>Cold ironing varsa: trafo/harmonik/reaktif devre alarmları ve yük paylaşımı limitleri izleniyor mu?</li>
+        <li>Devreye alma–izolasyon sırası prosedüre uygun şekilde kayda geçirildi mi?</li>
+      </ol>
     </div>
     <div class="svg-wrap">
       <h3>Main &amp; Emergency Switchboard (Blok Şeması)</h3>
@@ -3759,6 +3825,27 @@
           <li>PT100 simülasyonunda 2/3/4 telli bağlantı farkını göz ardı etmek.</li>
         </ul>
         <div class="saha-box"><strong>Saha ipucu:</strong> Alarm panelinde <strong>sürekli aktif</strong> görünen bir alarm varsa, önce giriş sinyalini multimetreyle, ardından kablo numarası üzerinden şemayla takip et. Çoğu sorun kablo / terminal kaynaklıdır.</div>
+      </div>
+    </div>
+
+    <h3>17.3 Gemi Ağı — Modbus TCP/IP, Ethernet ve ETO Kontrolleri</h3>
+    <div class="two-col">
+      <div class="card">
+        <p>PLC/SCADA, alarm sistemi, bazı VFD ve burner kontrol üniteleri <strong>Ethernet (RJ45 / fiber)</strong> veya seri hatlar üzerinden haberleşir. ETO, “bir uç cihaz arızası” ile “ağ segmenti çökmesi”ni ayırabilmelidir.</p>
+        <ul>
+          <li><strong>Modbus TCP/IP:</strong> çoğu gemide 502 veya üreticiye özel port; register okuma/yazma. Bu segment dış dünyaya güvenlik duvarı olmadan açılmamalıdır.</li>
+          <li><strong>Switch / ring:</strong> yönetilen switch’lerde RSTP/MRP vb. ring protokolü; fiber veya bakır hat kopunca sadece ilgili kol segmentlenir.</li>
+          <li><strong>IT ↔ OT:</strong> ofis ağı ve ICS ayrı VLAN veya fiziksel segmentte olmalı; misafir Wi‑Fi üretim IO’su ile aynı yayında olmamalıdır.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ETO rutin kontrolleri</h3>
+        <ul>
+          <li>Switch LED’leri, güç modülü ve fan; kablolarda ezilme ve su girişi (güverte geçişleri).</li>
+          <li>Patch panel etiketleri; bakır/fiber temizliği ve kırılgan bağlantı noktaları.</li>
+          <li>PLC/PC saat senkronu (NTP) ve konfig yedeklerinin güncelliği.</li>
+          <li>Yetkisiz USB / dizüstü / yeni cihaz takılı mı — fiziksel ziyaretçi kontrolü.</li>
+        </ul>
       </div>
     </div>
 
@@ -5303,6 +5390,7 @@
       <li><strong>UV arıtma:</strong> Yüksek yoğunluklu UV lambalar organizmaları etkisiz kılar; ETO lambaların çalışır olduğunu ve enerji değerlerini takip eder.</li>
       <li><strong>Elektroklorinasyon:</strong> Tuzlu su elektrolizi ile hipoklorit üretilir; ETO elektroliz hücrelerinin akım ve gerilimini izler.</li>
     </ul>
+    <div class="info-box"><strong>EGCS (scrubber) — elektrik notu:</strong> Egzoz gazı temizleme ünitelerinde yüksek güçlü pompa, blower, ısıtıcılar ve çok sayıda aktüatör bulunur. ETO, motor/VFD koruma röleleri, kablo ve bara sıcaklıkları, harmonik/reaktif banka alarmlarını üretici dokümanına göre izler; parametreleri gemi PMS’inde doğrular.</div>
     <h4>ETO'nun Balast Sistemindeki Görevi</h4>
     <ul>
       <li>Pompa motor akımı ve termik ayarlarını kontrol etmek.</li>
@@ -5407,6 +5495,8 @@
       </div>
     </div>
 
+    <div class="mistake-box"><strong>Sık hata — earth fault:</strong> Parlak/sönük lamba kombinasyonunu ters yorumlamak; panikle aynı anda birkaç büyük kesiciyi kapatmak; veya ilk arıza giderilmeden ikinci bir fazı tekneye indirmek (çift toprak → faz–faz kısa ve blackout riski). Tek dalda, tek kesicide çalıştır.</div>
+
     <h3>26.2 Earth Fault İndikatörü — Switchboard'da Okuma</h3>
     <div class="two-col">
       <div>
@@ -5442,6 +5532,37 @@
       <li><strong>Arızayı gider:</strong> Islak kablo ucu kurutma, hasarlı kablo değişimi veya motor sargısı onarımı. Tamir sonrası megger testini tekrarla.</li>
       <li><strong>Devreyi enerjile ve log'a kaydet:</strong> Alarm geçtiğini doğrula; bulguları, nedeni ve yapılan işlemi arıza formuna ve PMS'e yaz.</li>
     </ol>
+    <div class="svg-wrap">
+      <h3>Kaçak avı — karar akışı (özet)</h3>
+      <svg viewBox="0 0 420 168" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <marker id="efFlow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94a3b8"/></marker>
+        </defs>
+        <rect x="8" y="6" width="100" height="26" rx="6" fill="#0f172a" stroke="#38bdf8"/>
+        <text x="58" y="23" text-anchor="middle" fill="#e5e7eb" font-size="8.5">1) Alarm + faz</text>
+        <line x1="58" y1="32" x2="58" y2="44" stroke="#64748b" stroke-width="1.2" marker-end="url(#efFlow)"/>
+        <rect x="8" y="44" width="100" height="26" rx="6" fill="#0f172a" stroke="#64748b"/>
+        <text x="58" y="61" text-anchor="middle" fill="#e5e7eb" font-size="8.5">2) Öncelik listesi</text>
+        <line x1="58" y1="70" x2="58" y2="82" stroke="#64748b" stroke-width="1.2" marker-end="url(#efFlow)"/>
+        <rect x="8" y="82" width="100" height="30" rx="6" fill="#0f172a" stroke="#fbbf24"/>
+        <text x="58" y="98" text-anchor="middle" fill="#fde68a" font-size="8.5">3) Tek kesici aç</text>
+        <text x="58" y="108" text-anchor="middle" fill="#9ca3af" font-size="7">(kritik sona)</text>
+        <line x1="108" y1="97" x2="130" y2="97" stroke="#64748b" stroke-width="1.2" marker-end="url(#efFlow)"/>
+        <polygon points="130,82 130,112 152,97" fill="#334155" stroke="#94a3b8"/>
+        <text x="158" y="92" fill="#e5e7eb" font-size="8">İndikatör</text>
+        <text x="158" y="103" fill="#e5e7eb" font-size="8">normale döndü?</text>
+        <line x1="210" y1="90" x2="248" y2="62" stroke="#4ade80" stroke-width="1.1" marker-end="url(#efFlow)"/>
+        <text x="252" y="58" fill="#4ade80" font-size="8">Evet → o dal</text>
+        <line x1="210" y1="104" x2="248" y2="128" stroke="#f97373" stroke-width="1.1" marker-end="url(#efFlow)"/>
+        <text x="252" y="136" fill="#f97373" font-size="8">Hayır → kapat, sıradaki</text>
+        <rect x="260" y="6" width="152" height="26" rx="5" fill="#0f172a" stroke="#22c55e"/>
+        <text x="336" y="23" text-anchor="middle" fill="#86efac" font-size="8.5">4) Megger + onarım + log</text>
+        <line x1="336" y1="32" x2="336" y2="44" stroke="#64748b" stroke-width="1" marker-end="url(#efFlow)"/>
+        <rect x="265" y="44" width="142" height="22" rx="4" fill="#1e293b" stroke="#475569"/>
+        <text x="336" y="59" text-anchor="middle" fill="#94a3b8" font-size="7.5">İkinci faz arızasını bekleme — hızlı izole et</text>
+      </svg>
+      <p class="svg-caption">Aynı mantık metindeki numaralı maddelerle örtüşür: her seferinde tek kesici, indikatör normale dönene kadar daralt; ardından megger ve kalıcı onarım.</p>
+    </div>
     <div class="saha-box"><strong>Ebubekir'in Sahadaki Tüyosu:</strong> Hunting'e geceleri veya kötü hava koşullarında başlarsan asistan iste. Yalnız çalışma. Earth fault kaynaklı hiçbir ölüm olmasa da, hunting sırasında enerji verilmiş devrelerle çalışılıyor — dikkat dağıtıcı ortamda kaza olabilir. Sesli olarak "şimdi X kesiciyi açıyorum" de, asistanın duyduğunu onaylasın.</div>
 
     <h3>26.4 Sık Karşılaşılan Nedenler</h3>
@@ -6569,7 +6690,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ BÖLÜM 32 -->
-  <section id="b32">
+  <section id="b32" data-label="Bölüm 32">
     <h2>Bölüm 32 — DC Motor, Bobinaj, Reversing &amp; Çift Devirli Güç Devreleri</h2>
     <p>DC motorlar, bobinaj bilgisi ve güç devre şemaları ETO sınavlarının temel konularındandır. Bu bölüm DC motor yapısını, türlerini, motor sarım onarımını (bobinaj), reversing ve Dahlander güç devresi şemalarını ve floresan lamba bağlantısını kapsamaktadır.</p>
 
@@ -6985,14 +7106,66 @@
     </div>
   </section>
 
-  <div class="footer">
+  <!-- ═══════════════════════════════════════════════════════
+       BÖLÜM 33 – AĞ & DENİZ SİBER GÜVENLİĞİ
+  ═══════════════════════════════════════════════════════ -->
+  <section id="b33" data-label="Bölüm 33">
+    <h2>Ağ &amp; Deniz Siber Güvenliği <span class="lvl lvl-3">Seviye 3 · Farkındalık</span></h2>
+    <p class="section-sub">ICS segmentasyonu · Zayıf halka · Olay müdahalesi · IMO / IACS çerçevesi</p>
+    <p><em>Gemide Ethernet artık sadece “internet kablosu” değil; pompa, kazan ve alarm sistemlerinin omurgasıdır.</em></p>
 
-  <div class="footer">
+    <div class="learn-outcomes"><strong>Öğrenme çıktıları:</strong> Üretim ve ofis ağlarını ayırmanın nedenini; zayıf parolayı ve USB tehdidini; olay anında izolasyon ve kayıt prosedürünü; resmi dokümantasyona (SMS, CSMP) güvenmenin önemini özetleyebilmen yeterlidir.</div>
+
+    <h3>33.1 Gemide siber riskler (ETO bakışı)</h3>
+    <div class="two-col">
+      <div class="card">
+        <ul>
+          <li><strong>Ransomware / malware:</strong> chart veya mail PC’sinden ICS’e sıçrama riski.</li>
+          <li><strong>Zayıf veya fabrika varsayılan parolalar:</strong> PLC, switch, VNC, uzaktan servis portları.</li>
+          <li><strong>Fiziksel erişim:</strong> yetkisiz USB, dizüstü veya telefon kablosu.</li>
+          <li><strong>Yamasz / desteği bitmiş ekipman:</strong> eski işletim sistemi ve uzaktan bakım araçları.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Minimum savunma hatları</h3>
+        <ul>
+          <li>ICS ve ofis/Wi‑Fi segmentlerini ayır; gereksiz yönlendirme portlarını kapat.</li>
+          <li>Varsayılan parolaları değiştir; yönetici hesaplarını paylaşma.</li>
+          <li>USB ve e‑posta eklerinde “önce düşün, sonra tıkla”.</li>
+          <li>Haftalık yedek ve konfigürasyon dosyalarını kuru ve erişim kontrollü ortamda sakla.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>33.2 Olay olduğunda (basit sıra)</h3>
+    <ol>
+      <li><strong>Kaydet:</strong> saat, ekran görüntüsü, alarm kodu, hangi sistemler etkilenmiş.</li>
+      <li><strong>İzole et:</strong> şüpheli segmenti mümkünse ağdan ayır; üretimi güvenli modda sürdür (talimata göre).</li>
+      <li><strong>Bildir:</strong> kaptan/çevik ofis ve ashore IT / sınıf gereksinimlerine uygun kanal.</li>
+      <li><strong>Yenile:</strong> temiz imaj/yedekten dönüş yalnız onaylı prosedürle; kanıt zincirini bozma.</li>
+    </ol>
+    <div class="warn-box"><strong>Uyarı:</strong> Bu bölüm bilinçlendirme içindir. Gerçek olaylarda her zaman geminin <strong>SMS, CSMP ve üretici kılavuzları</strong> önceliklidir; yetkisiz deneme sistemi daha kötü hale getirebilir.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 33 — Mini Sınav</div>
+      <details class="quiz-item">
+        <summary>B33-S1: ICS ve ofis bilgisayarları neden aynı yayında olmamalıdır?</summary>
+        <div class="quiz-answer">Ofis ağından gelen kötü amaçlı yazılım veya kullanıcı hatası, PLC/VFD/alarm trafiğini etkileyebilir. Segmentasyon, yayılmayı yavaşlatır ve kritik süreçler için kontrollü bir güvenlik sınırı sağlar.</div>
+      </details>
+      <details class="quiz-item">
+        <summary>B33-S2: Limanda “yardım” için takılan bir USB belleği doğrudan ECDIS PC’sine takmak neden risklidir?</summary>
+        <div class="quiz-answer">Bilinmeyen USB, otomatik çalıştırma veya gizli dosyalarla sistemi enfekte edebilir. ECDIS ve seyir yazılımları için sadece onaylı medya ve prosedür kullanılmalıdır.</div>
+      </details>
+    </div>
+  </section>
+
+  <footer class="footer">
     Bu rehber, denizde görev yapan ETO zabiti <span>Ebubekir</span>'in sahadan tavsiyeleri ve
     stajyerden zabite uzanan deneyimleri esas alınarak hazırlanmıştır.
-    Tüm formüller IEC standartlarına ve STCW yetkinlik çerçevesine uygundur.
-    &nbsp;|&nbsp; PDF: Ctrl+P → PDF olarak kaydet
-  </div>
+    Tüm formüller IEC standartlarına ve STCW yetkinlik çerçevesine uygun olacak şekilde derlenmiştir; resmi tatbikat ve sınıf kuralları her zaman önceliklidir.
+    &nbsp;|&nbsp; PDF: Ctrl+P → PDF olarak kaydet<br>
+    <small>Son güncelleme: 1 Nisan 2026</small>
+  </footer>
 
 </div><!-- /page -->
 <script>

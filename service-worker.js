@@ -1,5 +1,5 @@
-/* ETO Rehber — güncel HTML her zaman ağdan denenir; çevrimdışı yedek cache. */
-const CACHE = 'eto-v2';
+/* ETO Rehber v1.2 — güncel HTML her zaman ağdan denenir; çevrimdışı yedek cache. */
+const CACHE = 'eto-rehber-v1.2';
 
 const PRECACHE = ['./eto-egitim-rehberi.html', './manifest.json'];
 
