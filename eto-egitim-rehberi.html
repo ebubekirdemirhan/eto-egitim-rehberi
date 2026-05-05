@@ -14659,7 +14659,7 @@
     #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
-                                                /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+                                                    /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
     /* Dil seçici (TR/EN) */
     .wiki-lang-switch {
       display: inline-flex; gap: .25rem; margin: -.2rem 0 .8rem;
@@ -17078,6 +17078,8 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
 
 })();
 
+
+
   // ── Bölüm 34 Wiki Filtresi BAŞLANGIÇ ──
   (function () {
     const filterBar = document.getElementById('wiki-filter-bar');
@@ -17247,10 +17249,11 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     // Resize/font yüklemesi sonrası bir kez daha kontrol
     window.addEventListener('load', setupExpand, { once: true });
 
-    // ── Lightbox (medya) ──
+    // ── Lightbox (medya) — DOM'a sadece ilk açılışta eklenir ──
     (function setupLightbox() {
-      let box = document.getElementById('wiki-lightbox');
-      if (!box) {
+      let box = null, img = null, cap = null, close = null;
+      function ensureBox() {
+        if (box) return;
         box = document.createElement('div');
         box.id = 'wiki-lightbox';
         box.innerHTML =
@@ -17260,12 +17263,17 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
           '</div>' +
           '<button id="wiki-lightbox-close" aria-label="Kapat" title="Kapat (Esc)">×</button>';
         document.body.appendChild(box);
+        img   = box.querySelector('#wiki-lightbox-img');
+        cap   = box.querySelector('#wiki-lightbox-cap');
+        close = box.querySelector('#wiki-lightbox-close');
+        close.addEventListener('click', closeBox);
+        box.addEventListener('click', e => { if (e.target === box) closeBox(); });
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && box && box.classList.contains('open')) closeBox();
+        });
       }
-      const img   = document.getElementById('wiki-lightbox-img');
-      const cap   = document.getElementById('wiki-lightbox-cap');
-      const close = document.getElementById('wiki-lightbox-close');
-
       function openBox(src, captionTxt, vision) {
+        ensureBox();
         img.src = src;
         let html = '';
         if (captionTxt) html += '<span class="caption">' + captionTxt + '</span>';
@@ -17276,20 +17284,17 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
         document.body.style.overflow = 'hidden';
       }
       function closeBox() {
+        if (!box) return;
         box.classList.remove('open');
         img.src = '';
         document.body.style.overflow = '';
       }
-      close.addEventListener('click', closeBox);
-      box.addEventListener('click', e => { if (e.target === box) closeBox(); });
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && box.classList.contains('open')) closeBox();
-      });
-      document.querySelectorAll('.wiki-media-thumb').forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          openBox(a.getAttribute('href'), a.dataset.caption || '', a.dataset.vision || '');
-        });
+      // Event delegation: dinamik kart yenilemelerinden sonra da çalışır
+      document.addEventListener('click', function (e) {
+        const a = e.target.closest && e.target.closest('.wiki-media-thumb');
+        if (!a) return;
+        e.preventDefault();
+        openBox(a.getAttribute('href'), a.dataset.caption || '', a.dataset.vision || '');
       });
     })();
 
@@ -17510,6 +17515,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     filterAndSort();
   })();
   // ── /Bölüm 34 Wiki Filtresi END ──
+
 </script>
 <!-- ══════════════════════════════════════════════════════════════ -->
 </body>
