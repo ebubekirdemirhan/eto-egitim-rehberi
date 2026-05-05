@@ -15084,7 +15084,7 @@
     #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
-                                    /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+                                        /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
     /* Dil seçici (TR/EN) */
     .wiki-lang-switch {
       display: inline-flex; gap: .25rem; margin: -.2rem 0 .8rem;
@@ -17717,6 +17717,223 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
         });
       });
     })();
+
+    // ── Dil seçici (TR/EN) ──
+    const LANG_KEY = 'eto_wiki_lang';
+    const section34 = document.getElementById('b34');
+    function applyLang(lang) {
+      const en = (lang === 'en');
+      if (section34) section34.classList.toggle('lang-en', en);
+      document.querySelectorAll('.wiki-lang-btn').forEach(b => {
+        const isActive = (b.dataset.lang === lang);
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+      // Arama placeholder'ı dil değişince güncellensin
+      if (searchInp) {
+        searchInp.placeholder = en
+          ? 'Search… (e.g. AVR, megger, boiler ignition, generator parallel)'
+          : 'Ara… (örn: AVR, megger, kazan ateşleme, jeneratör paralel)';
+      }
+      const sort = document.getElementById('wiki-sort');
+      if (sort) {
+        const opts = sort.options;
+        const trOpts = ['Varsayılan', 'Kategori (A→Z)', 'Zorluk (Kolay → Zor)', 'Zorluk (Zor → Kolay)', 'Rastgele'];
+        const enOpts = ['Default', 'Category (A→Z)', 'Difficulty (Easy → Hard)', 'Difficulty (Hard → Easy)', 'Random'];
+        for (let i = 0; i < opts.length; i++) {
+          opts[i].text = en ? enOpts[i] : trOpts[i];
+        }
+      }
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    }
+    document.querySelectorAll('.wiki-lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+    });
+    // Başlangıç dili: localStorage > browser lang > tr
+    (function () {
+      let initial = 'tr';
+      try { initial = localStorage.getItem(LANG_KEY) || initial; } catch (e) {}
+      if (!localStorage.getItem(LANG_KEY) && navigator.language && /^en/i.test(navigator.language)) {
+        initial = 'en';
+      }
+      applyLang(initial);
+    })();
+
+    // ── Tag cloud (popüler etiketler) ──
+    // Event delegation: detays/summary içinde olsa bile click yakalar
+    const cloudWrap = document.querySelector('.wiki-cloud-wrap');
+    if (cloudWrap && searchInp) {
+      cloudWrap.addEventListener('click', function (ev) {
+        const btn = ev.target.closest('.wiki-cloud-tag');
+        if (!btn || !cloudWrap.contains(btn)) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        const tag = btn.dataset.tag || '';
+        const wasActive = btn.classList.contains('active');
+        // Tüm aktifleri temizle
+        cloudWrap.querySelectorAll('.wiki-cloud-tag.active').forEach(b => b.classList.remove('active'));
+        if (wasActive) {
+          searchInp.value = '';
+          searchTerm = '';
+          if (clearBtn) clearBtn.classList.remove('visible');
+        } else {
+          btn.classList.add('active');
+          searchInp.value = tag;
+          searchTerm = tag;
+          if (clearBtn) clearBtn.classList.add('visible');
+        }
+        // Debounce'u atlayıp doğrudan filter çağır
+        visibleCount = PAGE_SIZE;
+        filterAndSort();
+        // Görsel onay: arama kutusuna scroll
+        const wrap = document.querySelector('.wiki-search-wrap');
+        if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      // Arama kutusu temizlenirse cloud aktiflerini de temizle
+      searchInp.addEventListener('input', function () {
+        if (!searchInp.value) {
+          cloudWrap.querySelectorAll('.wiki-cloud-tag.active').forEach(b => b.classList.remove('active'));
+        }
+      });
+    }
+
+    // ── Permalink butonları ──
+    document.querySelectorAll('.wiki-link-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const url = window.location.origin + window.location.pathname + '?w=' + id + '#wiki-' + id;
+        const fallback = function () {
+          const ta = document.createElement('textarea');
+          ta.value = url; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          ta.remove();
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(url).catch(fallback);
+        } else {
+          fallback();
+        }
+        btn.classList.add('copied');
+        const orig = btn.textContent;
+        btn.textContent = '✓';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = orig;
+        }, 1400);
+      });
+    });
+
+    // ── Paylaş butonları (Web Share API + WhatsApp/Telegram fallback) ──
+    let _activeSharePop = null;
+    document.addEventListener('click', function (ev) {
+      if (_activeSharePop && !_activeSharePop.contains(ev.target)) {
+        _activeSharePop.remove();
+        _activeSharePop = null;
+      }
+    });
+    document.querySelectorAll('.wiki-share-btn').forEach(btn => {
+      btn.addEventListener('click', async function (e) {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const card = document.getElementById('wiki-' + id);
+        if (!card) return;
+        const title = (card.querySelector('.wiki-title')||{}).textContent || 'ETO Saha Vakası';
+        const sorun = (card.querySelector('.wiki-sorun')||{}).textContent || '';
+        const cozum = (card.querySelector('.wiki-cozum')||{}).textContent || '';
+        const url = window.location.origin + window.location.pathname + '?w=' + id + '#wiki-' + id;
+        const shareText = title + '\n\n' + sorun + '\n' + cozum + '\n\n' + url;
+
+        // 1) Yerel Web Share API (mobil)
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: 'ETO: ' + title, text: shareText, url: url });
+            return;
+          } catch (err) { /* iptal/fallback */ }
+        }
+
+        // 2) Popover ile WhatsApp/Telegram/Kopyala
+        if (_activeSharePop) { _activeSharePop.remove(); _activeSharePop = null; }
+        const pop = document.createElement('div');
+        pop.className = 'wiki-share-pop';
+        const wa = encodeURIComponent(shareText);
+        const tg = encodeURIComponent(url);
+        const tgText = encodeURIComponent('ETO Saha Vakası: ' + title);
+        pop.innerHTML =
+          '<button data-act="wa" title="WhatsApp">🟢 WhatsApp</button>' +
+          '<button data-act="tg" title="Telegram">📨 Telegram</button>' +
+          '<button data-act="cp" title="Kopyala">📋 Kopyala</button>';
+        // Pozisyon: butonun altında
+        const r = btn.getBoundingClientRect();
+        pop.style.top  = (window.scrollY + r.bottom + 4) + 'px';
+        pop.style.left = (window.scrollX + r.left - 80) + 'px';
+        document.body.appendChild(pop);
+        _activeSharePop = pop;
+
+        pop.addEventListener('click', function (ev2) {
+          const a = ev2.target.closest('button');
+          if (!a) return;
+          const act = a.dataset.act;
+          if (act === 'wa') {
+            window.open('https://wa.me/?text=' + wa, '_blank', 'noopener');
+          } else if (act === 'tg') {
+            window.open('https://t.me/share/url?url=' + tg + '&text=' + tgText, '_blank', 'noopener');
+          } else if (act === 'cp') {
+            const fb = function () {
+              const ta = document.createElement('textarea');
+              ta.value = shareText; ta.style.position='fixed'; ta.style.left='-9999px';
+              document.body.appendChild(ta); ta.select();
+              try { document.execCommand('copy'); } catch (e) {}
+              ta.remove();
+            };
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(shareText).catch(fb);
+            } else { fb(); }
+            a.textContent = '✓ Kopyalandı';
+            setTimeout(() => pop.remove(), 800);
+            return;
+          }
+          pop.remove(); _activeSharePop = null;
+        });
+      });
+    });
+
+    // ── URL'den ?w=ID parametresi ile gelen kartı vurgula ──
+    function handleUrlTarget() {
+      const params = new URLSearchParams(window.location.search);
+      const wid = params.get('w');
+      if (!wid) return;
+      const target = document.getElementById('wiki-' + wid);
+      if (!target) return;
+      // Kart filtrelenmiş olabilir → tüm filtreleri sıfırla
+      activeCat = 'tümü';
+      searchTerm = '';
+      sortMode = 'default';
+      if (searchInp) searchInp.value = '';
+      if (sortSel) sortSel.value = 'default';
+      filterBar.querySelectorAll('.wiki-filter-btn').forEach(b => b.classList.remove('active'));
+      const allBtn = filterBar.querySelector('[data-cat="tümü"]');
+      if (allBtn) allBtn.classList.add('active');
+      visibleCount = Math.max(PAGE_SIZE,
+        Array.from(allCards).indexOf(target) + 1);
+      filterAndSort();
+      // Genişlet
+      target.classList.add('expanded');
+      const tBtn = target.querySelector('.wiki-toggle-btn');
+      if (tBtn) tBtn.textContent = 'Daha az göster ▴';
+      // Scroll + highlight
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 2000);
+      }, 200);
+    }
+    handleUrlTarget();
+
+    // İlk yükleme
+    filterAndSort();
+  })();
 
     // ── Dil seçici (TR/EN) ──
     const LANG_KEY = 'eto_wiki_lang';
