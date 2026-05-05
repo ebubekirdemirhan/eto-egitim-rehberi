@@ -7167,7 +7167,23 @@
     <h2>Telegram Arşivi — Sahadan Sorular &amp; Çözümler <span class="lvl lvl-4">Canlı Arşiv</span></h2>
     <p class="section-sub">ETO grubundan derlenen gerçek saha sorunları ve çözümleri · Anonim · Kategorilere göre · 140 kayıt</p>
     <p><em>Bu bölümdeki tüm kayıtlar ETO-Elektroteknik Zabitleri Telegram grubundan alınmıştır. Kişisel bilgiler anonimleştirilmiştir; yalnızca teknik içerik yayınlanmaktadır.</em></p>
-    <div class="learn-outcomes"><strong>Kullanım:</strong> Üstteki arama kutusuna yaz, kategori veya gemi tipi butonlarıyla filtrele, sıralamayı değiştir. Her kart gerçek saha deneyimini yansıtır; uygulama öncesi gemi prosedürlerini ve güvenlik talimatlarını kontrol et.</div>
+    <div class="learn-outcomes"><strong>Kullanım:</strong> Üstteki arama kutusuna yaz, kategori butonlarıyla filtrele, sıralamayı değiştir. Karta tıkla, "Devamını gör" ile uzun çözümü aç. Her kart gerçek saha deneyimini yansıtır; uygulama öncesi gemi prosedürlerini ve güvenlik talimatlarını kontrol et.</div>
+
+    <!-- İstatistik Widget'ı -->
+    <div class="wiki-stats">
+      <div class="wiki-stat-card">
+        <strong>140</strong>
+        <span>Toplam Kayıt</span>
+      </div>
+      <div class="wiki-stat-card">
+        <strong>16</strong>
+        <span>Kategori</span>
+      </div>
+      <div class="wiki-stat-card">
+        <strong>05 May 2026</strong>
+        <span>Son Güncelleme</span>
+      </div>
+    </div>
 
     <!-- Arama Kutusu -->
     <div class="wiki-search-wrap">
@@ -7190,26 +7206,38 @@
       </select>
     </div>
 
-    <!-- Kategori Filtre Butonları -->
+    <!-- Kategori Filtre Butonları (gruplu) -->
     <div class="wiki-filter-label">Kategoriler:</div>
     <div class="wiki-filter-bar" id="wiki-filter-bar">
-      <button class="wiki-filter-btn active" data-cat="tümü">🔍 Tümü <span class="cat-count">140</span></button>
-      <button class="wiki-filter-btn" data-cat="Alarm">🔔 Alarm <span class="cat-count">29</span></button>
-        <button class="wiki-filter-btn" data-cat="Diğer">🔧 Diğer <span class="cat-count">26</span></button>
-        <button class="wiki-filter-btn" data-cat="Jeneratör">⚡ Jeneratör <span class="cat-count">22</span></button>
-        <button class="wiki-filter-btn" data-cat="Motor">🔄 Motor <span class="cat-count">15</span></button>
-        <button class="wiki-filter-btn" data-cat="Navigasyon">🧭 Navigasyon <span class="cat-count">8</span></button>
-        <button class="wiki-filter-btn" data-cat="Pompa">💧 Pompa <span class="cat-count">7</span></button>
-        <button class="wiki-filter-btn" data-cat="Kompresör">🌀 Kompresör <span class="cat-count">6</span></button>
-        <button class="wiki-filter-btn" data-cat="GMDSS">📡 GMDSS <span class="cat-count">4</span></button>
-        <button class="wiki-filter-btn" data-cat="Bağlantı/Kablo">🔗 Bağlantı/Kablo <span class="cat-count">4</span></button>
-        <button class="wiki-filter-btn" data-cat="Ölçüm">📏 Ölçüm <span class="cat-count">4</span></button>
-        <button class="wiki-filter-btn" data-cat="Aydınlatma">🔦 Aydınlatma <span class="cat-count">4</span></button>
-        <button class="wiki-filter-btn" data-cat="Hidrolik">🔩 Hidrolik <span class="cat-count">3</span></button>
-        <button class="wiki-filter-btn" data-cat="PLC">🖥️ PLC <span class="cat-count">3</span></button>
-        <button class="wiki-filter-btn" data-cat="Pnömatik">💨 Pnömatik <span class="cat-count">2</span></button>
-        <button class="wiki-filter-btn" data-cat="Şalter">🔌 Şalter <span class="cat-count">2</span></button>
-        <button class="wiki-filter-btn" data-cat="Otomasyon">🔧 Otomasyon <span class="cat-count">1</span></button>
+      <div class="wiki-filter-group wiki-filter-all">
+        <button class="wiki-filter-btn active" data-cat="tümü">🔍 Tümü <span class="cat-count">140</span></button>
+      </div>
+        <div class="wiki-filter-group"><span class="wiki-filter-group-label">⚡ Elektrik</span>
+          <button class="wiki-filter-btn" data-cat="Jeneratör">⚡ Jeneratör <span class="cat-count">22</span></button>
+          <button class="wiki-filter-btn" data-cat="Motor">🔄 Motor <span class="cat-count">15</span></button>
+          <button class="wiki-filter-btn" data-cat="Aydınlatma">🔦 Aydınlatma <span class="cat-count">4</span></button>
+          <button class="wiki-filter-btn" data-cat="Bağlantı/Kablo">🔗 Bağlantı/Kablo <span class="cat-count">4</span></button>
+          <button class="wiki-filter-btn" data-cat="Ölçüm">📏 Ölçüm <span class="cat-count">4</span></button>
+          <button class="wiki-filter-btn" data-cat="Şalter">🔌 Şalter <span class="cat-count">2</span></button>
+        </div>
+        <div class="wiki-filter-group"><span class="wiki-filter-group-label">🤖 Otomasyon &amp; Kontrol</span>
+          <button class="wiki-filter-btn" data-cat="Alarm">🔔 Alarm <span class="cat-count">29</span></button>
+          <button class="wiki-filter-btn" data-cat="PLC">🖥️ PLC <span class="cat-count">3</span></button>
+        </div>
+        <div class="wiki-filter-group"><span class="wiki-filter-group-label">🔧 Mekanik &amp; Akışkan</span>
+          <button class="wiki-filter-btn" data-cat="Pompa">💧 Pompa <span class="cat-count">7</span></button>
+          <button class="wiki-filter-btn" data-cat="Kompresör">🌀 Kompresör <span class="cat-count">6</span></button>
+          <button class="wiki-filter-btn" data-cat="Hidrolik">🔩 Hidrolik <span class="cat-count">3</span></button>
+          <button class="wiki-filter-btn" data-cat="Pnömatik">💨 Pnömatik <span class="cat-count">2</span></button>
+        </div>
+        <div class="wiki-filter-group"><span class="wiki-filter-group-label">📡 Sistem &amp; İletişim</span>
+          <button class="wiki-filter-btn" data-cat="Diğer">🔧 Diğer <span class="cat-count">26</span></button>
+          <button class="wiki-filter-btn" data-cat="Navigasyon">🧭 Navigasyon <span class="cat-count">8</span></button>
+          <button class="wiki-filter-btn" data-cat="GMDSS">📡 GMDSS <span class="cat-count">4</span></button>
+        </div>
+        <div class="wiki-filter-group"><span class="wiki-filter-group-label">📂 Diğer Gruplar</span>
+          <button class="wiki-filter-btn" data-cat="Otomasyon">🔧 Otomasyon <span class="cat-count">1</span></button>
+        </div>
     </div>
 
     <div id="wiki-count-badge" class="wiki-count-badge">140 kayıt gösteriliyor</div>
@@ -7221,10 +7249,12 @@
           <span class="wiki-icon">📡</span>
           <h3 class="wiki-title">GMDSS Akü Değişimi Prosedürü</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="0" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">GMDSS</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Seyir halindeki gemide GMDSS akülerinin değiştirilmesi sırasında navigasyon sistemlerinin etkilenme riski.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemi redresör üzerinden beslemeye devam ederek 24V DC sürekliliğini sağla, ardından akü kutup başlarını ayırıp yeni aküleri devreye al.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">GMDSS</span> <span class="wiki-tag">akü</span> <span class="wiki-tag">navigasyon</span> <span class="wiki-tag">redresör</span></div>
           
@@ -7235,10 +7265,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Yangın Dedektör Loop Hatası</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="1" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yangın alarm panelinde Loop 5'de no.1 hatası; heat dedektör yerine smoke dedektör takılması ve su girişi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Dedektör tipi uygun olanla değiştirilmeli ve cihazlar sistem üzerinde tekrar adreslenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm</span> <span class="wiki-tag">dedektör</span> <span class="wiki-tag">adresleme</span> <span class="wiki-tag">yangın</span></div>
           
@@ -7249,10 +7281,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Kazan Ateşleme ve Fotosel Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="2" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kazan ateşlemesinde 'flame fault' alarmı, fotoselin alevi görmemesi sonucu cihazın devreye girip çıkması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Fotosel camını temizle, fotoselin cehennemliğe odaklandığından ve yerine tam oturduğundan emin ol; sorun devam ederse fotoseli yenisiyle değiştir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kazan</span> <span class="wiki-tag">fotosel</span> <span class="wiki-tag">arıza</span> <span class="wiki-tag">ateşleme</span></div>
           
@@ -7263,10 +7297,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Yıldız-Üçgen Motor Bağlantı Hatası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="3" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Motorun yıldızda çalışıp üçgene geçince aşırı akım çekmesi ve devre korumaya geçmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motor klemens bağlantılarını kontrol et; bobin giriş uçlarına gelen fazın, bobin çıkış uçlarına farklı faz gelmesini sağla (U-X, V-Y, W-Z dizilimi).</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">motor</span> <span class="wiki-tag">yıldız-üçgen</span> <span class="wiki-tag">bağlantı</span> <span class="wiki-tag">elektrik</span></div>
           
@@ -7277,10 +7313,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Dümen Pompası Kumanda Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="4" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dümen pompalarından birinin sancak tarafa komut almaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Kumanda devresindeki kontaktör yardımcı kontaklarını, röleleri ve joystick sonrası dağıtım kutusundaki kablo bağlantılarını kontrol et.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">dümen</span> <span class="wiki-tag">pompa</span> <span class="wiki-tag">kumanda</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7291,10 +7329,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Klima/Soğutma Sistemi Düşük Basınç Arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="5" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Soğutma sisteminin otomatik devrede 'low pressure' hatası vererek durması (vakuma düşmesi).</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemde gaz geçiş selenoid valfini ve expansion valfini sökerek kontrol et; tıkanıklık varsa temizle veya yenile.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">soğutma</span> <span class="wiki-tag">klima</span> <span class="wiki-tag">basınç</span> <span class="wiki-tag">selenoid</span> <span class="wiki-tag">valf</span></div>
           
@@ -7305,10 +7345,12 @@
           <span class="wiki-icon">🌀</span>
           <h3 class="wiki-title">Hava kompresörü karterine su yürüyüp stop etme sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="6" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Kompresör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kompresör karterine su yürümesi ve basınç otomatiği (pressure switch) hatlarına giden hava devresinin dreyn edilmemesi sonucu kompresör düzensiz çalışıyordu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Karterin içi temizlenerek sistemdeki su dreyn edildi ve pressure switch hatlarındaki hava devresi boşaltıldı, bu işlemlerden sonra sistem normale döndü.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kompresör</span> <span class="wiki-tag">dreyn</span> <span class="wiki-tag">basınç</span> <span class="wiki-tag">su</span></div>
           
@@ -7319,10 +7361,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Yangın alarm paneli gecikme süresi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="7" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yangın alarm paneli sinyali geç düşürüyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Alarm paneli içerisindeki trimpot üzerinden zaman (time) ayarı düşürülerek gecikme süresi kısaltılabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">fire alarm</span> <span class="wiki-tag">trimpot</span> <span class="wiki-tag">zaman rölesi</span></div>
           
@@ -7333,10 +7377,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Paralel çalışmada jeneratörün yükten çıkması</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="8" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dizel jeneratörler paraleldeyken yükler eşit olmasına rağmen biri anlık yükünü diğerine atıp sistemden çıkıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Öncelikle voltaj eşitliği kontrol edilmeli; sorun devam ederse devir sabitliği kontrol edilmeli. Mekanik bir devir düşmesi varsa yakıt filtresi, enjektörler veya governor kontrol edilmeli. Eğer devir sabit kalıyorsa AVR stabilite ayarı veya voltaj ayar potu kontrol edilip gerekirse AVR değiştirilmeli.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">paralel</span> <span class="wiki-tag">AVR</span> <span class="wiki-tag">yük dağılımı</span> <span class="wiki-tag">governor</span></div>
           
@@ -7347,10 +7393,12 @@
           <span class="wiki-icon">🌀</span>
           <h3 class="wiki-title">Kompresörün dur-kalk yapması ve basınç tutmaması</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="9" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Kompresör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kompresörün basınçta stop etmemesi, dur-kalk yapması ve sürekli çalışması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemde hava kaçağı olup olmadığı tüp çıkış valfleri kapatılarak test edilmeli. Elektriksel tarafta pressure switch ayarları, kalibrasyonu, diferansiyel yay durumu ve selenoid valf sızdırmazlığı kontrol edilmeli.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kompresör</span> <span class="wiki-tag">pressure switch</span> <span class="wiki-tag">hava kaçağı</span> <span class="wiki-tag">selenoid</span></div>
           
@@ -7361,10 +7409,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Delomatic panel 'Cable fail IOM: C5' uyarısı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="10" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Delomatic jeneratör kontrol panelinde C5 hata kodu alınıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Hata kodu hat üzerinde bir kablo arızasını veya bağlantı kopukluğunu işaret eder; ilgili hattın kablo sürekliliği ve fiziksel bağlantıları kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">Delomatic</span> <span class="wiki-tag">jeneratör</span> <span class="wiki-tag">arıza kodu</span> <span class="wiki-tag">kablo</span></div>
           
@@ -7375,10 +7425,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">Telsiz/Radio üzerinden mesaj gönderilememesi</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="11" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemideki telsiz cihazından mesaj gönderilebiliyor ancak mesaj alınamıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Öncelikle anten hattı kontrol edilmeli, ardından cihazın loop/self test fonksiyonları çalıştırılmalıdır. Eğer Inmarsat kullanılıyorsa login/bağlantı durumu kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">haberleşme</span> <span class="wiki-tag">telsiz</span> <span class="wiki-tag">GMDSS</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7389,10 +7441,12 @@
           <span class="wiki-icon">🌀</span>
           <h3 class="wiki-title">Kompresör basınç otomatiği arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="12" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Kompresör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kompresörde basınç otomatığı (presostat) kaynaklı arıza yaşanıyor ve sistem kararsız çalışıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Presostata giden kılcal bakır boru hattında biriken suyun tahliye edilmesi ve diferansiyel ayarlarının kontrol edilmesi önerilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kompresör</span> <span class="wiki-tag">presostat</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7403,10 +7457,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">AIS Pilot Plug arıza tespiti</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="13" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> AIS pilot plug değerlerinin belirsizliği ve çalışmama durumu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> 1-4 ve 5-6 uçları grup olarak kontrol edilmeli, 1-4 uçlarından 0-5V arası değer ölçülmelidir. Değer alınamıyorsa AIS çıkışının yanmış olabileceği değerlendirilmeli ve farklı bir çıkışa aktarım yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">AIS</span> <span class="wiki-tag">navigasyon</span> <span class="wiki-tag">haberleşme</span></div>
           
@@ -7417,10 +7473,12 @@
           <span class="wiki-icon">💨</span>
           <h3 class="wiki-title">Pnömatik valf parça temini</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="14" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pnömatik</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Pnömatik valf içerisinde kırılan veya bozulan bir parçanın temin edilememesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> İstanbul Karaköy Necatibey Caddesi veya Tuzla tersane bölgesindeki pnömatik devre elemanları satıcılarından parça veya komple valf temin edilebilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">pnömatik</span> <span class="wiki-tag">valf</span> <span class="wiki-tag">yedek parça</span></div>
           
@@ -7431,10 +7489,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Yanmar jeneratör alternatör yağ değişimi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="15" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yanmar jeneratör alternatöründe kullanılması gereken yağ türünün belirlenmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Genellikle SAE 30 karter yağı kullanılır ancak en doğru bilgi için cihazın manueline bakılmalı veya marka/model ile teknik veri sorgulanmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">alternatör</span> <span class="wiki-tag">yağ</span></div>
           
@@ -7445,10 +7505,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Piston soğutma yağı akış alarmı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="16" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Piston cooling oil non-flow alarmı sürekli tekrarlıyor ancak sensörler akış görüyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sensörün bağlı olduğu PCU kartında arıza olma ihtimali yüksektir; kart değişimi yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">PCU</span> <span class="wiki-tag">ana makine</span></div>
           
@@ -7459,10 +7521,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Yardımcı kazan yanma kontrol arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="17" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kazan stop konumunda olmasına rağmen run sinyali veriyor ve alev sensörleri sürekli sinyal çakıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yakıt selenoidlerinin kaçırıp kaçırmadığı kontrol edilmeli, cehennemlikte biriken yakıt veya curuf olup olmadığına bakılmalı ve sistem kartı resetlenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kazan</span> <span class="wiki-tag">arıza</span> <span class="wiki-tag">selenoid</span> <span class="wiki-tag">sensör</span></div>
           
@@ -7473,10 +7537,12 @@
           <span class="wiki-icon">🔗</span>
           <h3 class="wiki-title">Sintine alarmı kablo arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="18" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Bağlantı/Kablo</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Sintine alarmı sürekli bozuluyor ve kablo bağlantılarında sorun yaşanıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sintine seviyesinin altından geçen kablolarda korozyon/kaçak olma ihtimali yüksektir; kablo komple yenilenmeli ve meger ile izolasyon testi yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sintine</span> <span class="wiki-tag">kablo</span> <span class="wiki-tag">arıza</span> <span class="wiki-tag">meger</span></div>
           
@@ -7487,10 +7553,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Kazan ateşleme sistemi arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="19" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kazan operasyonu başlatıldığında ilk ateşlemede kendini 'off' konumuna çekiyor ve kaçak varmış gibi davranıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Ateşleme trafosunu, elektrotları, porselen izolatörleri, elektrot mesafesini, difüzör konumunu ve yakıt memesi filtresini kontrol edin. Yakıt pompası basıncının 15 bar üzerinde olduğunu, yakıt selenoidinin kaçırmadığını, fotosel aynasının temizliğini ve hava klapesinin yakıt miktarına göre doğru açıya gelip gelmediğini denetleyin. Yakıt sıcaklığının uygunluğunu ve servo motorun ateşleme pozisyonuna inip inmediğini doğrulayın.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kazan</span> <span class="wiki-tag">ateşleme</span> <span class="wiki-tag">selenoid</span> <span class="wiki-tag">servomotor</span></div>
           
@@ -7501,10 +7569,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör overspeed ve start sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="20" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dizel jeneratör aniden overspeed ve tacho fail alarmı verip yüksek frekansta çalıştı, sonrasında mekanik olarak durduruldu ancak 'no 86 start release' alarmı nedeniyle tekrar start almıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Overspeed sonrası mekanik tirnağın (rack) kurtarılması gerekir. Eğer PLC kendini stop konumuna kilitlemişse, pano içindeki switch üzerinden resetleme yapılmalıdır. Ayrıca sensörün dişliye olan mesafesini (klerens) kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">overspeed</span> <span class="wiki-tag">PLC</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7515,10 +7585,12 @@
           <span class="wiki-icon">🔗</span>
           <h3 class="wiki-title">110V devre kaçağı tespiti</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="21" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Bağlantı/Kablo</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemide 110V devresinde sürekli kaçak mevcut, 'Group Dimmer Switch' sigortası üzerinde yoğunlaşıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Köprü üstündeki aydınlatma dimmer anahtarlarını, lamba duylarını, rutubet olasılığını ve özellikle miyar pusula aydınlatması ile diğer dimmer kontrollü armatürleri kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kaçak</span> <span class="wiki-tag">110V</span> <span class="wiki-tag">dimmer</span> <span class="wiki-tag">aydınlatma</span></div>
           
@@ -7529,10 +7601,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">DC motor ve dinamo çalışma prensipleri</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="22" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemide kullanılan DC motor ve dinamo sistemlerinin çalışma mantığı ve farkları.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Şönt dinamolar sabit voltaj gerektiren yerlerde (akü şarj vb.) kullanılırken, bileşik (compound) dinamolar hem power hem lighting sistemlerini beslediği için gemilerde tercih edilir. DC sistemlerde trafo kullanılamadığı için farklı voltaj seviyeleri için ayrı dinamolar kullanılır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">DC motor</span> <span class="wiki-tag">dinamo</span> <span class="wiki-tag">şönt</span> <span class="wiki-tag">compound</span></div>
           
@@ -7543,10 +7617,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Rezistans güç hesaplaması</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="23" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bir rezistans grubunun çektiği toplam watt değerinin hesaplanması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Önce rezistansın direncini (ohm) ölçün, çalışma voltajını kullanarak akımı (I=V/R) bulun, ardından güç formülünü (P=V*I) uygulayarak tek grubun gücünü hesaplayın ve grup sayısıyla çarpın.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">rezistans</span> <span class="wiki-tag">ohm kanunu</span> <span class="wiki-tag">güç</span> <span class="wiki-tag">hesaplama</span></div>
           
@@ -7557,10 +7633,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Vinç yağ filtresi bakımı</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="24" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Filtreleri periyodik olarak (örneğin her 3 yüklemede bir) kontrol edin, temizlik esnasında hava ile temizlik yaparken basınçlı yağ püskürmesine dikkat edin.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> </p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">vinç</span> <span class="wiki-tag">filtre</span> <span class="wiki-tag">bakım</span> <span class="wiki-tag">hidrolik</span></div>
           
@@ -7571,10 +7649,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör paralelleme ve faz dengesizliği arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="25" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratörler paraleldeyken fazlar arası dengesizlik olması ve tek büyük jeneratör devreye alındığında gemi elektriğinin kesilmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Pens ampermetre ile faz akımları kontrol edildi; şalter giriş ve çıkışlarında yapılan incelemede S fazının şalterden geçmediği tespit edildi. Arızalı şalterin değişimi ile sorun giderildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">paralel</span> <span class="wiki-tag">şalter</span> <span class="wiki-tag">faz dengesizliği</span></div>
           
@@ -7585,10 +7665,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratörde izolasyon kaçak arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="26" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratör devreye alındığında 440V izolasyon alarmı vermesi ve alternatör sargılarında kaçak olması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Öncelikle AVR ve uyartım devreleri ayrılarak izolasyon testi yapıldı. Kablo ve alternatör sargıları arasındaki yalıtımın bozuk olduğu (stator yanığı) tespit edildi, sarım önerildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">izolasyon</span> <span class="wiki-tag">megger</span> <span class="wiki-tag">stator</span></div>
           
@@ -7599,10 +7681,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Speed sensor (hız sensörü) arızası ve bakımı</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="27" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Hız sensörünün hatalı değer okuması veya çalışmaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> İndüktif olan bu sensörlerin yüzeyinde biriken yağ ve kir, sinyal okumayı engellediği için sensör aynasının periyodik temizlenmesi gerekir; sorun devam ederse sensör değişimi yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sensor</span> <span class="wiki-tag">indüktif</span> <span class="wiki-tag">bakım</span> <span class="wiki-tag">hız</span></div>
           
@@ -7613,10 +7697,12 @@
           <span class="wiki-icon">🔌</span>
           <h3 class="wiki-title">Emergency şalteri otomatik kurma ünitesi arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="28" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Şalter</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Emergency barayı besleyen şalterin otomatik kurma motoru zorlanma nedeniyle yandı ve şalter manuel kurulduğunda trip moduna geçiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Düşük gerilim (UV) bobini şalterin trip atmasına neden olabilir; şalter ön kapağındaki yuvasından bu bobin çıkartılarak veya şemanın incelenerek bobinin enerjilendiği kontaktan yarı otomatik tetiklenerek sorun giderilebilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">emergency</span> <span class="wiki-tag">şalter</span> <span class="wiki-tag">bobin</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7627,10 +7713,12 @@
           <span class="wiki-icon">🔩</span>
           <h3 class="wiki-title">Dümen sancağa yavaş basma arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="29" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Hidrolik</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dümen sancağa 20 saniyede, iskeleye 10 saniyede basıyor; sensör kablosu lehimlenmesine rağmen sorun çözülmedi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Kütük üzerindeki sensörlerin ileri-geri ayarları kontrol edildi ve sancak tarafı sensörü yarım tur geri alınarak hidrolik valf tepki süresi iyileştirildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">dümen</span> <span class="wiki-tag">hidrolik</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7641,10 +7729,12 @@
           <span class="wiki-icon">🔗</span>
           <h3 class="wiki-title">Gemide uzun süreli 220V kaçak arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="30" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Bağlantı/Kablo</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Emergency jeneratör dairesinde 7 aydır süren 220V kaçak arızası mevcuttu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yanlış bağlanmış marine priz fişi tespit edildi, bağlantı standartlara uygun şekilde yenilendi ve kaçak giderildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kaçak</span> <span class="wiki-tag">priz</span> <span class="wiki-tag">bağlantı</span> <span class="wiki-tag">izolasyon</span></div>
           
@@ -7655,10 +7745,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Termik röle alarmının genel alarma dönüştürülmesi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="31" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Elektrik kumanda panolarında termik attığında verilen 24V DC local alarmın genel sisteme entegrasyonu isteniyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemin genel alarm devresine paralel veya uygun bir röle kontağı üzerinden bağlanarak dönüşümünün yapılması gereklidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm</span> <span class="wiki-tag">pano</span> <span class="wiki-tag">termik</span> <span class="wiki-tag">otomasyon</span></div>
           
@@ -7669,10 +7761,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Statora izolasyon verniği uygulanması</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="32" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bazı motorlarda statör sargılarına izolasyon verniği sürülmektedir.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Bu işlem kesinlikle yapılmamalıdır; manyetik alan şiddetini azaltarak motorun zorlanmasına ve aşırı akım çekmesine neden olur.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">motor</span> <span class="wiki-tag">izolasyon</span> <span class="wiki-tag">bakım</span> <span class="wiki-tag">stator</span></div>
           
@@ -7683,10 +7777,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Elektrik panolarında yangın söndürme sistemleri</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="33" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Elektrik tesisatı ve kompanzasyon panolarındaki yangınlarda geleneksel yöntemlerin yetersizliği.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yeni sistemlerde FM-200 gazlı söndürme sistemleri kullanılmalıdır; elektriksel sisteme zarar vermez ve etkilidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">yangın</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">panolar</span> <span class="wiki-tag">FM-200</span></div>
           <span class="wiki-gemi">Tanker</span>
@@ -7697,10 +7793,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Dizel makinelerde siyah duman sebebi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="34" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dizel makinelerde siyah duman çıkmasının ana sebebi nedir ve hatalı kaynakların tespiti.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Siyah duman genellikle eksik yanmadan (yetersiz hava veya hatalı enjeksiyon) kaynaklanır; hava filtresi tıkanıklığı kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">dizel motor</span> <span class="wiki-tag">siyah duman</span> <span class="wiki-tag">yanma</span></div>
           
@@ -7711,10 +7809,12 @@
           <span class="wiki-icon">📏</span>
           <h3 class="wiki-title">Sinyal jeneratörü/simülatörü IMPA kodu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="35" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Ölçüm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> 4-20mA ve 0-10V sinyal üretimi için kullanılacak sinyal jeneratörlerinin IMPA koduna ihtiyaç duyulması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Marka model bağımsız olarak ilgili teknik cihazın datasheet'i üzerinden veya IMPA kataloğundan (genellikle test cihazları/kalibratörler bölümü) temin edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sinyal</span> <span class="wiki-tag">4-20mA</span> <span class="wiki-tag">0-10V</span> <span class="wiki-tag">IMPA</span> <span class="wiki-tag">ölçüm</span></div>
           
@@ -7725,10 +7825,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Baş altı pano tanımlaması</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="36" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Baş altında bulunan panonun işlevinin belirlenmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Baş altındaki ana elektrik panosu genellikle Bow Thruster sistemine ait kontrol veya güç panosudur.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">pano</span> <span class="wiki-tag">bow thruster</span> <span class="wiki-tag">manevra</span></div>
           
@@ -7739,10 +7841,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Bilezikli Asenkron Motorların Çalışma Prensibi ve Arızaları</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="37" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bow thruster gibi yüksek güçlü sistemlerde kullanılan bilezikli asenkron motorların çalışma mantığı ve rezistansların ısınma/arıza sorunları.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motor kalkınma anında tüm dirençler devrededir; zaman röleleri ve kontaktörler aracılığıyla dirençler kademeli olarak devreden çıkarılır. Porselen dirençlerin uzun süre devrede kalıp ısınması çatlamalara, kısa devrelere veya gövdeye kaçağa neden olabilir. Düzenli fan kontrolü ve izolasyon takibi hayati önem taşır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">bilezikli motor</span> <span class="wiki-tag">bow thruster</span> <span class="wiki-tag">asenkron motor</span> <span class="wiki-tag">dirençli yol verme</span></div>
           
@@ -7753,10 +7857,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Watertight Kapı İndikatör Sistemi Arızaları</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="38" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Watertight kapı ve kaporta indikatörlerinde yeşil/kırmızı ledlerin yanlış çalışması veya arızalanması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistem çalışma mantığı kapalı konumda yeşil, açık konumda kırmızı led yanmasıdır. Bağlantılar ters zannedilerek switch ayarlarıyla oynanmamalı, sistem orijinal yapısına uygun şekilde kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">watertight</span> <span class="wiki-tag">indikatör</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">switch</span></div>
           
@@ -7767,10 +7873,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Gemi Anons Sistemi Ses Çıkış Arızası</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="39" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemi anons sistemlerinde ses çıkışının alınamaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Hoparlörlerden önce ses çıkış kartındaki sigortalar ve kondansatörler kontrol edilmelidir. Çift kanallı kartlarda 10A sigorta genelde ses çıkışını korur; sigorta değişimi ile sorun çözülebilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">anons sistemi</span> <span class="wiki-tag">sigorta</span> <span class="wiki-tag">ses kartı</span> <span class="wiki-tag">kondansatör</span></div>
           
@@ -7781,10 +7889,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Kaynak makinesinin 440V gerilimde çalıştırılması</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="40" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> 380V 50/60Hz değerindeki bir dijital kaynak makinesinin 440V 60Hz gemi şebekesinde çalışıp çalışmayacağı sorusu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Cihazın etiket değerlerinin (Max 418V) aşılmaması gerektiği, yüksek voltajın cihazı ısıtacağı ve kısa süreli kullanımlarda bile zarar verebileceği, üretici etiket değerlerine uyulmasının zorunlu olduğu belirtildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kaynak makinesi</span> <span class="wiki-tag">voltaj uyumu</span> <span class="wiki-tag">etiket değeri</span></div>
           
@@ -7795,10 +7905,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">BWMS Wiper motorlarının manuel kontrolü</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="41" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Miura BWMS sisteminde proximity sensör arızası nedeniyle wiper motorunun çalışmaması ve kontrol panelinde manuel çalıştırma tuşu olmaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Wiper motorunu çalıştıran rölelerin (WMX1 ve WMX2) bobin uçlarına enerji verilerek veya motor kontaktör uçlarını kısa devre ederek motorun manuel test edilebileceği önerildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWMS</span> <span class="wiki-tag">wiper motor</span> <span class="wiki-tag">röle</span> <span class="wiki-tag">otomasyon</span></div>
           
@@ -7809,10 +7921,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Genel anons sisteminde hoparlör cızırtısı/bip sesi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="42" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bazı odalardaki hoparlörlerden sürekli uzun bip şeklinde ses gelmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Lokal ünite veya amplifikatörde nem/su girişi veya lehim kopması kaynaklı kısa devre kontrolü önerildi. Ayrıca yeni montaj yapılan cihazların elektromanyetik etkileşim yapabileceği belirtildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">anons sistemi</span> <span class="wiki-tag">hoparlör</span> <span class="wiki-tag">arıza arama</span></div>
           
@@ -7823,10 +7937,12 @@
           <span class="wiki-icon">🔦</span>
           <h3 class="wiki-title">Sodyum buharlı lamba balast ve ateşleyici uyumu</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="43" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Aydınlatma</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yenisi takılan sodyum buharlı lambanın ateşleme yapmaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Lambaların ateşleyici (ignitor/starter) gerektirdiği ve balastlı sistemlerde doğrudan 220V verilemeyeceği, kullanılan balast/ampul kodlarının uyumlu olması gerektiği belirtildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sodyum lamba</span> <span class="wiki-tag">balast</span> <span class="wiki-tag">ateşleyici</span> <span class="wiki-tag">aydınlatma</span></div>
           
@@ -7837,10 +7953,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Gemi trafo çıkış yapısı ve faz-şase voltajı</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="44" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemide 440/115V trafo çıkışında bir fazda düşük voltaj (19V) okunması ve kaçak lambalarının normal çalışmaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Gemi trafolarının üçgen bağlı olduğu, kaçak durumunda lamba parlaklığının değişeceği veya söneceği açıklandı; fazların gemi gövdesine göre 127V okunması gerektiği belirtildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">trafo</span> <span class="wiki-tag">topraklama</span> <span class="wiki-tag">kaçak kontrolü</span></div>
           
@@ -7851,10 +7969,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">BWMS UV dosage alarmı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="45" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Denizden denize geçişte tüm UV sensörlerinden dosage alarmı alınması ve sistemin stop etmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Suyun rengi/bulanıklığı (turbidity) kontrol edilmeli ve CIP (yıkama) işleminin sistemde otomatik başlatılması önerildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWMS</span> <span class="wiki-tag">UV sensör</span> <span class="wiki-tag">arıza</span></div>
           <span class="wiki-gemi">Tanker</span>
@@ -7865,10 +7985,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Dümen açı transmitteri kalibrasyon sapması</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="46" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Otomasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dümen pozisyon göstergesinin 6 derece hatalı göstermesi ve DC amplifikatör çıkışında 1V fazlalık olması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Devreye direnç/diyot eklemek yerine, sistemdeki potansiyometreler üzerinden kalibrasyon yapılması veya sensör üzerindeki potansiyometrenin değiştirilmesi önerildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">dümen</span> <span class="wiki-tag">transmitter</span> <span class="wiki-tag">potansiyometre</span> <span class="wiki-tag">kalibrasyon</span></div>
           
@@ -7879,10 +8001,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">BWMS UV dozaj alarmı ve çözümü</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="47" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> BWMS sistemi (Miura HK-900) kirli deniz suyunda sürekli UV dozaj alarmı vererek sistemi durduruyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> UV sensörlerinin ve cam tüplerinin temizliği yapıldı, arızalı sensörler ve kırık lamba tüpleri yenileriyle değiştirildi. Overboard valfi 1/4 oranında kısarak sistem debisi optimize edildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWMS</span> <span class="wiki-tag">UV sensörü</span> <span class="wiki-tag">deniz suyu</span> <span class="wiki-tag">arıza çözümü</span></div>
           
@@ -7893,10 +8017,12 @@
           <span class="wiki-icon">🔦</span>
           <h3 class="wiki-title">UV lamba balast seçimi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="48" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Aydınlatma</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> UV lambanın balastı arızalanmış ve gemi 60Hz olduğu halde 50Hz bir balast uygun görülmüştür.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Endüktif devrelerde frekansın önemi nedeniyle, gemi frekansına uygun 60Hz balast kullanılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">UV lamba</span> <span class="wiki-tag">balast</span> <span class="wiki-tag">frekans</span> <span class="wiki-tag">60Hz</span></div>
           
@@ -7907,10 +8033,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Defroster rezistans kaçak arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="49" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Defroster devreye alındığında 380V alarmı veriyor, heaterlar çalışıyor ancak kısa devre/kaçak şüphesi var.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Rezistansların faz-gövde arası omaj ölçümü yapılmalı, buat bağlantıları su girişi ve korozyon yönünden kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">rezistans</span> <span class="wiki-tag">ısıtıcı</span> <span class="wiki-tag">kaçak akım</span> <span class="wiki-tag">defroster</span></div>
           
@@ -7921,10 +8049,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Oil Mist dedektörü hatalı shutdown arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="50" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Oil Mist dedektörü gerçek bir alarm durumu olmadan ana makineyi shutdown'a çekiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Elektriksel olarak kablo, soket ve sensör kontrolü; mekanik olarak karter fanları, turbo şarj kirliliği ve segman sızdırmazlığı kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">Oil Mist</span> <span class="wiki-tag">ana makine</span> <span class="wiki-tag">shutdown</span> <span class="wiki-tag">sensör</span></div>
           
@@ -7935,10 +8065,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Motor sigorta attırıyor ancak meger değeri normal</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="51" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Motor sargı yalıtımı meger ile ölçüldüğünde 5.5 Gohm gibi normal değerler vermesine rağmen, enerji verildiğinde güç sigortasını attırıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motor klemens kutusunu kontrol edin ve gerekirse yenileyin (karbonlaşma olabilir). Kontaktör ana kontaklarını kontrol edin, aşınmışsa düzeltin veya değiştirin. Yıldız/üçgen bağlantı köprülerini sökerek sargıları bağımsız ölçün ve tüm fazların akım dengesini pens ampermetre ile kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">motor</span> <span class="wiki-tag">sigorta</span> <span class="wiki-tag">meger</span> <span class="wiki-tag">arıza</span></div>
           
@@ -7949,10 +8081,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Kreynlerde proximity switch çalışma prensibi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="52" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kreyn kütüklerinde bulunan proximity switchlerin işlevi ve çalışma prensibi merak ediliyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Proximity switchler fiziksel temas olmadan metal cisimleri algılayan endüktif sensörlerdir. Kreynlerde limit algılama, pozisyon doğrulama ve güvenlik (overtravel önleme) amacıyla kullanılırlar ve doğrudan PLC veya kontrol sistemine sinyal gönderirler.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sensör</span> <span class="wiki-tag">kreyn</span> <span class="wiki-tag">otomasyon</span> <span class="wiki-tag">proximity</span></div>
           
@@ -7963,10 +8097,12 @@
           <span class="wiki-icon">📡</span>
           <h3 class="wiki-title">VHF anten kablosu direnç ölçümü</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="53" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">GMDSS</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> VHF cihazı anten kablolarında yapılan ölçümlerde 1.5 ohm'un üzerinde (2.5 ohm ve daha yüksek) direnç değerleri okunuyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yüksek direnç değerleri kablo soketlerindeki oksitlenme, kötü ekler veya anten arızasına işaret eder. Bağlantı noktaları temizlenmeli ve ölçü aletinin kalibrasyonu ile yöntemin doğruluğu teyit edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">VHF</span> <span class="wiki-tag">haberleşme</span> <span class="wiki-tag">anten</span> <span class="wiki-tag">ölçüm</span></div>
           
@@ -7977,10 +8113,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratörün yük altında sigorta attırması</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="54" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratörler teke düşürülürken frekans veya voltaj düşümü olmamasına rağmen, bazen üzerinden yük atıp sigorta attırıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Gerilim trafosu (transducer) arızası kararsız çalışmaya sebep olabilir; mA cinsinden ölçüm yaparak transducer kontrol edilmeli ve arızalı ise değiştirilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">yük atma</span> <span class="wiki-tag">transducer</span> <span class="wiki-tag">sigorta</span></div>
           
@@ -7991,10 +8129,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">BWTS sisteminde sensör hata uyarısı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="55" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> BWTS sisteminde sensör giriş var ancak çıkış sinyali alınamıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sensör arızalı olabilir, yedek sensörle değiştirilmeli, kimyasal seviyeleri kontrol edilmeli ve TRO ünitesi parametreleri ile adreslemeler tekrar yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWTS</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">arıza</span></div>
           
@@ -8005,10 +8145,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Cargo pompası heater ölçüm farkı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="56" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kablo üzerinden ölçülen 274 ohm direnç değerinin, pano klemensine bağlandığında 91-94 ohm değerine düşmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Pano içerisindeki devrenin veya paralel bağlantıların yük altında olup olmadığı kontrol edilmeli; kablo ayrıldığında değerin normale dönmesi bir izolasyon veya harici yük sorununa işaret edebilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">ısıtıcı</span> <span class="wiki-tag">direnç</span> <span class="wiki-tag">ölçüm</span></div>
           <span class="wiki-gemi">Tanker</span>
@@ -8019,10 +8161,12 @@
           <span class="wiki-icon">🌀</span>
           <h3 class="wiki-title">Kompresör devreye girerken Battery Switch Board alarmı</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="57" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Kompresör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> No.1 kompresör oto modda çalışırken anlık olarak battery switch board alarmı veriyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Kompresör ile kontrol paneli arasındaki 24V besleme hattı, pako şalter bağlantıları ve pressure switch besleme devreleri kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kompresör</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">kontrol sistemi</span></div>
           
@@ -8033,10 +8177,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">Rüzgar gülü gösterge arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="58" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Rüzgar gülü fiziksel olarak dönmesine rağmen gösterge üzerinde veri okunamıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Soketlerdeki oksitlenme kontrol edilmeli, signal converter kartı test edilmeli veya inverter ünitesi ile bağlantı kutusuna su girip girmediği incelenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">rüzgar gülü</span> <span class="wiki-tag">navigasyon</span> <span class="wiki-tag">elektronik kart</span></div>
           
@@ -8047,10 +8193,12 @@
           <span class="wiki-icon">🔦</span>
           <h3 class="wiki-title">Balast ısınması ve direnç yanması</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="59" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Aydınlatma</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> 230V 50/60Hz etiketli balastın, gemi şebekesinde 230V 60Hz'de ısınarak direnç yakması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Balastın kalite yetersizliği göz önüne alınarak daha kaliteli bir marka (Philips vb.) ile değiştirilmeli ve lamba çıkışları boşta test edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">balast</span> <span class="wiki-tag">floresan</span> <span class="wiki-tag">ısınma</span></div>
           
@@ -8061,10 +8209,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Actuator sistemi hata uyarısı</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="60" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Actuator sisteminde hata oluşması ve sistemin çalışmaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Gelen voltaj eşitliği kontrol edilmeli, sistem resetlenmeli, enkoder ve sinyal hattı motor bölümündeki bağlantılar gözden geçirilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">actuator</span> <span class="wiki-tag">arıza</span> <span class="wiki-tag">motor</span></div>
           
@@ -8075,10 +8225,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">BWTS pompa stop sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="61" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Sistem çalışıyor görünmesine rağmen pompa 5-10 saniye çalışıp stop ediyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Discharge devre valfleri açmıyor olabilir; selenoid valflere enerji gelip gelmediği ve valf mekaniklerinin tutukluk yapıp yapmadığı kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWTS</span> <span class="wiki-tag">pompa</span> <span class="wiki-tag">selenoid</span></div>
           
@@ -8089,10 +8241,12 @@
           <span class="wiki-icon">🔗</span>
           <h3 class="wiki-title">Fırın ve ızgara için ısıya dayanıklı kablo seçimi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="62" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Bağlantı/Kablo</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Fırın ve plate ızgara iç tesisatı için ısıya dayanıklı kablo ihtiyacı bulunmaktadır.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Amyant esaslı, silikon ve elyaf kaplı, 4 mm² kesitli kablo temin edilmelidir; IMPA kodu olmasa dahi malzeme tanımı ile sipariş edilebilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kablo</span> <span class="wiki-tag">ısıya dayanıklı</span> <span class="wiki-tag">yedek parça</span></div>
           
@@ -8103,10 +8257,12 @@
           <span class="wiki-icon">📏</span>
           <h3 class="wiki-title">XLPE kablo izolasyon testi ve gerilim seviyeleri</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="63" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Ölçüm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> XLPE kabloya 10kV ile megger testi uygulandığında ölçüm değerlerinde kararsızlık yaşanmaktadır.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Ölçüm öncesi kablonun kondansatör etkisi nedeniyle topraklama yapılması şarttır; DC test gerilimi kablonun işletme gerilimine göre belirlenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">XLPE</span> <span class="wiki-tag">megger</span> <span class="wiki-tag">izolasyon</span></div>
           
@@ -8117,10 +8273,12 @@
           <span class="wiki-icon">🖥️</span>
           <h3 class="wiki-title">Bow thruster devreye alma ve timer arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="64" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">PLC</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bow thruster sistemi devreye alınamıyor, sistem sigortaları atıyor ve zaman rölesi (timer) kısa devre veriyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sigorta değerleri kontrol edilmeli, zaman rölesi fonksiyonu test edilmeli; porselen dirençler, bağlantı papuçları ve kontaktör bobinleri gözden geçirilerek kaçak kontrolü yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">bow thruster</span> <span class="wiki-tag">timer</span> <span class="wiki-tag">röle</span> <span class="wiki-tag">kumanda devresi</span></div>
           
@@ -8131,10 +8289,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Yağ ısıtıcı rezistansların yetersiz ısıtma sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="65" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Ana makine yağ ısıtıcı rezistansları enerji almasına rağmen yağı istenen sıcaklığa ulaştıramıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Rezistansların izolasyon direnci megger ile ölçülmeli, fazlar arası direnç değerleri karşılaştırılmalı ve arızalı/kopuk rezistans veya papuçlar yenilenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">rezistans</span> <span class="wiki-tag">ısıtıcı</span> <span class="wiki-tag">bakım</span> <span class="wiki-tag">izolasyon</span></div>
           
@@ -8145,10 +8305,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Alternatör voltaj ve cos-fi dengesizliği</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="66" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Paralel çalışan jeneratörlerde yük ve cos-fi dengesizliği yaşanmakta, voltaj dalgalanmaları oluşmaktadır.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> AVR kartı değiştirilmeli, sonuç alınamazsa uyartım devresindeki diyotlar kontrol edilmeli ve tüm jeneratörlerin yük altında voltaj eşitlemesi yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">AVR</span> <span class="wiki-tag">paralel</span> <span class="wiki-tag">cos-fi</span></div>
           
@@ -8159,10 +8321,12 @@
           <span class="wiki-icon">📡</span>
           <h3 class="wiki-title">VHF haberleşme kesintisi ve akü grubu arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="67" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">GMDSS</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> VHF üzerinden haberleşme sağlanamıyor ve akülerin voltajı yük altında hızla düşüyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Akülerin yük testi yapılmalı; aküler bitikse sistemin enerjisi kesilmeden (paralel besleme yapılarak) aküler yenilenmeli ve anten soketleri temizlenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">VHF</span> <span class="wiki-tag">akü</span> <span class="wiki-tag">haberleşme</span> <span class="wiki-tag">GMDSS</span></div>
           
@@ -8173,10 +8337,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Navigasyon Aküleri Değişimi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="68" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Navigasyon sistemlerini enerjisiz bırakmadan akü değişimi yapılması gerekliliği.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemi 24V enerjisiz bırakmadan aküleri değiştirin, aksi takdirde navigasyon sistemleri formatlanabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">akü</span> <span class="wiki-tag">navigasyon</span> <span class="wiki-tag">enerji</span></div>
           
@@ -8187,10 +8353,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Bulaşık Makinesi Rezistans Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="69" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bulaşık makinesi rezistansının sürekli yanması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Rezistansın takılı olduğu alanı kireçten arındırın, kaliteli bakır/kalay kaplı veya teflon kaplamalı krom rezistans kullanın, kireç önleyici kimyasal veya sirke kullanın.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">rezistans</span> <span class="wiki-tag">kireç</span> <span class="wiki-tag">arıza</span></div>
           
@@ -8201,10 +8369,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Kreyn Yıldız-Üçgen Kalkışta Şalter Trip Atması</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="70" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kreyn yıldızdan üçgene geçerken şalterin trip atması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yıldızdan üçgene geçiş süresini uzatın, aşınmış üçgen kontaktörünü daha yüksek kW değerine sahip yenisiyle değiştirin, hidrolik sistemin karşı basıncını (releaf valf ayarı) kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kontaktör</span> <span class="wiki-tag">motor</span> <span class="wiki-tag">yıldız-üçgen</span> <span class="wiki-tag">kreyn</span></div>
           
@@ -8215,10 +8385,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">KNS Uydu Sinyal Sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="71" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> KNS uydu sisteminde NIM QUALITY olmasına rağmen TV'de sinyal alınamaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Anten ve TV üzerindeki Türksat 42E uydu ayarlarını ve frekans değerlerini tekrar yapılandırın.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">KNS</span> <span class="wiki-tag">uydu</span> <span class="wiki-tag">sinyal</span> <span class="wiki-tag">TV</span></div>
           
@@ -8229,10 +8401,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Blackout Sonrası Emergency Jeneratör Yük Almıyor</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="72" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Blackout durumunda Emergency jeneratör devreye giriyor ancak yük almıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Şalterin kurma motorunu veya bobinini kontrol edin, sigortaları gözden geçirin, otomatik kurma motoru yanmış olabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">blackout</span> <span class="wiki-tag">emergency jeneratör</span> <span class="wiki-tag">şalter</span> <span class="wiki-tag">yük</span></div>
           
@@ -8243,10 +8417,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Yangın Alarm Sistemi Sensör Arızası</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="73" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yangın alarm sisteminde zona özel arıza ve temizlenemeyen alarm durumu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Arızalı sensörü bulun, temizleyin veya değiştirin, sistemin zone arızası verdiği hattı ve sensörü kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">yangın</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">zone</span></div>
           
@@ -8257,10 +8433,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">M/E Selenoid Valf Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="74" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> M/E Selenoid valfin açık kalması ve arıza vermesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Bobin direncini ölçüp diğer çalışan valflerle karşılaştırın, dışarıdan voltaj vererek test edin, gerekirse bobini değiştirin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">selenoid</span> <span class="wiki-tag">valf</span> <span class="wiki-tag">bobin</span> <span class="wiki-tag">M/E</span></div>
           
@@ -8271,10 +8449,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Kontrol Hava Devresi Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="75" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kontrol havası devresinde 'Wire break' ve düşük basınç alarmı.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Hava basınç transmitterini ve kablo bağlantılarını kontrol edin, kablo kopukluğu veya sensör arızasını giderin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kontrol havası</span> <span class="wiki-tag">transmitter</span> <span class="wiki-tag">wire break</span> <span class="wiki-tag">sensör</span></div>
           
@@ -8285,10 +8465,12 @@
           <span class="wiki-icon">📡</span>
           <h3 class="wiki-title">FleetBroadband Uydu Bağlantı Sorunu</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="76" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">GMDSS</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> FleetBroadband sisteminin uyduya bağlanamaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Anten dip soketlerini kontrol edin, oksitlenmiş bağlantıları temizleyin, direnç değerini (2-3 ohm) ölçün.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">Inmarsat</span> <span class="wiki-tag">uydu</span> <span class="wiki-tag">FleetBroadband</span> <span class="wiki-tag">anten</span></div>
           
@@ -8299,10 +8481,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör Voltaj Dalgalanması ve Amper Yükselmesi</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="77" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemideki 4 jeneratörden 1 nolu olanı seyir halindeyken voltajı 400V'dan 360V seviyelerine aniden düşürüp yükseltiyor, bu sırada amper değerleri aşırı yükseliyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> AVR kartları ve PMG sargısı değiştirilmesine rağmen sorun devam etmiştir. Uyartım devresindeki diyotların kaçırma ihtimali yüksektir; tüm diyotların yenilenmesi, uyartım sargı dirençlerinin diğer jeneratörlerle kıyaslanması ve potansiyometrelerin kontrol edilmesi önerilmiştir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">AVR</span> <span class="wiki-tag">Jeneratör</span> <span class="wiki-tag">Voltaj</span> <span class="wiki-tag">Uyartım</span></div>
           
@@ -8313,10 +8497,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Akü Bağlantı Kuralları</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="78" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Akülerin seri veya paralel bağlanması durumunda voltaj ve kapasite değişimleri hakkında bilgi eksikliği.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Paralel bağlantıda voltaj sabit kalır, güç artar ve voltajların eşit olması şarttır. Seri bağlantıda voltaj artar, kapasite düşük olan aküye göre sınırlanır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">Akü</span> <span class="wiki-tag">Bağlantı</span> <span class="wiki-tag">Elektrik</span></div>
           
@@ -8327,10 +8513,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">BWTS UV Lamba Arızası ve Kaçak</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="79" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Alfa Laval BWTS sisteminde UV lamba değişimi yapılmasına rağmen kısa süre sonra 220V kaçak verip lambaların tekrar patlaması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yoğunluk (intensity) sensörünün kirlenerek sistemi hatalı yönlendirmesi sonucu gücün artıp lambaları patlatabileceği belirtildi. Sensör temizliği, soğutma fanlarının kontrolü ve kablo tesisatında kısa devre kontrolü önerildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWTS</span> <span class="wiki-tag">UV lamba</span> <span class="wiki-tag">Sensör</span> <span class="wiki-tag">Alfa Laval</span></div>
           
@@ -8341,10 +8529,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Elektronik Devre Arızalarında Resetleme</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="80" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemideki elektronik cihazlarda oluşan belirsiz arızaların giderilmesi yöntemi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Elektronik devre arızalarının büyük kısmının cihazın resetlenmesi ile çözülebileceği, donanım kurcalanmadan önce mutlaka reset prosedürünün uygulanması gerektiği belirtildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">Elektronik</span> <span class="wiki-tag">Arıza</span> <span class="wiki-tag">Reset</span></div>
           
@@ -8355,10 +8545,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör yük paylaşımı ve stabilite sorunu</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="81" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratörler senkronize çalışırken yükü eşit paylaşmıyor, sürekli yük kayması yaşanıyor ve yük paylaşım lambası yanıp sönüyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Önce tüm yakıt filtreleri ve enjektörler kontrol edilmeli, yakıt sisteminde su olup olmadığına bakılmalıdır. Ardından jeneratörler tek tek çalıştırılarak devir düşüşü olup olmadığı (mekanik/yakıt sorunu) veya sadece yük altında frekans dalgalanması (elektriksel sorun) gözlemlenmelidir. Hız kontrol ünitesi (speed monitor) ve aktüatörün stabilite ayarları yapılmalı, alternatör çıkış voltajları hassas ölçülerek eşitlenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">senkronizasyon</span> <span class="wiki-tag">yük paylaşımı</span> <span class="wiki-tag">aktüatör</span> <span class="wiki-tag">speed monitor</span></div>
           
@@ -8369,10 +8561,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">220V topraklama kaçağının tespiti</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="82" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemide 220V hattında topraklama kaçağı var ve bulunamıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemi bölüm bölüm ayırmak için tüm aydınlatma ve güç şalterlerini indirin. Ardından şalterleri tek tek devreye alarak kaçağın hangi bölgeden kaynaklandığını tespit edin. Özellikle dış güvertedeki aydınlatma armatürlerinin içine su girip girmediğini veya floresan kapaklarının çatlak olup olmadığını kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">topraklama</span> <span class="wiki-tag">kaçak akım</span> <span class="wiki-tag">panolar</span></div>
           
@@ -8383,10 +8577,12 @@
           <span class="wiki-icon">🔩</span>
           <h3 class="wiki-title">Vinç (Crane) düşük yağ sıcaklığında çalışmıyor</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="83" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Hidrolik</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Çin yapımı bir vinç, yağ sıcaklığı 40 derecenin altında kaldığında çalışmıyor ve yıldız-üçgen geçişinde şalter attırıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yağ soğuk olduğunda viskozite yüksek, akışkanlık az ve basınç yüksektir; bu durum motorun kalkış anında aşırı akım çekmesine neden olur. Hidrolik sistemdeki relief valf ayarları kontrol edilerek basınç düşürülmelidir. Ayrıca yağ filtresi değiştirilmeli, PT100 sensörü ve yıldız-üçgen zaman rölesi ile selenoidlerin düzgün çalışıp çalışmadığı test edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">hidrolik</span> <span class="wiki-tag">vinç</span> <span class="wiki-tag">yıldız-üçgen</span> <span class="wiki-tag">basınç valfi</span></div>
           
@@ -8397,10 +8593,12 @@
           <span class="wiki-icon">📏</span>
           <h3 class="wiki-title">Alternatör uyartım diyotlarını test etme</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="84" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Ölçüm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Alternatör uyartım diyotlarının yönünün ve sağlamlığının nasıl test edileceği bilinmiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Avometre ile diyotun giriş yönüne artı, çıkış yönüne eksi uç değdirilerek yaklaşık 0.470 ohm değer okunduğu teyit edilmelidir. Ters yönde 'O.L' okunmalıdır. Tam dalga doğrultmada her fazda iki diyot bulunur; biri yukarı diğeri aşağı yönlü takılmalı, yönlere dikkat edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">diyot</span> <span class="wiki-tag">alternatör</span> <span class="wiki-tag">uyartım</span> <span class="wiki-tag">multimetre</span></div>
           
@@ -8411,10 +8609,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Stand-by pompa devreye girmiyor</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="85" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> LT pompalarında 2 numaralı pompa durduğunda 1 numaralı (stand-by) pompa otomatik devreye girmiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Pompa çıkışındaki pressure switch boru hattında tıkanıklık kontrol edilmeli, pressure switch üzerindeki 'cut' basıncı ve diferansiyel ayarları gözden geçirilmelidir. Sistemdeki zaman rölesi arızalı olabilir veya sistemde bulunan check valfinin mekanik durumu incelenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">pompa</span> <span class="wiki-tag">pressure switch</span> <span class="wiki-tag">otomasyon</span> <span class="wiki-tag">stand-by</span></div>
           
@@ -8425,10 +8625,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">Radar 'No sync signal' hatası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="86" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> JRC X-Band radar açılışta 'No sync signal' hatası veriyor ve çalışmıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Scanner ile ana ünite arasındaki kablo bağlantıları kontrol edilmeli, jaklar temizlenmelidir. Sorun devam ederse sinyal iletimindeki veri hatları ve işlem kartları kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">radar</span> <span class="wiki-tag">navigasyon</span> <span class="wiki-tag">haberleşme</span></div>
           
@@ -8439,10 +8641,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Şaft jeneratörü voltaj üretmiyor</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="87" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Şaft jeneratörü, şaft döndüğü halde voltaj üretmiyor ve çıkış alamıyorum.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Exciter sigortalarını kontrol edin, fırça uçlarına harici 12-48V DC vererek uyartım yapmayı deneyin veya alternatör çıkışındaki bağlantıların ters olup olmadığını gözden geçirin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">şaft jeneratörü</span> <span class="wiki-tag">uyartım</span> <span class="wiki-tag">AVR</span> <span class="wiki-tag">voltaj</span></div>
           
@@ -8453,10 +8657,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Aalborg boiler su seviye indikatörü arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="88" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Aalborg kompozit boiler su seviye indikatörü olması gereken değeri göstermiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sensörün mA/volt tipini kontrol edin, menüden sensör çalışma aralığını kalibre edin ve bağlantı uçlarının doğruluğunu test edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">boiler</span> <span class="wiki-tag">seviye sensörü</span> <span class="wiki-tag">kalibrasyon</span> <span class="wiki-tag">4-20mA</span></div>
           
@@ -8467,10 +8673,12 @@
           <span class="wiki-icon">🌀</span>
           <h3 class="wiki-title">Kompresör otomatik durmuyor</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="89" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Kompresör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kompresör 17 barda devreye giriyor ancak 22 barda otomatik olarak durmuyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Parametre ayarlarından stop (cut) basıncını kontrol edin, manometre ile gerçek basıncı kıyaslayarak set değerini bir bar altına düşürün.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kompresör</span> <span class="wiki-tag">basınç</span> <span class="wiki-tag">parametre</span> <span class="wiki-tag">otomatik</span></div>
           
@@ -8481,10 +8689,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Makine devir sensörü alarmı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="90" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Makine çalışırken 1 numara RPM start blocking alarmı veriyor veya sensör sinyali kararsız yanıp sönüyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Hız sensörünün kirliliğini kontrol edin, sensör ile dişli volan arasındaki mesafeyi ayarlayın ve kablo izolasyonunu/kısa devre durumunu denetleyin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">RPM</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">takometre</span></div>
           
@@ -8495,10 +8705,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">BWT sistemi LPS ünitesi arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="91" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> BWT sisteminde LPS ünitesine giriş voltajı geliyor ancak ünite çalışmıyor ve sistem 6 alarm veriyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Modülün arıza ledini kontrol edin, LPS ünitesini yenisiyle değiştirmeyi deneyin veya dahili çarpara tüplerinin kırık olup olmadığını kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BWT</span> <span class="wiki-tag">LPS</span> <span class="wiki-tag">UV lamba</span> <span class="wiki-tag">otomasyon</span></div>
           
@@ -8509,10 +8721,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Pompa otomatik devreye girmiyor</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="92" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Ana pompa çalıştığı halde standby pompa otomatik devreye girmiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Seçici şalterin kontaklarını kontrol edin, pressure switch'in normalde kapalı (NC) konuma geçip geçmediğini test edin ve jumper atarak sistemin tepkisini gözlemleyin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">pompa</span> <span class="wiki-tag">standby</span> <span class="wiki-tag">otomatik</span> <span class="wiki-tag">pressure switch</span></div>
           
@@ -8523,10 +8737,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Yıldız-üçgen motor termik attırıyor</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="93" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yeni sarımdan gelen hidrolik pompa motoru üçgene geçtiğinde termik attırıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motoru kaplinden ayırıp boşta çalıştırın; sorun devam ediyorsa yıldız-üçgen klemens bağlantılarını (bobin giriş-çıkış faz sıralaması) kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">motor</span> <span class="wiki-tag">termik</span> <span class="wiki-tag">yıldız-üçgen</span> <span class="wiki-tag">bobinaj</span></div>
           
@@ -8537,10 +8753,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Yıldız-üçgen motor uçlarının tespiti ve bağlantısı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="94" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Gemiye yeni katılan zabit, sökülen yıldız-üçgen motor uçlarının markalanmamış olması nedeniyle bağlantı karmaşası yaşıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motorun giriş (U, V, W) ve çıkış (X, Y, Z) uçlarını belirleyip, yıldız bağlantıda çıkış uçlarını, üçgen bağlantıda ise bir bobinin çıkışını diğerinin girişine gelecek şekilde şemaya uygun bağlantı yapılması önerildi.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">asenkron motor</span> <span class="wiki-tag">yıldız-üçgen</span> <span class="wiki-tag">bobinaj</span></div>
           
@@ -8551,10 +8769,12 @@
           <span class="wiki-icon">🌀</span>
           <h3 class="wiki-title">Aalborg kazan flush modunda takılı kalması</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="95" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Kompresör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kazan flush modunda takılı kalmış, F.O pompası devreye girmiyor ve sirkülasyon sağlanamıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Servo motorun damper hareketlerini, altındaki mikro switch'leri ve akışkanlık sensörünü kontrol edin. Sensör arızalı veya kirli olabilir, yağ sıcaklığını artırarak akışkanlığı iyileştirmeyi veya sensörü değiştirmeyi deneyin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kazan</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">flush mod</span> <span class="wiki-tag">pompa</span></div>
           
@@ -8565,10 +8785,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Jeneratör start almama sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="96" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratörün manuel veya oto-startta geç devreye girmesi, torna çark ettikten sonra çalışması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Marş motoru kömürlerinin, kontak uçlarının ve start rölesinin kontrol edilmesi; erimiş bir kablonun onarılması ve kömür tozu temizliğinin yapılması sorunu çözdü.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">marş motoru</span> <span class="wiki-tag">start rölesi</span></div>
           
@@ -8579,10 +8801,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Yangın alarm paneli arızası ve batarya testi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="97" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yangın alarm paneli çalışmıyor, bataryaların durumu şüpheli.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Batarya testi için 24V 60W lık ampul kullanarak yük altında ölçüm yapın. Panel içindeki sigortaları, redresör çıkış voltajını ve kuru tip bataryaların çıkışlarını kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm paneli</span> <span class="wiki-tag">batarya</span> <span class="wiki-tag">sigorta</span> <span class="wiki-tag">redresör</span></div>
           
@@ -8593,10 +8817,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Manyetolu telefon bağlantısı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="98" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Eski manyetolu telefonun yerine yenisinin takılmasında bağlantı uçlarının tespiti.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Eski telefonun kolunu çevirerek ölçülen DC voltajın giriş hattı olduğu tespit edildi; yeni telefonun giriş uçlarını bu hatta uygun şekilde bağlayın.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">telefon</span> <span class="wiki-tag">bağlantı</span> <span class="wiki-tag">manyeto</span></div>
           
@@ -8607,10 +8833,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Sintine seviye ölçer sensör arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="99" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Sintine seviye ölçer sensörü değiştirilmesine rağmen cihaz çalışmıyor ve 24V çıkış vermiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Cihazın besleme voltajı girişlerini, üzerindeki cam sigortayı ve güç kaynağı (power supply) çıkışını kontrol edin; cihaz çok eskiyse arızalı olma ihtimalini değerlendirin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sensör</span> <span class="wiki-tag">sintine</span> <span class="wiki-tag">güç kaynağı</span> <span class="wiki-tag">arıza</span></div>
           
@@ -8621,10 +8849,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">24V Güç Kaynağı Değişimi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="100" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> 220V girişli 24V çıkışlı güç kaynağı arızalandı, muadili ile değiştirilip değiştirilemeyeceği soruluyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Giriş voltajı, çıkış voltajı ve amper değerleri aynı olduğu sürece farklı bir marka güç kaynağı kullanılabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">güç kaynağı</span> <span class="wiki-tag">besleme</span></div>
           
@@ -8635,10 +8865,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Elektronik Kart Sigorta Attırma Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="101" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Elektronik kart 220V'a takıldığında direkt sigorta attırıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Giriş düşürücü trafo yanıklığı veya giriş katındaki kondansatörlerin kısa devre yapmış olabileceği kontrol edilmelidir. Trafo primer sargıları ohm metre ile ölçülmeli, değer düşükse trafo kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kart arızası</span> <span class="wiki-tag">kısa devre</span> <span class="wiki-tag">trafo</span> <span class="wiki-tag">kondansatör</span></div>
           
@@ -8649,10 +8881,12 @@
           <span class="wiki-icon">💨</span>
           <h3 class="wiki-title">Healing Valf Kontrol Problemi</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="102" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pnömatik</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Healing valfleri kart değişimi sonrası köprüüstünden sadece valf üzerinden manuel kapatıldığında açılabiliyor, ancak ofisten (uzaktan) komuta edilince kapanmıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemin hava basıncı, valf üzerindeki selenoid bobin beslemesi ve valf mekaniğinin korozyon durumu kontrol edilmelidir. Valf mekaniği WD-40 ile temizlenip hareket kabiliyeti test edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">healing valf</span> <span class="wiki-tag">selenoid</span> <span class="wiki-tag">pnömatik</span> <span class="wiki-tag">balast</span></div>
           
@@ -8663,10 +8897,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Monofaze Motor Sargı Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="103" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Motor sargılarının bir kısmından ohm değeri alınırken diğer kısmından alınamıyor ve gövde kaçağı bulunmuyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motorun bobin devresinde kopukluk olduğu tespit edilmiştir, motor bobinaj için gönderilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">monofaze</span> <span class="wiki-tag">motor</span> <span class="wiki-tag">bobinaj</span> <span class="wiki-tag">ölçüm</span></div>
           
@@ -8677,10 +8913,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör Devir ve Yükleme Sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="104" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratörün devir düşürmesi sonucu kesicinin açması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Hız kontrol (governor) ünitesi, bu üniteyi besleyen 24V/12V DC hatlar ve PGM (Power Generator Motor) kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">governor</span> <span class="wiki-tag">kesici</span> <span class="wiki-tag">devir</span></div>
           
@@ -8691,10 +8929,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Bow Thruster Aşırı Akım ve Durma Sorunu</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="105" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Bow thruster enerji verildikten 15-20 dakika sonra devreden çıkıyor ve aşırı akım çekiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motorun pervane kovanı ve süzgeçleri kekamoz/halat açısından temizlenmeli, fren bobini ve DC beslemesi kontrol edilmeli, termistör kalibrasyonu incelenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">bow thruster</span> <span class="wiki-tag">aşırı akım</span> <span class="wiki-tag">motor</span> <span class="wiki-tag">fren</span></div>
           
@@ -8705,10 +8945,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Lyngso Marine Alarm Paneli Arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="106" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Sisteme kart takıldığında 'Net to Gamma' hatası veriyor ve diğer tüm kartlar devre dışı kalıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Karttaki kondansatörler görsel olarak kontrol edilmeli, kart arızalıysa yenisiyle değiştirilmeli ve sistemde kaçak olup olmadığı kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm paneli</span> <span class="wiki-tag">Lyngso</span> <span class="wiki-tag">kart</span> <span class="wiki-tag">arıza</span></div>
           
@@ -8719,10 +8961,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Seviye Transmitteri Kalibrasyonu</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="107" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Seviye transmitteri için kazanı boşaltıp doldurmadan zero-span ayarı yapmak isteniyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Kazanı boşaltmadan ayar yapmanın sağlıklı olmayacağı belirtildi; model (7MF4433) için teknik kılavuz incelenmeli ve cihaz üzerinden ayar potları kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">transmitter</span> <span class="wiki-tag">kalibrasyon</span> <span class="wiki-tag">seviye</span></div>
           
@@ -8733,10 +8977,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Kuzine Devresinde 440V Kaçağı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="108" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kuzine bölgesi sigorta değiştikten sonra sistemde 440V kaçak oluştu ve ocak plakaları açıldığında kaçak artıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Şalter göbeği ve bakalit yalıtımı kontrol edilmeli, rezistansların genleşerek gövdeye kaçak yapıp yapmadığı test edilmelidir. Cihazlar sırayla devre dışı bırakılarak kaçak noktası izole edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kaçak</span> <span class="wiki-tag">kuzine</span> <span class="wiki-tag">rezistans</span> <span class="wiki-tag">megger</span></div>
           
@@ -8747,10 +8993,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Yakıt Transfer Pompası Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="109" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Pompa normal çalışmıyor, sadece start butonuna uzun süre basıldığında çalışıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Zaman rölesi ve kontaktör bobin voltajı kontrol edilmelidir; bobin yanık olabilir veya sekonder çıkış voltajında düşüş yaşanıyor olabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">pompa</span> <span class="wiki-tag">kontaktör</span> <span class="wiki-tag">motor</span></div>
           
@@ -8761,10 +9009,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Duman Dedektörü Arızası</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="110" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Duman dedektörü çalışmıyor, yer değiştirildiğinde arızanın devam edip etmediği merak ediliyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Adresli sistem değilse değişim yapılabilir. Tabanda 24V DC ölçülmeli, hat seri bağlı olduğundan bir önceki dedektörün bağlantısı ve oturma durumu kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">adresli</span> <span class="wiki-tag">dedektör</span> <span class="wiki-tag">yangın</span></div>
           
@@ -8775,10 +9025,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Emergency Jeneratör Paneli Alarmı</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="111" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Emergency jeneratör paneli gerçekte 400V olduğu halde 445V okuyarak alarm veriyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Ölçü aleti ile giriş voltajı doğrulanmalı; cihazda ayar potu yoksa panel değiştirilmeli veya servis desteği alınmalıdır. PSC riskine karşı baş çarkçı bilgilendirilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">voltaj</span> <span class="wiki-tag">panel</span></div>
           
@@ -8789,10 +9041,12 @@
           <span class="wiki-icon">🖥️</span>
           <h3 class="wiki-title">Alarm İzleme Sistemi Veri Kaybı</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="112" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">PLC</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> ECR alarm izleme sisteminde (SGD A/B) A panelinde görüntü var ancak veri akışı yok.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Aküler ve şarj redresörü kontrol edilmeli, PLC üzerindeki pil ömrü bitmiş olabilir. Sistemin bağlantı soketleri ve seçici anahtarları gözden geçirilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">PLC</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">izleme</span></div>
           
@@ -8803,10 +9057,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Filte Pompa Aşırı Isınma ve Stop</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="113" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Pompa 15 dakika çalıştıktan sonra stop ediyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Akım değerleri pens ampermetre ile kontrol edilmeli; termistör arızası veya mekanik valf kısıtlaması ihtimali değerlendirilmelidir. Motor boşta çalıştırılarak sorun mekanik mi elektriksel mi belirlenmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">pompa</span> <span class="wiki-tag">motor</span> <span class="wiki-tag">termistör</span></div>
           
@@ -8817,10 +9073,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör Paralel Çalışma Kararsızlığı</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="114" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Paralel çalışan jeneratörlerde yük dengesizliği ve ani çökme yaşanıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Mekanik (yakıt sistemi/enjektör) kontrol edilmeli; governor aktivatörü/kartı incelenmeli, droop ayarları gözden geçirilmeli ve son çare olarak AVR kartı kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">paralel</span> <span class="wiki-tag">senkronizasyon</span> <span class="wiki-tag">governor</span> <span class="wiki-tag">AVR</span></div>
           
@@ -8831,10 +9089,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Hoparlör Güç Kaynağı ve Kablo Seçimi</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="115" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> 3500W 12V DC beslemeli ses sistemi için gerekli güç kaynağı ve kablo kesiti sorusu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sistemin 200Ah kapasiteli akü grubu ile beslenmesi ve kablo ısınmaması için en az 50mm² kesitli kablo kullanılması önerilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kablo</span> <span class="wiki-tag">DC</span> <span class="wiki-tag">besleme</span></div>
           
@@ -8845,10 +9105,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">Otopilot Dümen Tutmama Sorunu</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="116" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Dümen otopilotta rota tutmuyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Cayro pusula haberleşmesi kontrol edilmeli. Dümen bölgesindeki konum geri bildirim potansiyometresi ve mekanik bağlantı (kayış) kontrol edilerek yeniden kalibrasyon yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">otopilot</span> <span class="wiki-tag">cayro</span> <span class="wiki-tag">potansiyometre</span> <span class="wiki-tag">dümen</span></div>
           
@@ -8859,10 +9121,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratörde voltaj dalgalanması ve arıza tespiti</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="117" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratör çıkışında voltaj sabit olmasına rağmen kararsızlık yaşanıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Şalterden alternatöre kadar tüm bağlantıları kontrol edin; gevşek bağlantı ihtimali %80'dir. Özellikle faz bağlantılarını ve AVR bağlantılarını gözden geçirin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">AVR</span> <span class="wiki-tag">gevşek bağlantı</span> <span class="wiki-tag">voltaj</span></div>
           
@@ -8873,10 +9137,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Vinç motorunun aşırı akım çekmesi</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="118" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Üçgen bağlı vinç motoru, boşta 10.6A çekerken yük altında 17A'e çıkarak termik attırıyor (Etiket değeri 11.6A).</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Motoru mekanik yükten ayırıp boşta test edin. Mekanik bir sıkışma yoksa; rulmanları, hidrolik pompa basıncını (releaf valf ayarı), motor sargı izolasyonunu, kontaktör kontaklarını ve faz dengesini kontrol edin. Ayrıca 50Hz/60Hz etiket uyumunu doğrulayın.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">asenkron motor</span> <span class="wiki-tag">termik</span> <span class="wiki-tag">aşırı akım</span> <span class="wiki-tag">mekanik arıza</span></div>
           
@@ -8887,10 +9153,12 @@
           <span class="wiki-icon">💧</span>
           <h3 class="wiki-title">Yakıt sisteminde şoklu filtre alarmı</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="119" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Pompa</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Yakıt sistemi sürekli kırmızı alarm veriyor ve basınç düşüyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Yakıt temizse; zaman rölesi ayarlarını, paneldeki switch'leri kontrol edin. Yakıt separatörünün verimli çalışıp çalışmadığını kontrol edin; su ayrıştırması başarısızsa filtreler tıkanacaktır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">filtre</span> <span class="wiki-tag">yakıt sistemi</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">separatör</span></div>
           
@@ -8901,10 +9169,12 @@
           <span class="wiki-icon">🖥️</span>
           <h3 class="wiki-title">BCMU veri alamama sorunu</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="120" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">PLC</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> BCMU (Battery Control Monitoring Unit) sisteminden veri alınamıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> ASV kartı sol altındaki diyotu kontrol edin, yanmış olabilir. Ayrıca pick-up sensörlerini ve encoder bağlantılarını kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">BCMU</span> <span class="wiki-tag">otomasyon</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">arıza</span></div>
           
@@ -8915,10 +9185,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Lyngso panelinde Gamma 40 alarmı</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="121" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Lyngso marka alarm panelinde 'Gamma 40' hatası alınıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Kablo diyagramlarını açarak alarm izleme sistemini inceleyin ve alarmın hangi kanaldan/sistemden geldiğini tespit edin. Muhtemelen jeneratör kaynaklı bir uyarı olabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm paneli</span> <span class="wiki-tag">Lyngso</span> <span class="wiki-tag">arıza-çözüm</span></div>
           
@@ -8929,10 +9201,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör senkronizasyon ve yük paylaşım arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="122" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> DG1 ve DG2 jeneratörler otomatik veya manuel olarak senkronize olmuyor ve yük paylaşımı yapmıyor, jeneratör boşta çalışıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Ana şalterin (circuit breaker) mekanik olarak tam kapanıp kapanmadığı, şalterin resetlenmesi veya arızalı olup olmadığı kontrol edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">senkronizasyon</span> <span class="wiki-tag">şalter</span> <span class="wiki-tag">yük paylaşımı</span></div>
           
@@ -8943,10 +9217,12 @@
           <span class="wiki-icon">🔩</span>
           <h3 class="wiki-title">Kreyn vira-mayna ve dönüş arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="123" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Hidrolik</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kreyn bir yöne çalışıyor (vira) ancak diğer yöne (mayna) hareket etmiyor, aynı sorun iskele-sancak dönüşünde de mevcut.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Selenoid bobinleri temizlenmeli, diyafram kısımları kontrol edilmeli ve olası arızalı Ehr (amplifier) ünitesi test edilerek valf bobinlerine 10V sinyal çıkışı olup olmadığı ölçülmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">hidrolik</span> <span class="wiki-tag">selenoid</span> <span class="wiki-tag">kreyn</span> <span class="wiki-tag">amplifier</span></div>
           
@@ -8957,10 +9233,12 @@
           <span class="wiki-icon">📏</span>
           <h3 class="wiki-title">UPS trafosu ve akü sağlamlık testi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="124" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Ölçüm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> UPS trafosunun sağlamlık kontrolü ve akülerin şarj tutmaması sorunu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Trafonun çıkışına uygun bir direnç (yük) bağlayarak voltaj ölçümü yapılmalı; sadece boşta ölçüm yanıltıcıdır. Akü test cihazları ile yük altında ölçüm yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">UPS</span> <span class="wiki-tag">trafo</span> <span class="wiki-tag">akü</span> <span class="wiki-tag">ölçüm</span></div>
           
@@ -8971,10 +9249,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">NAH-692 Power Amplifier alarm arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="125" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> NAH-692 power amplifier cihazının sürekli 6V hatası vererek saçma alarmlar üretmesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Cihazın convertor kartının (ZWS10 modeli) arızalı olduğu tespit edilmiştir, kart değişimi önerilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">amplifier</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">elektronik</span> <span class="wiki-tag">kart</span></div>
           
@@ -8985,10 +9265,12 @@
           <span class="wiki-icon">🔌</span>
           <h3 class="wiki-title">Jeneratör ACB otomatik kurmama arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="126" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Şalter</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratör şalteri (ACB) otomatik modda kurulmuyor ancak manuel olarak kurulabiliyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Kurma motorunun enerji alıp almadığı kontrol edilmeli; voltaj gelmesine rağmen çalışmıyorsa motor arızalıdır veya motor dişlileri aşınmış/kırılmıştır. Mekanik bir arıza yoksa şalterin MN bobini tetiklenmiyor olabilir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">ACB</span> <span class="wiki-tag">kurma motoru</span> <span class="wiki-tag">otomasyon</span> <span class="wiki-tag">mekanik arıza</span></div>
           
@@ -8999,10 +9281,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Şaft jeneratörü voltaj düşüklüğü</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="127" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Şaft jeneratörü 60 Hz frekansta çalışmasına rağmen voltajı 390V seviyelerinde kalıyor (normali 440-450V).</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Main Switch Board üzerindeki voltaj ayar potansiyometresi üzerinden kaba ayar, AVR üzerinden ise ince ayar yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">şaft jeneratörü</span> <span class="wiki-tag">voltaj ayarı</span> <span class="wiki-tag">AVR</span> <span class="wiki-tag">MSB</span></div>
           
@@ -9013,10 +9297,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Aalborg kazan flame failure arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="128" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Kazan sisteminde 'flame failure' alarmı resetlenmiyor ve kazan devreye giremiyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Öncelikle alev sensörünün (fotoelektrik hücre) direnç değişimi ölçülerek sensörün çalışıp çalışmadığı kontrol edilmeli; ardından bağlantı kabloları kontrol edilmeli ve yanma hücresinde (cehennemlik) cüruf temizliği yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">kazan</span> <span class="wiki-tag">flame failure</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">Aalborg</span></div>
           
@@ -9027,10 +9313,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratörün sürekli stop etmesi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="129" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> DG 2 numaralı jeneratör çalıştıktan 1-3 saniye sonra 'DG2 trouble' hatası vererek stop ediyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Öncelikle stop bobininin mekanik tırnağını ve yakıt devresini kontrol edin. Stop bobini enerjisi ve rölesini, stop anahtarını kontrol edin. Yakıt filtresi ve yakıt pompası governorunu temizleyin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">arıza</span> <span class="wiki-tag">stop</span> <span class="wiki-tag">yakıt</span></div>
           
@@ -9041,10 +9329,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">General Alarm Power Fail hatası</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="130" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> AMS ekranında general alarm sonrası 'general alarm power fail' hatası sabit kalıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Panel içerisindeki aküleri kontrol edin. Voltajları ölçmek yeterli olmayabilir; yük altında kapasite testi yaparak arızalı aküleri yenileyin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">alarm</span> <span class="wiki-tag">akü</span> <span class="wiki-tag">arıza</span></div>
           
@@ -9055,10 +9345,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratörün overspeed hatası vermesi</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="131" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratör çalışınca overspeed ışığı yakıp stop ediyor ancak bazen tekrar çalışınca normal çalışıyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Sensör ile volan dişlisi arasındaki mesafeyi kontrol edin, sensör aynasını temizleyin ve kablolarda kısa devre olup olmadığını inceleyin. Sorun devam ederse sensörü yenileyin veya mekanik overspeed switchini kontrol edin.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">overspeed</span> <span class="wiki-tag">sensör</span></div>
           
@@ -9069,10 +9361,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">Seyir feneri paneli arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="132" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Seyir feneri ampulü patladığı halde panelde çalışıyor görünüyordu.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Devre kontrol edilmeli; fener rölesi, röle bobin uçları veya faz sigortaları kontrol edilerek bağlantı kopukluğu veya röle arızası giderilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">navigasyon</span> <span class="wiki-tag">seyir feneri</span> <span class="wiki-tag">arıza</span></div>
           
@@ -9083,10 +9377,12 @@
           <span class="wiki-icon">🔄</span>
           <h3 class="wiki-title">Elektrikli Motor Fren Mekanizması Çalışması</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="133" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Motor</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Asenkron motorlarda fren bobininin çalışma prensibi ve frenleme arızaları hakkında bilgi eksikliği.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Fren bobini DC gerilim ile çalışır; motor startında bobin enerjilenerek balatayı çeker, stopta enerji kesilerek balata fren yapar. Balata/rotor arasındaki klerens (açıklık) düzenli kontrol edilmeli ve aşınmalara göre yay ayarları yapılmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">asenkron motor</span> <span class="wiki-tag">fren bobini</span> <span class="wiki-tag">DC gerilim</span> <span class="wiki-tag">balata ayarı</span></div>
           
@@ -9097,10 +9393,12 @@
           <span class="wiki-icon">🔦</span>
           <h3 class="wiki-title">Navigasyon Işıkları Devre Arızası</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="134" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Aydınlatma</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Navigasyon ışıkları pako şalterindeki kısa devre nedeniyle hem ana hem de acil durum hattından beslenerek cam sigortaların atmasına ve ikaz sisteminin çalışmamasına neden oluyor.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Pako şalterindeki kısa devre giderilmeli ve ana/acil durum besleme hatları birbirinden izole edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">navigasyon</span> <span class="wiki-tag">pako şalter</span> <span class="wiki-tag">kısa devre</span> <span class="wiki-tag">sigorta</span></div>
           
@@ -9111,10 +9409,12 @@
           <span class="wiki-icon">🧭</span>
           <h3 class="wiki-title">Radar Magnetron Arızası</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="135" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Navigasyon</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Radar ekolarının zayıf olması ve PSC denetiminde zayıf performans raporlanması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Magnetron arızalı tespit edilmiştir; radar ünitesi sökülüp magnetronun yenisiyle değiştirilmesi sağlanmıştır. Değişim sırasında radyasyon tehlikesine karşı dikkatli olunmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">radar</span> <span class="wiki-tag">magnetron</span> <span class="wiki-tag">ekran</span> <span class="wiki-tag">radyasyon</span></div>
           
@@ -9125,10 +9425,12 @@
           <span class="wiki-icon">⚡</span>
           <h3 class="wiki-title">Jeneratör Paralel Almama Sorunu</h3>
           <span class="wiki-zorluk" style="color:#ef4444">Zor</span>
+          <button class="wiki-link-btn" data-id="136" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Jeneratör</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> PLC kontrollü jeneratörün otomatik paralel sisteme geçmemesi.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Hata kodu (sıcaklık alarmı) PLC girişini blokluyor olabilir. Manuel kurma yapılıyorsa şalterin otomatik kurma motoru ve beslemesi kontrol edilmeli, PLC kart giriş/çıkışları doğrulanmalıdır.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">jeneratör</span> <span class="wiki-tag">PLC</span> <span class="wiki-tag">senkronizasyon</span> <span class="wiki-tag">şalter</span></div>
           
@@ -9139,10 +9441,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Sıcaklık Termostatı Arıza Tespiti</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="137" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Jeneratör sıcaklık termostatının sürekli kırmızı ışık verip alarmda kalması.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Termostatın kalibrasyonu veya sensör (bulb) durumu kontrol edilmeli, gerekirse kontaktör bypass edilerek veya devre kesilerek sensörün doğruluğu test edilmelidir.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">termostat</span> <span class="wiki-tag">sensör</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">sıcaklık</span></div>
           
@@ -9153,10 +9457,12 @@
           <span class="wiki-icon">🔔</span>
           <h3 class="wiki-title">Manyetik Pickup ve İndüktif Sensör Farklılıkları</h3>
           <span class="wiki-zorluk" style="color:#f59e0b">Orta</span>
+          <button class="wiki-link-btn" data-id="138" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Alarm</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Manyetik pickup ve indüktif sensörlerin birbirinin yerine kullanılıp kullanılamayacağı merak edilmektedir.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Manyetik pickup hıza bağlı ac voltaj üretirken, indüktif sensör besleme voltajına bağlı kare dalga üretir; bu sebeple birbirlerinin yerine kullanılamazlar.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">sensör</span> <span class="wiki-tag">pickup</span> <span class="wiki-tag">devre</span> <span class="wiki-tag">hız</span></div>
           
@@ -9167,10 +9473,12 @@
           <span class="wiki-icon">🔧</span>
           <h3 class="wiki-title">Gemi İçi Dahili Haberleşme Sistemleri</h3>
           <span class="wiki-zorluk" style="color:#22c55e">Kolay</span>
+          <button class="wiki-link-btn" data-id="139" title="Linki kopyala" aria-label="Linki kopyala">🔗</button>
         </div>
         <div class="wiki-cat-badge">Diğer</div>
         <p class="wiki-sorun"><strong>Sorun:</strong> Makine alarm sistemlerinin gemi içi dahili haberleşme sistemleri kapsamında olup olmadığı tartışılmaktadır.</p>
         <p class="wiki-cozum"><strong>Çözüm:</strong> Makine alarm sistemleri genel haberleşme sistemlerine girmez; dahili haberleşme sistemleri VHF, anons, makine telgrafı, CCTV, talk-back ve dahili telefonları kapsar.</p>
+        <button class="wiki-toggle-btn" type="button" aria-expanded="false">Devamını gör ▾</button>
         <div class="wiki-footer-row">
           <div class="wiki-tags"><span class="wiki-tag">haberleşme</span> <span class="wiki-tag">alarm</span> <span class="wiki-tag">sistem</span></div>
           
@@ -9188,7 +9496,8 @@
     <div class="wiki-update-note">
       Son güncelleme: <strong>05 May 2026</strong> ·
       Kayıt sayısı: <strong>140</strong> ·
-      Veri kaynağı: ETO-Elektroteknik Zabitleri Telegram grubu (anonim)
+      Veri kaynağı: ETO-Elektroteknik Zabitleri Telegram grubu (anonim) ·
+      <a href="#b34">Bölüm bağlantısı</a>
     </div>
   </section>
 
@@ -9816,7 +10125,87 @@
     #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
-                    /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+                        /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+    /* İstatistik kartları */
+    .wiki-stats {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .6rem; margin: .9rem 0 1rem;
+    }
+    .wiki-stat-card {
+      padding: .7rem .8rem; background: rgba(99,102,241,.08);
+      border: 1px solid rgba(99,102,241,.2); border-radius: .5rem;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .wiki-stat-card strong {
+      font-size: 1.25rem; line-height: 1.2; color: #c7d2fe;
+      font-variant-numeric: tabular-nums;
+    }
+    .wiki-stat-card span {
+      font-size: .72rem; color: var(--muted); margin-top: .15rem;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    @media (max-width: 600px) {
+      .wiki-stats { grid-template-columns: 1fr; }
+      .wiki-stat-card strong { font-size: 1.1rem; }
+    }
+
+    /* Kategori grupları */
+    .wiki-filter-bar { flex-direction: column; align-items: stretch; gap: .55rem; }
+    .wiki-filter-group {
+      display: flex; flex-wrap: wrap; gap: .35rem; align-items: center;
+      padding: .35rem .5rem; background: rgba(15,23,42,.3);
+      border-radius: .45rem; border: 1px solid rgba(99,102,241,.12);
+    }
+    .wiki-filter-group-label {
+      font-size: .7rem; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .08em; font-weight: 600; margin-right: .3rem;
+      flex-shrink: 0;
+    }
+    .wiki-filter-all { background: transparent; border: none; padding: 0; }
+
+    /* Permalink butonu */
+    .wiki-link-btn {
+      background: transparent; border: none; color: var(--muted);
+      cursor: pointer; padding: .15rem .35rem; border-radius: .3rem;
+      font-size: .85rem; flex-shrink: 0; opacity: .5;
+      transition: opacity .15s, background .15s;
+    }
+    .wiki-link-btn:hover { opacity: 1; background: rgba(99,102,241,.2); color: #c7d2fe; }
+    .wiki-link-btn.copied { background: #15803d; color: #fff; opacity: 1; }
+
+    /* Kart vurgulama (permalink ile gelince) */
+    .wiki-entry.highlight {
+      animation: wiki-flash 1.6s ease;
+      border-left-color: #facc15 !important;
+    }
+    @keyframes wiki-flash {
+      0%   { background: rgba(250,204,21,.25); }
+      40%  { background: rgba(250,204,21,.15); }
+      100% { background: transparent; }
+    }
+
+    /* Devamını gör (kart genişletme) */
+    .wiki-cozum.clamped, .wiki-sorun.clamped {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .wiki-entry.expanded .wiki-cozum.clamped,
+    .wiki-entry.expanded .wiki-sorun.clamped {
+      display: block;
+      -webkit-line-clamp: unset;
+    }
+    .wiki-toggle-btn {
+      display: none; /* JS clamp olduğunu görünce gösterir */
+      background: transparent; border: none; padding: .2rem .5rem;
+      font-size: .75rem; color: #a5b4fc; cursor: pointer;
+      border-radius: .3rem; margin: .3rem 0 .15rem;
+    }
+    .wiki-toggle-btn:hover { background: rgba(99,102,241,.15); }
+    .wiki-toggle-btn.visible { display: inline-block; }
+    .wiki-entry.expanded .wiki-toggle-btn::before { content: ''; }
+
     /* Arama kutusu */
     .wiki-search-wrap {
       position: relative; margin: .9rem 0 .6rem;
@@ -9935,12 +10324,37 @@
 
     /* Mobile */
     @media (max-width: 720px) {
-      .wiki-filter-bar, .wiki-ship-bar {
+      .wiki-filter-group {
         flex-wrap: nowrap; overflow-x: auto; padding-bottom: .3rem;
         scrollbar-width: thin;
       }
-      .wiki-filter-btn, .wiki-ship-btn { flex-shrink: 0; }
+      .wiki-filter-btn { flex-shrink: 0; }
       .wiki-sort-row { flex-wrap: wrap; }
+    }
+
+    /* Print modu — yazdırırken UI elementlerini gizle, tüm kartları aç */
+    @media print {
+      .wiki-search-wrap, .wiki-sort-row, .wiki-filter-bar,
+      .wiki-filter-label, .wiki-loadmore-wrap, .wiki-stats,
+      .wiki-link-btn, .wiki-toggle-btn { display: none !important; }
+      .wiki-entry, .wiki-entry.hidden {
+        display: block !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        border: 1px solid #d1d5db !important;
+        border-left: 3px solid #6366f1 !important;
+        background: #fff !important;
+        margin-bottom: .8rem;
+      }
+      .wiki-entry .wiki-sorun, .wiki-entry .wiki-cozum {
+        display: block !important;
+        -webkit-line-clamp: unset !important;
+        color: #1f2937 !important;
+      }
+      .wiki-cat-badge { background: #e0e7ff !important; color: #3730a3 !important; }
+      .wiki-tag { background: #f3f4f6 !important; color: #374151 !important; }
+      #wiki-count-badge { display: none; }
+      .wiki-empty-msg { display: none !important; }
     }
     /* ── Wiki filtre JS kancası ── */
   </style>
@@ -12074,6 +12488,97 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
         filterAndSort();
       });
     }
+
+    // ── Kart genişletme (Devamını gör) ──
+    function setupExpand() {
+      allCards.forEach(card => {
+        const sorun = card.querySelector('.wiki-sorun');
+        const cozum = card.querySelector('.wiki-cozum');
+        const btn   = card.querySelector('.wiki-toggle-btn');
+        if (!btn) return;
+
+        // Önce clamp uygula
+        if (sorun) sorun.classList.add('clamped');
+        if (cozum) cozum.classList.add('clamped');
+
+        // Kırpılmış mı kontrol et — değilse butonu gizli tut
+        const needsToggle = (sorun && sorun.scrollHeight > sorun.clientHeight + 2)
+                         || (cozum && cozum.scrollHeight > cozum.clientHeight + 2);
+        if (needsToggle) {
+          btn.classList.add('visible');
+        }
+
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          const expanded = card.classList.toggle('expanded');
+          btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+          btn.textContent = expanded ? 'Daha az göster ▴' : 'Devamını gör ▾';
+        });
+      });
+    }
+    setupExpand();
+    // Resize/font yüklemesi sonrası bir kez daha kontrol
+    window.addEventListener('load', setupExpand, { once: true });
+
+    // ── Permalink butonları ──
+    document.querySelectorAll('.wiki-link-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const url = window.location.origin + window.location.pathname + '?w=' + id + '#wiki-' + id;
+        const fallback = function () {
+          const ta = document.createElement('textarea');
+          ta.value = url; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          ta.remove();
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(url).catch(fallback);
+        } else {
+          fallback();
+        }
+        btn.classList.add('copied');
+        const orig = btn.textContent;
+        btn.textContent = '✓';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = orig;
+        }, 1400);
+      });
+    });
+
+    // ── URL'den ?w=ID parametresi ile gelen kartı vurgula ──
+    function handleUrlTarget() {
+      const params = new URLSearchParams(window.location.search);
+      const wid = params.get('w');
+      if (!wid) return;
+      const target = document.getElementById('wiki-' + wid);
+      if (!target) return;
+      // Kart filtrelenmiş olabilir → tüm filtreleri sıfırla
+      activeCat = 'tümü';
+      searchTerm = '';
+      sortMode = 'default';
+      if (searchInp) searchInp.value = '';
+      if (sortSel) sortSel.value = 'default';
+      filterBar.querySelectorAll('.wiki-filter-btn').forEach(b => b.classList.remove('active'));
+      const allBtn = filterBar.querySelector('[data-cat="tümü"]');
+      if (allBtn) allBtn.classList.add('active');
+      visibleCount = Math.max(PAGE_SIZE,
+        Array.from(allCards).indexOf(target) + 1);
+      filterAndSort();
+      // Genişlet
+      target.classList.add('expanded');
+      const tBtn = target.querySelector('.wiki-toggle-btn');
+      if (tBtn) tBtn.textContent = 'Daha az göster ▴';
+      // Scroll + highlight
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 2000);
+      }, 200);
+    }
+    handleUrlTarget();
 
     // İlk yükleme
     filterAndSort();
