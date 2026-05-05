@@ -1,13 +1,16 @@
 {
   "name": "ETO Eğitim Rehberi",
   "short_name": "ETO Rehber",
-  "description": "Gemi Elektro-Teknik Zabit Eğitim Rehberi — Stajyerden Zabite (sürüm 1.2)",
-  "version": "1.2",
+  "description": "Gemi Elektro-Teknik Zabit Eğitim Rehberi — Stajyerden Zabite. Saha vakaları, PLC, jeneratör, otomasyon ve denizcilik elektriği rehberi (sürüm 1.3).",
+  "version": "1.3",
   "start_url": "./eto-egitim-rehberi.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#020617",
   "theme_color": "#0f172a",
   "lang": "tr",
+  "dir": "ltr",
   "icons": [
     {
       "src": "icon.svg",
@@ -16,6 +19,22 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["education"],
+  "shortcuts": [
+    {
+      "name": "Saha Vakaları (Bölüm 34)",
+      "short_name": "Saha Vakaları",
+      "description": "ETO meslektaşlarından gerçek arıza-çözüm arşivi",
+      "url": "./eto-egitim-rehberi.html#b34",
+      "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "AI Asistanı",
+      "short_name": "AI Sor",
+      "description": "ETO Asistanı ile konuş, fotoğraf gönder",
+      "url": "./eto-egitim-rehberi.html#ai-asistan",
+      "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ],
+  "categories": ["education", "books", "productivity"],
   "screenshots": []
 }

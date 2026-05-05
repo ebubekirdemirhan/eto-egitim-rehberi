@@ -1,7 +1,7 @@
-/* ETO Rehber v1.2 — güncel HTML her zaman ağdan denenir; çevrimdışı yedek cache. */
-const CACHE = 'eto-rehber-v1.2';
+/* ETO Rehber v1.3 — güncel HTML her zaman ağdan denenir; çevrimdışı yedek cache. */
+const CACHE = 'eto-rehber-v1.3';
 
-const PRECACHE = ['./eto-egitim-rehberi.html', './manifest.json'];
+const PRECACHE = ['./eto-egitim-rehberi.html', './manifest.json', './icon.svg'];
 
 function isHtmlNavigation(req) {
   if (req.mode === 'navigate') return true;
@@ -30,11 +30,16 @@ self.addEventListener('activate', e => {
   );
 });
 
+self.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   if (e.request.url.includes('generativelanguage.googleapis.com')) return;
+  if (e.request.url.includes('aistudio.google.com')) return;
 
-  // Sayfa / HTML: önce ağ (yeni asistan özellikleri güncellenince mobil de görür), yoksa cache
+  // Sayfa / HTML: önce ağ, başarısızsa cache (offline destek)
   if (isHtmlNavigation(e.request)) {
     e.respondWith(
       fetch(e.request)
@@ -52,6 +57,7 @@ self.addEventListener('fetch', e => {
     return;
   }
 
+  // Diğer asset'ler: cache-first, sonra ağ (gemide net yokken yine açılsın)
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
