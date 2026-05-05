@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ETO Eğitim Rehberi — Saha Vakaları</title>
+  <subtitle>Bölüm 34 · Telegram'dan derlenen gerçek arıza-çözüm kayıtları</subtitle>
+  <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html" />
+  <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/feed.xml" rel="self" type="application/atom+xml" />
+  <id>urn:eto-egitim-rehberi:feed</id>
+  <updated>2026-05-05T13:38:34Z</updated>
+  <author><name>Ebubekir Demirhan</name></author>
+  <generator uri="https://github.com/ebubekirdemirhan/eto-egitim-rehberi">tg-wiki feed_generator</generator>
+  <icon>https://ebubekirdemirhan.github.io/eto-egitim-rehberi/icon.svg</icon>
+  <rights>© 2026 Ebubekir Demirhan. CC BY-NC 4.0</rights>
+    <entry>
+      <title>Gemi İçi Dahili Haberleşme Sistemleri</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=171#wiki-171" />
+      <id>urn:eto-wiki:wiki-171</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Anons (PA)" />
+      <category term="haberleşme" />
+      <category term="sınav" />
+      <category term="eğitim" />
+      <summary>Gemi içi dahili haberleşme sistemlerinin kapsamı nedir ve makine alarmları bu sınıfa girer mi?</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Anons (PA) · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Gemi içi dahili haberleşme sistemlerinin kapsamı nedir ve makine alarmları bu sınıfa girer mi?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Makine alarmları izleme ve güvenlik sistemidir, dahili haberleşme sistemi olarak sınıflandırılmaz. Dahili haberleşme sistemleri; VHF telsiz, dahili anons (PA), makine telgrafı, CCTV kamera sistemleri, talk-back ve dahili telefonlardır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; haberleşme, sınav, eğitim&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Jeneratör Manyetik Pickup ve İndüktif Sensör Farklılıkları</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=170#wiki-170" />
+      <id>urn:eto-wiki:wiki-170</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="sensör" />
+      <category term="pickup" />
+      <category term="jeneratör" />
+      <category term="arıza" />
+      <summary>İki pinli manyetik pickup sensörü yerine farklı kablo yapısına sahip (4 pinli) bir sensör gönderilmiştir ve bağlantısı bilinmemektedir.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; İki pinli manyetik pickup sensörü yerine farklı kablo yapısına sahip (4 pinli) bir sensör gönderilmiştir ve bağlantısı bilinmemektedir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Manyetik pickup sensörler pasif bileşenlerdir, bir üreteç gibi AC voltaj üretirler. İndüktif sensörler ise besleme gerektirir ve kare dalga üretirler; bu iki sensör tipi birbiri yerine kullanılamaz. Bağlantı şeması ve teknik doküman olmadan riske girmeyip orijinal ekipman temin edilmeli veya üretici/tedarikçi teknik desteği alınmalıdır. (yorum: Sensör tipi uyumsuzluğu sistemin çalışmamasına veya kartların zarar görmesine neden olabilir.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; sensör, pickup, jeneratör, arıza&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Otomatik Senkronizasyon ve Şalter Kurma Sorunu</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=169#wiki-169" />
+      <id>urn:eto-wiki:wiki-169</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="senkronizasyon" />
+      <category term="ACB" />
+      <category term="şalter" />
+      <category term="PLC" />
+      <category term="jeneratör" />
+      <summary>Jeneratör otomatik senkronizasyona girmiyor, şalter kurma motoru çalışmıyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Jeneratör otomatik senkronizasyona girmiyor, şalter kurma motoru çalışmıyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Otomatik senkronizasyon için öncelikle devre kesicinin (ACB) kurulu (charged) olması gerekir. Şalter motoruna voltaj gelip gelmediğini kontrol edin. Eğer voltaj gelmiyorsa, PLC çıkışını ve kontrol devresindeki güvenlik blokajlarını (örn. yüksek sıcaklık alarmı) inceleyin. PLC kartları üzerinde test yaparak kart arızasını doğrulayın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; senkronizasyon, ACB, şalter, PLC, jeneratör&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Radar Magnetron Değişimi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=168#wiki-168" />
+      <id>urn:eto-wiki:wiki-168</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Navigasyon" />
+      <category term="radar" />
+      <category term="magnetron" />
+      <category term="arıza" />
+      <category term="navigasyon" />
+      <summary>Radar panelinde düşük sinyal (zayıf ekolar) uyarısı ve magnetron arızası.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Navigasyon · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Radar panelinde düşük sinyal (zayıf ekolar) uyarısı ve magnetron arızası.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Arızalı magnetronu yenisiyle değiştirin. Değişim sırasında çıplak elle dokunmayın (radyasyon riski). Lehimli ünitelerde lehim tabancasının ısısının yeterli olmasına dikkat edin, rüzgarlı ortamlarda karton siperlik kullanın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; radar, magnetron, arıza, navigasyon&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Asenkron Motor Fren Devresi ve Köprü Diyot</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=167#wiki-167" />
+      <id>urn:eto-wiki:wiki-167</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Motor" />
+      <category term="asenkron motor" />
+      <category term="fren" />
+      <category term="köprü diyot" />
+      <category term="bobin" />
+      <summary>Motor fren bobini ve köprü diyot çalışma prensibi ve arıza tespiti.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Motor · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Motor fren bobini ve köprü diyot çalışma prensibi ve arıza tespiti.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Köprü diyot, asenkron motorlarda fren bobinine DC gerilim vererek motorun anlık durmasını sağlar. Diyot yanması veya bobin arızası durumunda fren balatası açmaz, motor aşırı akım çeker. Bağlantıları kontrol ederken köprü diyotun AC giriş ve DC çıkış uçlarına dikkat edilmeli, fren balatası ile rotor arasındaki açıklık (klerens) sentil ile ayarlanmalıdır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; asenkron motor, fren, köprü diyot, bobin&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Seyir Feneri Devre Arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=166#wiki-166" />
+      <id>urn:eto-wiki:wiki-166</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Aydınlatma" />
+      <category term="seyir feneri" />
+      <category term="navigasyon" />
+      <category term="röle" />
+      <category term="kısa devre" />
+      <summary>Ampul kesilmesine rağmen navigasyon panelinde fener çalışıyor görünüyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Aydınlatma · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Ampul kesilmesine rağmen navigasyon panelinde fener çalışıyor görünüyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Pako şalter kontakları içinde kısa devre oluştuğu için ana hat (main) ve acil durum (emg) röleleri aynı anda çekiyor. Main hat üzerindeki sigortalar atmış ancak sistem emg hattı üzerinden beslenmeye devam ediyor; bu yüzden fener çalışıyor gibi görünüyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; seyir feneri, navigasyon, röle, kısa devre&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Jeneratörde Overspeed Alarmı ve Stop Sorunu</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=165#wiki-165" />
+      <id>urn:eto-wiki:wiki-165</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="overspeed" />
+      <category term="jeneratör" />
+      <category term="sensör" />
+      <category term="arıza" />
+      <summary>Jeneratör çalışınca overspeed uyarısı vererek stop ediyor, ancak tekrar denendiğinde normal çalışabiliyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Jeneratör çalışınca overspeed uyarısı vererek stop ediyor, ancak tekrar denendiğinde normal çalışabiliyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Mekanik overspeed switch&amp;#x27;ini kontrol edin (gevşeklik veya takılma olabilir). Sensörün volan dişlisine olan mesafesini kontrol edin, sensörün aynasını temizleyin ve kablolarında kısa devre olup olmadığını inceleyin. Makine devrinin gerçekten yükselip yükselmediğini gözlemleyerek sorunun sensörde mi yoksa mekanik devirde mi olduğunu doğrulayın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; overspeed, jeneratör, sensör, arıza&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>ETO&#x27;dan Mühendisliğe Geçiş Süreci</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=164#wiki-164" />
+      <id>urn:eto-wiki:wiki-164</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Diğer" />
+      <category term="kariyer" />
+      <category term="eto" />
+      <category term="mühendislik" />
+      <category term="sertifika" />
+      <summary>ETO&#x27;ların 3. Mühendisliğe geçiş süreci ve şartları hakkında güncel bilgi ihtiyacı.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Diğer · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; ETO&amp;#x27;ların 3. Mühendisliğe geçiş süreci ve şartları hakkında güncel bilgi ihtiyacı.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; ETO cüzdanı sonrası 1 yıl süren makine eğitimi alarak 3000 KW sınırlı 3. mühendis olunabilir. Sırasıyla 3&amp;#x27;er yıl hizmet ile 3000 KW 2. mühendis ve başmühendisliğe, oradan da sınırsız 2. ve başmühendisliğe yükselinebilir. (Yorum: Mevzuat güncellemeleri liman başkanlıkları üzerinden takip edilmelidir.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; kariyer, eto, mühendislik, sertifika&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>General Alarm Power Fail Hatası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=163#wiki-163" />
+      <id>urn:eto-wiki:wiki-163</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="alarm" />
+      <category term="AMS" />
+      <category term="akü" />
+      <category term="güç kaynağı" />
+      <summary>AMS ekranında &#x27;General alarm power fail&#x27; hatası sabit kalıyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; AMS ekranında &amp;#x27;General alarm power fail&amp;#x27; hatası sabit kalıyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Panel içerisindeki aküleri kontrol edin; akü voltajı düşükse (yükte ölçüldüğünde) veya ömürlerini tamamlamışlarsa aküleri yenileyin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; alarm, AMS, akü, güç kaynağı&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Jeneratörün Çalıştıktan Sonra Stop Etmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=162#wiki-162" />
+      <id>urn:eto-wiki:wiki-162</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="jeneratör" />
+      <category term="stop" />
+      <category term="arıza" />
+      <category term="motor" />
+      <summary>DG2 jeneratörü çalıştırıldıktan 1-3 saniye sonra &#x27;DG2 trouble&#x27; hatası ile stop ediyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; DG2 jeneratörü çalıştırıldıktan 1-3 saniye sonra &amp;#x27;DG2 trouble&amp;#x27; hatası ile stop ediyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Öncelikle sorunun mekanik mi elektriksel mi olduğu ayrılmalı. Stop bobininin uçlarını ayırıp deneyin (takılı kalmadığından emin olun). Stop rolesini kontrol edin, kontakları yapışık kalmış olabilir. Yakıt devresini, filtreleri ve govornörün temizliğini gözden geçirin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; jeneratör, stop, arıza, motor&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Aalborg Kazan Flame Failure Arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=161#wiki-161" />
+      <id>urn:eto-wiki:wiki-161</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Kazan" />
+      <category term="kazan" />
+      <category term="aalborg" />
+      <category term="flame failure" />
+      <category term="sensör" />
+      <summary>Aalborg kazan sisteminde &#x27;flame failure&#x27; alarmı resetlenmiyor ve kazan devreye girmiyor. Sensör temizliği yapıldı ancak sorun devam ediyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Kazan · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Aalborg kazan sisteminde &amp;#x27;flame failure&amp;#x27; alarmı resetlenmiyor ve kazan devreye girmiyor. Sensör temizliği yapıldı ancak sorun devam ediyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Sensörün camını ve cehennemlikte çürük/cüruf olup olmadığını kontrol edin. Sensör arıza tespiti için multimetreyi direnç kademesine alın; ışıkta ve kapalıyken direnç değerleri değişmiyorsa sensör arızalıdır. Ayrıca ignition controller (ateşleme kontrolcüsü) üzerindeki NO/NC kontaklarını kontrol edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; kazan, aalborg, flame failure, sensör&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Denizcilik sınavlarında lojik kapılar</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=160#wiki-160" />
+      <id>urn:eto-wiki:wiki-160</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="PLC" />
+      <category term="PLC" />
+      <category term="lojik-kapılar" />
+      <category term="sınav" />
+      <category term="otomasyon" />
+      <summary>ETO yeterlilik sınavlarında karşılaşılan teknik sorular.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; PLC · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; ETO yeterlilik sınavlarında karşılaşılan teknik sorular.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Sınav hazırlığı için lojik kapılar (AND, OR, NOT vb.) ve sembolleri ile temel otomasyon devrelerinin çalışma mantığı iyice öğrenilmelidir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; PLC, lojik-kapılar, sınav, otomasyon&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>ETO stajyerleri için tecrübe edinme stratejisi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=159#wiki-159" />
+      <id>urn:eto-wiki:wiki-159</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Diğer" />
+      <category term="ETO" />
+      <category term="stajyer" />
+      <category term="kariyer" />
+      <category term="tecrübe" />
+      <summary>İlk kez zabit olarak çalışacak ETO&#x27;ların tecrübesizlik nedeniyle iş bulmakta zorlanması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Diğer · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; İlk kez zabit olarak çalışacak ETO&amp;#x27;ların tecrübesizlik nedeniyle iş bulmakta zorlanması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Şirketlere yardımcı zabit (assistant ETO) olarak, yarı maaş ile bir kontrat çalışma teklif edilerek tecrübe kazanılması ve performans durumunda tam maaşa geçilmesi önerilir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; ETO, stajyer, kariyer, tecrübe&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Yüksek voltaj sertifikasının cüzdana işlenmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=158#wiki-158" />
+      <id>urn:eto-wiki:wiki-158</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Güvenlik" />
+      <category term="yüksek-voltaj" />
+      <category term="sertifika" />
+      <category term="gemiadamı-cüzdanı" />
+      <summary>Yüksek voltaj sertifikasının gemiadamı cüzdanına işlenip işlenmediği konusundaki belirsizlik.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Güvenlik · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Yüksek voltaj sertifikasının gemiadamı cüzdanına işlenip işlenmediği konusundaki belirsizlik.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; İlgili liman başkanlıkları bazen farklı uygulamalar yapabilmektedir; terfi başvurusu sırasında sistem üzerinden HV sertifikasının yüklendiğinden ve onaylandığından emin olunmalıdır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; yüksek-voltaj, sertifika, gemiadamı-cüzdanı&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Şaft jeneratörü voltaj düşüklüğü ayarı</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=157#wiki-157" />
+      <id>urn:eto-wiki:wiki-157</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="şaft-jeneratör" />
+      <category term="AVR" />
+      <category term="voltaj-regülasyonu" />
+      <category term="MSB" />
+      <summary>Şaft jeneratörü çıkış voltajının 440-450V aralığı yerine 390V seviyelerinde kalması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Şaft jeneratörü çıkış voltajının 440-450V aralığı yerine 390V seviyelerinde kalması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Kaba voltaj ayarı ana panoda (MSB) bulunan potansiyometre üzerinden, ince ayar ise AVR (Otomatik Voltaj Regülatörü) üzerinden yapılmalıdır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; şaft-jeneratör, AVR, voltaj-regülasyonu, MSB&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Jeneratör şalteri otomatik devreye girmiyor</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=156#wiki-156" />
+      <id>urn:eto-wiki:wiki-156</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="ACB" />
+      <category term="otomatik-kurma" />
+      <category term="şalter" />
+      <category term="jeneratör" />
+      <category term="senkronizasyon" />
+      <summary>Jeneratör manuel olarak kurulabilmesine rağmen otomatik olarak devreye girmiyor ve yükü üzerine almıyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Jeneratör manuel olarak kurulabilmesine rağmen otomatik olarak devreye girmiyor ve yükü üzerine almıyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Şalterin otomatik kurma motoru, dişli mekanizması veya MN (açtırma) bobini kontrol edilmelidir. Manuel kurma başarılı ancak otomatik kurma gerçekleşmiyorsa, öncelikle kurma motoruna giden voltaj ve motor dişlileri incelenmelidir. Motor dişlilerinde aşınma/kırılma varsa değişim yapılmalıdır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; ACB, otomatik-kurma, şalter, jeneratör, senkronizasyon&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Sınav soruları ve mesleki ingilizce sınav içeriği</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=155#wiki-155" />
+      <id>urn:eto-wiki:wiki-155</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Diğer" />
+      <category term="Sınav" />
+      <category term="Eğitim" />
+      <category term="Gemiadamı" />
+      <summary>Sınavlara hazırlık ve soru içerikleri.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Diğer · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Sınavlara hazırlık ve soru içerikleri.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Sınavlarda genellikle CO2/Foam tüp renkleri, batarya şarj/deşarj soruları, boşluk doldurma ve temel emk soruları çıkmaktadır (yorum: Mesleki İngilizce sınavlarında Mersin MOU gibi denetim kuralları hakkında bilgi sahibi olmak faydalıdır).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; Sınav, Eğitim, Gemiadamı&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>NAH-692 Power Amplifier alarm arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=154#wiki-154" />
+      <id>urn:eto-wiki:wiki-154</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Anons (PA)" />
+      <category term="Amplifier" />
+      <category term="PA" />
+      <category term="Alarm" />
+      <category term="ZWS10" />
+      <summary>NAH-692 model power amplifier cihazı sürekli hata veriyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Anons (PA) · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; NAH-692 model power amplifier cihazı sürekli hata veriyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Cihazın convertor kartının (ZWS10 modeli) arızalı olduğu tespit edilmiştir, kartın değişimi gereklidir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; Amplifier, PA, Alarm, ZWS10&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>UPS trafosu sağlamlık testi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=153#wiki-153" />
+      <id>urn:eto-wiki:wiki-153</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Trafo" />
+      <category term="Trafo" />
+      <category term="UPS" />
+      <category term="Ölçüm" />
+      <category term="Direnç" />
+      <summary>UPS trafosunun sağlamlığı nasıl test edilir?</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Trafo · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; UPS trafosunun sağlamlığı nasıl test edilir?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Sadece gerilim ölçmek yanıltıcı olabilir; çıkışa uygun bir direnç bağlayıp (yük tatbik ederek) voltajı ölçün. Ayrıca primer sargıda omaj değeri görülüyorsa sargı sağlam kabul edilebilir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; Trafo, UPS, Ölçüm, Direnç&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Kreyn vira/mayna ve dönüş arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=152#wiki-152" />
+      <id>urn:eto-wiki:wiki-152</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Hidrolik" />
+      <category term="Kreyn" />
+      <category term="Hidrolik" />
+      <category term="EHR" />
+      <category term="Valf" />
+      <category term="Amplifier" />
+      <summary>Kreyn bir yöne çalışıyor (vira) diğerine (mayna) çalışmıyor, dönüşlerde de benzer sorun var. Bobinler, joystick ve trafo değerleri normal.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Hidrolik · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Kreyn bir yöne çalışıyor (vira) diğerine (mayna) çalışmıyor, dönüşlerde de benzer sorun var. Bobinler, joystick ve trafo değerleri normal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Elektronik kontrol kartı (EHR amplifier) çıkış sinyallerini (10V referans) kontrol edin, ardından hidrolik valflerin mekanik olarak kirlilik nedeniyle takılı kalıp kalmadığını kontrol edip diyaframları temizleyin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; Kreyn, Hidrolik, EHR, Valf, Amplifier&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Gamma 40 alarm sistemi arıza teşhisi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=151#wiki-151" />
+      <id>urn:eto-wiki:wiki-151</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="Lyngso" />
+      <category term="Gamma 40" />
+      <category term="Alarm" />
+      <category term="Troubleshooting" />
+      <summary>Lyngso marka Gamma 40 alarm paneli belirsiz bir alarm veriyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Lyngso marka Gamma 40 alarm paneli belirsiz bir alarm veriyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Kablo bağlantı şemalarını (cable diagram) açarak alarm izleme sistemini kontrol edin; alarmın hangi sistemden (DG vb.) kaynaklandığını bu çizimler üzerinden tespit edebilirsiniz.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; Lyngso, Gamma 40, Alarm, Troubleshooting&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>BCMU ünitesinden veri alınamaması</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=150#wiki-150" />
+      <id>urn:eto-wiki:wiki-150</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="PLC" />
+      <category term="BCMU" />
+      <category term="PLC" />
+      <category term="sensör" />
+      <category term="veri" />
+      <summary>BCMU sisteminde veri görülememesi ve bağlantı hatası.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; PLC · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; BCMU sisteminde veri görülememesi ve bağlantı hatası.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Ünitenin altında bulunan diyotları kontrol edin, yanmış olabilir. Ayrıca encoder ve pick-up sensör arızalarını test edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; BCMU, PLC, sensör, veri&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Yakıt filtresi alarmı ve basınç düşmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=149#wiki-149" />
+      <id>urn:eto-wiki:wiki-149</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Kazan" />
+      <category term="filtre" />
+      <category term="yakıt" />
+      <category term="separatör" />
+      <category term="alarm" />
+      <category term="basınç" />
+      <summary>Yakıt filtresinin sürekli kırmızı alarm vermesi ve yakıt basıncının düşmesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Kazan · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Yakıt filtresinin sürekli kırmızı alarm vermesi ve yakıt basıncının düşmesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Yakıt separatörünün verimini ve ayarlarını kontrol edin. Yakıttaki su/pislik separatörden geçiyorsa filtre çabuk tıkanır. Panodaki zaman rölesi ayarlarını ve switch&amp;#x27;leri kontrol edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; filtre, yakıt, separatör, alarm, basınç&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Vinç motorunun aşırı akım çekmesi ve termik atması</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=148#wiki-148" />
+      <id>urn:eto-wiki:wiki-148</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Motor" />
+      <category term="vinç" />
+      <category term="motor" />
+      <category term="akım" />
+      <category term="termik" />
+      <category term="mekanik" />
+      <summary>Vinç motorunun boşta çalışırken yüksek akım çekmesi ve yük altında termik atması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Motor · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Vinç motorunun boşta çalışırken yüksek akım çekmesi ve yük altında termik atması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Motorun voltaj/frekans uyumunu (60Hz/440V) kontrol edin. Mekanik sıkışma, rulman kontrolü, hidrolik sistem basıncı ve kontaktör kontaklarının durumunu inceleyin; gerekirse motoru yüksüz test edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; vinç, motor, akım, termik, mekanik&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Klima cihazında ER 06 hatası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=147#wiki-147" />
+      <id>urn:eto-wiki:wiki-147</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Klima/HVAC" />
+      <category term="klima" />
+      <category term="ER06" />
+      <category term="hata" />
+      <category term="arıza" />
+      <summary>Isıtma modunda çalışan klima cihazının belli süre sonra ER 06 hatası vermesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Klima/HVAC · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Isıtma modunda çalışan klima cihazının belli süre sonra ER 06 hatası vermesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Cihazın hata kodunu üretici kılavuzundan doğrulayın; genel olarak kart arızası, fan motoru veya kompresör aşırı akımı nedeniyle oluşur. Akımı pens ampermetre ile kontrol edin. (yorum: Sensörlerin ve dış ünite fanının temizliği de kontrol edilmelidir.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; klima, ER06, hata, arıza&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Otopilotun dümen tutmaması ve konum hatası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=146#wiki-146" />
+      <id>urn:eto-wiki:wiki-146</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Dümen" />
+      <category term="otopilot" />
+      <category term="dümen" />
+      <category term="potansiyometre" />
+      <category term="kalibrasyon" />
+      <summary>Otopilotun dümeni tutmaması ve plc&#x27;ye hatalı konum bilgisi gitmesi sonucu tolerans aşımı.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Dümen · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Otopilotun dümeni tutmaması ve plc&amp;#x27;ye hatalı konum bilgisi gitmesi sonucu tolerans aşımı.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Dümen pozisyon sensörünü (potansiyometre) ve iletim kayışını kontrol edin; potansiyometre kalibrasyonunu köprüüstü ile eş zamanlı sıfır noktasında yapın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; otopilot, dümen, potansiyometre, kalibrasyon&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Lyngso/Alphatronic 2000 ME Safety alarm entegrasyonu</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=145#wiki-145" />
+      <id>urn:eto-wiki:wiki-145</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="alarm" />
+      <category term="Lyngso" />
+      <category term="Alphatronic" />
+      <category term="Safety" />
+      <summary>ME Safety sistemine entegre edilmiş Exh. Gas Temp alarmlarının sistemden çıkartılamaması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; ME Safety sistemine entegre edilmiş Exh. Gas Temp alarmlarının sistemden çıkartılamaması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Alarmların diagnostic dosyasına girilmesi gerekmektedir; bu işlem servis yetkisi veya özel şifre gerektirir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; alarm, Lyngso, Alphatronic, Safety&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Akım taşıma kapasitesine göre kablo kesiti seçimi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=144#wiki-144" />
+      <id>urn:eto-wiki:wiki-144</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Bağlantı/Kablo" />
+      <category term="kablo" />
+      <category term="kesit" />
+      <category term="ısınma" />
+      <summary>Kablo kesitinin akım artışına bağlı olarak yetersiz kalması durumunda ısınma yaşanması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Bağlantı/Kablo · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Kablo kesitinin akım artışına bağlı olarak yetersiz kalması durumunda ısınma yaşanması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Yüksek akım çekilen devrelerde kablo kesiti en az 50 mm² olmalı, aksi takdirde kablo ısınması kaçınılmazdır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; kablo, kesit, ısınma&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>3500W Ses Sistemi İçin Güç Kaynağı Seçimi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=143#wiki-143" />
+      <id>urn:eto-wiki:wiki-143</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Diğer" />
+      <category term="güç" />
+      <category term="hesaplama" />
+      <category term="akım" />
+      <category term="DC" />
+      <summary>3500W, 12V DC beslemeli ses sistemi için gerekli güç kaynağı ve kablo kesiti hesabı.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Diğer · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; 3500W, 12V DC beslemeli ses sistemi için gerekli güç kaynağı ve kablo kesiti hesabı.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; I=P/V formülünden (3500/12) yaklaşık 292A akım çekilecektir. Bu yük için en az 300A kapasiteli bir güç kaynağı veya uygun amper-saat kapasitesine (min. 200Ah) sahip akü grubu kullanılmalıdır. Kablo kesiti yüksek akımdan dolayı oldukça kalın seçilmelidir (minimum 70-95mm² bakır kablo önerilir).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; güç, hesaplama, akım, DC&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Paralel Çalışan Jeneratörlerde Yük Dengesizliği</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=142#wiki-142" />
+      <id>urn:eto-wiki:wiki-142</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="jeneratör" />
+      <category term="paralel" />
+      <category term="AVR" />
+      <category term="yük dağılımı" />
+      <category term="governor" />
+      <summary>Jeneratörler paralel çalışırken yükün birine binmesi, cosfi düşmesi ve sistemin çökmesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Jeneratörler paralel çalışırken yükün birine binmesi, cosfi düşmesi ve sistemin çökmesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Tüm alternatör ve AVR bağlantılarını (şaltere kadar) gevşeklik yönünden kontrol edin. Yakıt sistemini, governor (aktivatör) kartını ve aktivatör ünitesini kontrol edin. Droop ayarlarını ve yakıtta su olup olmadığını inceleyin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; jeneratör, paralel, AVR, yük dağılımı, governor&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>ECR Alarm Monitör Sistemi A/B Panel Hatası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=141#wiki-141" />
+      <id>urn:eto-wiki:wiki-141</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="PLC" />
+      <category term="PLC" />
+      <category term="alarm" />
+      <category term="izleme" />
+      <category term="gemi" />
+      <summary>ECR alarm monitör sisteminde A panelinde görüntü var ancak data almıyor, B paneli çalışmıyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; PLC · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; ECR alarm monitör sisteminde A panelinde görüntü var ancak data almıyor, B paneli çalışmıyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; 24V DC besleme hatlarını, akü çıkışlarını ve şalter konumlarını kontrol edin. Sistemin PLC pili bitmiş olabilir, enerjinin kesilip gelmesi sonrası PLC hafızası etkilenmiş olabilir. Panel bağlantılarını ve socketleri inceleyin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; PLC, alarm, izleme, gemi&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Emergency Jeneratör Paneli Hatalı Voltaj Gösterimi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=140#wiki-140" />
+      <id>urn:eto-wiki:wiki-140</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="jeneratör" />
+      <category term="emergency" />
+      <category term="voltaj" />
+      <category term="alarm" />
+      <summary>Emergency jeneratör kontrol panelinin 400V girişe rağmen 445V okuması ve resetlenemeyen alarm vermesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Emergency jeneratör kontrol panelinin 400V girişe rağmen 445V okuması ve resetlenemeyen alarm vermesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Ölçü aleti ile giriş voltajını teyit edin. Panelde kalibrasyon potu yoksa ve giriş voltajı normalse panelin kendisi veya ölçüm kartı arızalıdır. Yedek parça ile değiştirin, sorun devam ederse durumu başmühendise raporlayın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; jeneratör, emergency, voltaj, alarm&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Duman Dedektörü Arıza Tespiti</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=139#wiki-139" />
+      <id>urn:eto-wiki:wiki-139</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="yangın" />
+      <category term="alarm" />
+      <category term="dedektör" />
+      <category term="24V" />
+      <summary>Duman dedektörünün çalışmaması durumu.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Duman dedektörünün çalışmaması durumu.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Dedektörün tabanındaki hattı ölçerek 24V DC olup olmadığını kontrol edin. Eğer gerilim varsa, çalışan bir dedektörle yer değiştirin; sorun yer değiştiriyorsa dedektör arızalıdır, değişmiyorsa kablo hattını ve bağlantılarını (seri bağlı sistem olduğu için bir önceki dedektörün bağlantısını) kontrol edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; yangın, alarm, dedektör, 24V&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Yakıt Transfer Pompasının Stop Etmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=138#wiki-138" />
+      <id>urn:eto-wiki:wiki-138</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Pompa" />
+      <category term="pompa" />
+      <category term="motor" />
+      <category term="termistör" />
+      <category term="arıza" />
+      <summary>Yakıt transfer pompası çalıştıktan 15 dakika sonra komple durmaktadır; basınç sensörü iptal edilmiştir.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Pompa · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Yakıt transfer pompası çalıştıktan 15 dakika sonra komple durmaktadır; basınç sensörü iptal edilmiştir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Pens ampermetre ile her üç fazdaki akımı ölçün. Akım yüksekse mekanik sıkışma veya motor sargı direnci sorunu vardır; motoru pompadan ayırıp boşta deneyin. Akımlar normalse motor termistörünü (PTC) veya mekanik basıncı kontrol edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; pompa, motor, termistör, arıza&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Kuzine Devresinde 440V Kaçağı Giderilmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=137#wiki-137" />
+      <id>urn:eto-wiki:wiki-137</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Bağlantı/Kablo" />
+      <category term="440V" />
+      <category term="kaçak" />
+      <category term="kuzine" />
+      <category term="rezistans" />
+      <category term="megger" />
+      <summary>Kuzine ocaklarında sigorta yuvasının yanması sonrası oluşan kısa devre neticesinde gemide 440V topraklama kaçağı meydana gelmiştir.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Bağlantı/Kablo · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Kuzine ocaklarında sigorta yuvasının yanması sonrası oluşan kısa devre neticesinde gemide 440V topraklama kaçağı meydana gelmiştir.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Tüm cihazların şalterlerini kapatın. Telsizle bir kişiyi ana panoda görevlendirin. Şalterleri sırayla açıp kaçak göstergesini izleyerek hangi cihazın kaçağa sebep olduğunu tespit edin. Rezistansların ısındığında genleşerek gövdeye temas etme ihtimalini göz önünde bulundurun.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; 440V, kaçak, kuzine, rezistans, megger&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Differential Pressure Transmitter Zero-Span Ayarı</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=136#wiki-136" />
+      <id>urn:eto-wiki:wiki-136</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="transmitter" />
+      <category term="kalibrasyon" />
+      <category term="kazan" />
+      <category term="7MF4433" />
+      <summary>Differential pressure transmitter (7MF4433) için kazanı boşaltmadan zero-span ayarı yapılıp yapılamayacağı soruluyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Differential pressure transmitter (7MF4433) için kazanı boşaltmadan zero-span ayarı yapılıp yapılamayacağı soruluyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Transmitterin dP değeri baz alınarak hesaplama yapılabilir ancak kazanı boşaltmadan yapılan ayarlar genellikle hassasiyet düşüklüğüne yol açar; servis kılavuzundaki prosedüre uygun olarak wet-leg veya dry-leg kalibrasyonu tercih edilmelidir. (yorum: Cihazın datasheet&amp;#x27;i ve dP aralığı dikkate alınarak &amp;#x27;offline&amp;#x27; kalibrasyon yapılması önerilir.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; transmitter, kalibrasyon, kazan, 7MF4433&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Dahili haberleşme sistemi ve VHF kullanımı</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=135#wiki-135" />
+      <id>urn:eto-wiki:wiki-135</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Diğer" />
+      <category term="haberleşme" />
+      <category term="VHF" />
+      <category term="SOLAS" />
+      <category term="el telsizi" />
+      <summary>Dahili haberleşme sistemi sınav sorusunda VHF telsizin dahili haberleşme aracı olup olmadığı.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Diğer · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Dahili haberleşme sistemi sınav sorusunda VHF telsizin dahili haberleşme aracı olup olmadığı.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; El telsizleri limanda düşük güçte (1W) dahili haberleşmede kullanılır; açık denizde ise SOLAS gereği kanal 16&amp;#x27;yı dinlemek zorunludur ve yüksek güce alınır.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; haberleşme, VHF, SOLAS, el telsizi&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>DC Şönt motor şeması</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=134#wiki-134" />
+      <id>urn:eto-wiki:wiki-134</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Motor" />
+      <category term="DC motor" />
+      <category term="şönt motor" />
+      <category term="şema" />
+      <summary>DC şönt motor bağlantı şemasına ihtiyaç duyulması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Motor · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; DC şönt motor bağlantı şemasına ihtiyaç duyulması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; DC şönt motor şeması ilgili teknik el kitaplarının sonunda ve yardımcı kaynaklarda mevcuttur (yorum: Sınav hazırlık kaynaklarını ve üretici manuellerini kontrol edin).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; DC motor, şönt motor, şema&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Lyngso Marine alarm sistemi kart arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=133#wiki-133" />
+      <id>urn:eto-wiki:wiki-133</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="Lyngso" />
+      <category term="alarm paneli" />
+      <category term="kart arızası" />
+      <category term="otomasyon" />
+      <summary>Lyngso Marine DEM 401 kartının sisteme takıldığında &#x27;net to gamma&#x27; alarmı verip tüm sistemi devre dışı bırakması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Lyngso Marine DEM 401 kartının sisteme takıldığında &amp;#x27;net to gamma&amp;#x27; alarmı verip tüm sistemi devre dışı bırakması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Sistemde kaçak olup olmadığını kontrol edin, kart üzerindeki şişmiş/yanık kondansatörleri inceleyin veya arızalı entegreyi değiştirin; sorun devam ederse kartı yenileyin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; Lyngso, alarm paneli, kart arızası, otomasyon&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Bow Thruster motorunun aşırı akım çekmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=132#wiki-132" />
+      <id>urn:eto-wiki:wiki-132</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Pompa" />
+      <category term="bow thruster" />
+      <category term="motor" />
+      <category term="aşırı akım" />
+      <category term="fren bobini" />
+      <summary>Bow thruster motorunun kısa süre çalışıp durması ve 300kW motorun 600A akım çekmesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Pompa · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Bow thruster motorunun kısa süre çalışıp durması ve 300kW motorun 600A akım çekmesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Fren bobininin enerjisini ve balata klerensini kontrol edin; mekanik zorlama (yosun, halat vb.) olup olmadığını anlamak için dalgıç çağırın ve pervane kovanını temizletin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; bow thruster, motor, aşırı akım, fren bobini&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Jeneratörün yük altında stop etmesi</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=131#wiki-131" />
+      <id>urn:eto-wiki:wiki-131</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="jeneratör" />
+      <category term="gavarnör" />
+      <category term="PGM" />
+      <category term="hız kontrolü" />
+      <summary>Hava ile çalışan jeneratörlerde devir düşmesi veya yük altında circuit breaker açması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Hava ile çalışan jeneratörlerde devir düşmesi veya yük altında circuit breaker açması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Gavarnörü, gavarnör kartını, 24V/12V besleme hattını (PGM) ve hız/frekans kontrol ünitesini kontrol edin; arızalı ise yenisiyle değiştirin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; jeneratör, gavarnör, PGM, hız kontrolü&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Monofaze motor sargı arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=130#wiki-130" />
+      <id>urn:eto-wiki:wiki-130</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Motor" />
+      <category term="motor" />
+      <category term="bobinaj" />
+      <category term="monofaze" />
+      <category term="ölçüm" />
+      <summary>Monofaze bir motorda kahverengi uçlardan 7.3 ohm değer alınırken siyah uçlardan değer okunamıyor ve gövde kaçağı yok.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Motor · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Monofaze bir motorda kahverengi uçlardan 7.3 ohm değer alınırken siyah uçlardan değer okunamıyor ve gövde kaçağı yok.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Monofaze motorda bir ana bir de yardımcı sargı bulunur; birinden değer alıp diğerinden alamıyorsanız bobin devresi kopuktur.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; motor, bobinaj, monofaze, ölçüm&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Heeling valfi uzaktan kumanda arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=129#wiki-129" />
+      <id>urn:eto-wiki:wiki-129</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Hidrolik" />
+      <category term="heeling" />
+      <category term="valf" />
+      <category term="hidrolik" />
+      <category term="selenoit" />
+      <summary>Heeling valfinin ofis panelinden kapanmaması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Hidrolik · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Heeling valfinin ofis panelinden kapanmaması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Valf üzerindeki selenoid bobine enerji gelip gelmediğini kontrol edin. Mekanik korozyon olup olmadığını kontrol edip WD-40 ile yağlayın. Sistemi test etmeden önce mutlaka kaptandan izin alın ve liman dışında risk almayın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; heeling, valf, hidrolik, selenoit&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Elektronik kart sigorta attırma arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=128#wiki-128" />
+      <id>urn:eto-wiki:wiki-128</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Diğer" />
+      <category term="kart" />
+      <category term="elektronik" />
+      <category term="sigorta" />
+      <category term="kondansatör" />
+      <summary>Kartın 220V&#x27;a takıldığı an sigortayı attırması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Diğer · &lt;strong&gt;Zorluk:&lt;/strong&gt; Zor&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Kartın 220V&amp;#x27;a takıldığı an sigortayı attırması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Kart üzerindeki giriş katındaki kondansatörleri, filtre katını ve besleme trafosunun primer sargısını ohm metre ile kontrol edin. Kısa devre yapan bileşeni (muhtemelen filtre kondansatörü veya köprü diyot) değiştirin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; kart, elektronik, sigorta, kondansatör&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Sintine seviye ölçüm cihazı power supply arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=127#wiki-127" />
+      <id>urn:eto-wiki:wiki-127</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="power supply" />
+      <category term="sintine" />
+      <category term="ölçüm" />
+      <summary>Cihazın 220V girişi olduğu halde 24V çıkış vermemesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Cihazın 220V girişi olduğu halde 24V çıkış vermemesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Cihazın çıkışına yük altında test yapın. Eğer çıkış voltajı yoksa ve power supply arızalıysa, aynı giriş-çıkış değerlerine ve amper kapasitesine sahip başka bir 24V DC güç kaynağı ile değiştirin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; power supply, sintine, ölçüm&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Yangın alarm paneli akü ve güç besleme kontrolü</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=126#wiki-126" />
+      <id>urn:eto-wiki:wiki-126</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="fire panel" />
+      <category term="alarm" />
+      <category term="akü" />
+      <category term="sigorta" />
+      <summary>Fire panelin besleme hatası vermesi.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Fire panelin besleme hatası vermesi.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Akünün 24V çıkışına 60W&amp;#x27;lık bir lamba bağlayarak yük altında voltaj düşümünü test edin. Redresör çıkışını ve panel içerisindeki cam sigortaları kontrol edin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; fire panel, alarm, akü, sigorta&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Jeneratör marş motoru geç start alma arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=125#wiki-125" />
+      <id>urn:eto-wiki:wiki-125</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Jeneratör" />
+      <category term="jeneratör" />
+      <category term="marş motoru" />
+      <category term="start rölesi" />
+      <category term="kömür" />
+      <summary>Jeneratörün marş motorunun geç devreye girmesi veya start almaması.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Jeneratör · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Jeneratörün marş motorunun geç devreye girmesi veya start almaması.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Öncelikle start rölesini ve kontaklarını kontrol edin. Sorun devam ederse marş motoru kömürlerini, kollektör temizliğini ve marş motoruna giden kabloların yanık/erimiş olup olmadığını kontrol edip onarın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; jeneratör, marş motoru, start rölesi, kömür&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Asenkron motor klemens bağlantıları</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=124#wiki-124" />
+      <id>urn:eto-wiki:wiki-124</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Motor" />
+      <category term="asenkron motor" />
+      <category term="bağlantı" />
+      <category term="yıldız-üçgen" />
+      <summary>Motorun klemens bağlantı uçlarının (U,V,W,X,Y,Z) doğru tanımlanması ve bağlantı şekilleri.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Motor · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Motorun klemens bağlantı uçlarının (U,V,W,X,Y,Z) doğru tanımlanması ve bağlantı şekilleri.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Yıldız bağlantıda çıkış uçlarını (X,Y,Z) köprüleyin. Üçgen bağlantıda U-X, V-Y, W-Z uçlarını sırasıyla bağlayın. Yanlış bağlantı motorun 2 faza kalmasına veya hiç dönmemesine neden olur.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; asenkron motor, bağlantı, yıldız-üçgen&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Sintine seviye ölçüm sensörü arızası</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=123#wiki-123" />
+      <id>urn:eto-wiki:wiki-123</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Alarm" />
+      <category term="sensör" />
+      <category term="sintine" />
+      <category term="ölçüm" />
+      <summary>Sistemde sensör kaynaklı hata alınıyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Alarm · &lt;strong&gt;Zorluk:&lt;/strong&gt; Kolay&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Sistemde sensör kaynaklı hata alınıyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Oil flow sensörünü yenisi ile değiştirin ve 4-20mA çıkış değerini ölçerek sistem kalibrasyonunu yapın.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; sensör, sintine, ölçüm&lt;/p&gt;</content>
+    </entry>
+    <entry>
+      <title>Yakıt devresi flush modda stop etme sorunu</title>
+      <link href="https://ebubekirdemirhan.github.io/eto-egitim-rehberi/eto-egitim-rehberi.html?w=122#wiki-122" />
+      <id>urn:eto-wiki:wiki-122</id>
+      <updated>2026-05-05T13:38:34Z</updated>
+      <author><name>Ebubekir Demirhan</name></author>
+      <category term="Pompa" />
+      <category term="pompa" />
+      <category term="flush mod" />
+      <category term="yakıt" />
+      <category term="akışkanlık sensörü" />
+      <summary>Kazan FO&#x27;dan DO&#x27;ya geçerken flush modunda kalıyor ve elektrik motoru devreye girmiyor.</summary>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Kategori:&lt;/strong&gt; Pompa · &lt;strong&gt;Zorluk:&lt;/strong&gt; Orta&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Sorun:&lt;/strong&gt; Kazan FO&amp;#x27;dan DO&amp;#x27;ya geçerken flush modunda kalıyor ve elektrik motoru devreye girmiyor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Çözüm:&lt;/strong&gt; Mixing tank içindeki yakıtın karışım oranını ve akışkanlık sensörünün (viscosity sensor) doğru çalışıp çalışmadığını kontrol edin; sensör arızalıysa veya temiz değilse motoru stopa çeker. (yorum: Sensör 4-20mA çıkışı kontrol edilerek doğrulanmalıdır)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Etiketler:&lt;/strong&gt; pompa, flush mod, yakıt, akışkanlık sensörü&lt;/p&gt;</content>
+    </entry>
+</feed>

@@ -1,0 +1,362 @@
+[
+  {
+    "msg_id": 11000,
+    "file": "media/11000.jpg",
+    "caption": "Merhaba ben Tahir kartal 04.07.2024 de gemici güverte aldım 40 yaşındayım ticari faaliyet gösteren gemici sigortası yatıracak değerli büyüklerim kucuklerim yalan yok bende şeker hastasıyım işe ihtiyacım var yardımcı olur musunuz Allah rızası için 05444015375 şuan Adana dayım",
+    "vision": "Deniz üzerinde çekilen bu fotoğrafta, gemi güverte personeli olarak iş arayan Tahir Kartal'ın özgeçmişini ve iletişim bilgilerini içeren bir yardım çağrısı yer almaktadır.",
+    "sender_hash": "f6a3991d6479",
+    "date": "2024-11-25T19:26:22+00:00"
+  },
+  {
+    "msg_id": 11011,
+    "file": "media/11011.jpg",
+    "caption": "Güngör hocam merhaba, hava kompresöründe iki tane basınç otomatiği var, ben start stop için bir tane kullanıldığını düşünüyordum. İkincisinin mantığı nedir?",
+    "vision": "Bu şema, hava kompresöründe 2.94 MPa'da durduran (Auto Stop) ve 1.95 MPa'da başlatan (Auto Start) iki ayrı basınç otomatiğinin kontrol mantığını göstermektedir.",
+    "sender_hash": "d704e8585319",
+    "date": "2024-11-27T12:36:19+00:00"
+  },
+  {
+    "msg_id": 11103,
+    "file": "media/11103.jpg",
+    "caption": "allah selamet versin fire alarm gec dusuyor bunun nedeni nedir süreyi kisaltmam gerekiyor yardimci olursaniz sevirim.",
+    "vision": "Minerva T880 yangın paneli, \"Zone 29\" seçili ve aktifken dedektör gecikme ayarlarının (Time Delay/Confirmation Delay) panelin servis menüsünden kontrol edilmesi gerektiğini gösteriyor.",
+    "sender_hash": "900d7357ed5b",
+    "date": "2024-12-09T13:24:00+00:00"
+  },
+  {
+    "msg_id": 11144,
+    "file": "media/11144.jpg",
+    "caption": "Selamlar, pnömatik valf içerisindeki bu parçayı nerede bulabilirim?",
+    "vision": "Fotoğraftaki parça, pnömatik valf diyafram mekanizmasına ait bir yay baskı pulu veya valf yaylı çanak (spring retainer) olup, yedek parça kataloğundan temin edilebilir.",
+    "sender_hash": "5c058596e868",
+    "date": "2024-12-15T10:32:23+00:00"
+  },
+  {
+    "msg_id": 11223,
+    "file": "media/11223.jpg",
+    "caption": "Stop da iken yukarı da ki comb.(boiler runing) sürekli yanıp sönüyor. Yakıt pompası da stopda gene de dediklerinizden olur mu? Güngör hocam.",
+    "vision": "\"BNR. OPERATION\" (2) ve \"F.O. CIRC. PUMP\" (1) stop konumundayken \"COMBUSTION (BOILER RUNNING)\" lambasının yanıp sönmesi, kontrol rölesinde bir takılı kalma veya kısa devre olduğunu gösterir.",
+    "sender_hash": "6174fc2f8b0a",
+    "date": "2024-12-23T07:44:34+00:00"
+  },
+  {
+    "msg_id": 11370,
+    "file": "media/11370.jpg",
+    "caption": "Merhaba herkese kolay gelsin güngör hocam şöyle bir problemim var kaza. Sistemiyle alakalı operasyonu başlatıyorum kazan bazen ilk ateslemede kendini of a çekiyor ilk başta selenoid dedim o da değil açıyor ilk ateslemede sanki bir kaçak yapıyor bana fikir verir misiniz",
+    "vision": "Kazan kontrol panelinde \"Control Voltage\", \"Diesel Oil\", \"Safety Interlocks\" ve \"Valves On\" ışıkları yanıyor; ilk ateşlemede sistemin durması muhtemelen brülör alev denetimi veya yakıt akış hatasından kaynaklanıyor.",
+    "sender_hash": "6c80d6a3d289",
+    "date": "2025-01-16T09:28:19+00:00"
+  },
+  {
+    "msg_id": 11654,
+    "file": "media/11654.jpg",
+    "caption": "Dün yaşadığım jeneratör sorununu çözdük Sorun jeneratörün kendi panosunda hariç ana baraya bağlandığı bi şalter daha varmış ve S fazı şalter üzerinden geçmediğini tespit ettik. Yani büyük jeneratörün sadece 2 faizini kullanıyormuşuz küçük jeneratörde eksik fazı kendisinden tamamladıgı içinde faz ölçümlerinde bi eşitsizlik mevcuttu. Şalter değiştikten sonra sorun çözüldü. Güngör Can hocama ve yardımcı olan diger abilerime teşekkür ederim cümleten Allah selamet versin",
+    "vision": "Ana baraya enerji aktarımını sağlayan ve arızalı (S fazı geçişi olmayan) olduğu tespit edilerek yenisiyle değiştirilen Merlin Gerin NS630H kompakt devre kesici (MCCB) görülmektedir.",
+    "sender_hash": "b842d3466713",
+    "date": "2025-02-10T16:44:37+00:00"
+  },
+  {
+    "msg_id": 11982,
+    "file": "media/11982.jpg",
+    "caption": "Bunlarda valf ve kütüğün çalışma prensibi",
+    "vision": "Bu şema, hidrolik dümen sistemi kontrol valfinin boşta (Bild A: Idling) ve aktif (Bild B: In action) çalışma prensibini göstermektedir.",
+    "sender_hash": "3c9c5fb7d6b2",
+    "date": "2025-02-26T20:01:10+00:00"
+  },
+  {
+    "msg_id": 12161,
+    "file": "media/12161.jpg",
+    "caption": "Soru 14 DC motorlarla ilgili hangi ifade doğrudur, kitapta cevap d şıkkı, fakat aynı Soru gemi akademi calışma kaynak ta aynı sorunun cevabı e şıkkı doğru cevap sizce hangisi",
+    "vision": "Soru hatalıdır; hem DC motorlar manyetik prensiplerle çalışır (e) hem de hız karakteristiği yükle değişebilir, ancak endüstriyel temel eğitimde \"manyetik prensip\" (e) daha temeldir.",
+    "sender_hash": "6b4203c0daaf",
+    "date": "2025-03-21T04:35:40+00:00"
+  },
+  {
+    "msg_id": 12164,
+    "file": "media/12164.jpg",
+    "caption": "Kitapta aynı iki soru ve iki farklı cevap var fakat CO2 elektrik tesisatlarından kaynaklı en etkili yangın söndürme şeklidir sanırım doğru cevap C şıkkı",
+    "vision": "Elektrik yangınları (Class C) için en uygun söndürücü karbondioksittir; bu yüzden test sorusunda doğru seçenek (c. Class C/CO2) olmalıdır.",
+    "sender_hash": "6b4203c0daaf",
+    "date": "2025-03-21T06:20:38+00:00"
+  },
+  {
+    "msg_id": 12330,
+    "file": "media/12330.jpg",
+    "caption": "Günaydın arkadaslar soru 29 doğru cevap E şıkkı olması gerekmezmi Dızel motorda duman cıkma sebebi değildir diye soruyor Cevap e - uygun yakıt miktarı olması gerekmezmi 735 lik pdf calışma notları telegram dan aldığım notlar",
+    "vision": "",
+    "sender_hash": "6b4203c0daaf",
+    "date": "2025-04-03T09:01:18+00:00"
+  },
+  {
+    "msg_id": 12489,
+    "file": "media/12489.jpg",
+    "caption": "Bilgi amaçlıdır. Değerli hocam ve meslektaşlarım . Gitmiş olduğunuz gemilerde watertight sistemleri olabilir. Bu sistemlerde switch ile kapılarda baş altında ve cargo holdlerde bulunur. Geminin en önemli unsurlarından biridir. Çarpışma esnasında veya gemi su almaya başladığında kapakların ( kaportaların) açılması durumunda devreye girer. Psc fos limanında 3 gün önce bunları denetlediği gözlemlendi. Sistemin çalışma mantığı şu şekilde . Kapılar kapalı konumda yeşil ledler yanar . Kapılar açık konumda kırmızı ledler yanar. Ters bağlantı zannedip swtich bağlantıları ile oynamayınız. Saygılar ASV",
+    "vision": "Bu panel (Watertight Doors Alarm & Indication Panel), gemideki kapı ve kapakların su sızdırmazlık durumunu izleyen, (Cargo Hold-1) bölgesindeki kırmızı uyarı hariç tamamı güvenli sistemidir.",
+    "sender_hash": "ec40a93be660",
+    "date": "2025-04-17T23:44:54+00:00"
+  },
+  {
+    "msg_id": 12500,
+    "file": "media/12500.jpg",
+    "caption": "BİLGİ AMAÇLIDIR. SN Güngör hocam ve değerli meslektaşlarım. Gittiğiniz veya mevcutta gemiler de Gemi anons sistemleri bulunmaktadır. Ses çıkışında sorun olan durumlar da direk olarak hoparlörler sorunlu olmayabiliyor. Resim de de görüldüğü üzere hem zamandan tasarruf hem de iş yükünü minimize etmeniz için paylaşıyorum. Ses çıkışında 10a sigorta vardır . Ortada ki sigorta ses çıkış kartının sigortası. Çift kanallı kart olduğu için öncelik buraya odaklana bilirsiniz. Ayrıca kondansatör kontrolünü de unutmayalım tabii ki 😇 Sigorta değişiminin ardından sorununuz çözebilirsiniz Saygılar ASV",
+    "vision": "Gemi anons sistemi (Tepe Sound TS-750) panelindeki ses çıkış arızalarında, sorunun giderilmesi için öncelikle merkezi ünitedeki 10A değerindeki çıkış kartı sigortası kontrol edilmelidir.",
+    "sender_hash": "ec40a93be660",
+    "date": "2025-04-19T09:22:38+00:00"
+  },
+  {
+    "msg_id": 12716,
+    "file": "media/12716.jpg",
+    "caption": "Bu trofalarda giriş 440 volt çıkış fazları 115 volt. U-V-W W fazında panoda şaseye karşı sadece 19 volt okuyorum. 110 volt Kaçak lambalarından T lambası yanmıyor. Kaçak test butonuna bastığımda lamba yanıyor. Ohmmeter de kaçak gözükmüyor. Lambalar aynı parlaklıkta yanıyor. Seyirde olduğumuz için trafo değişikliği yapamadık. Bulunduğum yer Somali durmamız risk teşkil ediyor. Trafodan 3 adet 115 volt faz çıktığını çarkçıbaşına anlatamadım. Fazlardan biri nötr diyor.",
+    "vision": "Bu trafo etiket ve bağlantı şeması, (450-445-440V/115V) değerlerine sahip, 3 fazlı (U-V-W) yapıda, izolasyon hatası veya ölçüm referansı kaynaklı dengesizliğe işaret eden bir güç transformatörüdür.",
+    "sender_hash": "e096e5b96126",
+    "date": "2025-05-04T08:48:36+00:00"
+  },
+  {
+    "msg_id": 12912,
+    "file": "media/12912.jpg",
+    "caption": "Selamın aleyküm bizim bir uv lambamız var bunun balastı arızalanmış benden önce atmışlar şimdi yeni bir uv lamba geldi bunu nasıl çalıştırabiliriz",
+    "vision": "Görseldeki 4 pinli UV lamba başlığı; yeni lambanızı devreye alabilmeniz için uygun bir elektronik balast veya sürücü temin etmeniz gerektiğini göstermektedir.",
+    "sender_hash": "144ad4bd5fbc",
+    "date": "2025-05-15T14:24:18+00:00"
+  },
+  {
+    "msg_id": 12937,
+    "file": "media/12937.jpg",
+    "caption": "Merhaba güngör hocam ve meslektaşlarım. Gemiye yeni katıldım ve ben katılmadan limana gelirken böyle bir sorun yaşamışlar 2 defa tekrar etmiş Oilmist kendi üzerinde alarm vermeden. Alarm sistemine bu alarmı verip makinayı shutdowna çekmiş. Stopa çektiğinde makinayı kontrol etmişler herhangi bir yerinde olumsuz bir şeye rastlanılmamış. Bunun üzerine yeni oilmist takmışlar aynı sorun tekrar etmiş. Oilmist üzerinde hareket olmadan yine shutdowna çekmiş Konu hakkında bilgisi olan varsa bilgilendirebilirse teşekkür ederim.",
+    "vision": "Sensörün kendi paneli alarm vermeden alarm sistemine (PMCS 2) \"ME PS OIL MIST IN CRANKCASE 6%\" hatası gönderip motoru hatalı şekilde durdurduğu görülmektedir.",
+    "sender_hash": "759a6d19c8ca",
+    "date": "2025-05-19T20:33:35+00:00"
+  },
+  {
+    "msg_id": 13049,
+    "file": "media/13049.jpg",
+    "caption": "Allah selamet versin bu arızanın nerden kaynaklandığını bilen var mı ya da daha önce başına gelmiş biri",
+    "vision": "\"No.1 CHF (Krank Karteri) izolasyon direnci düşük arızası, sistemde kararsız bir kaçak olduğunu ve elektriksel bir izolasyon sorunu yaşadığınızı göstermektedir.\"",
+    "sender_hash": "23dee1e985ae",
+    "date": "2025-05-29T14:04:21+00:00"
+  },
+  {
+    "msg_id": 13164,
+    "file": "media/13164.jpg",
+    "caption": "Allah selamet versin vhf lerin anten kablosu bu şekil mi ölçülüyor ohm kademesinde İşaretlediğim yerlere değdirip",
+    "vision": "VHF anten kablosunun iç iletkeni ile dış metal kovanı arasında kısa devre olup olmadığını (ohm kademesinde) yanlış yöntemle kontrol etmeye çalışıyorsunuz.",
+    "sender_hash": "323e82d6dab5",
+    "date": "2025-06-12T15:54:40+00:00"
+  },
+  {
+    "msg_id": 13287,
+    "file": "media/13287.jpg",
+    "caption": "Bu sorunun cevabı B şıkkı olmayacak mı?Dizel jeneratörlerin ilk hareketini hava ile yapılmaz mı?",
+    "vision": "Gemi yardımcı makinelerinin (dizel jeneratör) ilk hareketi genellikle yüksek basınçlı hava ile yapılır, dolayısıyla sorudaki \"a\" şıkkı işaretlemesi teknik olarak hatalıdır (b şıkkı).",
+    "sender_hash": "71f4edf3a3f2",
+    "date": "2025-06-21T11:09:12+00:00"
+  },
+  {
+    "msg_id": 13301,
+    "file": "media/13301.jpg",
+    "caption": "Selamlar, BİTZER 6F-50.2 AC kompresör sargı uçlarını gösteren manuel var mı elinizde?",
+    "vision": "Görsel, BİTZER kompresör modellerinin (6F-50.2 vb.) basınç, yağlama ve ısıtma bağlantı noktalarını gösteren bir teknik şemadır; sargı uçlarını içermemektedir.",
+    "sender_hash": "5c058596e868",
+    "date": "2025-06-22T14:22:44+00:00"
+  },
+  {
+    "msg_id": 13629,
+    "file": "media/13629.jpg",
+    "caption": "Selamlar, bu etiket bilgilerine göre alternatörün manuelini arıyorum. Elinde olan var mı?",
+    "vision": "Bu Wuxi Fenxi üretimi, 545 kVA gücündeki (Tip: 1FJ2355-4SB43) senkron alternatöre ait teknik etiket bilgileridir, manuel arayışınız için gerekli temel verileri içerir.",
+    "sender_hash": "5c058596e868",
+    "date": "2025-07-29T08:10:59+00:00"
+  },
+  {
+    "msg_id": 13708,
+    "file": "media/13708.jpg",
+    "caption": "Merhabalar değerli hocalarım dün makine dairesinde bulunan safety sistem aküleri değiştirmek için redresörü kapatttım aküleri değiştirdim ama bu alarm kaldı ve resetleyemedim yardımcı olur musunuz?",
+    "vision": "Akü değişimi sonrası (PMS POWER FAIL. TRIPPING) alarmının kalıcı olması, sistemin enerji kesintisini bir arıza olarak algıladığını ve mod seçim anahtarının sıfırlanması gerektiğini gösterir.",
+    "sender_hash": "9a963266e59f",
+    "date": "2025-08-09T12:27:08+00:00"
+  },
+  {
+    "msg_id": 14241,
+    "file": "media/14241.jpg",
+    "caption": "Arkadaşlar cummıns jeneratör ile çalışan varmı. Leakage alarm testi yapamadım gemi sıfır gemi manyetik sensör var",
+    "vision": "Cummins jeneratör yakıt/yağ filtresi (Fleetguard) üzerindeki sensör kablo bağlantılarını gösteren bu görsel, muhtemelen leakage alarm testindeki başarısızlığın kaynağı olan sensör yapısını işaret ediyor.",
+    "sender_hash": "cbfa553bf459",
+    "date": "2025-10-04T10:20:20+00:00"
+  },
+  {
+    "msg_id": 14482,
+    "file": "media/14482.jpg",
+    "caption": "Selamünaleyküm arkadaşlar 17 barda devreye giriyor ve 22 barda devreden otomatik olarak çıkmıyor sebebini bilen yazabilir mi",
+    "vision": "Kompresörün boşaltma basıncı (20.1 BAR) set değerinin üzerinde kalmış; sistemin durmaması muhtemelen basınç transmitteri arızası veya parametre hatasından kaynaklanıyor (DEC 40).",
+    "sender_hash": "314bb7c01826",
+    "date": "2025-10-23T06:19:15+00:00"
+  },
+  {
+    "msg_id": 14495,
+    "file": "media/14495.jpg",
+    "caption": "Selamünaleyküm aleyküm cümleten makina stopteyken yanmıyor ama makina çalışınca 1 numara rpm start bloking devreye giriyor ve ara sıra yanıp yanıp sönüyor veya sabit yanıyor sebebi ne olabilir yardımcı olabilcek",
+    "vision": "\"RPM START BLOCKING\" (1 no'lu alarm) sinyalinin makine çalışırken aktifleşmesi, devir sinyali okuyucusunda (pick-up) veya PLC giriş modülünde temassızlık/arızaya işaret eder.",
+    "sender_hash": "314bb7c01826",
+    "date": "2025-10-24T12:08:14+00:00"
+  },
+  {
+    "msg_id": 14496,
+    "file": "media/14496.jpg",
+    "caption": "O yandığı için makina hazır durumda bu işaretledigim yanıp sönüyor",
+    "vision": "Bu ikaz lambası, makine dairesindeki tüm sistemlerin çalışmaya hazır olduğunu ve start komutu beklediğini gösterir (START ALLOWANCE / START FREIGABE).",
+    "sender_hash": "314bb7c01826",
+    "date": "2025-10-24T12:11:02+00:00"
+  },
+  {
+    "msg_id": 14504,
+    "file": "media/14504.jpg",
+    "caption": "Bwts sisteminde LPS ünitesine giriş voltajı geliyor fakat ünite çalışmıyor. Çıkış vermediği için UV lambaları yanmıyor görünüyor. Bununla birlikte sistemde 6 alarm aktif şuan. LPS nin arıza çözümü hakkında bilgisi olan var mı?",
+    "vision": "Görüntülenen BWTS (LPS M 3-6) ünitesinde, giriş voltajına rağmen (LPS On, Internal Fault, Lamp Error) LED'leri ve hata durumları cihazın çalışmadığını doğrulamaktadır.",
+    "sender_hash": "5c058596e868",
+    "date": "2025-10-25T10:22:20+00:00"
+  },
+  {
+    "msg_id": 14546,
+    "file": "media/14546.jpg",
+    "caption": "Stby aldığında otomatik devreye giriyor sebebi ne olabilir yardımcı olabilecek var mi",
+    "vision": "Şema, (Stand-by) alarm devresindeki (K6) rölesinin veya basınç şalterinin (press-switch) hatalı tetiklenmesiyle sistemin istem dışı devreye girdiğini göstermektedir, kontrol rölelerini inceleyin.",
+    "sender_hash": "314bb7c01826",
+    "date": "2025-10-31T06:05:05+00:00"
+  },
+  {
+    "msg_id": 14555,
+    "file": "media/14555.jpg",
+    "caption": "Selamünaleyküm aleyküm hidrolik pompası devreye girdiğinde termik atıyor sebebi bilen var mı motor sağlam yeni sarimdan geldi bulamadım sebebini yardımcı olabilecek olan var Mi",
+    "vision": "Görüntülenen Yıldız-Üçgen (Y/Δ) yol verme devresinde motor sarımındaki olası bir faz hatası veya geçiş kontaklarındaki (K1, K2, K3) kısa devre, termiği (F2) açtırıyor olabilir.",
+    "sender_hash": "314bb7c01826",
+    "date": "2025-10-31T12:22:21+00:00"
+  },
+  {
+    "msg_id": 14862,
+    "file": "media/14862.jpg",
+    "caption": "Dahili haberleşme sistemi sorusunda doğru şık b denmiş vhf de dahili haberleşme aracı olarak mı geçiyor bana 1-2-3-4 gibi geldi ama şıklarda yok bilgisi olan var mı acaba ?",
+    "vision": "Gemi dahili haberleşme sistemleri (makine telgraf, diyafon, alarm, telefon, telsiz, CCTV) geniş kapsamlı değerlendirildiği için VHF el telsizleri de bu sisteme dahil edilerek \"B\" şıkkı işaretlenmiştir.",
+    "sender_hash": "de3bb9aa51c8",
+    "date": "2025-11-17T10:56:43+00:00"
+  },
+  {
+    "msg_id": 14870,
+    "file": "media/14870.jpg",
+    "caption": "Gungor hocam bu ikisinde ohm alıyorum ama diğer ikisnde bir değer göremiyorum bu motor tek fazlı normalde kahverengilerden alıyorum 7.3 ohm ama siyahlardan hiç birşey alamıyorum gövdeye kacakda yok motorun durumu nedir hocam",
+    "vision": "Motor sargılarında (siyah uçlar) muhtemelen dahili termik koruma veya kopukluk mevcut, tek fazlı motorun bu sargıları açık devre (açık uçlar) durumdadır.",
+    "sender_hash": "314bb7c01826",
+    "date": "2025-11-17T13:31:21+00:00"
+  },
+  {
+    "msg_id": 14991,
+    "file": "media/14991.jpg",
+    "caption": "Slm arkadaşlar daha önce bu kart arızası başına gelen varmı lyngso marıne aralarm sistemi dem 401 kart gam net alarmı verdiriyor sisteme",
+    "vision": "Lyngso Marine DEM 401 alarm sistemi kartı, \"gam net\" hatası veren ve inceleme gerektiren arızalı bir kontrol ünitesidir (kart üzerinde: DEM 401).",
+    "sender_hash": "3f5e10f98dae",
+    "date": "2025-11-29T17:06:33+00:00"
+  },
+  {
+    "msg_id": 15170,
+    "file": "media/15170.jpg",
+    "caption": "Aktivatör kartı bu kartı ve aktivatörü yedekleri varsa değiştirip denemeni tavsiye ederim. Ama önce bağlantılarını kontrol et sonra rated moda aldıktan sonra Run spd yazan pot ta rpm ayarlamaya çalış,çok hassas ve yavaş bir şekilde rpm ve frekans düzeliyormu eğer rpm düzeliyorsa normal çalışmaya başlar. Bu pottan ayarlayamıyorsan kartı veya aktivatörü değiştirmen gerekiyor. Olmazsa droop kartını kontrol et paralelde yükün dağılımını ayarlar. Oda değilse son olarak iş avr kartına kalıyor onu değiştirmen gerekir. Genelde bu sorunları yakıtta su varsa v.s veya yakıt pompasında sorun varsa yapar. Su gelirse aktivatörler çabuk bozulur sonuçta made in china",
+    "vision": "Fotoğraf, jeneratör hız kontrol ünitesini (Speed Control Unit) ve üzerindeki (Gain, Droop, Idle SPD, Run SPD) ayar potansiyometrelerini göstererek arıza giderme sürecini desteklemektedir.",
+    "sender_hash": "cbfa553bf459",
+    "date": "2025-12-24T23:44:55+00:00"
+  },
+  {
+    "msg_id": 15172,
+    "file": "media/15172.jpg",
+    "caption": "Alphatronic 2000 üzerinde peş peşe böyle alarmlar alıyoruz. Gamma modülüne baktım, değiştirdim ama yine de alarm gitmiyor. Ana makina çalışmadığında bu alarm sürekli geliyor. Alarm sistemi lyngso. Böyle bir arıza daha önce yaşayan oldu mu?",
+    "vision": "Alphatronic 2000 sistemi \"COLD START\" hatası vererek (NODE ID: 128) sistemin resetlendiğini ve ana makine dururken iletişim kesintisi yaşandığını gösteriyor.",
+    "sender_hash": "5c058596e868",
+    "date": "2025-12-25T18:13:52+00:00"
+  },
+  {
+    "msg_id": 15201,
+    "file": "media/15201.jpg",
+    "caption": "Arkadaşlar merhaba dümen oto pilotta tutmuyor benzeri sorun yaşayan ya da fikri olan var mı",
+    "vision": "Gemi dümen kontrol sistemi panosunda (SYSMAC C200H PLC), oto pilot arızasına yol açabilecek modüler giriş-çıkış kartlarında veya röle bağlantılarında gevşeklik olup olmadığını kontrol etmelisiniz.",
+    "sender_hash": "de3bb9aa51c8",
+    "date": "2025-12-28T14:24:44+00:00"
+  },
+  {
+    "msg_id": 15236,
+    "file": "media/15236.jpg",
+    "caption": "Sancak vinc üçgen bağlı termik attiriyordu termik değiştirdim pens amper metre vurdum motorun kendi etiketi 11.6 üçgen de bu arada boş da 10.6 çekiyor ama kendi bow kaldırmaya çalışınca 16.7 17 lere çıkıyor motor sağlam hocam bu arada",
+    "vision": "Fotoğraf, sancak vinç motorunun bağlantı kutusu açık halini ve aşırı akım çekerek termik attıran motorun elektriksel test sürecindeki mevcut durumunu göstermektedir.",
+    "sender_hash": "314bb7c01826",
+    "date": "2026-01-03T10:05:49+00:00"
+  },
+  {
+    "msg_id": 15295,
+    "file": "media/15295.jpg",
+    "caption": "Kırmızı yere bak eğer bir sıkıntı yoksa yeşil kutuyu aç orada switch'ler var onlara bak onlar da sağlamsa zaman rölesinin ayarlarını düzenle, tabi yakıt temizse, bende de hemen kirleniyor çünkü yakıt çok pis",
+    "vision": "Görseldeki Boll & Kirch marka fark basınç göstergesi (red circled) kirlilik durumunu izlemek için kullanılır; sorun devam ederse switch bağlantılarını ve zaman rölesini (green circled) kontrol edin.",
+    "sender_hash": "242e39116492",
+    "date": "2026-01-04T08:00:57+00:00"
+  },
+  {
+    "msg_id": 15314,
+    "file": "media/15314.jpg",
+    "caption": "Asv. Sol altta bulunan diyotu kontrol et. Yanmış olabilir",
+    "vision": "BCU kartındaki terminal bloğunda, (Asv) açıklamasına istinaden fiziksel hasar veya ısınma belirtisi gösteren şüpheli diyot bağlantısını işaret eden bölgeyi göstermektedir.",
+    "sender_hash": "11471824bd60",
+    "date": "2026-01-05T23:33:31+00:00"
+  },
+  {
+    "msg_id": 15378,
+    "file": "media/15378.jpg",
+    "caption": "Bugün girdiğim bakım tutum sınavında çıkan sorular",
+    "vision": "Gemi elektrik/otomasyon bakım tutum sınavında sorulan teknik soruların (Sf6, hidrolik, direnç hesaplama, motor koruma ve akü bakımı gibi) listesini içeren kişisel notlardır.",
+    "sender_hash": "1d31b2bf1ac7",
+    "date": "2026-01-08T07:55:07+00:00"
+  },
+  {
+    "msg_id": 15502,
+    "file": "media/15502.jpg",
+    "caption": "Selamünaleyküm bu trafonun saglamlik kontrolünü bilen biri kısa bir şekilde anlatabilir mi en doğru şekilde",
+    "vision": "Bu bir UPS veya invertör trafosudur; sargıların sürekliliğini ve gövdeye karşı yalıtımını bir multimetre ile ölçerek kısa devre veya açık devre olup olmadığını kontrol edebilirsiniz.",
+    "sender_hash": "314bb7c01826",
+    "date": "2026-01-23T18:01:59+00:00"
+  },
+  {
+    "msg_id": 15536,
+    "file": "media/15536.jpg",
+    "caption": "Bu A1 ehr amplifier 9 nolu ucu sag taraftaki Y olan selenoıd bobının 2 nolu ucuna giriyor 1 nolu ucuna ise direk 24 vdc giriyor diğer 3 nolu ucu ise toprak Soldakı R 1 ise joystick den gelen + amplifier in 3 nolu ucuna giriyor Yine diğer çalışan bom’un amplifier den değiştirip koça mayna viranınkine taktım sorun yine devam ediyor mayna yapmıyor vira yapıyor arızalı düşündüğüm bu a1 i diğerine taktığım zaman çalışıyor",
+    "vision": "A1 EHR amplifikatörünün 9 numaralı çıkışından Y1 solenoid valfine giden bağlantı hattı ve ilgili kontrol devresi gösterilmektedir.",
+    "sender_hash": "323e82d6dab5",
+    "date": "2026-01-28T23:03:26+00:00"
+  },
+  {
+    "msg_id": 15853,
+    "file": "media/15853.jpg",
+    "caption": "Buradan resetlenen üstte okunan alarm şu an resetlenmiyor ( butona basınca kontaklar çekiyor ama )",
+    "vision": "Aalborg kazan kontrol panelinde \"FLAME FAILURE\" (Alev hatası) alarmı aktif; reset butonuna basılmasına rağmen röle kontak çekse de alarm sistem tarafından silinmiyor.",
+    "sender_hash": "9a963266e59f",
+    "date": "2026-03-27T11:08:59+00:00"
+  },
+  {
+    "msg_id": 15858,
+    "file": "media/15858.jpg",
+    "caption": "Pano içinde flame sensör buna bağlı ignition controller var no nc konaklarını bu verir",
+    "vision": "Bu bir Siemens LME21.330C2 serisi brülör kontrol ünitesidir; pano içi yanma kontrolü, ateşleme ve emniyet kilitleme devrelerini (NO/NC) yönetmek için kullanılır.",
+    "sender_hash": "ff3ed89e83d2",
+    "date": "2026-03-27T12:15:08+00:00"
+  },
+  {
+    "msg_id": 16130,
+    "file": "media/16130.jpg",
+    "caption": "3 ve 5 numaralı pinlere bağlı soketi çıkartıp birbirne bağlayıp bypass edebilirsin böylece termostat devre dışı kalır paralele almayı tekrar denersin",
+    "vision": "Görseldeki cihaz (Schneider Zelio Zaman Rölesi), 3 ve 5 numaralı pinler üzerinden köprülenerek (bypass) termostat kontrolü devre dışı bırakılabilir ve işlevsellik test edilebilir.",
+    "sender_hash": "118121d433bf",
+    "date": "2026-05-01T15:01:47+00:00"
+  },
+  {
+    "msg_id": 16151,
+    "file": "media/16151.jpg",
+    "caption": "Burda ki kontaktör çekmiyor planda da bulamadım nerden çektirdiğini",
+    "vision": "Sistem panosunda (ABB marka PLC'li) enerjilenmeyen arızalı kontaktörü (çevrelenmiş) ve bu kontaktörün tetikleme devresini bulmak için saha planlarındaki eksikliği gösteriyor.",
+    "sender_hash": "314bb7c01826",
+    "date": "2026-05-01T16:03:47+00:00"
+  }
+]
