@@ -15232,8 +15232,38 @@
   @keyframes eto-bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-7px)} }
 
   /* ── Suggestions ── */
+  #eto-ai-suggestions-wrap {
+    flex-shrink: 0;
+    padding: 4px 12px 6px;
+    border-top: 1px solid rgba(42,53,80,.8);
+  }
+  #eto-ai-suggestions-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: transparent;
+    border: 0;
+    color: #94a3b8;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 2px 6px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #eto-ai-suggestions-toggle .chev { transition: transform .16s ease; }
+  #eto-ai-suggestions-wrap.collapsed #eto-ai-suggestions-toggle .chev { transform: rotate(-90deg); }
   #eto-ai-suggestions {
-    padding: 6px 12px; display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0;
+    padding: 0; display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  #eto-ai-suggestions-wrap.collapsed #eto-ai-suggestions {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
   }
   .ai-chip {
     background: #252d40; color: #90caf9; border: 1px solid #2a3550;
@@ -16157,7 +16187,11 @@
   <div id="eto-ai-messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
 
   <!-- Quick chips -->
-  <div id="eto-ai-suggestions" aria-label="Hazır sorular">
+  <div id="eto-ai-suggestions-wrap" aria-label="Hazır sorular">
+    <button id="eto-ai-suggestions-toggle" type="button" aria-expanded="true" aria-controls="eto-ai-suggestions" title="Hazır soruları gizle/göster">
+      Hazır sorular <span class="chev">▾</span>
+    </button>
+    <div id="eto-ai-suggestions">
     <div class="ai-chip-group">
       <div class="ai-chip-title">Arıza Tespiti</div>
       <span class="ai-chip">Adım adım arıza bulma nasıl yapılır?</span>
@@ -16181,6 +16215,7 @@
       <span class="ai-chip">Benzer saha vakası var mı? en iyi 2 örneği özetle</span>
       <span class="ai-chip">Bu arıza için muhtemel nedenler + test adımları</span>
       <span class="ai-chip">Çözümü kısa özet + sahada dikkat</span>
+    </div>
     </div>
   </div>
 
@@ -17919,8 +17954,23 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     input.style.height = Math.min(input.scrollHeight, 120) + 'px';
   });
 
-  // Suggestion chips (event delegation)
+  // Suggestion chips (event delegation) + aç/kapa
+  const suggestionsOuter = document.getElementById('eto-ai-suggestions-wrap');
+  const suggestionsToggle = document.getElementById('eto-ai-suggestions-toggle');
   const suggestionsWrap = document.getElementById('eto-ai-suggestions');
+  (function initSuggestionsToggle() {
+    const KEY = 'eto-ai-suggestions-collapsed-v1';
+    if (!suggestionsOuter || !suggestionsToggle) return;
+    const collapsed = localStorage.getItem(KEY) === '1';
+    suggestionsOuter.classList.toggle('collapsed', collapsed);
+    suggestionsToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    suggestionsToggle.addEventListener('click', () => {
+      const now = !suggestionsOuter.classList.contains('collapsed');
+      suggestionsOuter.classList.toggle('collapsed', now);
+      suggestionsToggle.setAttribute('aria-expanded', now ? 'false' : 'true');
+      try { localStorage.setItem(KEY, now ? '1' : '0'); } catch (e) {}
+    });
+  })();
   if (suggestionsWrap) {
     const runChipText = (txt) => {
       const t = String(txt || '').trim();
