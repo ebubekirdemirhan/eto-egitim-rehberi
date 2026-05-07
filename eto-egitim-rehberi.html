@@ -14844,7 +14844,7 @@
     #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
-                                    /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+                                        /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
     /* Taşma koruması — mobilde yatay kayıp önle */
     #b34 { overflow-x: hidden; max-width: 100%; }
     #wiki-cards-grid { min-width: 0; overflow: hidden; }
@@ -17348,6 +17348,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
 
 
 
+
+
+
   // ── Bölüm 34 Wiki Filtresi BAŞLANGIÇ ──
   (function () {
     const filterBar = document.getElementById('wiki-filter-bar');
@@ -17645,8 +17648,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       });
     }
 
-    // ── "AI'ya Sor" butonları (event delegation) ──
-    document.addEventListener('click', function (ev) {
+    function onAskAi(ev) {
       const btn = ev.target.closest && ev.target.closest('.wiki-ask-btn');
       if (!btn) return;
       ev.preventDefault();
@@ -17675,11 +17677,14 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
         aiInput.focus();
         try { aiInput.setSelectionRange(aiInput.value.length, aiInput.value.length); } catch (e) {}
       }, 220);
-    });
+    }
+    // ── "AI'ya Sor" butonları (event delegation) ──
+    document.addEventListener('pointerdown', onAskAi, { passive: false });
+    document.addEventListener('click', onAskAi);
 
     // ── Permalink butonları ──
     document.querySelectorAll('.wiki-link-btn').forEach(btn => {
-      btn.addEventListener('click', function (e) {
+      function copyLink(e) {
         e.stopPropagation();
         const id = btn.dataset.id;
         const url = window.location.origin + window.location.pathname + '?w=' + id + '#wiki-' + id;
@@ -17702,7 +17707,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
           btn.classList.remove('copied');
           btn.textContent = orig;
         }, 1400);
-      });
+      }
+      btn.addEventListener('pointerdown', function (e) { e.preventDefault(); copyLink(e); }, { passive: false });
+      btn.addEventListener('click', copyLink);
     });
 
     // ── Paylaş butonları (Web Share API + WhatsApp/Telegram fallback) ──
@@ -17714,7 +17721,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       }
     });
     document.querySelectorAll('.wiki-share-btn').forEach(btn => {
-      btn.addEventListener('click', async function (e) {
+      async function doShare(e) {
         e.stopPropagation();
         const id = btn.dataset.id;
         const card = document.getElementById('wiki-' + id);
@@ -17776,7 +17783,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
           }
           pop.remove(); _activeSharePop = null;
         });
-      });
+      }
+      btn.addEventListener('pointerdown', function (e) { e.preventDefault(); doShare(e); }, { passive: false });
+      btn.addEventListener('click', doShare);
     });
 
     // ── URL'den ?w=ID parametresi ile gelen kartı vurgula ──
