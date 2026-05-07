@@ -14844,7 +14844,7 @@
     #eto-ai-mic, #eto-ai-speak, #eto-ai-settings-btn, #eto-ai-img-btn { width: 38px; height: 38px; font-size: 15px; }
     #eto-ai-settings-drawer { max-height: min(62vh, 340px); }
   }
-                                        /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+                                            /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
     /* Taşma koruması — mobilde yatay kayıp önle */
     #b34 { overflow-x: hidden; max-width: 100%; }
     #wiki-cards-grid { min-width: 0; overflow: hidden; }
@@ -17351,6 +17351,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
 
 
 
+
+
+
   // ── Bölüm 34 Wiki Filtresi BAŞLANGIÇ ──
   (function () {
     const filterBar = document.getElementById('wiki-filter-bar');
@@ -17659,11 +17662,11 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       const titleEl = card.querySelector('.wiki-title .i18n-tr:not([hidden])') ||
                       card.querySelector('.wiki-title');
       const title = (titleEl ? titleEl.textContent : '').trim();
-      const aiBtn = document.getElementById('eto-ai-btn');
       const aiPanel = document.getElementById('eto-ai-panel');
       const aiInput = document.getElementById('eto-ai-input');
-      if (!aiBtn || !aiPanel || !aiInput) return;
-      if (!aiPanel.classList.contains('open')) aiBtn.click();
+      if (!aiPanel || !aiInput) return;
+      // Mobilde sentetik click yerine paneli direkt aç
+      if (!aiPanel.classList.contains('open')) aiPanel.classList.add('open');
       // Panel açılış transitionı sonrası input'a yaz, scroll ve focus
       setTimeout(() => {
         const isEn = document.documentElement.classList.contains('lang-en') ||
@@ -17751,11 +17754,19 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
           '<button data-act="wa" title="WhatsApp">🟢 WhatsApp</button>' +
           '<button data-act="tg" title="Telegram">📨 Telegram</button>' +
           '<button data-act="cp" title="Kopyala">📋 Kopyala</button>';
-        // Pozisyon: butonun altında
+        // Pozisyon: butonun altında (mobilde ekran dışına taşmasın)
         const r = btn.getBoundingClientRect();
-        pop.style.top  = (window.scrollY + r.bottom + 4) + 'px';
-        pop.style.left = (window.scrollX + r.left - 80) + 'px';
+        pop.style.top = (window.scrollY + r.bottom + 6) + 'px';
+        pop.style.left = (window.scrollX + r.left) + 'px';
         document.body.appendChild(pop);
+        // clamp: popover ekranda kalsın
+        const pr = pop.getBoundingClientRect();
+        const pad = 8;
+        let left = pr.left;
+        const maxLeft = window.innerWidth - pr.width - pad;
+        if (left > maxLeft) left = maxLeft;
+        if (left < pad) left = pad;
+        pop.style.left = (window.scrollX + left) + 'px';
         _activeSharePop = pop;
 
         pop.addEventListener('click', function (ev2) {
