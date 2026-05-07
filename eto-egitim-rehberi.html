@@ -17815,13 +17815,21 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       const startModelIdx = modelIdx;
       let usedIdx = modelIdx;
 
-      // Try current model, fall back through chain on 429
+      // Try current model, fall back on 429 + temporary overload (503/500)
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+      const RETRY = new Set([429, 500, 502, 503, 504]);
       for (let i = modelIdx; i < MODELS.length; i++) {
         res = await fetch(API_STREAM_URL(apiKey, MODELS[i].id), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)
         });
+        if (RETRY.has(res.status)) {
+          // yoğunluk / geçici hata: kısa backoff + sonraki modele geç
+          await sleep(650 + (i - modelIdx) * 450);
+          res = null;
+          continue;
+        }
         if (res.status !== 429) {
           usedIdx = i;
           // Persist new model index if we fell back
