@@ -15621,7 +15621,7 @@
   /* AI panel: üst üste binme fix (chips + composer) */
   #eto-ai-panel { display: flex; flex-direction: column; }
   #eto-ai-messages { flex: 1; min-height: 0; padding-bottom: 10px; }
-  #eto-ai-suggestions {
+  #eto-ai-suggestions-wrap {
     flex-shrink: 0;
     max-height: 190px;
     overflow: auto;
@@ -17961,7 +17961,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
   (function initSuggestionsToggle() {
     const KEY = 'eto-ai-suggestions-collapsed-v1';
     if (!suggestionsOuter || !suggestionsToggle) return;
-    const collapsed = localStorage.getItem(KEY) === '1';
+    // Default: kapalı. Kullanıcı açarsa KEY=0 olur.
+    const v = localStorage.getItem(KEY);
+    const collapsed = (v === null) ? true : (v === '1');
     suggestionsOuter.classList.toggle('collapsed', collapsed);
     suggestionsToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
     suggestionsToggle.addEventListener('click', () => {
