@@ -1,8 +1,8 @@
 {
   "name": "ETO Eğitim Rehberi",
   "short_name": "ETO Rehber",
-  "description": "Gemi Elektro-Teknik Zabit Eğitim Rehberi — Stajyerden Zabite. Saha vakaları, PLC, jeneratör, otomasyon ve denizcilik elektriği rehberi (sürüm 1.3).",
-  "version": "1.3",
+  "description": "Gemi Elektro-Teknik Zabit Eğitim Rehberi — Stajyerden Zabite. Saha vakaları, PLC, jeneratör, otomasyon ve denizcilik elektriği rehberi (sürüm 1.6).",
+  "version": "1.6",
   "start_url": "./eto-egitim-rehberi.html",
   "scope": "./",
   "display": "standalone",
@@ -17,6 +17,18 @@
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -25,16 +37,64 @@
       "short_name": "Saha Vakaları",
       "description": "ETO meslektaşlarından gerçek arıza-çözüm arşivi",
       "url": "./eto-egitim-rehberi.html#b34",
-      "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "icons": [
+        {
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
       "name": "AI Asistanı",
       "short_name": "AI Sor",
       "description": "ETO Asistanı ile konuş, fotoğraf gönder",
       "url": "./eto-egitim-rehberi.html#ai-asistan",
-      "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+      "icons": [
+        {
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
     }
   ],
-  "categories": ["education", "books", "productivity"],
-  "screenshots": []
+  "categories": [
+    "education",
+    "books",
+    "productivity"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Ana ekran"
+    },
+    {
+      "src": "screenshot-mobile-2.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Saha vakaları"
+    },
+    {
+      "src": "screenshot-desktop-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Masaüstü"
+    }
+  ],
+  "share_target": {
+    "action": "./eto-egitim-rehberi.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }

@@ -1,7 +1,18 @@
-/* ETO Rehber v1.5 — güncel HTML her zaman ağdan denenir; çevrimdışı yedek cache. */
-const CACHE = 'eto-rehber-v1.5';
+/* ETO Rehber v1.6 — güncel HTML her zaman ağdan denenir; çevrimdışı yedek cache. */
+const CACHE = 'eto-rehber-v1.6';
 
-const PRECACHE = ['./eto-egitim-rehberi.html', './manifest.json', './icon.svg'];
+const PRECACHE = [
+  './eto-egitim-rehberi.html',
+  './manifest.json',
+  './icon.svg',
+  './icon-192.png',
+  './icon-512.png',
+  './screenshot-mobile-1.png',
+  './screenshot-mobile-2.png',
+  './screenshot-desktop-1.png',
+  './robots.txt',
+  './sitemap.xml',
+];
 
 function isHtmlNavigation(req) {
   if (req.mode === 'navigate') return true;
