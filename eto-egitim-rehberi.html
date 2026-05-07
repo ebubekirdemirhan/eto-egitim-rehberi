@@ -15587,6 +15587,23 @@
     transition: opacity .18s ease, transform .18s ease;
   }
   #net-indicator.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* AI panel: üst üste binme fix (chips + composer) */
+  #eto-ai-panel { display: flex; flex-direction: column; }
+  #eto-ai-messages { flex: 1; min-height: 0; padding-bottom: 10px; }
+  #eto-ai-suggestions {
+    flex-shrink: 0;
+    max-height: 190px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #eto-ai-composer {
+    flex-shrink: 0;
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(26,31,46,0.0), rgba(26,31,46,0.92) 22%, rgba(26,31,46,1));
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
                                     /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
     /* Taşma koruması — mobilde yatay kayıp önle */
     #b34 { overflow-x: hidden; max-width: 100%; }
