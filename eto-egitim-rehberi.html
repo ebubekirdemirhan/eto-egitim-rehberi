@@ -351,6 +351,8 @@
       pointer-events: none;
       transition: opacity .25s ease, transform .25s ease;
       z-index: 50;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .back-to-top.visible {
       opacity: 1;
@@ -508,6 +510,8 @@
       box-shadow: 0 4px 14px rgba(0,0,0,.35);
       transition: transform .2s, background .2s;
       title: "Flashcard Modu";
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     #flashcard-open-btn:hover { transform: translateY(-2px); background: rgba(167,139,250,.35); }
 
@@ -521,6 +525,8 @@
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 14px rgba(0,0,0,.35);
       transition: transform .2s, background .2s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     #exam-open-btn:hover { transform: translateY(-2px); background: rgba(251,146,60,.35); }
 
@@ -14518,6 +14524,8 @@
     background: #252d40; color: #90caf9; border: 1px solid #2a3550;
     border-radius: 20px; font-size: 11px; padding: 4px 10px;
     cursor: pointer; white-space: nowrap; transition: background .15s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .ai-chip:hover { background: #1565c0; color: #fff; border-color: #1565c0; }
 
@@ -14920,6 +14928,8 @@
       cursor: pointer; padding: .15rem .35rem; border-radius: .3rem;
       font-size: .85rem; flex-shrink: 0; opacity: .5;
       transition: opacity .15s, background .15s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .wiki-link-btn:hover { opacity: 1; background: rgba(99,102,241,.2); color: #c7d2fe; }
     .wiki-link-btn.copied { background: #15803d; color: #fff; opacity: 1; }
@@ -14935,6 +14945,8 @@
       flex-shrink: 0; line-height: 1;
       transition: transform .15s, background .15s, box-shadow .15s;
       white-space: nowrap;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .wiki-ask-btn:hover {
       background: linear-gradient(135deg, rgba(99,102,241,.32), rgba(56,189,248,.32));
@@ -14949,6 +14961,8 @@
       cursor: pointer; padding: .15rem .35rem; border-radius: .3rem;
       font-size: .85rem; flex-shrink: 0; opacity: .5;
       transition: opacity .15s, background .15s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     .wiki-share-btn:hover { opacity: 1; background: rgba(56,189,248,.18); color: #7dd3fc; }
 
@@ -16843,11 +16857,14 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
 
   // Suggestion chips
   chips.forEach(chip => {
-    chip.addEventListener('click', () => {
+    const runChip = () => {
       if (!apiKey) { panel.classList.add('open'); refreshKeywall(); return; }
       input.value = chip.textContent;
       send(chip.textContent);
-    });
+    };
+    // Mobilde click bazen kaçabiliyor → pointerdown daha güvenilir
+    chip.addEventListener('pointerdown', (e) => { e.preventDefault(); runChip(); }, { passive: false });
+    chip.addEventListener('click', runChip);
   });
 
   // Init
@@ -16927,7 +16944,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
   window.addEventListener('scroll', () => {
     backBtn.classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
-  backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const goTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  backBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); goTop(); }, { passive: false });
+  backBtn.addEventListener('click', goTop);
 
 
   /* ══ SEARCH ══ */
@@ -17138,11 +17157,13 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     if (actions) actions.appendChild(btn);
   })();
 
-  fcOpenBtn.addEventListener('click', () => {
+  const openFlashcards = () => {
     fcCards = fcShuffle(buildCards()); fcIdx = 0; fcKnow = 0; fcSkip = 0;
     fcModal.classList.add('open');
     fcShow(0);
-  });
+  };
+  fcOpenBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); openFlashcards(); }, { passive: false });
+  fcOpenBtn.addEventListener('click', openFlashcards);
 
   fcCloseBtn.addEventListener('click', () => fcModal.classList.remove('open'));
   fcModal.addEventListener('click', e => { if (e.target === fcModal) fcModal.classList.remove('open'); });
@@ -17313,9 +17334,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       showQuestion(0);
     });
 
-    openBtn.addEventListener('click', () => {
-      showScreen('setup'); modal.classList.add('open');
-    });
+    const openExam = () => { showScreen('setup'); modal.classList.add('open'); };
+    openBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); openExam(); }, { passive: false });
+    openBtn.addEventListener('click', openExam);
     closeBtn.addEventListener('click', () => { stopTimer(); modal.classList.remove('open'); });
     modal.addEventListener('click', e => { if (e.target === modal) { stopTimer(); modal.classList.remove('open'); } });
     document.addEventListener('keydown', e => {
