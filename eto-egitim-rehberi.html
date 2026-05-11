@@ -15015,6 +15015,96 @@
     border-bottom-left-radius: 4px;
   }
   .ai-msg.bot { position: relative; }
+
+  /* User mesajında çoklu görsel 2x2 grid */
+  .ai-user-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 6px;
+    max-width: 280px;
+  }
+  .ai-user-grid-cell {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: zoom-in;
+    background: #0f1422;
+  }
+  .ai-user-grid-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ai-user-grid-more {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 14, 28, .65);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  /* Attachment lightbox (user görselleri + şerit thumb'ları) */
+  #eto-attach-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99995;
+    background: rgba(4, 8, 16, .92);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  #eto-attach-lightbox.open { display: flex; }
+  #eto-attach-lightbox img {
+    max-width: 96vw;
+    max-height: 88vh;
+    border-radius: 8px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+  }
+  #eto-attach-lightbox .lb-close,
+  #eto-attach-lightbox .lb-prev,
+  #eto-attach-lightbox .lb-next {
+    position: absolute;
+    background: rgba(20, 25, 40, .85);
+    border: 1px solid #3d5280;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #eto-attach-lightbox .lb-close { top: 18px; right: 18px; }
+  #eto-attach-lightbox .lb-prev  { left: 18px; top: 50%; transform: translateY(-50%); }
+  #eto-attach-lightbox .lb-next  { right: 18px; top: 50%; transform: translateY(-50%); }
+  #eto-attach-lightbox .lb-counter {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #cbd5e1;
+    font-size: 12px;
+    background: rgba(20, 25, 40, .75);
+    border: 1px solid #2a3550;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
   .ai-msg-actions {
     position: absolute;
     top: 6px;
@@ -15658,7 +15748,7 @@
     flex-shrink: 0; align-self: flex-end; transition: color .15s, border-color .15s;
   }
   #eto-img-btn:hover { color: #90caf9; border-color: #1565c0; }
-  #eto-img-file { display: none; }
+  #eto-img-file, #eto-cam-file { display: none; }
 
   /* ── Tüm-sayfa sürükle-bırak katmanı ── */
   #eto-ai-drop-overlay {
@@ -16359,7 +16449,8 @@
   <div id="eto-ai-composer">
     <div id="eto-ai-input-row">
       <input type="file" id="eto-img-file" accept="image/*,application/pdf,.pdf" multiple/>
-      <button id="eto-img-btn" title="Görsel veya PDF ekle" aria-label="Görsel veya PDF ekle">📷</button>
+      <input type="file" id="eto-cam-file" accept="image/*" capture="environment"/>
+      <button id="eto-img-btn" title="Görsel veya PDF ekle (uzun bas: kamera)" aria-label="Görsel veya PDF ekle">📷</button>
       <div class="eto-ai-mic-wrap">
         <button type="button" id="eto-ai-mic" title="Konuşarak yaz (Gemini)" aria-label="Konuşarak yaz">🎙️</button>
         <span id="eto-ai-rec-timer" aria-live="polite"></span>
@@ -16370,6 +16461,15 @@
       <button id="eto-ai-send" aria-label="Gönder" title="Gönder">➤</button>
     </div>
   </div>
+
+<!-- Eklenen görseller için tam ekran önizleme -->
+<div id="eto-attach-lightbox" aria-hidden="true" role="dialog" aria-label="Görsel önizleme">
+  <button type="button" class="lb-prev" aria-label="Önceki görsel">‹</button>
+  <img alt="Önizleme">
+  <button type="button" class="lb-next" aria-label="Sonraki görsel">›</button>
+  <button type="button" class="lb-close" aria-label="Kapat">✕</button>
+  <div class="lb-counter" aria-live="polite"></div>
+</div>
 
 <!-- Tüm sayfa sürükle-bırak katmanı -->
 <div id="eto-ai-drop-overlay" aria-hidden="true">
@@ -16600,8 +16700,10 @@ YANIT KURALLARI:
       const item = document.createElement('div');
       item.className = 'eto-thumb-item';
       item.setAttribute('role', 'listitem');
+      item.dataset.idx = String(idx);
+      item.draggable = true;
       const baseTitle = a.name || (a.isPdf ? 'PDF' : 'Görsel');
-      item.title = baseTitle;
+      item.title = baseTitle + (a.isPdf ? '' : ' (büyük görmek için tıkla, sürükleyerek sırayı değiştir)');
 
       if (isPdfAttachment(a)) {
         const card = document.createElement('div');
@@ -16947,29 +17049,147 @@ YANIT KURALLARI:
   });
 
   /* ── Image upload ── */
-  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB / dosya — Gemini inlineData makul sınır
-  imgBtn.addEventListener('click', () => imgFile.click());
-  function loadImageFile(file) {
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;      // 5 MB / dosya — Gemini inlineData makul sınır
+  const COMPRESS_THRESHOLD = 1 * 1024 * 1024; // 1 MB üstü görselleri otomatik sıkıştır
+  const COMPRESS_MAX_DIM = 1600;              // uzun kenar piksel
+  const COMPRESS_QUALITY = 0.82;              // JPEG kalite
+
+  // Canvas üzerinden boyutlandır + JPEG'e çevir.
+  // Bonus: canvas yolu EXIF'i (GPS, kamera) zaten siler -> privacy.
+  function compressImage(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        try {
+          let w = img.naturalWidth || img.width;
+          let h = img.naturalHeight || img.height;
+          if (!w || !h) {
+            URL.revokeObjectURL(url);
+            reject(new Error('görsel boyutu okunamadı'));
+            return;
+          }
+          const max = Math.max(w, h);
+          if (max > COMPRESS_MAX_DIM) {
+            const s = COMPRESS_MAX_DIM / max;
+            w = Math.round(w * s);
+            h = Math.round(h * s);
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            URL.revokeObjectURL(url);
+            reject(new Error('canvas ctx yok'));
+            return;
+          }
+          ctx.drawImage(img, 0, 0, w, h);
+          canvas.toBlob((blob) => {
+            URL.revokeObjectURL(url);
+            if (!blob) { reject(new Error('toBlob basarisiz')); return; }
+            const baseName = (file.name || 'image').replace(/\.[^.]+$/, '') + '.jpg';
+            try {
+              const out = new File([blob], baseName, { type: 'image/jpeg', lastModified: Date.now() });
+              resolve(out);
+            } catch (_) {
+              // Bazı tarayıcılarda File ctor yok -> Blob da kabul edilir.
+              blob.name = baseName;
+              resolve(blob);
+            }
+          }, 'image/jpeg', COMPRESS_QUALITY);
+        } catch (e) {
+          URL.revokeObjectURL(url);
+          reject(e);
+        }
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error('görsel yüklenemedi'));
+      };
+      img.src = url;
+    });
+  }
+
+  // Kamera (capture='environment') vs Galeri seçimi:
+  // - Kısa tıklama  -> galeri (mevcut multi-select pickeri)
+  // - Uzun bas      -> doğrudan arka kamera (mobil sahada motorun başında çekim)
+  const camFile = document.getElementById('eto-cam-file');
+  const isCoarsePointer = (() => {
+    try { return window.matchMedia && window.matchMedia('(pointer: coarse)').matches; }
+    catch (_) { return false; }
+  })();
+  let _imgBtnLongPress = { t: null, fired: false };
+  function openCameraPicker() {
+    if (!camFile) { imgFile.click(); return; }
+    try { camFile.click(); } catch (_) { imgFile.click(); }
+  }
+  imgBtn.addEventListener('pointerdown', (e) => {
+    _imgBtnLongPress.fired = false;
+    if (!isCoarsePointer || !camFile) return; // masaüstünde long-press faydasız
+    _imgBtnLongPress.t = setTimeout(() => {
+      _imgBtnLongPress.fired = true;
+      openCameraPicker();
+      try { imgBtn.blur(); } catch (_) {}
+    }, 420);
+  }, { passive: true });
+  const clearImgBtnLP = () => {
+    if (_imgBtnLongPress.t) clearTimeout(_imgBtnLongPress.t);
+    _imgBtnLongPress.t = null;
+  };
+  imgBtn.addEventListener('pointerup', clearImgBtnLP, { passive: true });
+  imgBtn.addEventListener('pointercancel', clearImgBtnLP, { passive: true });
+  imgBtn.addEventListener('pointerleave', clearImgBtnLP, { passive: true });
+  imgBtn.addEventListener('click', (e) => {
+    if (_imgBtnLongPress.fired) { _imgBtnLongPress.fired = false; e.preventDefault(); return; }
+    imgFile.click();
+  });
+  if (camFile) {
+    camFile.addEventListener('change', () => {
+      const files = camFile.files ? Array.from(camFile.files) : [];
+      if (!files.length) return;
+      files.forEach(f => loadImageFile(f));
+      try { camFile.value = ''; } catch (_) {}
+    });
+  }
+  async function loadImageFile(file) {
     if (!file) return;
     if (pendingAttachments.length >= MAX_ATTACHMENTS) {
       addBotMsg('📎 En fazla ' + MAX_ATTACHMENTS + ' dosya eklenebilir. Yenisini eklemek için sağdaki ✕ ile bir dosyayı kaldır.');
       return;
     }
 
-    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '');
-    const isImage = file.type && file.type.startsWith('image/');
+    const nameLow = (file.name || '').toLowerCase();
+    const isHeic = /\.(heic|heif)$/.test(nameLow) || /heic|heif/i.test(file.type || '');
+    if (isHeic) {
+      addBotMsg('📎 iPhone HEIC formatı tarayıcıda gösterilemiyor: "' + (file.name || 'dosya') + '". Telefonda **Ayarlar → Kamera → Formatlar → "En Uyumlu"** seç veya ekran görüntüsü al, sonra tekrar yükle.');
+      return;
+    }
+
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(nameLow);
+    const isImage = (file.type && file.type.startsWith('image/')) || /\.(jpe?g|png|webp|gif|bmp)$/i.test(nameLow);
     if (!isPdf && !isImage) {
       addBotMsg('📎 Sadece görüntü veya PDF yükleyebilirsin. (' + (file.name || 'dosya') + ')');
       return;
     }
 
-    if (typeof file.size === 'number' && file.size > MAX_FILE_SIZE) {
-      const mb = (file.size / (1024 * 1024)).toFixed(1);
-      addBotMsg('📎 Çok büyük dosya: ' + (file.name || 'dosya') + ' (' + mb + ' MB). 5 MB altına düşür (örn. JPEG\'i sıkıştır).');
+    // Görsellerde otomatik sıkıştırma: 1 MB üzeri veya 5 MB sınırını aşan dosyalar
+    let effective = file;
+    if (isImage && (file.size > COMPRESS_THRESHOLD || file.size > MAX_FILE_SIZE)) {
+      try {
+        effective = await compressImage(file);
+      } catch (_) {
+        effective = file;
+      }
+    }
+
+    if (typeof effective.size === 'number' && effective.size > MAX_FILE_SIZE) {
+      const mb = (effective.size / (1024 * 1024)).toFixed(1);
+      addBotMsg('📎 Sıkıştırmaya rağmen büyük: ' + (file.name || 'dosya') + ' (' + mb + ' MB). 5 MB altına düşür.');
       return;
     }
 
-    const mimeType = isPdf ? 'application/pdf' : file.type;
+    const mimeType = isPdf ? 'application/pdf' : (effective.type || 'image/jpeg');
     const reader = new FileReader();
     reader.onload = () => {
       const dataUrl = reader.result;
@@ -16988,7 +17208,7 @@ YANIT KURALLARI:
     reader.onerror = () => {
       addBotMsg('📎 Dosya okunamadı: ' + (file.name || 'dosya'));
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(effective);
   }
 
   imgFile.addEventListener('change', () => {
@@ -17057,18 +17277,122 @@ YANIT KURALLARI:
     });
   })();
 
-  // Şerit içindeki tekil ✕ ile dosya kaldırma
+  // Attachment lightbox (tam ekran önizleme)
+  const attachLightbox = document.getElementById('eto-attach-lightbox');
+  const lbImg     = attachLightbox && attachLightbox.querySelector('img');
+  const lbPrev    = attachLightbox && attachLightbox.querySelector('.lb-prev');
+  const lbNext    = attachLightbox && attachLightbox.querySelector('.lb-next');
+  const lbClose   = attachLightbox && attachLightbox.querySelector('.lb-close');
+  const lbCounter = attachLightbox && attachLightbox.querySelector('.lb-counter');
+  let lbList = [];
+  let lbIdx = 0;
+
+  function renderLightbox() {
+    if (!attachLightbox || !lbImg || !lbList.length) return;
+    lbIdx = ((lbIdx % lbList.length) + lbList.length) % lbList.length;
+    lbImg.src = lbList[lbIdx];
+    if (lbCounter) lbCounter.textContent = (lbIdx + 1) + ' / ' + lbList.length;
+    if (lbPrev) lbPrev.style.display = lbList.length > 1 ? 'flex' : 'none';
+    if (lbNext) lbNext.style.display = lbList.length > 1 ? 'flex' : 'none';
+  }
+  function openAttachmentLightbox(list, idx) {
+    if (!attachLightbox || !list || !list.length) return;
+    lbList = list.slice();
+    lbIdx = Math.max(0, Math.min(idx || 0, lbList.length - 1));
+    renderLightbox();
+    attachLightbox.classList.add('open');
+    attachLightbox.setAttribute('aria-hidden', 'false');
+  }
+  function closeAttachmentLightbox() {
+    if (!attachLightbox) return;
+    attachLightbox.classList.remove('open');
+    attachLightbox.setAttribute('aria-hidden', 'true');
+    if (lbImg) lbImg.removeAttribute('src');
+    lbList = [];
+  }
+  if (lbClose) lbClose.addEventListener('click', closeAttachmentLightbox);
+  if (lbPrev) lbPrev.addEventListener('click', () => { lbIdx -= 1; renderLightbox(); });
+  if (lbNext) lbNext.addEventListener('click', () => { lbIdx += 1; renderLightbox(); });
+  if (attachLightbox) {
+    attachLightbox.addEventListener('click', (e) => {
+      if (e.target === attachLightbox) closeAttachmentLightbox();
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!attachLightbox || !attachLightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeAttachmentLightbox();
+    else if (e.key === 'ArrowLeft' && lbList.length > 1) { lbIdx -= 1; renderLightbox(); }
+    else if (e.key === 'ArrowRight' && lbList.length > 1) { lbIdx += 1; renderLightbox(); }
+  });
+
+  // Thumb'ları sürükleyerek yeniden sırala (masaüstü)
+  let dragSrcIdx = -1;
+  if (imgStrip) {
+    imgStrip.addEventListener('dragstart', (e) => {
+      const item = e.target && e.target.closest ? e.target.closest('.eto-thumb-item') : null;
+      if (!item) return;
+      dragSrcIdx = parseInt(item.dataset.idx || '-1', 10);
+      try {
+        e.dataTransfer.effectAllowed = 'move';
+        // Bazı tarayıcılar dataTransfer'a en az bir veri yazılmadan drag başlatmaz
+        e.dataTransfer.setData('text/plain', String(dragSrcIdx));
+      } catch (_) {}
+      item.style.opacity = '0.4';
+    });
+    imgStrip.addEventListener('dragend', (e) => {
+      const item = e.target && e.target.closest ? e.target.closest('.eto-thumb-item') : null;
+      if (item) item.style.opacity = '';
+      dragSrcIdx = -1;
+    });
+    imgStrip.addEventListener('dragover', (e) => {
+      if (dragSrcIdx < 0) return;
+      const item = e.target && e.target.closest ? e.target.closest('.eto-thumb-item') : null;
+      if (!item) return;
+      e.preventDefault();
+      try { e.dataTransfer.dropEffect = 'move'; } catch (_) {}
+    });
+    imgStrip.addEventListener('drop', (e) => {
+      if (dragSrcIdx < 0) return;
+      const item = e.target && e.target.closest ? e.target.closest('.eto-thumb-item') : null;
+      if (!item) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const dstIdx = parseInt(item.dataset.idx || '-1', 10);
+      if (dstIdx < 0 || dstIdx === dragSrcIdx) return;
+      if (dragSrcIdx >= pendingAttachments.length || dstIdx >= pendingAttachments.length) return;
+      const moved = pendingAttachments.splice(dragSrcIdx, 1)[0];
+      pendingAttachments.splice(dstIdx, 0, moved);
+      dragSrcIdx = -1;
+      renderAttachmentPreview();
+    });
+  }
+
+  // Şerit içindeki tekil ✕ ile dosya kaldırma + thumb tıkla -> lightbox
   if (imgStrip) {
     imgStrip.addEventListener('click', (e) => {
       const x = e.target && e.target.closest ? e.target.closest('.eto-thumb-x') : null;
-      if (!x) return;
-      e.preventDefault();
-      e.stopPropagation();
-      const idx = parseInt(x.dataset.idx || '-1', 10);
-      if (idx >= 0 && idx < pendingAttachments.length) {
-        pendingAttachments.splice(idx, 1);
-        renderAttachmentPreview();
+      if (x) {
+        e.preventDefault();
+        e.stopPropagation();
+        const idx = parseInt(x.dataset.idx || '-1', 10);
+        if (idx >= 0 && idx < pendingAttachments.length) {
+          pendingAttachments.splice(idx, 1);
+          renderAttachmentPreview();
+        }
+        return;
       }
+      const item = e.target && e.target.closest ? e.target.closest('.eto-thumb-item') : null;
+      if (!item) return;
+      const idx = parseInt(item.dataset.idx || '-1', 10);
+      if (idx < 0 || idx >= pendingAttachments.length) return;
+      const a = pendingAttachments[idx];
+      if (!a || a.isPdf) return;
+      // Sadece görsel attachment'ları büyük göster (PDF için tarayıcının kendi görüntüleyicisi var, atlıyoruz)
+      const list = pendingAttachments
+        .filter(x => x && !x.isPdf && x.dataUrl)
+        .map(x => x.dataUrl);
+      const startIdx = list.indexOf(a.dataUrl);
+      openAttachmentLightbox(list, startIdx >= 0 ? startIdx : 0);
     });
   }
 
@@ -17371,12 +17695,42 @@ YANIT KURALLARI:
   function addUserMsg(text, imgSrc) {
     const div = document.createElement('div');
     div.className = 'ai-msg user';
-    if (imgSrc) {
+
+    // imgSrc: string (geri uyumlu) veya string[] (çoklu görsel)
+    const srcList = Array.isArray(imgSrc)
+      ? imgSrc.filter(s => typeof s === 'string' && s)
+      : (typeof imgSrc === 'string' && imgSrc ? [imgSrc] : []);
+
+    if (srcList.length === 1) {
       const img = document.createElement('img');
-      img.src = imgSrc;
-      img.style.cssText = 'max-width:100%;border-radius:6px;display:block;margin-bottom:4px;';
+      img.src = srcList[0];
+      img.style.cssText = 'max-width:100%;border-radius:6px;display:block;margin-bottom:4px;cursor:zoom-in;';
+      img.addEventListener('click', () => openAttachmentLightbox(srcList, 0));
       div.appendChild(img);
+    } else if (srcList.length >= 2) {
+      const grid = document.createElement('div');
+      grid.className = 'ai-user-grid';
+      const shown = srcList.slice(0, 4);
+      shown.forEach((src, idx) => {
+        const cell = document.createElement('div');
+        cell.className = 'ai-user-grid-cell';
+        const im = document.createElement('img');
+        im.src = src;
+        im.loading = 'lazy';
+        im.alt = 'Eklenen görsel ' + (idx + 1);
+        cell.appendChild(im);
+        if (idx === 3 && srcList.length > 4) {
+          const badge = document.createElement('div');
+          badge.className = 'ai-user-grid-more';
+          badge.textContent = '+' + (srcList.length - 4);
+          cell.appendChild(badge);
+        }
+        cell.addEventListener('click', () => openAttachmentLightbox(srcList, idx));
+        grid.appendChild(cell);
+      });
+      div.appendChild(grid);
     }
+
     if (text) {
       const t = document.createElement('span');
       t.textContent = text;
@@ -18023,11 +18377,12 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       input.style.height = 'auto';
     }
 
-    // Show user message with optional image
-    const firstImg = attachments.find(a => a && !a.isPdf);
-    const imgSrc = (firstImg && firstImg.dataUrl) ? firstImg.dataUrl : null;
+    // Show user message with all attached images (PDF'ler liste dışı)
+    const imgSrcList = attachments
+      .filter(a => a && !a.isPdf && a.dataUrl)
+      .map(a => a.dataUrl);
     const bubbleText = sentText || (hasAttachments ? ('📎 ' + attachments.length + ' dosya eklendi') : '');
-    addUserMsg(bubbleText, imgSrc);
+    addUserMsg(bubbleText, imgSrcList);
 
     // Build parts array
     const userParts = [];
