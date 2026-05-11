@@ -7552,7 +7552,7 @@
         <span>Kategori</span>
       </div>
       <div class="wiki-stat-card">
-        <strong>07 May 2026</strong>
+        <strong>11 May 2026</strong>
         <span>Son Güncelleme</span>
       </div>
       <a class="wiki-stat-card wiki-stat-rss" href="feed.xml" target="_blank" rel="noopener" title="Atom 1.0 feed — RSS okuyucunla takip et">
@@ -14793,7 +14793,7 @@
     </div>
 
     <div class="wiki-update-note">
-      Son güncelleme: <strong>07 May 2026</strong> ·
+      Son güncelleme: <strong>11 May 2026</strong> ·
       Kayıt sayısı: <strong>172</strong> ·
       Veri kaynağı: ETO-Elektroteknik Zabitleri Telegram grubu (anonim) ·
       <a href="#b34">Bölüm bağlantısı</a>
@@ -15554,34 +15554,103 @@
     cursor: pointer; text-decoration: underline; padding: 0;
   }
   #eto-ai-key-clear:hover { color: #e53935; }
-  /* ── Image preview strip ── */
+  /* ── Çoklu önizleme şeridi ── */
   #eto-img-preview {
-    display: none; padding: 6px 12px; align-items: center; gap: 8px;
-    background: #1e2538; border-top: 1px solid #2a3550; flex-shrink: 0;
+    display: none;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 8px;
+    background: #1e2538;
+    border-top: 1px solid #2a3550;
+    flex-shrink: 0;
+    min-height: 0;
   }
   #eto-img-preview.active { display: flex; }
-  #eto-attach-media {
-    width: 48px; height: 48px; border-radius: 6px;
-    overflow: hidden; border: 1px solid #2a3550;
-    background: #252d40; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
+  #eto-img-strip {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: #2a3550 transparent;
   }
-  #eto-img-thumb {
-    width: 48px; height: 48px; border-radius: 6px; object-fit: cover;
-    border: none;
+  #eto-img-strip::-webkit-scrollbar { height: 6px; }
+  #eto-img-strip::-webkit-scrollbar-thumb { background: #2a3550; border-radius: 4px; }
+  .eto-thumb-item {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2a3550;
+    background: #252d40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .eto-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
-  #eto-pdf-embed {
-    width: 100%; height: 100%;
-    display: none;
-    background: #252d40;
-    border: 0;
+  .eto-thumb-pdf {
+    font-size: 10px;
+    color: #90caf9;
+    text-align: center;
+    line-height: 1.15;
+    padding: 4px;
+    word-break: break-word;
+    width: 100%;
   }
-  #eto-img-label { color: #8892a4; font-size: 11px; flex: 1; }
+  .eto-thumb-pdf .ic { font-size: 18px; display: block; margin-bottom: 2px; }
+  .eto-thumb-x {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(20, 25, 40, .92);
+    border: 1px solid #3d5280;
+    color: #ffb4b4;
+    font-size: 11px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .eto-thumb-x:hover { background: #b91c1c; border-color: #b91c1c; color: #fff; }
+  #eto-img-label {
+    color: #8892a4;
+    font-size: 11px;
+    flex-shrink: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
   #eto-img-remove {
-    background: none; border: none; color: #e53935; font-size: 18px;
-    cursor: pointer; line-height: 1; padding: 0 4px;
+    background: #252d40;
+    border: 1px solid #2a3550;
+    color: #e53935;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 6px 10px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .15s, border-color .15s, color .15s;
   }
+  #eto-img-remove:hover { background: #3a1414; border-color: #b91c1c; color: #fff; }
   #eto-img-btn {
     width: 40px; height: 40px; border-radius: 50%; border: 1px solid #2a3550;
     background: #252d40; color: #8892a4; font-size: 18px;
@@ -15590,6 +15659,66 @@
   }
   #eto-img-btn:hover { color: #90caf9; border-color: #1565c0; }
   #eto-img-file { display: none; }
+
+  /* ── Tüm-sayfa sürükle-bırak katmanı ── */
+  #eto-ai-drop-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99990;
+    background: rgba(8, 14, 28, .78);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    pointer-events: none;
+  }
+  #eto-ai-drop-overlay.active {
+    display: flex;
+    pointer-events: auto;
+    animation: etoDropFadeIn .15s ease-out;
+  }
+  @keyframes etoDropFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  #eto-ai-drop-overlay-card {
+    background: linear-gradient(160deg, #1a2233 0%, #131826 100%);
+    border: 2px dashed #1565c0;
+    border-radius: 18px;
+    padding: 32px 36px;
+    max-width: 520px;
+    text-align: center;
+    color: #e8eaf6;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .55);
+  }
+  #eto-ai-drop-overlay-card .dz-icon {
+    font-size: 56px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  #eto-ai-drop-overlay-card .dz-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #90caf9;
+    margin-bottom: 8px;
+    letter-spacing: .01em;
+  }
+  #eto-ai-drop-overlay-card .dz-sub {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.55;
+  }
+  #eto-ai-drop-overlay-card kbd {
+    background: #252d40;
+    border: 1px solid #2a3550;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 11px;
+    color: #cbd5e1;
+    font-family: inherit;
+  }
   @media (max-width: 480px) {
     #eto-ai-panel { width: calc(100vw - 20px); right: 10px; bottom: 92px; max-height: 70vh; }
     #eto-ai-btn { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); width: 60px; height: 60px; font-size: 24px; z-index: 10000; }
@@ -15634,7 +15763,7 @@
     background: linear-gradient(180deg, rgba(26,31,46,0.0), rgba(26,31,46,0.92) 22%, rgba(26,31,46,1));
     padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   }
-                                    /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
+                                        /* ── Bölüm 34 — Wiki / Telegram Arşivi stilleri ── */
     /* Taşma koruması — mobilde yatay kayıp önle */
     #b34 { overflow-x: hidden; max-width: 100%; }
     #wiki-cards-grid { min-width: 0; overflow: hidden; }
@@ -16221,12 +16350,9 @@
 
   <!-- Image preview strip -->
   <div id="eto-img-preview">
-    <div id="eto-attach-media">
-      <img id="eto-img-thumb" src="" alt="Seçilen görsel"/>
-      <embed id="eto-pdf-embed" type="application/pdf" />
-    </div>
-    <span id="eto-img-label">Görsel eklendi</span>
-    <button id="eto-img-remove" title="Görseli kaldır">✕</button>
+    <div id="eto-img-strip" role="list" aria-label="Eklenen dosyalar"></div>
+    <span id="eto-img-label" aria-live="polite"></span>
+    <button id="eto-img-remove" title="Tüm dosyaları kaldır" aria-label="Tüm dosyaları kaldır">✕ Hepsi</button>
   </div>
 
   <!-- Composer: tek satır araç çubuğu -->
@@ -16245,7 +16371,16 @@
     </div>
   </div>
 
-  <div id="eto-ai-settings-backdrop" aria-hidden="true"></div>
+<!-- Tüm sayfa sürükle-bırak katmanı -->
+<div id="eto-ai-drop-overlay" aria-hidden="true">
+  <div id="eto-ai-drop-overlay-card">
+    <div class="dz-icon" aria-hidden="true">📥</div>
+    <div class="dz-title">Dosyaları buraya bırakın</div>
+    <div class="dz-sub">Birden fazla fotoğraf veya PDF yükleyebilirsiniz · maks. 8 dosya · 5 MB / dosya<br>Vazgeçmek için <kbd>Esc</kbd> tuşuna basın.</div>
+  </div>
+</div>
+
+<div id="eto-ai-settings-backdrop" aria-hidden="true"></div>
   <div id="eto-ai-settings-drawer" role="dialog" aria-modal="true" aria-labelledby="eto-ai-settings-title" aria-hidden="true">
     <div id="eto-ai-settings-drawer-head">
       <h4 id="eto-ai-settings-title">Ses ayarları</h4>
@@ -16381,10 +16516,10 @@ YANIT KURALLARI:
   const imgBtn      = document.getElementById('eto-img-btn');
   const imgFile     = document.getElementById('eto-img-file');
   const imgPreview  = document.getElementById('eto-img-preview');
-  const imgThumb    = document.getElementById('eto-img-thumb');
-  const pdfEmbedEl  = document.getElementById('eto-pdf-embed');
+  const imgStrip    = document.getElementById('eto-img-strip');
   const imgLabel    = document.getElementById('eto-img-label');
   const imgRemove   = document.getElementById('eto-img-remove');
+  const dropOverlay = document.getElementById('eto-ai-drop-overlay');
   const micBtn      = document.getElementById('eto-ai-mic');
   const ttsBtn      = document.getElementById('eto-ai-speak');
   const autoSpeakChk= document.getElementById('eto-ai-autospeak');
@@ -16452,37 +16587,56 @@ YANIT KURALLARI:
   }
 
   function renderAttachmentPreview() {
-    if (!imgPreview || !imgLabel || !imgThumb) return;
+    if (!imgPreview || !imgLabel || !imgStrip) return;
+    imgStrip.innerHTML = '';
     if (!pendingAttachments.length) {
       imgPreview.classList.remove('active');
-      if (imgThumb) { imgThumb.style.display = 'block'; imgThumb.src = ''; }
-      if (pdfEmbedEl) { pdfEmbedEl.style.display = 'none'; pdfEmbedEl.removeAttribute('src'); }
-      imgLabel.textContent = 'Görsel eklendi';
+      imgLabel.textContent = '';
       return;
     }
 
-    const first = pendingAttachments[0];
-    imgLabel.textContent = pendingAttachments.length > 1
-      ? ('Eklenen: ' + pendingAttachments.length + ' dosya')
-      : ((first && first.name) ? first.name : 'Dosya eklendi');
+    pendingAttachments.forEach((a, idx) => {
+      if (!a) return;
+      const item = document.createElement('div');
+      item.className = 'eto-thumb-item';
+      item.setAttribute('role', 'listitem');
+      const baseTitle = a.name || (a.isPdf ? 'PDF' : 'Görsel');
+      item.title = baseTitle;
 
-    if (isPdfAttachment(first)) {
-      if (imgThumb) imgThumb.style.display = 'none';
-      if (pdfEmbedEl) {
-        pdfEmbedEl.style.display = 'block';
-        pdfEmbedEl.src = first.dataUrl || ('data:application/pdf;base64,' + first.data);
+      if (isPdfAttachment(a)) {
+        const card = document.createElement('div');
+        card.className = 'eto-thumb-pdf';
+        const ic = document.createElement('span');
+        ic.className = 'ic';
+        ic.textContent = '📄';
+        card.appendChild(ic);
+        const lbl = document.createElement('span');
+        const short = (a.name || 'PDF').replace(/\.[^.]+$/, '');
+        lbl.textContent = short.length > 10 ? (short.slice(0, 9) + '…') : short;
+        card.appendChild(lbl);
+        item.appendChild(card);
+      } else {
+        const im = document.createElement('img');
+        im.src = a.dataUrl || ('data:' + a.mimeType + ';base64,' + a.data);
+        im.alt = baseTitle;
+        im.loading = 'lazy';
+        item.appendChild(im);
       }
-    } else {
-      if (imgThumb) {
-        imgThumb.style.display = 'block';
-        imgThumb.src = first.dataUrl || ('data:' + first.mimeType + ';base64,' + first.data);
-      }
-      if (pdfEmbedEl) {
-        pdfEmbedEl.style.display = 'none';
-        pdfEmbedEl.removeAttribute('src');
-      }
-    }
 
+      const x = document.createElement('button');
+      x.type = 'button';
+      x.className = 'eto-thumb-x';
+      x.setAttribute('aria-label', 'Bu dosyayı kaldır');
+      x.title = 'Kaldır';
+      x.dataset.idx = String(idx);
+      x.textContent = '✕';
+      item.appendChild(x);
+
+      imgStrip.appendChild(item);
+    });
+
+    const n = pendingAttachments.length;
+    imgLabel.textContent = n + (n === 1 ? ' dosya' : ' dosya');
     imgPreview.classList.add('active');
   }
 
@@ -16793,18 +16947,25 @@ YANIT KURALLARI:
   });
 
   /* ── Image upload ── */
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB / dosya — Gemini inlineData makul sınır
   imgBtn.addEventListener('click', () => imgFile.click());
   function loadImageFile(file) {
     if (!file) return;
     if (pendingAttachments.length >= MAX_ATTACHMENTS) {
-      addBotMsg('📎 En fazla ' + MAX_ATTACHMENTS + ' dosya eklenebilir.');
+      addBotMsg('📎 En fazla ' + MAX_ATTACHMENTS + ' dosya eklenebilir. Yenisini eklemek için sağdaki ✕ ile bir dosyayı kaldır.');
       return;
     }
 
     const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '');
     const isImage = file.type && file.type.startsWith('image/');
     if (!isPdf && !isImage) {
-      addBotMsg('📎 Sadece görüntü veya PDF yükleyebilirsin.');
+      addBotMsg('📎 Sadece görüntü veya PDF yükleyebilirsin. (' + (file.name || 'dosya') + ')');
+      return;
+    }
+
+    if (typeof file.size === 'number' && file.size > MAX_FILE_SIZE) {
+      const mb = (file.size / (1024 * 1024)).toFixed(1);
+      addBotMsg('📎 Çok büyük dosya: ' + (file.name || 'dosya') + ' (' + mb + ' MB). 5 MB altına düşür (örn. JPEG\'i sıkıştır).');
       return;
     }
 
@@ -16824,6 +16985,9 @@ YANIT KURALLARI:
       input.placeholder = 'ETO konusunda soru sor veya görsel/PDF ekle…';
       input.focus();
     };
+    reader.onerror = () => {
+      addBotMsg('📎 Dosya okunamadı: ' + (file.name || 'dosya'));
+    };
     reader.readAsDataURL(file);
   }
 
@@ -16835,29 +16999,94 @@ YANIT KURALLARI:
     try { imgFile.value = ''; } catch (e) {}
   });
 
-  // Drag & Drop support
-  const dropTarget = document.getElementById('eto-ai-input-row') || document.getElementById('eto-ai-composer');
-  if (dropTarget) {
-    ['dragenter', 'dragover'].forEach(evt => {
-      dropTarget.addEventListener(evt, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dropTarget.classList.add('eto-ai-drop-active');
-      });
+  // Tüm-sayfa sürükle-bırak overlay'i
+  (function setupFullPageDrop() {
+    if (!dropOverlay) return;
+    let dragDepth = 0;
+    function hasFiles(e) {
+      const dt = e.dataTransfer;
+      if (!dt) return false;
+      if (dt.types) {
+        const types = Array.from(dt.types);
+        return types.indexOf('Files') !== -1 || types.indexOf('application/x-moz-file') !== -1;
+      }
+      return false;
+    }
+    function show() {
+      dropOverlay.classList.add('active');
+      dropOverlay.setAttribute('aria-hidden', 'false');
+    }
+    function hide() {
+      dropOverlay.classList.remove('active');
+      dropOverlay.setAttribute('aria-hidden', 'true');
+      dragDepth = 0;
+    }
+    window.addEventListener('dragenter', (e) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      dragDepth++;
+      show();
     });
-    ['dragleave', 'drop'].forEach(evt => {
-      dropTarget.addEventListener(evt, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        dropTarget.classList.remove('eto-ai-drop-active');
-      });
+    window.addEventListener('dragover', (e) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
     });
-    dropTarget.addEventListener('drop', (e) => {
-      const files = e.dataTransfer && e.dataTransfer.files ? e.dataTransfer.files : null;
-      if (!files || !files.length) return;
-      Array.from(files).forEach(f => loadImageFile(f));
+    window.addEventListener('dragleave', (e) => {
+      if (!hasFiles(e)) return;
+      dragDepth = Math.max(0, dragDepth - 1);
+      if (dragDepth === 0) hide();
+    });
+    window.addEventListener('drop', (e) => {
+      if (!hasFiles(e)) { hide(); return; }
+      e.preventDefault();
+      hide();
+      const files = e.dataTransfer && e.dataTransfer.files ? Array.from(e.dataTransfer.files) : [];
+      if (!files.length) return;
+      if (panel && !panel.classList.contains('open')) {
+        panel.classList.add('open');
+        refreshKeywall();
+        applyAiViewportInsets();
+      }
+      files.forEach(f => loadImageFile(f));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dropOverlay.classList.contains('active')) {
+        hide();
+      }
+    });
+  })();
+
+  // Şerit içindeki tekil ✕ ile dosya kaldırma
+  if (imgStrip) {
+    imgStrip.addEventListener('click', (e) => {
+      const x = e.target && e.target.closest ? e.target.closest('.eto-thumb-x') : null;
+      if (!x) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const idx = parseInt(x.dataset.idx || '-1', 10);
+      if (idx >= 0 && idx < pendingAttachments.length) {
+        pendingAttachments.splice(idx, 1);
+        renderAttachmentPreview();
+      }
     });
   }
+
+  // Yapıştırarak (paste) görsel ekleme — ekran görüntüsünden hızlı yükleme
+  if (input) {
+    input.addEventListener('paste', (e) => {
+      if (!e.clipboardData || !e.clipboardData.items) return;
+      const items = Array.from(e.clipboardData.items);
+      const imageItems = items.filter(it => it && it.kind === 'file' && it.type && it.type.startsWith('image/'));
+      if (!imageItems.length) return;
+      e.preventDefault();
+      imageItems.forEach(it => {
+        const blob = it.getAsFile();
+        if (blob) loadImageFile(blob);
+      });
+    });
+  }
+
   imgRemove.addEventListener('click', () => {
     pendingAttachments = [];
     renderAttachmentPreview();
@@ -17765,10 +17994,24 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     if (sentText) {
       userParts.push({ text: sentText });
     } else if (hasAttachments) {
-      const prompt = (hasPdf && hasImage)
-        ? 'Bu görsel ve PDF dokümanlarını ETO perspektifinden incele ve ilgili kısımları açıkla.'
-        : (hasPdf ? 'Bu PDF dokümanını ETO perspektifinden incele ve ilgili kısımları açıkla.'
-                  : 'Bu görselleri ETO perspektifinden incele ve ilgili kısımları açıkla.');
+      const imgCount = attachments.filter(a => a && !a.isPdf).length;
+      let prompt;
+      if (hasPdf && hasImage) {
+        prompt = 'Bu görsel ve PDF dokümanlarını ETO perspektifinden incele ve ilgili kısımları açıkla.';
+      } else if (hasPdf) {
+        prompt = 'Bu PDF dokümanını ETO perspektifinden incele ve ilgili kısımları açıkla.';
+      } else if (imgCount >= 2) {
+        prompt =
+'Bu ' + imgCount + ' fotoğraf gemideki BİR arızanın / durumun farklı açılarıdır. Hepsini tek bir vaka olarak bütüncül analiz et ve ETO bakış açısıyla aşağıdaki yapıyı doldur:\n\n' +
+'1) **Belirtiler** — Her fotoğrafta görülen anlamlı belirtileri F1, F2, F3 … şeklinde KISA madde madde yaz (gözle görülen değerler, renk, ışık/LED, ekran yazıları, tip levhası).\n' +
+'2) **Olası kök nedenler (olasılıkça sıralı)** — Her madde için: kısa neden + hangi fotoğraftaki kanıt (F1/F2 …) + tipik karşılaşma sıklığı.\n' +
+'3) **Saha test adımları** — Güvenli sıra: LOTO, PPE, ölçüm aleti seçimi, başlangıç ölçüm noktaları. Eğer mümkünse beklenen değerler/eşikler (Ω, V, MΩ, A) ile yaz.\n' +
+'4) **Önerilen çözüm + ayarlar** — Kalıcı düzeltme, kullanılacak parça/ayar, devreye alma kontrol listesi.\n' +
+'5) **Saha vakası eşleşmesi** — Bölüm 34 (Telegram arşivi) içinde aynı/yakın belirtiye sahip vaka varsa #wiki-XX şeklinde 1–2 atıf ekle. Yoksa "Eşleşen saha vakası bulunamadı" yaz.\n\n' +
+'Cevabın başında "🛠️ Çoklu fotoğraf arıza analizi (N=' + imgCount + ')" başlığını kullan. Fotoğraflar birbiriyle çelişiyorsa hangisinin daha güvenilir olduğunu belirt.';
+      } else {
+        prompt = 'Bu görseli ETO perspektifinden incele ve ilgili kısımları açıkla.';
+      }
       userParts.push({ text: prompt });
     }
 
@@ -18858,6 +19101,9 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
   })();
 
 })();
+
+
+
 
 
 
