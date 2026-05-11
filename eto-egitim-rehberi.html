@@ -151,7 +151,7 @@
     a { color: var(--link); text-decoration: none; }
     a:hover { color: var(--link-hover); text-decoration: underline; }
 
-    .page { max-width: 1100px; margin: 0 auto 4rem auto; padding: 1.5rem 1.25rem 3rem; }
+    .page { position: relative; max-width: 1100px; margin: 0 auto 4rem auto; padding: 1.5rem 1.25rem 3rem; }
 
     header.hero {
       margin: 0 auto 2rem; padding: 1.75rem 1.75rem 1.5rem;
@@ -203,6 +203,11 @@
     .toc-en { font-size: .76rem; color: var(--muted); }
 
     main { margin-top: 2rem; }
+    /* Uzun sayfada scroll maliyetini düşür (b21/b34 lazy sınıfı varken çakışmasın diye :not) */
+    main > section:not(.lazy-collapsed) {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 760px;
+    }
     section { margin-bottom: 2.8rem; padding: 1.6rem 1.6rem 1.7rem;
       border-radius: 1.1rem; background: rgba(15,23,42,.9);
       border: 1px solid rgba(31,41,55,.95); box-shadow: 0 18px 45px rgba(15,23,42,.8);
@@ -474,8 +479,31 @@
       touch-action: manipulation;
     }
 
+    /* Klavye / ekran okuyucu: ana içeriğe atla */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 12px;
+      z-index: 100001;
+      padding: 10px 16px;
+      background: #1565c0;
+      color: #fff !important;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.35);
+    }
+    .skip-link:focus {
+      left: 12px;
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
     @media print {
       body { background: #fff; color: #000; }
+      main > section { content-visibility: visible !important; contain: initial !important; }
+      body .skip-link { display: none !important; }
       header.hero { position: static; background: #fff; border: none; box-shadow: none; border-radius: 0; }
       nav.toc { display: block !important; background: #fff; box-shadow: none; border-radius: 0; page-break-after: always; }
       section { background: #fff; box-shadow: none; border-radius: 0; border: 1px solid #e5e7eb; page-break-inside: avoid; }
@@ -865,6 +893,7 @@
   </div>
 </div>
 <div class="page">
+  <a href="#main-content" class="skip-link">Ana içeriğe atla</a>
 
   <!-- ══════════ HEADER ══════════ -->
   <header class="hero">
@@ -897,7 +926,7 @@
   </aside>
 
   <!-- ══════════ TOC ══════════ -->
-  <nav class="toc">
+  <nav class="toc" aria-label="İçindekiler — Eğitim rehberi bölümleri">
     <h2>İçindekiler · Contents</h2>
 
     <div class="toc-grid">
@@ -945,7 +974,7 @@
     <div id="eto-search-results"></div>
   </div>
 
-  <main>
+  <main id="main-content" tabindex="-1">
 
   <!-- ═══════════════════════════════════════════════════════
        BÖLÜM 1 – ELEKTRİĞİN TEMELLERİ
@@ -6220,7 +6249,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ BÖLÜM 29 -->
-  <section id="b29">
+  <section id="b29" data-label="Bölüm 29">
     <h2>Bölüm 29 — Pnömatik Semboller &amp; Devre Okuma</h2>
     <p>Pnömatik devreler basınçlı havayı iş aktuatörlerine ileten sistemlerdir. ISO 1219-1 standardı tüm sembol ve gösterim kurallarını tanımlar. Bu bölümü öğrendikten sonra herhangi bir pnömatik şemayı okuyabilirsiniz.</p>
 
@@ -6478,7 +6507,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ BÖLÜM 30 -->
-  <section id="b30">
+  <section id="b30" data-label="Bölüm 30">
     <h2>Bölüm 30 — Valf Türleri, Pompa Sistemleri &amp; Hidrolik RAM</h2>
     <p>Gemi makine dairesinde ve yardımcı sistemlerde onlarca farklı valf ve pompa tipi kullanılır. Bu bölüm ETO'nun sıklıkla karşılaştığı valf ve pompa türlerini, dümen pompasını ve hidrolik RAM sistemini detaylı olarak açıklar.</p>
 
@@ -6804,7 +6833,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ BÖLÜM 31 -->
-  <section id="b31">
+  <section id="b31" data-label="Bölüm 31">
     <h2>Bölüm 31 — Kablo Kesitleri, Kontaktör, Kondansatör &amp; Termik Seçim</h2>
     <p>Doğru bileşen seçimi güvenli ve verimli gemi elektriğinin temelidir. Bu bölüm standart kablo kesitlerini, kontaktör ve kondansatör seçim kriterlerini ve termik röle ayarını kapsamaktadır.</p>
 
@@ -14808,7 +14837,7 @@
       <div class="section-meta"><span class="section-num">⚙</span><span class="section-level level-2">Pratik</span></div>
       <h2 class="section-title">Araçlar <span class="section-en">Tools</span></h2>
     </div>
-    <p class="section-intro">Kablo kesiti · 3‑faz güç · Akü kapasitesi · IR/PI yorumlama · Birim çevirici</p>
+    <p class="section-intro">Kablo kesiti · 3‑faz güç · Akü kapasitesi · IR/PI yorumlama · Direnç (seri/paralel) · Birim çevirici · Kısa sınav</p>
 
     <div class="two-col">
       <div class="card">
@@ -14859,6 +14888,27 @@
           <label>°F<input id="tool-f" type="number" inputmode="decimal" value="77"></label>
         </div>
         <button class="tool-btn" id="tool-conv" type="button">Çevir</button>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:12px">
+      <div class="card">
+        <h3>Seri / Paralel direnç (Ω)</h3>
+        <div class="tools-grid">
+          <label>R₁ (Ω)<input id="tool-r1" type="number" inputmode="decimal" value="6" step="any"></label>
+          <label>R₂ (Ω)<input id="tool-r2" type="number" inputmode="decimal" value="3" step="any"></label>
+        </div>
+        <div class="tool-out" id="tool-r-out">Seri: — | Paralel: —</div>
+        <button class="tool-btn" id="tool-r-calc" type="button">Hesapla</button>
+        <div class="muted" style="margin-top:6px;font-size:.8rem;color:#94a3b8">Formül: R<sub>seri</sub>=R₁+R₂ · 1/R<sub>paralel</sub>=1/R₁+1/R₂</div>
+      </div>
+      <div class="card">
+        <h3>Mini sınav (Araçlar)</h3>
+        <div class="quiz-block sinav-box" style="margin-top:0">
+          <details class="quiz-item"><summary>AT-1: 400 V hat–hat, 10 A hat akımı ve cosφ=0,8 olan üç fazlı yükte aktif güç yaklaşık kaç kW?</summary><div class="quiz-answer"><strong>Cevap:</strong> ≈5,5 kW. <strong>Çözüm:</strong> P = √3·V·I·cosφ ≈ 1,732×400×10×0,8 ≈ 5542 W.</div></details>
+          <details class="quiz-item"><summary>AT-2: 6 Ω ve 3 Ω iki direnç seri bağlanırsa toplam kaç Ω olur?</summary><div class="quiz-answer"><strong>Cevap:</strong> 9 Ω. Seri toplama: R = R₁+R₂ = 6+3.</div></details>
+          <details class="quiz-item"><summary>AT-3: Aynı dirençler paralel bağlanırsa toplam kaç Ω olur?</summary><div class="quiz-answer"><strong>Cevap:</strong> 2 Ω. 1/R = 1/6+1/3 = 1/2 → R=2 Ω.</div></details>
+        </div>
       </div>
     </div>
   </section>
@@ -18709,10 +18759,39 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     } catch (e) {}
   })();
 
-  // Quiz'lerden FAQPage JSON-LD üret (ilk 50 soru) — SEO için
+  // Quiz'lerden FAQPage JSON-LD (en fazla 50): bölümler arası yuvarlak seçim + kalan sırayla tamamla — SEO
   (function injectFaqJsonLd() {
     try {
-      const items = Array.from(document.querySelectorAll('.quiz-item')).slice(0, 50);
+      const MAX = 50;
+      const sections = Array.from(document.querySelectorAll('main section[id]'));
+      const picked = [];
+      const seen = new Set();
+      let round = 0;
+      let progress = true;
+      while (picked.length < MAX && progress) {
+        progress = false;
+        for (const sec of sections) {
+          const list = sec.querySelectorAll('.quiz-item');
+          const it = list[round];
+          if (it && !seen.has(it)) {
+            seen.add(it);
+            picked.push(it);
+            progress = true;
+            if (picked.length >= MAX) break;
+          }
+        }
+        round++;
+        if (round > 200) break;
+      }
+      if (picked.length < MAX) {
+        for (const it of document.querySelectorAll('.quiz-item')) {
+          if (seen.has(it)) continue;
+          seen.add(it);
+          picked.push(it);
+          if (picked.length >= MAX) break;
+        }
+      }
+      const items = picked;
       if (!items.length) return;
       const mainEntity = [];
       for (const it of items) {
@@ -18951,7 +19030,8 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     const ahCalc = document.getElementById('tool-ah-calc');
     const piCalc = document.getElementById('tool-pi-calc');
     const convBtn = document.getElementById('tool-conv');
-    if (!pCalc && !ahCalc && !piCalc && !convBtn) return;
+    const rCalc = document.getElementById('tool-r-calc');
+    if (!pCalc && !ahCalc && !piCalc && !convBtn && !rCalc) return;
     const num = (id) => parseFloat((document.getElementById(id) || {}).value || '0');
 
     if (pCalc) pCalc.addEventListener('click', () => {
@@ -18976,6 +19056,18 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       else if (pi > 0) note = 'Zayıf';
       const out = document.getElementById('tool-pi-out');
       if (out) out.textContent = `PI ≈ ${pi.toFixed(2)} (${note})`;
+    });
+    if (rCalc) rCalc.addEventListener('click', () => {
+      const r1 = num('tool-r1'), r2 = num('tool-r2');
+      const out = document.getElementById('tool-r-out');
+      if (!out) return;
+      if (!(r1 > 0) || !(r2 > 0)) {
+        out.textContent = 'Seri: — | Paralel: — (pozitif R gir)';
+        return;
+      }
+      const s = r1 + r2;
+      const p = 1 / (1 / r1 + 1 / r2);
+      out.textContent = `Seri: ${s.toFixed(3)} Ω | Paralel: ${p.toFixed(3)} Ω`;
     });
     if (convBtn) convBtn.addEventListener('click', () => {
       const kwEl = document.getElementById('tool-kw');
