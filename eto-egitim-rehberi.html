@@ -17073,19 +17073,65 @@ YANIT KURALLARI:
   }
 
   // Yapıştırarak (paste) görsel ekleme — ekran görüntüsünden hızlı yükleme
-  if (input) {
-    input.addEventListener('paste', (e) => {
-      if (!e.clipboardData || !e.clipboardData.items) return;
-      const items = Array.from(e.clipboardData.items);
-      const imageItems = items.filter(it => it && it.kind === 'file' && it.type && it.type.startsWith('image/'));
-      if (!imageItems.length) return;
-      e.preventDefault();
-      imageItems.forEach(it => {
-        const blob = it.getAsFile();
-        if (blob) loadImageFile(blob);
-      });
-    });
+  // Window seviyesinde: input odakta olmasa bile her yerde çalışsın.
+  function extractImagesFromClipboard(cd) {
+    if (!cd) return [];
+    const out = [];
+    if (cd.items && cd.items.length) {
+      for (let i = 0; i < cd.items.length; i++) {
+        const it = cd.items[i];
+        if (!it || !it.type) continue;
+        if (it.kind === 'file' && it.type.indexOf('image/') === 0) {
+          const blob = it.getAsFile ? it.getAsFile() : null;
+          if (blob) out.push(blob);
+        }
+      }
+    }
+    if (!out.length && cd.files && cd.files.length) {
+      for (let i = 0; i < cd.files.length; i++) {
+        const f = cd.files[i];
+        if (f && f.type && f.type.indexOf('image/') === 0) out.push(f);
+      }
+    }
+    return out;
   }
+
+  function handleClipboardPaste(e) {
+    if (thinking) return;
+    const target = e.target;
+    // Bir başka düzenlenebilir alana (ör. arama kutusu) yapıştırma yapılıyorsa,
+    // sadece görsel/dosya var ise araya gir; aksi halde varsayılan davranışa karışma.
+    const inEditable = target && (
+      (target.tagName === 'INPUT' && target.type !== 'file') ||
+      target.tagName === 'TEXTAREA' ||
+      target.isContentEditable
+    );
+    const isAiInput = target === input;
+    const cd = e.clipboardData || window.clipboardData;
+    const blobs = extractImagesFromClipboard(cd);
+    if (!blobs.length) return;
+    // AI input dışındaki düzenlenebilir alanlarda görsel yapıştırması nadirdir;
+    // yine de yakalayıp AI panele yönlendirelim.
+    if (inEditable && !isAiInput) {
+      // Diğer inputlara metin yapıştırıyorsa karışma; ama görsel varsa AI'ya yönlendir
+      if (cd && cd.getData && (cd.getData('text/plain') || '').trim().length > 0) {
+        // Hem metin hem görsel olabilir; öncelik metne -> kullanıcının görsel niyeti belirsiz
+        return;
+      }
+    }
+    e.preventDefault();
+    if (panel && !panel.classList.contains('open')) {
+      panel.classList.add('open');
+      refreshKeywall();
+      applyAiViewportInsets();
+    }
+    blobs.forEach(b => loadImageFile(b));
+    // Görsel eklendiğine dair kısa görsel ipucu: input'a odaklan
+    setTimeout(() => { try { input && input.focus(); } catch (_) {} }, 60);
+  }
+
+  // Tek nokta: document seviyesinde dinle (paste event'i her zaman document'a bubble eder).
+  document.addEventListener('paste', handleClipboardPaste);
 
   imgRemove.addEventListener('click', () => {
     pendingAttachments = [];
