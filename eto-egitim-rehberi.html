@@ -14473,6 +14473,8 @@
   }
   #eto-ai-panel.open {
     transform: scale(1) translateY(0); opacity: 1; pointer-events: all;
+    /* FAB (#eto-fab-wrap z-index 10001) Yukarı dön oku gönder ile çakışmasın */
+    z-index: 10020;
   }
 
   /* ── Header ── */
@@ -15319,6 +15321,13 @@
     color: #cbd5e1;
     font-family: inherit;
   }
+  /* AI panel açıkken hızlı eylemler FAB'ı gizle — parmak yanlışlıkla Yukarı dön'e basmasın */
+  body.eto-ai-panel-open #eto-fab-wrap {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .16s ease;
+  }
+
   @media (max-width: 480px) {
     #eto-ai-panel { width: calc(100vw - 20px); right: 10px; bottom: 92px; max-height: 70vh; }
     #eto-ai-btn { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); width: 60px; height: 60px; font-size: 24px; z-index: 10000; }
@@ -16161,8 +16170,13 @@ YANIT KURALLARI:
   const polishMicChk = document.getElementById('eto-ai-polish-mic');
 
   /* ── iOS keyboard / visualViewport adaptasyonu ── */
+  function syncEtoAiFabSuppression() {
+    const p = document.getElementById('eto-ai-panel');
+    document.body.classList.toggle('eto-ai-panel-open', !!(p && p.classList.contains('open')));
+  }
   function applyAiViewportInsets() {
     if (!panel) return;
+    syncEtoAiFabSuppression();
     const vv = window.visualViewport;
     if (!vv) return;
     // Klavye açılınca visualViewport küçülür. kb yüksekliği yaklaşık:
@@ -17083,6 +17097,7 @@ YANIT KURALLARI:
   window.gotoSection = function(id) {
     if (window.closeEtoAiSettings) window.closeEtoAiSettings();
     document.getElementById('eto-ai-panel').classList.remove('open');
+    syncEtoAiFabSuppression();
     var el = document.getElementById(id);
     if (el) { setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 120); }
     return false;
@@ -17766,6 +17781,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     if (!apiKey) {
       panel.classList.add('open');
       refreshKeywall();
+      applyAiViewportInsets();
       return;
     }
     if (thinking || geminiMic.transcribing) return;
@@ -17863,6 +17879,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       if (!apiKey) {
         panel.classList.add('open');
         refreshKeywall();
+        applyAiViewportInsets();
         return;
       }
       if (geminiMic.recording) {
@@ -18154,7 +18171,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
     const runChipText = (txt) => {
       const t = String(txt || '').trim();
       if (!t) return;
-      if (!apiKey) { panel.classList.add('open'); refreshKeywall(); return; }
+      if (!apiKey) { panel.classList.add('open'); refreshKeywall(); applyAiViewportInsets(); return; }
       input.value = t;
       send(t);
     };
@@ -18234,6 +18251,7 @@ registerProcessor('gemini-mic-recorder', GeminiMicRecorderProcessor);
       const merged = [ttl, st, su].filter(Boolean).join('\n');
       panel.classList.add('open');
       refreshKeywall();
+      applyAiViewportInsets();
       setTimeout(() => {
         input.value = merged;
         input.focus();
