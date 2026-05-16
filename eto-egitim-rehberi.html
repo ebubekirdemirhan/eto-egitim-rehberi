@@ -1214,6 +1214,7 @@
     </div>
 
     <div class="saha-box"><strong>Sahada ne işine yarar?</strong> Sigortanın sık atması → akım beklenenden büyük demektir (kısa devre veya izolasyon kaçağı). Bir noktada gerilim yoksa KVL mantığıyla çevrimi takip et: enerjinin kaybolduğu yerde ya açık kontak ya yanmış eleman vardır.</div>
+    <div class="note-box"><strong>Pratik ölçüm:</strong> Formülü bilmen yetmez; sahada önce <em>hangi noktada</em> ölçtüğünü netleştir (yük açık/kapalı, hat mı faz mı).</div>
     <div class="sinav-box"><strong>Sınavda nasıl sorulur?</strong> "Seri devreden 2 A akım geçiyor, R₁=10 Ω, R₂=5 Ω; toplam gerilim kaçtır?" → V = 2×(10+5) = 30 V. Güç hesabı: P = I²·R veya P = V·I.</div>
 
     <!-- Bölüm 1 Mini Quiz -->
@@ -2775,10 +2776,11 @@
   ═══════════════════════════════════════════════════════ -->
   <section id="b8" data-label="Bölüm 8">
     <h2>Güvenlik ve LOTO <span class="lvl lvl-1">Seviye 1–3 · KRİTİK</span></h2>
-    <p class="section-sub">Elektrik çarpması · LOTO prosedürü · PPE · Sıcak çalışma · SOLAS gereksinimleri</p>
+    <p class="section-sub">Elektrik çarpması · LOTO · PTW · Ex zonları · Class denetimi · PPE</p>
     <p><em>Hiçbir iş can güvenliğinden önemli değildir. Bu bölüm ezberlenecek değil, içselleştirilecek bilgiler içeriyor.</em></p>
+    <nav class="mini-toc" aria-label="Bölüm 8 alt başlıkları"><a href="#b8-s1">8.1 Çarpma</a><a href="#b8-s2">8.2 LOTO</a><a href="#b8-ex">8.6 Ex</a><a href="#b8-ptw">8.7 PTW</a><a href="#b8-survey">8.8 Denetim</a></nav>
 
-    <h3>8.1 Elektrik Çarpması Tehlikeleri</h3>
+    <h3 id="b8-s1">8.1 Elektrik Çarpması Tehlikeleri</h3>
     <table>
       <thead><tr><th>Vücut Akımı</th><th>Etkisi</th></tr></thead>
       <tbody>
@@ -2792,7 +2794,7 @@
     </table>
     <div class="danger-box"><strong>Kritik bilgi:</strong> Ölüm için yüksek gerilim şart değildir. <strong>50 mA, 50 ms</strong> bile yeterlidir. 230V AC, ıslak veya zayıf izolasyonlu ortamda öldürücü akım için yeterli gerilimdir.</div>
 
-    <h3>8.2 LOTO — Lockout / Tagout (Kilitleme / Etiketleme)</h3>
+    <h3 id="b8-s2">8.2 LOTO — Lockout / Tagout (Kilitleme / Etiketleme)</h3>
     <p>LOTO, bir ekipman üzerinde çalışmadan önce enerjisinin kesilip kilitlenerek <strong>başkası tarafından yeniden devreye alınmasını</strong> fiziksel olarak önleyen güvenlik prosedürüdür.</p>
 
     <div class="svg-wrap">
@@ -2952,6 +2954,74 @@
       </div>
     </div>
     <div class="note-box">EKOL talimat listesi 20+ maddeden oluşur; burada yalnızca <strong>ETO için kritik olan</strong> başlıklar özetlenmiştir. Gemide göreve başlamadan önce, bağlı olduğun kurumun ISG/LOTO prosedürünü baştan sona okuman zorunludur.</div>
+    <h3 id="b8-ex">8.6 Patlayıcı Ortamlar (Ex) — Saha Özeti</h3>
+    <p>Yakıt tankı, kargo tankı, boya deposu ve benzeri alanlarda yanıcı gaz/buhar bulunabilir. Bu bölgelerde <strong>normal elektrik ekipmanı kullanılmaz</strong>; Ex sertifikalı ekipman ve doğru montaj zorunludur (IEC 60079 / ATEX çerçevesi).</p>
+    <table>
+      <thead><tr><th>Zone</th><th>Tanım (özet)</th><th>Tipik gemi yeri</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Zone 0</strong></td><td>Patlayıcı karışım <em>sürekli</em> veya uzun süre beklenir</td><td>Tank içi, kapalı hacim</td></tr>
+        <tr><td><strong>Zone 1</strong></td><td>Normal işletmede ara sıra patlayıcı atmosfer</td><td>Pompa odası, tank üstü</td></tr>
+        <tr><td><strong>Zone 2</strong></td><td>Arıza/anormal durumda kısa süre oluşabilir</td><td>Vent çıkışı, tank çevresi</td></tr>
+      </tbody>
+    </table>
+    <h4>Koruma tipleri (ETO için pratik)</h4>
+    <ul>
+      <li><strong>Ex d</strong> — Alev sızdırmaz muhafaza.</li>
+      <li><strong>Ex e</strong> — Artırılmış güvenlik.</li>
+      <li><strong>Ex i</strong> — İçsel güvenlik (düşük enerji).</li>
+      <li><strong>Ex n</strong> — Normal çalışma + arıza koruması.</li>
+      <li><strong>Ex p</strong> — Basınçlı muhafaza.</li>
+    </ul>
+    <div class="two-col">
+      <div class="card">
+        <h4>Plaka okuma örneği</h4>
+        <p><code>Ex II 2 G Ex db IIB T3</code> — Zone 2, gaz, alev sızdırmaz; plakanın alan etiketiyle uyumunu doğrula.</p>
+      </div>
+      <div class="card">
+        <h4>Sahada kontrol listesi</h4>
+        <ul>
+          <li>Ex bölgede standart priz veya lamba var mı?</li>
+          <li>Kablo pabucu (gland) sızdırmaz ve Ex uyumlu mu?</li>
+          <li>Eşpotansiyel topraklama kopuk mu?</li>
+          <li>Geçici kablo Ex alanında mı?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="danger-box"><strong>Asla:</strong> Ex alanında hasarlı gland veya normal ekipmanla idare etme. Şüphede enerjiyi kes, ISG ve sorumlu mühendise danış.</div>
+
+    <h3 id="b8-ptw">8.7 Çalışma İzni (PTW) — COSWP Mantığı</h3>
+    <p>Tehlikeli işler için <strong>yazılı Permit to Work</strong> kullanılır: riski tanımla, izole et, doğrula, yetkilendir.</p>
+    <ol>
+      <li><strong>Risk değerlendirmesi</strong> — enerji kaynakları ve etkilenen alanlar.</li>
+      <li><strong>İzolasyon planı</strong> — kesiciler, LOTO noktaları, kilit sahipleri.</li>
+      <li><strong>Doğrulama</strong> — voltmetre ile enerji yok; kayıt.</li>
+      <li><strong>Gözetim</strong> — en az iki kişi; ECR/köprü bilgilendirilir.</li>
+      <li><strong>İş bitimi</strong> — LOTO kaldırma sırası, imza, saat.</li>
+    </ol>
+
+    <h3 id="b8-survey">8.8 Class / Bayrak Denetiminde Elektrik Kontrol Listesi</h3>
+    <table>
+      <thead><tr><th>Kontrol</th><th>Kanıt / kayıt</th></tr></thead>
+      <tbody>
+        <tr><td>İzolasyon / earth fault log</td><td>Günlük IT kaydı, trend</td></tr>
+        <tr><td>Motor/jeneratör megger</td><td>PMS formu, periyot</td></tr>
+        <tr><td>Acil aydınlatma</td><td>Aylık fonksiyon + süre testi</td></tr>
+        <tr><td>Test cihazı kalibrasyonu</td><td>Megger, pensampermetre sertifikası</td></tr>
+        <tr><td>LOTO / PTW</td><td>ISM dokümanı, örnek form</td></tr>
+        <tr><td>Ex envanter</td><td>Zone plan + ekipman listesi</td></tr>
+      </tbody>
+    </table>
+    <div class="saha-box"><strong>Denetim öncesi:</strong> Log’da boş gün bırakma; eksik megger veya earth fault kaydını aynı gün tamamla.</div>
+
+    <div class="quiz-block">
+      <div class="quiz-header">📝 Bölüm 8 — Ex, PTW ve Denetim</div>
+      <details class="quiz-item"><summary>Ex-1: Zone 1 ile Zone 2 farkı?</summary><div class="quiz-answer">Zone 1’de normal işletmede patlayıcı atmosfer ara sıra beklenir; Zone 2’de yalnızca arıza/anormal durumda kısa süre oluşabilir.</div></details>
+      <details class="quiz-item"><summary>Ex-2: Ex d ne sağlar?</summary><div class="quiz-answer">Alev sızdırmaz muhafaza — ark dışarı sızmaz.</div></details>
+      <details class="quiz-item"><summary>Ex-3: Gland görevi?</summary><div class="quiz-answer">Kablonun panele Ex uyumlu ve sızdırmaz geçişi.</div></details>
+      <details class="quiz-item"><summary>PTW-1: PTW olmadan pano açılır mı?</summary><div class="quiz-answer"><strong>Hayır</strong> — tehlikeli işlerde yazılı izin ve izolasyon şart.</div></details>
+      <details class="quiz-item"><summary>Den-1: Günlük insulation log neden istenir?</summary><div class="quiz-answer">IT sisteminde izolasyon sağlığının izlendiğini kanıtlar.</div></details>
+      <details class="quiz-item"><summary>Den-2: Kalibrasyon süresi dolmuş cihaz?</summary><div class="quiz-answer">Resmi ölçümde kullanılmaz; kalibrasyon planlanır — denetimde bulgu sayılır.</div></details>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -4714,6 +4784,15 @@
     <p class="section-intro">Lehim · Kontaktör Bakımı · Motor Demontaj/Montaj · Sahada Alternatif Çözüm Üretme</p>
     <p class="section-sub"><em>Bu bölüm, sınıfta pek öğretilmeyen ama sahada günlük kullandığın el becerilerini kapsar. Teori bittikten sonra asıl iş burada başlar.</em></p>
 
+    <h3 id="b22-praktik">22.0 Atölye Dili — Pratik İpuçları</h3>
+    <div class="saha-box">
+      <strong>Terminal ve bağlantı:</strong> Klemens vidasını kablo yönünde değil, tork anahtarı veya uygun uç anahtarı ile sık; “el gücü” gevşek bağlantı ve ısınma demektir. Çok damarlı kabloda ferrül veya kablo pabuç kullan; tek tek teller vida altında kopar.
+      <br><br>
+      <strong>Ölçüm alışkanlığı:</strong> Önce gerilim var mı, sonra akım, en son megger. Multimetre probunu her zaman doğru ölçek ve kategoride (CAT III/IV gemi panosu) kullan.
+      <br><br>
+      <strong>“Usta kuralı”:</strong> Bir işi iki kez ölç, bir kez kaydet. Liman öncesi gevşek terminal turu (torque check) çoğu arızayı önler.
+    </div>
+
     <h3>22.1 Lehim Nasıl Yapılır (Soldering)</h3>
     <p>Gemide elektronik kartlardaki kopmaları, sensör kablolarını veya ince kumanda tellerini onarmak için iyi lehim yapabilmek şarttır. Lehim, iki iletken yüzeyi düşük erime noktalı bir alaşımla (kalay-kurşun veya kurşunsuz) birleştirme işlemidir.</p>
     <h4>Temel Malzemeler</h4>
@@ -6276,6 +6355,18 @@
       <li>Periyodik dielektrik yağ analizi (trafolarda) — laboratuvar gönderimi.</li>
     </ul>
     <div class="warn-box"><strong>Sınav İpucu:</strong> "1 kV üzeri = HV" sınırını ve VCB tanımını bil. Zabitlik sınavında "HV çalışmada earth switch ne işe yarar?", "VCB ark söndürme ortamı nedir?", "diferansiyel koruma (87) neyi korur?" sıkça çıkan sorulardır.</div>
+
+    <h3 id="b28-propulsion">28.5 Elektrik Tahrik (Pod / ITH) — Özet</h3>
+    <p>Ana pervane tahriki için diesel-electric, hybrid veya tam elektrik sistemler kullanılır. ETO tarafı: <strong>güç dağıtımı, koruma, soğutma, alarm kaydı</strong>; pervane miline doğrudan müdahale makine alanıdır.</p>
+    <ul>
+      <li><strong>Güç zinciri:</strong> Jeneratör/batarya → HV bara → VFD → tahrik motoru.</li>
+      <li><strong>VFD:</strong> Hız/tork kontrolü; soğutma ve harmonik filtreleri kritik.</li>
+      <li><strong>Pod motor:</strong> Dönen gövde; kablo, yağ ve sızdırmazlık izlenir.</li>
+      <li><strong>ITH:</strong> Azimut/sabit itici; joystick ve junction box kabloları ETO kontrolünde.</li>
+    </ul>
+    <div class="info-box">Trip’te önce alarm metni ve trend; sonra soğutma ve besleme. Mekanik tork limiti ile elektrik overcurrent benzer görünebilir.</div>
+    <details class="quiz-item"><summary>B28-P1: Elektrik tahrikte VFD ne yapar?</summary><div class="quiz-answer">Motor hız ve torkunu kontrol eder; değişken frekans/güç çıkışı sağlar.</div></details>
+    <details class="quiz-item"><summary>B28-P2: Pod/ITH arızasında ETO ilk ne yapar?</summary><div class="quiz-answer">Alarm/trip ve PMS log; soğutma/besleme kontrolü; HV işlemi yetkili personele.</div></details>
 
     <details class="quiz-item"><summary>B28-S1: Gemi elektriğinde IEC 60092'ye göre yüksek gerilim (HV) sınırı nedir? A) 500 V B) 1000 V C) 3300 V D) 6600 V</summary><div class="quiz-answer"><strong>Cevap: B.</strong> IEC 60092 standardına göre 1 kV (1000 V) üzeri yüksek gerilim (HV) olarak tanımlanır. Gemilerde en yaygın HV seviyeleri 3,3 kV, 6,6 kV ve 11 kV'tur.</div></details>
     <details class="quiz-item"><summary>B28-S2: VCB (Vacuum Circuit Breaker) ark söndürme ortamı nedir ve avantajı nedir?</summary><div class="quiz-answer">VCB'de ark söndürme vakum tüpü içinde gerçekleşir. Vakum ortamında ark hızla söner, gaz veya yağ kullanılmaz — dolayısıyla bakım ihtiyacı azdır, kirlenme riski yoktur, ömrü uzundur. Modern HV switchgear'da tercih edilen tiptir.</div></details>
@@ -15248,7 +15339,10 @@
     stajyerden zabite uzanan deneyimleri esas alınarak hazırlanmıştır.
     Tüm formüller IEC standartlarına ve STCW yetkinlik çerçevesine uygun olacak şekilde derlenmiştir; resmi tatbikat ve sınıf kuralları her zaman önceliklidir.
     &nbsp;|&nbsp; PDF: Ctrl+P → PDF olarak kaydet<br>
-    <small>Son güncelleme: 2026-05-07</small>
+    <p style="margin-top:1rem;font-size:.78rem;line-height:1.5;max-width:42rem;margin-left:auto;margin-right:auto;"><strong>Önerilen kaynaklar (telif — bu sitede alıntı yok):</strong>
+    Dennis T. Hall, <em>Practical Marine Electrical Knowledge</em> (4th ed., Witherbys) — gemi elektriği, Ex, survey, tahrik çerçevesi;
+    Turhan Biliktu, <em>Pratik Elektrik</em> — temel/atölye pratiği. İçerik özgün özetlerdir; resmi mevzuat ve class kuralları her zaman önceliklidir.</p>
+    <small>Son güncelleme: 2026-05-16</small>
   </footer>
 
 </div><!-- /page -->
